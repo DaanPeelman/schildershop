@@ -5,15 +5,26 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import be.vdab.valueobjects.Adres;
 
+@Entity
+@Table(name = "klanten")
 public class Klant implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	@Id
+	@GeneratedValue
+	private long klantNr;
 	private String naam;
 	private String familienaam;
 	private Adres adres;
+	@OneToMany(mappedBy = "Bestelbon")
 	private Set<Bestelbon> bestellingen;
 	private String wachtwoord;
 	private String emailadres;
@@ -31,11 +42,11 @@ public class Klant implements Serializable {
 	}
 
 	public long getId() {
-		return id;
+		return klantNr;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long klantNr) {
+		this.klantNr = klantNr;
 	}
 
 	public String getNaam() {

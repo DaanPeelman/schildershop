@@ -2,11 +2,17 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Bestelbonlijn implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Product product;
 	private int aantal;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BestelBonNr")
 	private Bestelbon bestelbon;
 	
 	protected Bestelbonlijn() {

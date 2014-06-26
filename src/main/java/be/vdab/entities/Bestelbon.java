@@ -5,32 +5,50 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import be.vdab.valueobjects.Adres;
 
+@Entity
+@Table(name = "bestelbonnen")
 public class Bestelbon implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	@Id
+	@GeneratedValue
+	private long bestelbonNr;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "klantNr")
 	private Klant klant;
+	@Embedded
 	private Adres leverAdres;
+	@OneToMany(mappedBy = "Bestelbonlijn")
 	private Set<Bestelbonlijn> bestelbonlijnen;
 	
 	protected Bestelbon() {
 	}
 
-	public Bestelbon(long id, Klant klant, Adres leverAdres) {
-		this.id = id;
+	public Bestelbon(long bestelbonNr, Klant klant, Adres leverAdres) {
+		this.bestelbonNr = bestelbonNr;
 		this.klant = klant;
 		this.leverAdres = leverAdres;
 		bestelbonlijnen = new HashSet<>();
 	}
 
 	public long getId() {
-		return id;
+		return bestelbonNr;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long bestelbonNr) {
+		this.bestelbonNr = bestelbonNr;
 	}
 
 	public Klant getKlant() {
@@ -63,7 +81,7 @@ public class Bestelbon implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((bestelbonlijnen == null) ? 0 : bestelbonlijnen.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (bestelbonNr ^ (bestelbonNr >>> 32));
 		result = prime * result + ((klant == null) ? 0 : klant.hashCode());
 		return result;
 	}
@@ -82,7 +100,7 @@ public class Bestelbon implements Serializable {
 				return false;
 		} else if (!bestelbonlijnen.equals(other.bestelbonlijnen))
 			return false;
-		if (id != other.id)
+		if (bestelbonNr != other.bestelbonNr)
 			return false;
 		if (klant == null) {
 			if (other.klant != null)

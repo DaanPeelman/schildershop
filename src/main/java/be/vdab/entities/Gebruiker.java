@@ -2,10 +2,19 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "gebruikers")
 public class Gebruiker implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	@Id
+	@GeneratedValue
+	private long gebruikerNr;
 	private String naam;
 	private String role;
 	private String wachtwoord;
@@ -22,11 +31,11 @@ public class Gebruiker implements Serializable {
 	}
 
 	public long getId() {
-		return id;
+		return gebruikerNr;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long gebruikerNr) {
+		this.gebruikerNr = gebruikerNr;
 	}
 
 	public String getNaam() {

@@ -3,12 +3,26 @@ package be.vdab.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "producten")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	@Id
+	@GeneratedValue
+	private long schilderijNr;
 	private String titel;
 	private int jaartal;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "schilderNr")
 	private Schilder schilder;
 	private String stijl;
 	private BigDecimal prijs;
@@ -25,11 +39,11 @@ public class Product implements Serializable {
 	}
 
 	public long getId() {
-		return id;
+		return schilderijNr;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long schilderijNr) {
+		this.schilderijNr = schilderijNr;
 	}
 
 	public String getTitel() {
