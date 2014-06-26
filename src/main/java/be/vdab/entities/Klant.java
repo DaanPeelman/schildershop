@@ -24,7 +24,7 @@ public class Klant implements Serializable {
 	private String naam;
 	private String familienaam;
 	private Adres adres;
-	@OneToMany(mappedBy = "Bestelbon")
+	@OneToMany(mappedBy = "klant")
 	private Set<Bestelbon> bestellingen;
 	private String wachtwoord;
 	private String emailadres;

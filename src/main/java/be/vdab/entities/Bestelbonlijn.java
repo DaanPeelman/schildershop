@@ -2,10 +2,15 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Embeddable
+@Table(name = "bestelbonlijnen")
 public class Bestelbonlijn implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

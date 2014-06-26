@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +32,8 @@ public class Bestelbon implements Serializable {
 	private Klant klant;
 	@Embedded
 	private Adres leverAdres;
-	@OneToMany(mappedBy = "Bestelbonlijn")
+	@ElementCollection
+	@CollectionTable(name = "bestelbonlijnen", joinColumns = @JoinColumn(name = "bestelbonNr"))
 	private Set<Bestelbonlijn> bestelbonlijnen;
 	
 	protected Bestelbon() {

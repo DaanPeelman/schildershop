@@ -20,7 +20,7 @@ public class Schilder implements Serializable {
 	@GeneratedValue
 	private long schilderNr;
 	private String naam;
-	@OneToMany(mappedBy = "Product")
+	@OneToMany(mappedBy = "schilder")
 	private Set<Product> schilderijen;
 	
 	protected Schilder() {
