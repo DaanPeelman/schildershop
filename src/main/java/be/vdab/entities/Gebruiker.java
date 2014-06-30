@@ -1,41 +1,65 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import be.vdab.valueobjects.Adres;
 
 @Entity
-@Table(name = "gebruikers")
+@Table(name = "klanten")
 public class Gebruiker implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue
-	private long gebruikerNr;
+	private long klantNr;
+	@NotNull
+	@Size(min = 1, max = 50)
 	private String naam;
-	private String role;
+	@NotNull
+	@Size(min = 1, max = 50)
+	private String familienaam;
+	@Valid
+	@Embedded
+	private Adres adres;
+	@OneToMany(mappedBy = "klant")
+	private Set<Bestelbon> bestellingen;
+	@NotNull
+	@Size(min = 5, max = 20)
 	private String wachtwoord;
+	@NotNull
 	private String emailadres;
 	
-	protected Gebruiker() {
+	public Gebruiker() {
 	}
 
-	public Gebruiker(String naam, String role, String wachtwoord, String emailadres) {
+	public Gebruiker(String naam, String familienaam, Adres adres, String wachtwoord, String emailadres) {
 		this.naam = naam;
-		this.role = role;
+		this.familienaam = familienaam;
+		this.adres = adres;
+		bestellingen = new HashSet<>();
 		this.wachtwoord = wachtwoord;
 		this.emailadres = emailadres;
 	}
 
 	public long getId() {
-		return gebruikerNr;
+		return klantNr;
 	}
 
-	public void setId(long gebruikerNr) {
-		this.gebruikerNr = gebruikerNr;
+	public void setId(long klantNr) {
+		this.klantNr = klantNr;
 	}
 
 	public String getNaam() {
@@ -46,12 +70,28 @@ public class Gebruiker implements Serializable {
 		this.naam = naam;
 	}
 
-	public String getRole() {
-		return role;
+	public String getFamilienaam() {
+		return familienaam;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setFamilienaam(String familienaam) {
+		this.familienaam = familienaam;
+	}
+
+	public Adres getAdres() {
+		return adres;
+	}
+
+	public void setAdres(Adres adres) {
+		this.adres = adres;
+	}
+
+	public Set<Bestelbon> getBestellingen() {
+		return Collections.unmodifiableSet(bestellingen);
+	}
+
+	public void setBestellingen(Set<Bestelbon> bestellingen) {
+		this.bestellingen = bestellingen;
 	}
 
 	public String getWachtwoord() {

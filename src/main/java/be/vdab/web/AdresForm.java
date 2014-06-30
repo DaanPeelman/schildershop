@@ -10,32 +10,29 @@ class AdresForm extends Adres {
 	
 	AdresForm(Adres adres) {
 		setStraat(adres.getStraat());
-		setNummer(adres.getNummer());
+		setHuisNr(adres.getHuisNr());
 		setGemeente(adres.getGemeente());
 		setPostcode(adres.getPostcode());
 	}
 
 	@Override
 	public void setStraat(String straat) {
-		// TODO Auto-generated method stub
 		super.setStraat(straat);
 	}
 	
 	@Override
 	public void setGemeente(String gemeente) {
-		// TODO Auto-generated method stub
+		System.out.println("gemeente op " + gemeente + " zetten");
 		super.setGemeente(gemeente);
 	}
 	
 	@Override
-	public void setNummer(String nummer) {
-		// TODO Auto-generated method stub
-		super.setNummer(nummer);
+	public void setHuisNr(String huisNr) {
+		super.setHuisNr(huisNr);
 	}
 	
 	@Override
 	public void setPostcode(String postcode) {
-		// TODO Auto-generated method stub
 		super.setPostcode(postcode);
 	}
 }

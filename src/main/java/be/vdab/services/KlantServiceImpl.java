@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import be.vdab.dao.KlantDAO;
-import be.vdab.entities.Klant;
+import be.vdab.entities.Gebruiker;
 
 @Service
 public class KlantServiceImpl implements KlantService {
-	private KlantDAO klantDAO;
+	private final KlantDAO klantDAO;
 	
 	@Autowired
 	public KlantServiceImpl(KlantDAO klantDAO) {
@@ -16,7 +16,7 @@ public class KlantServiceImpl implements KlantService {
 	}
 	
 	@Override
-	public void voegToe(Klant klant) {
-		klantDAO.save(klant);
+	public void voegToe(Gebruiker klant) {
+			klantDAO.save(klant);
 	}
 }

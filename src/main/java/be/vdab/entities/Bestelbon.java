@@ -29,7 +29,7 @@ public class Bestelbon implements Serializable {
 	private long bestelbonNr;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "klantNr")
-	private Klant klant;
+	private Gebruiker klant;
 	@Embedded
 	private Adres leverAdres;
 	@ElementCollection
@@ -39,7 +39,7 @@ public class Bestelbon implements Serializable {
 	protected Bestelbon() {
 	}
 
-	public Bestelbon(long bestelbonNr, Klant klant, Adres leverAdres) {
+	public Bestelbon(long bestelbonNr, Gebruiker klant, Adres leverAdres) {
 		this.bestelbonNr = bestelbonNr;
 		this.klant = klant;
 		this.leverAdres = leverAdres;
@@ -54,11 +54,11 @@ public class Bestelbon implements Serializable {
 		this.bestelbonNr = bestelbonNr;
 	}
 
-	public Klant getKlant() {
+	public Gebruiker getKlant() {
 		return klant;
 	}
 
-	public void setKlant(Klant klant) {
+	public void setKlant(Gebruiker klant) {
 		this.klant = klant;
 	}
 

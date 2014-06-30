@@ -3,22 +3,26 @@ package be.vdab.valueobjects;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Embeddable
 public class Adres implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotNull
+	@Size(min = 1, max = 50)
 	private String straat;
-	private String nummer;
+	private String huisNr;
 	private String gemeente;
 	private String postcode;
 	
 	protected Adres() {
 	}
 
-	public Adres(String straat, String nummer, String gemeente, String postcode) {
+	public Adres(String straat, String huisNr, String gemeente, String postcode) {
 		this.straat = straat;
-		this.nummer = nummer;
+		this.huisNr = huisNr;
 		this.gemeente = gemeente;
 		this.postcode = postcode;
 	}
@@ -27,8 +31,8 @@ public class Adres implements Serializable {
 		return straat;
 	}
 
-	public String getNummer() {
-		return nummer;
+	public String getHuisNr() {
+		return huisNr;
 	}
 
 	public String getGemeente() {
@@ -43,8 +47,8 @@ public class Adres implements Serializable {
 		this.straat = straat;
 	}
 
-	protected void setNummer(String nummer) {
-		this.nummer = nummer;
+	protected void setHuisNr(String huisNr) {
+		this.huisNr = huisNr;
 	}
 
 	protected void setGemeente(String gemeente) {
@@ -61,7 +65,7 @@ public class Adres implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((gemeente == null) ? 0 : gemeente.hashCode());
-		result = prime * result + ((nummer == null) ? 0 : nummer.hashCode());
+		result = prime * result + ((huisNr == null) ? 0 : huisNr.hashCode());
 		result = prime * result
 				+ ((postcode == null) ? 0 : postcode.hashCode());
 		result = prime * result + ((straat == null) ? 0 : straat.hashCode());
@@ -82,10 +86,10 @@ public class Adres implements Serializable {
 				return false;
 		} else if (!gemeente.equals(other.gemeente))
 			return false;
-		if (nummer == null) {
-			if (other.nummer != null)
+		if (huisNr == null) {
+			if (other.huisNr != null)
 				return false;
-		} else if (!nummer.equals(other.nummer))
+		} else if (!huisNr.equals(other.huisNr))
 			return false;
 		if (postcode == null) {
 			if (other.postcode != null)
