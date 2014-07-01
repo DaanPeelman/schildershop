@@ -1,7 +1,7 @@
 package be.vdab.web;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Iterator;
 
 import javax.validation.Valid;
 
@@ -26,13 +26,11 @@ public class ProductController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView findAll() {
-		return new ModelAndView("producten/producten", "schilderijen",
+		ModelAndView mav = new ModelAndView("producten/producten", "schilderijen",
 				productService.findAll());
-	}
-
-	@RequestMapping(value = "zoeken", method = RequestMethod.GET)
-	public ModelAndView zoekForm() {
-		return new ModelAndView("producten/zoeken", "zoekForm", new ZoekForm());
+		mav.addObject("zoekForm", new ZoekForm());
+		mav.addObject("stijlen", productService.findAllStijlen());
+		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, params = { "titel",
@@ -50,14 +48,14 @@ public class ProductController {
 				bindingResult.reject("fouteVanTotPrijs", new Object[] {
 						zoekForm.getVanPrijs(), zoekForm.getTotPrijs() }, "");
 			} else {
-				String titel = zoekForm.getTitel();
-				String schilderNaam = zoekForm.getSchilderNaam();
-				String stijl = zoekForm.getStijl();
+				String titel = zoekForm.getTitel().toLowerCase();
+				String schilderNaam = zoekForm.getSchilderNaam().toLowerCase();
+				String stijl = zoekForm.getStijl().toLowerCase();
 				BigDecimal vanPrijs = zoekForm.getVanPrijs();
 				BigDecimal totPrijs = zoekForm.getTotPrijs();
-				int vanJaartal = zoekForm.getVanJaartal();
-				int totJaartal = zoekForm.getTotJaartal();
-				List<Product> resultaat = productService.zoek(titel,
+				Integer vanJaartal = zoekForm.getVanJaartal();
+				Integer totJaartal = zoekForm.getTotJaartal();
+				Iterator<Product> resultaat = productService.zoek(titel,
 						schilderNaam, stijl, vanPrijs, totPrijs, vanJaartal,
 						totJaartal);
 				mav.addObject("resultaat", resultaat);

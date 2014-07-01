@@ -1,8 +1,7 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
-import java.util.List;
-
+import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -25,56 +24,63 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> zoek(String titel, String schilderNaam,
+	public Iterator<Product> zoek(String titel, String schilderNaam,
 		String stijl, BigDecimal vanPrijs, BigDecimal totPrijs,
 		Integer vanJaartal, Integer totJaartal) {
-		List<Product> resultaat = productDAO.findAll();
+		Iterator<Product> resultaat = productDAO.findAll().iterator();
 		if (titel != null) {
-			for (Product product: resultaat) {
+			while(resultaat.hasNext()) {
+				Product product = resultaat.next();
 				if (! product.getTitel().contains(titel)) {
-					resultaat.remove(product);
+					resultaat.remove();
 				}
 			}
 		}
 		if (schilderNaam != null) {
-			for (Product product: resultaat) {
+			while(resultaat.hasNext()) {
+				Product product = resultaat.next();
 				if (! product.getSchilder().getNaam().contains(schilderNaam)) {
-					resultaat.remove(product);
+					resultaat.remove();
 				}
 			}
 		}
 		if (stijl != null) {
-			for (Product product: resultaat) {
-				if (! product.getStijl().equals(stijl)) {
-					resultaat.remove(product);
+			while(resultaat.hasNext()) {
+				Product product = resultaat.next();
+				if (! product.getStijl().contains(stijl)) {
+					resultaat.remove();
 				}
 			}
 		}
 		if (vanPrijs != null) {
-			for (Product product: resultaat) {
+			while(resultaat.hasNext()) {
+				Product product = resultaat.next();
 				if (product.getPrijs().compareTo(vanPrijs) < 0) {
-					resultaat.remove(product);
+					resultaat.remove();
 				}
 			}
 		}
 		if (totPrijs != null) {
-			for (Product product: resultaat) {
+			while(resultaat.hasNext()) {
+				Product product = resultaat.next();
 				if (product.getPrijs().compareTo(totPrijs) >= 0) {
-					resultaat.remove(product);
+					resultaat.remove();
 				}
 			}
 		}
 		if (vanJaartal != null) {
-			for (Product product: resultaat) {
+			while(resultaat.hasNext()) {
+				Product product = resultaat.next();
 				if (product.getJaartal() < vanJaartal) {
-					resultaat.remove(product);
+					resultaat.remove();
 				}
 			}
 		}
 		if (totJaartal != null) {
-			for (Product product: resultaat) {
+			while(resultaat.hasNext()) {
+				Product product = resultaat.next();
 				if (product.getJaartal() > totJaartal) {
-					resultaat.remove(product);
+					resultaat.remove();
 				}
 			}
 		}
