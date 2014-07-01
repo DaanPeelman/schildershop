@@ -22,7 +22,7 @@ public class Product implements Serializable {
 	private String titel;
 	private int jaartal;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "schilderNr")
+	@JoinColumn(name = "schilderId")
 	private Schilder schilder;
 	private String stijl;
 	private BigDecimal prijs;
