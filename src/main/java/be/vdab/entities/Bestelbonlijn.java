@@ -13,10 +13,12 @@ import javax.persistence.Table;
 public class Bestelbonlijn implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "productId")
 	private Product product;
 	private int aantal;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BestelBonNr")
+	@JoinColumn(name = "bestelbonId")
 	private Bestelbon bestelbon;
 	
 	protected Bestelbonlijn() {

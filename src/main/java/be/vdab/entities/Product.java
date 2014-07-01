@@ -18,11 +18,11 @@ public class Product implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	private long schilderijNr;
+	private long productId;
 	private String titel;
 	private int jaartal;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "schilderNr")
+	@JoinColumn(name = "schilderId")
 	private Schilder schilder;
 	private String stijl;
 	private BigDecimal prijs;
@@ -38,12 +38,12 @@ public class Product implements Serializable {
 		this.prijs = prijs;
 	}
 
-	public long getId() {
-		return schilderijNr;
+	public long getProductId() {
+		return productId;
 	}
 
-	public void setId(long schilderijNr) {
-		this.schilderijNr = schilderijNr;
+	public void setProductId(long productId) {
+		this.productId = productId;
 	}
 
 	public String getTitel() {

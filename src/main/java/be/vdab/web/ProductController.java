@@ -1,6 +1,7 @@
 package be.vdab.web;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -56,7 +57,7 @@ public class ProductController {
 				BigDecimal totPrijs = zoekForm.getTotPrijs();
 				int vanJaartal = zoekForm.getVanJaartal();
 				int totJaartal = zoekForm.getTotJaartal();
-				Iterable<Product> resultaat = productService.zoek(titel,
+				List<Product> resultaat = productService.zoek(titel,
 						schilderNaam, stijl, vanPrijs, totPrijs, vanJaartal,
 						totJaartal);
 				mav.addObject("resultaat", resultaat);

@@ -18,7 +18,7 @@ public class Schilder implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	private long schilderNr;
+	private long schilderId;
 	private String naam;
 	@OneToMany(mappedBy = "schilder")
 	private Set<Product> schilderijen;
@@ -31,12 +31,12 @@ public class Schilder implements Serializable {
 		schilderijen = new HashSet<>();
 	}
 
-	public long getId() {
-		return schilderNr;
+	public long getSchilderId() {
+		return schilderId;
 	}
 
-	public void setId(long schilderNr) {
-		this.schilderNr = schilderNr;
+	public void setSchilderId(long schilderId) {
+		this.schilderId = schilderId;
 	}
 
 	public String getNaam() {

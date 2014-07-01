@@ -16,7 +16,7 @@
 		<div><form:label path="naam">Voornaam: <form:input path="naam" /><form:errors path="naam" cssClass="fout"/></form:label></div>
 		<div><form:label path="familienaam">Familienaam: <form:input path="familienaam" /><form:errors path="familienaam" cssClass="fout"/></form:label></div>
 		<div><form:label path="adres.straat">Straat: <form:input path="adres.straat" /><form:errors path="adres.straat" cssClass="fout"/></form:label></div>
-		<div><form:label path="adres.huisNr">Huisnr.: <form:input path="adres.huisNr" /><form:errors path="adres.huisNr" cssClass="fout"/></form:label></div>
+		<div><form:label path="adres.nummer">Huisnr.: <form:input path="adres.nummer" /><form:errors path="adres.nummer" cssClass="fout"/></form:label></div>
 		<div><form:label path="adres.gemeente">Gemeente: <form:input path="adres.gemeente" /><form:errors path="adres.gemeente" cssClass="fout"/></form:label></div>
 		<div><form:label path="adres.postcode">Postcode: <form:input path="adres.postcode" /><form:errors path="adres.postcode" cssClass="fout"/></form:label></div>
 		<div><form:label path="emailadres">Emailadres: <form:input path="emailadres" /><form:errors path="emailadres" cssClass="fout"/></form:label></div>

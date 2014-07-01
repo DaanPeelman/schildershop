@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Iterable<Product> zoek(String titel, String schilderNaam,
+	public List<Product> zoek(String titel, String schilderNaam,
 		String stijl, BigDecimal vanPrijs, BigDecimal totPrijs,
 		Integer vanJaartal, Integer totJaartal) {
 		List<Product> resultaat = productDAO.findAll();

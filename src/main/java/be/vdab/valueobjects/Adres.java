@@ -3,6 +3,8 @@ package be.vdab.valueobjects;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,16 +15,23 @@ public class Adres implements Serializable {
 	@NotNull
 	@Size(min = 1, max = 50)
 	private String straat;
-	private String huisNr;
+	@NotNull
+	@Size(min = 1, max = 7)
+	private String nummer;
+	@NotNull
+	@Size(min = 1, max = 50)
 	private String gemeente;
-	private String postcode;
+	@NotNull
+	@Min(1000)
+	@Max(9999)
+	private Integer postcode;
 	
 	protected Adres() {
 	}
 
-	public Adres(String straat, String huisNr, String gemeente, String postcode) {
+	public Adres(String straat, String nummer, String gemeente, Integer postcode) {
 		this.straat = straat;
-		this.huisNr = huisNr;
+		this.nummer = nummer;
 		this.gemeente = gemeente;
 		this.postcode = postcode;
 	}
@@ -31,15 +40,15 @@ public class Adres implements Serializable {
 		return straat;
 	}
 
-	public String getHuisNr() {
-		return huisNr;
+	public String getNummer() {
+		return nummer;
 	}
 
 	public String getGemeente() {
 		return gemeente;
 	}
 
-	public String getPostcode() {
+	public Integer getPostcode() {
 		return postcode;
 	}
 
@@ -47,15 +56,15 @@ public class Adres implements Serializable {
 		this.straat = straat;
 	}
 
-	protected void setHuisNr(String huisNr) {
-		this.huisNr = huisNr;
+	protected void setNummer(String nummer) {
+		this.nummer = nummer;
 	}
 
 	protected void setGemeente(String gemeente) {
 		this.gemeente = gemeente;
 	}
 
-	protected void setPostcode(String postcode) {
+	protected void setPostcode(Integer postcode) {
 		this.postcode = postcode;
 	}
 
@@ -65,9 +74,8 @@ public class Adres implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((gemeente == null) ? 0 : gemeente.hashCode());
-		result = prime * result + ((huisNr == null) ? 0 : huisNr.hashCode());
-		result = prime * result
-				+ ((postcode == null) ? 0 : postcode.hashCode());
+		result = prime * result + ((nummer == null) ? 0 : nummer.hashCode());
+		result = prime * result + postcode;
 		result = prime * result + ((straat == null) ? 0 : straat.hashCode());
 		return result;
 	}
@@ -86,15 +94,12 @@ public class Adres implements Serializable {
 				return false;
 		} else if (!gemeente.equals(other.gemeente))
 			return false;
-		if (huisNr == null) {
-			if (other.huisNr != null)
+		if (nummer == null) {
+			if (other.nummer != null)
 				return false;
-		} else if (!huisNr.equals(other.huisNr))
+		} else if (!nummer.equals(other.nummer))
 			return false;
-		if (postcode == null) {
-			if (other.postcode != null)
-				return false;
-		} else if (!postcode.equals(other.postcode))
+		if (postcode != other.postcode)
 			return false;
 		if (straat == null) {
 			if (other.straat != null)
