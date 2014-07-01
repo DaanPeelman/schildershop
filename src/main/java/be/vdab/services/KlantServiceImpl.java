@@ -7,6 +7,7 @@ import be.vdab.dao.KlantDAO;
 import be.vdab.dao.RolDAO;
 import be.vdab.entities.Gebruiker;
 import be.vdab.entities.Rol;
+import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
 
 @Service
 public class KlantServiceImpl implements KlantService {
@@ -21,6 +22,10 @@ public class KlantServiceImpl implements KlantService {
 	
 	@Override
 	public void voegToe(Gebruiker klant) {
+		if(klantDAO.findByEmailadres(klant.getEmailadres()) != null) {
+			throw new GebruikerMetDezeEmailBestaatAlException();
+		}
+		
 		Rol rol = rolDAO.findOne(2L);		// automatisch een klant
 		klant.addRol(rol);
 		klantDAO.save(klant);

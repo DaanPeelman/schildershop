@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.entities.Gebruiker;
+import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
 import be.vdab.services.KlantService;
 
 @Controller
@@ -32,8 +33,12 @@ public class KlantenController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid Gebruiker gebruiker, BindingResult bindingResult) {
 		if(!bindingResult.hasErrors()) {
-			klantService.voegToe(gebruiker);
-			return new ModelAndView("redirect:/");
+			try {
+				klantService.voegToe(gebruiker);
+				return new ModelAndView("redirect:/");
+			} catch (GebruikerMetDezeEmailBestaatAlException e) {
+				bindingResult.rejectValue("emailadres", "gebruikerMetDezeEmailBestaatAl");
+			}
 		}
 		
 		return new ModelAndView("klanten/registreer", "gebruiker", gebruiker);
