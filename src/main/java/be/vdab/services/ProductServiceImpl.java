@@ -1,7 +1,8 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -85,5 +86,14 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 		return resultaat;
+	}
+
+	@Override
+	public Iterable<String> findAllStijlen() {
+		Set<String> stijlen = new HashSet<>();
+		for (Product product: productDAO.findAll()) {
+			stijlen.add(product.getStijl());
+		}
+		return stijlen;
 	}
 }
