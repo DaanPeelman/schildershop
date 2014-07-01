@@ -10,7 +10,7 @@ class AdresForm extends Adres {
 	
 	AdresForm(Adres adres) {
 		setStraat(adres.getStraat());
-		setHuisNr(adres.getHuisNr());
+		setNummer(adres.getNummer());
 		setGemeente(adres.getGemeente());
 		setPostcode(adres.getPostcode());
 	}
@@ -27,12 +27,12 @@ class AdresForm extends Adres {
 	}
 	
 	@Override
-	public void setHuisNr(String huisNr) {
-		super.setHuisNr(huisNr);
+	public void setNummer(String nummer) {
+		super.setNummer(nummer);
 	}
 	
 	@Override
-	public void setPostcode(String postcode) {
+	public void setPostcode(Integer postcode) {
 		super.setPostcode(postcode);
 	}
 }

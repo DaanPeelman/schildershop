@@ -19,13 +19,13 @@ import be.vdab.constraints.Emailadres;
 import be.vdab.valueobjects.Adres;
 
 @Entity
-@Table(name = "klanten")
+@Table(name = "gebruikers")
 public class Gebruiker implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue
-	private long klantNr;
+	private long gebruikerId;
 	@NotNull
 	@Size(min = 1, max = 50)
 	private String naam;
@@ -35,7 +35,7 @@ public class Gebruiker implements Serializable {
 	@Valid
 	@Embedded
 	private Adres adres;
-	@OneToMany(mappedBy = "klant")
+	@OneToMany(mappedBy = "gebruiker")
 	private Set<Bestelbon> bestellingen;
 	@NotNull
 	@Size(min = 5, max = 20)
@@ -55,12 +55,12 @@ public class Gebruiker implements Serializable {
 		this.emailadres = emailadres;
 	}
 
-	public long getId() {
-		return klantNr;
+	public long getGebruikerId() {
+		return gebruikerId;
 	}
 
-	public void setId(long klantNr) {
-		this.klantNr = klantNr;
+	public void setGebruikerId(long gebruikerId) {
+		this.gebruikerId = gebruikerId;
 	}
 
 	public String getNaam() {

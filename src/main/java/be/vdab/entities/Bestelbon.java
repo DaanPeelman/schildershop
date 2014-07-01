@@ -14,10 +14,10 @@ public class Bestelbon implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	private long bestelbonNr;
+	private long bestelbonId;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "klantNr")
-	private Gebruiker klant;
+	@JoinColumn(name = "gebruikerId")
+	private Gebruiker gebruiker;
 	@Embedded
 	private Adres leverAdres;
 	@ElementCollection
@@ -27,27 +27,26 @@ public class Bestelbon implements Serializable {
 	protected Bestelbon() {
 	}
 
-	public Bestelbon(long bestelbonNr, Gebruiker klant, Adres leverAdres) {
-		this.bestelbonNr = bestelbonNr;
-		this.klant = klant;
+	public Bestelbon(Gebruiker gebruiker, Adres leverAdres) {
+		this.gebruiker = gebruiker;
 		this.leverAdres = leverAdres;
 		bestelbonlijnen = new HashSet<>();
 	}
 
-	public long getId() {
-		return bestelbonNr;
+	public long getBestelbonId() {
+		return bestelbonId;
 	}
 
-	public void setId(long bestelbonNr) {
-		this.bestelbonNr = bestelbonNr;
+	public void setBestelbonId(long bestelbonId) {
+		this.bestelbonId = bestelbonId;
 	}
 
 	public Gebruiker getKlant() {
-		return klant;
+		return gebruiker;
 	}
 
 	public void setKlant(Gebruiker klant) {
-		this.klant = klant;
+		this.gebruiker = klant;
 	}
 
 	public Adres getLeverAdres() {
@@ -72,8 +71,8 @@ public class Bestelbon implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((bestelbonlijnen == null) ? 0 : bestelbonlijnen.hashCode());
-		result = prime * result + (int) (bestelbonNr ^ (bestelbonNr >>> 32));
-		result = prime * result + ((klant == null) ? 0 : klant.hashCode());
+		result = prime * result + (int) (bestelbonId ^ (bestelbonId >>> 32));
+		result = prime * result + ((gebruiker == null) ? 0 : gebruiker.hashCode());
 		return result;
 	}
 
@@ -91,12 +90,12 @@ public class Bestelbon implements Serializable {
 				return false;
 		} else if (!bestelbonlijnen.equals(other.bestelbonlijnen))
 			return false;
-		if (bestelbonNr != other.bestelbonNr)
+		if (bestelbonId != other.bestelbonId)
 			return false;
-		if (klant == null) {
-			if (other.klant != null)
+		if (gebruiker == null) {
+			if (other.gebruiker != null)
 				return false;
-		} else if (!klant.equals(other.klant))
+		} else if (!gebruiker.equals(other.gebruiker))
 			return false;
 		return true;
 	}
