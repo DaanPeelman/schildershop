@@ -17,6 +17,6 @@ public class KlantServiceImpl implements KlantService {
 	
 	@Override
 	public void voegToe(Gebruiker klant) {
-			klantDAO.save(klant);
+		klantDAO.save(klant);
 	}
 }

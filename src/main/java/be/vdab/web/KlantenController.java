@@ -43,12 +43,6 @@ public class KlantenController {
 			return new ModelAndView("redirect:/");
 		}
 		
-		List<ObjectError> errors = bindingResult.getAllErrors();
-		
-		for(ObjectError error:errors) {
-			System.out.println(error.toString());
-		}
-		
 		return new ModelAndView("klanten/klanten", "gebruiker", gebruiker);
 	}
 	
@@ -57,10 +51,8 @@ public class KlantenController {
 		Gebruiker gebruiker = (Gebruiker) dataBinder.getTarget();
 		
 		if(gebruiker.getAdres() == null) {
-			System.out.println("KLANT ADRES OP ADRESFORM GEZET!!");
 			gebruiker.setAdres(new AdresForm());
 		} else {
-			System.out.println("KLANT ADRES OP AL INGESTELD ADRESFORM GEZET!!");
 			gebruiker.setAdres(new AdresForm(gebruiker.getAdres()));
 		}
 	}
