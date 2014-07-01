@@ -15,7 +15,7 @@
 		<div>
 			<aside class='sidebar'>
 			<c:url var="url" value="/producten" />
-				<form:form commandName="zoekForm" action="${url}" method="get">
+				<form:form commandName="titelForm" action="${url}" method="get">
 					<div>
 						<form:label path="titel">Titel: 
 						<form:input path="titel" autofocus='autofocus'/>
@@ -23,17 +23,35 @@
 						</form:label>
 					</div>
 					<div>
+						<input type="submit" value="Zoek" />
+						<form:errors cssClass='fout' element='div'/>
+					</div>
+				</form:form>	
+				<form:form commandName="schilderForm" action="${url}" method="get">
+					<div>
 						<form:label path="schilderNaam">Schilder: 
 						<form:input path="schilderNaam" />
 						<form:errors path="schilderNaam" cssClass="fout"/>
 						</form:label>
 					</div>
 					<div>
+						<input type="submit" value="Zoek" />
+						<form:errors cssClass='fout' element='div'/>
+					</div>
+				</form:form>	
+				<form:form commandName="stijlForm" action="${url}" method="get">
+					<div>
 						<form:label path="stijl">Stijl: 
 						<form:select path="stijl" items="${stijlen}" />
 						<form:errors path="stijl" cssClass="fout"/>
 						</form:label>
 					</div>
+					<div>
+						<input type="submit" value="Zoek" />
+						<form:errors cssClass='fout' element='div'/>
+					</div>
+					</form:form>	
+				<form:form commandName="vanTotPrijsForm" action="${url}" method="get">
 					<div>
 						<form:label path="vanPrijs">Prijs vanaf 
 						<form:input path="vanPrijs" type='number'/>
@@ -44,6 +62,12 @@
 						<form:errors path="totPrijs" cssClass="fout"/>
 						</form:label>
 					</div>
+					<div>
+						<input type="submit" value="Zoek" />
+						<form:errors cssClass='fout' element='div'/>
+					</div>
+				</form:form>	
+				<form:form commandName="vanTotJaartalForm" action="${url}" method="get">
 					<div>
 						<form:label path="vanJaartal">Gemaakt tussen 
 						<form:input path="vanJaartal" type='number'/>
