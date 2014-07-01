@@ -6,6 +6,7 @@
 		<title>Schilderijen</title>
 	<body>
 		<a href="<c:url value='/'/>">Home</a>
+		<a href="<c:url value='/producten/zoeken'/>">Zoeken</a>
 		<h1>Schilderijen</h1>
 		<table>
 			<thead>
