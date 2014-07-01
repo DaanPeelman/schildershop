@@ -67,45 +67,4 @@ public class Adres implements Serializable {
 	protected void setPostcode(Integer postcode) {
 		this.postcode = postcode;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((gemeente == null) ? 0 : gemeente.hashCode());
-		result = prime * result + ((nummer == null) ? 0 : nummer.hashCode());
-		result = prime * result + postcode;
-		result = prime * result + ((straat == null) ? 0 : straat.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Adres other = (Adres) obj;
-		if (gemeente == null) {
-			if (other.gemeente != null)
-				return false;
-		} else if (!gemeente.equals(other.gemeente))
-			return false;
-		if (nummer == null) {
-			if (other.nummer != null)
-				return false;
-		} else if (!nummer.equals(other.nummer))
-			return false;
-		if (postcode != other.postcode)
-			return false;
-		if (straat == null) {
-			if (other.straat != null)
-				return false;
-		} else if (!straat.equals(other.straat))
-			return false;
-		return true;
-	}
 }

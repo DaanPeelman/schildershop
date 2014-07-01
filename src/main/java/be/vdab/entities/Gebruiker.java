@@ -42,8 +42,11 @@ public class Gebruiker implements Serializable {
 	private String wachtwoord;
 	@Emailadres
 	private String emailadres;
+	@NotNull
+	private boolean actief;
 	
 	public Gebruiker() {
+		this.actief = false;
 	}
 
 	public Gebruiker(String naam, String familienaam, Adres adres, String wachtwoord, String emailadres) {
@@ -53,6 +56,7 @@ public class Gebruiker implements Serializable {
 		bestellingen = new HashSet<>();
 		this.wachtwoord = wachtwoord;
 		this.emailadres = emailadres;
+		this.actief = false;
 	}
 
 	public long getGebruikerId() {
@@ -109,6 +113,14 @@ public class Gebruiker implements Serializable {
 	
 	public void setEmailadres(String emailadres) {
 		this.emailadres = emailadres;
+	}
+	
+	public void setActief(boolean actief) {
+		this.actief = actief;
+	}
+	
+	public boolean getActief() {
+		return actief;
 	}
 
 	@Override

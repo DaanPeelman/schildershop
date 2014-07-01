@@ -13,4 +13,5 @@ public interface ProductService {
 			Integer vanJaartal, Integer totJaartal);
 
 	Iterable<String> findAllStijlen();
+
 }
