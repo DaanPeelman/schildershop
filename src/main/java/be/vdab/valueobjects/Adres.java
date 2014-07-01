@@ -13,8 +13,14 @@ public class Adres implements Serializable {
 	@NotNull
 	@Size(min = 1, max = 50)
 	private String straat;
+	@NotNull
+	@Size(min = 1, max = 7)
 	private String huisNr;
+	@NotNull
+	@Size(min = 1, max = 50)
 	private String gemeente;
+	@NotNull
+	@Size(min = 4, max = 4)
 	private String postcode;
 	
 	protected Adres() {
