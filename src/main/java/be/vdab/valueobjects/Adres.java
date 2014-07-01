@@ -8,18 +8,20 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Embeddable
 public class Adres implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@NotNull
-	@Size(min = 1, max = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String straat;
-	@NotNull
-	@Size(min = 1, max = 7)
+	@NotEmpty
+	@Size(max = 7)
 	private String nummer;
-	@NotNull
-	@Size(min = 1, max = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String gemeente;
 	@NotNull
 	@Min(1000)

@@ -16,7 +16,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import be.vdab.constraints.Emailadres;
+import be.vdab.constraints.Wachtwoord;
 import be.vdab.valueobjects.Adres;
 
 @Entity
@@ -27,23 +32,21 @@ public class Gebruiker implements Serializable {
 	@Id
 	@GeneratedValue
 	private long gebruikerId;
-	@NotNull
-	@Size(min = 1, max = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String naam;
-	@NotNull
-	@Size(min = 1, max = 50)
+	@NotEmpty
+	@Size(max = 50)
 	private String familienaam;
 	@Valid
 	@Embedded
 	private Adres adres;
 	@OneToMany(mappedBy = "gebruiker")
 	private Set<Bestelbon> bestellingen;
-	@NotNull
-	@Size(min = 5, max = 20)
+	@Wachtwoord
 	private String wachtwoord;
 	@Emailadres
 	private String emailadres;
-	@NotNull
 	private boolean actief;
 	@ManyToMany(mappedBy = "gebruikers")
 	private Set<Rol> rollen;
