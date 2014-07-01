@@ -8,10 +8,8 @@ http://www.springframework.org/schema/security/spring-security.xsd'>
 	<http pattern='/images/*' security='none' />
 	<http pattern='/scripts/*' security='none' />
 	<http use-expressions='true'>
-		<form-login login-page="/login" authentication-failure-url="/login?error=true"/>
+		<form-login login-page="/login" authentication-failure-url="/login?error=true" />
 		<logout/>
-		<intercept-url pattern='/producten'
-			access="hasAnyRole('magazijnier','helpdeskmedewerker')" />
 	</http>
 	<authentication-manager>
 		<authentication-provider>
