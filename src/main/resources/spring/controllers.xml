@@ -18,6 +18,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd'>
 		<property name='prefix' value='/WEB-INF/JSP/' />
 		<property name='suffix' value='.jsp' />
 	</bean>
+	<mvc:view-controller path='/login' view-name='login'/>
 		<bean id='validator'
 		class='org.springframework.validation.beanvalidation.LocalValidatorFactoryBean'>
 		<property name='validationMessageSource' ref='messageSource' />

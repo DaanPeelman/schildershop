@@ -8,9 +8,8 @@
 <title>Aanmelden</title>
 </head>
 <body>
-	<h1>Aanmelden</h1>
-	<h2>Ik ben al geregistreerd</h2>
-	<h2>Ik ben nieuw hier</h2>
+	<jsp:include page="../menu.jsp" />
+	<h1>Registreer</h1>
 	<c:url var="url" value="/klanten" />
 	<form:form commandName="gebruiker" action="${url}" method="post">
 		<div><form:label path="naam">Voornaam: <form:input path="naam" /><form:errors path="naam" cssClass="fout"/></form:label></div>
