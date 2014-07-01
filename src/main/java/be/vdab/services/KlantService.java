@@ -1,7 +1,7 @@
 package be.vdab.services;
 
-import be.vdab.entities.Klant;
+import be.vdab.entities.Gebruiker;
 
-interface KlantService {
-	void voegToe(Klant klant) ;
+public interface KlantService {
+	void voegToe(Gebruiker klant) ;
 }

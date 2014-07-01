@@ -9,17 +9,18 @@
 </head>
 <body>
 	<h1>Aanmelden</h1>
-	<h2>Ik heb al een account</h2>
-	<h2>Ik heb nog geen account</h2>
-	<form:form commandName="klant">
-		<div><form:label path="naam">Voornaam: <form:input path="naam" /></form:label></div>
-		<div><form:label path="familienaam">Familienaam: <form:input path="familienaam" /></form:label></div>
-		<div><form:label path="adres.straat">Straat: <form:input path="adres.straat" /></form:label></div>
-		<div><form:label path="adres.nummer">Huisnr.: <form:input path="adres.nummer" /></form:label></div>
-		<div><form:label path="adres.gemeente">Gemeente: <form:input path="adres.gemeente" /></form:label></div>
-		<div><form:label path="adres.postcode">Postcode: <form:input path="adres.postcode" /></form:label></div>
-		<div><form:label path="wachtwoord">Wachtwoord <form:input path="wachtwoord" /></form:label></div>
-		<div><form:label path="bevestigingWachtwoord">Bevestig wachtwoord: <form:input path="bevestigingWachtwoord" /></form:label></div>
+	<h2>Ik ben al geregistreerd</h2>
+	<h2>Ik ben nieuw hier</h2>
+	<c:url var="url" value="/klanten" />
+	<form:form commandName="gebruiker" action="${url}" method="post">
+		<div><form:label path="naam">Voornaam: <form:input path="naam" /><form:errors path="naam" cssClass="fout"/></form:label></div>
+		<div><form:label path="familienaam">Familienaam: <form:input path="familienaam" /><form:errors path="familienaam" cssClass="fout"/></form:label></div>
+		<div><form:label path="adres.straat">Straat: <form:input path="adres.straat" /><form:errors path="adres.straat" cssClass="fout"/></form:label></div>
+		<div><form:label path="adres.huisNr">Huisnr.: <form:input path="adres.huisNr" /><form:errors path="adres.huisNr" cssClass="fout"/></form:label></div>
+		<div><form:label path="adres.gemeente">Gemeente: <form:input path="adres.gemeente" /><form:errors path="adres.gemeente" cssClass="fout"/></form:label></div>
+		<div><form:label path="adres.postcode">Postcode: <form:input path="adres.postcode" /><form:errors path="adres.postcode" cssClass="fout"/></form:label></div>
+		<div><form:label path="emailadres">Emailadres: <form:input path="emailadres" /><form:errors path="emailadres" cssClass="fout"/></form:label></div>
+		<div><form:label path="wachtwoord">Wachtwoord <form:input path="wachtwoord" /><form:errors path="wachtwoord" cssClass="fout"/></form:label></div>
 		<div><input type="submit" value="Maak aan" /></div>
 	</form:form>
 </body>

@@ -1,20 +1,9 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import be.vdab.valueobjects.Adres;
 
@@ -28,7 +17,7 @@ public class Bestelbon implements Serializable {
 	private long bestelbonNr;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "klantNr")
-	private Klant klant;
+	private Gebruiker klant;
 	@Embedded
 	private Adres leverAdres;
 	@ElementCollection
@@ -38,7 +27,7 @@ public class Bestelbon implements Serializable {
 	protected Bestelbon() {
 	}
 
-	public Bestelbon(long bestelbonNr, Klant klant, Adres leverAdres) {
+	public Bestelbon(long bestelbonNr, Gebruiker klant, Adres leverAdres) {
 		this.bestelbonNr = bestelbonNr;
 		this.klant = klant;
 		this.leverAdres = leverAdres;
@@ -53,11 +42,11 @@ public class Bestelbon implements Serializable {
 		this.bestelbonNr = bestelbonNr;
 	}
 
-	public Klant getKlant() {
+	public Gebruiker getKlant() {
 		return klant;
 	}
 
-	public void setKlant(Klant klant) {
+	public void setKlant(Gebruiker klant) {
 		this.klant = klant;
 	}
 

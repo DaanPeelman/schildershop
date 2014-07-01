@@ -22,7 +22,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd'>
 		class='org.springframework.validation.beanvalidation.LocalValidatorFactoryBean'>
 		<property name='validationMessageSource' ref='messageSource' />
 	</bean>
-	<bean id="messageSource"
+		<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath://resourceBundles/teksten" />
 		<property name="fallbackToSystemLocale" value="false" />
