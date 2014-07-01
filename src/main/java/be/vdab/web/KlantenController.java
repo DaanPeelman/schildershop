@@ -21,9 +21,9 @@ public class KlantenController {
 		this.klantService = klantService;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/registreer", method = RequestMethod.GET)
 	public ModelAndView aanmeldForm() {
-		ModelAndView modelAndView = new ModelAndView("klanten/klanten");
+		ModelAndView modelAndView = new ModelAndView("klanten/registreer");
 		modelAndView.addObject("gebruiker", new Gebruiker());
 		
 		return modelAndView;
@@ -36,7 +36,7 @@ public class KlantenController {
 			return new ModelAndView("redirect:/");
 		}
 		
-		return new ModelAndView("klanten/klanten", "gebruiker", gebruiker);
+		return new ModelAndView("klanten/registreer", "gebruiker", gebruiker);
 	}
 	
 	@InitBinder("gebruiker")

@@ -46,7 +46,7 @@ public class Gebruiker implements Serializable {
 	private boolean actief;
 	
 	public Gebruiker() {
-		this.actief = false;
+		this.actief = true;
 	}
 
 	public Gebruiker(String naam, String familienaam, Adres adres, String wachtwoord, String emailadres) {
@@ -56,7 +56,7 @@ public class Gebruiker implements Serializable {
 		bestellingen = new HashSet<>();
 		this.wachtwoord = wachtwoord;
 		this.emailadres = emailadres;
-		this.actief = false;
+		this.actief = true;
 	}
 
 	public long getGebruikerId() {
