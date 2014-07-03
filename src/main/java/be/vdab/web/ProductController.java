@@ -1,6 +1,7 @@
 package be.vdab.web;
 
 import java.math.BigDecimal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +10,21 @@ import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import be.vdab.entities.Product;
-import be.vdab.services.ProductService;
+import be.vdab.entities.*;
+import be.vdab.exceptions.SchilderMetDezeNaamBestaatAlException;
+import be.vdab.services.*;
 
 @Controller
 @RequestMapping("/producten")
 public class ProductController {
 	private final ProductService productService;
+	private final SchilderService schilderService;
 
 	@Autowired
-	public ProductController(ProductService productService) {
+	public ProductController(ProductService productService, 
+			SchilderService schilderService) {
 		this.productService = productService;
+		this.schilderService = schilderService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -79,6 +84,7 @@ public class ProductController {
 			Iterable<Product> resultaat = productService.findByStijl(stijl);
 			mav.addObject("schilderijen", resultaat);
 			mav.addObject("titelForm", new TitelForm());
+			mav.addObject("schilderForm", new SchilderForm());
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
@@ -111,8 +117,8 @@ public class ProductController {
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, params = {"vanJaartal",
-			"totJaartal"})
+	@RequestMapping(method = RequestMethod.GET, params = { "vanJaartal",
+			"totJaartal" })
 	public ModelAndView findByJaartalBetween(
 			@Valid VanTotJaartalForm vanTotJaartalForm,
 			BindingResult bindingResult) {
@@ -136,6 +142,43 @@ public class ProductController {
 		}
 		return mav;
 	}
+
+	@RequestMapping(value = "toevoegen", method = RequestMethod.GET)
+	public ModelAndView createForm() {
+		ModelAndView mav = new ModelAndView("producten/toevoegen", "product", new Product());
+		mav.addObject("schilders", schilderService.findAll());
+		mav.addObject("schilder", new Schilder());
+		return mav;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView createProduct(@Valid Product product, BindingResult bindingResult) {
+		if (!bindingResult.hasErrors()) {
+			productService.create(product);
+			return new ModelAndView("redirect:/");
+		}
+		ModelAndView mav = new ModelAndView("producten/toevoegen", "product", product);
+		mav.addObject("schilders", schilderService.findAll());
+		mav.addObject("schilder", new Schilder());
+		return mav;
+	}
+	
+	@RequestMapping(value = "toevoegen", method = RequestMethod.POST, params = { "naam" })
+	public ModelAndView createSchilder(@Valid Schilder schilder, BindingResult bindingResult) {
+		if (!bindingResult.hasErrors()) {
+			try {
+				schilderService.create(schilder);
+				return new ModelAndView("redirect:/");
+			} catch (SchilderMetDezeNaamBestaatAlException ex) {
+				bindingResult.rejectValue("naam", "SchilderMetDezeNaamBestaatAl");
+			}
+		}
+		ModelAndView mav = new ModelAndView("producten/toevoegen", "product", new Product());
+		mav.addObject("schilders", schilderService.findAll());
+		mav.addObject("schilder", schilder);
+		return mav;
+	}
+
 
 	@InitBinder("titelForm")
 	public void intBinderTitelForm(DataBinder dataBinder) {

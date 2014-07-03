@@ -87,28 +87,35 @@
 			</aside>
 			<section class='content'>
 				<h1>Schilderijen</h1>
-				<table>
-					<thead>
-						<tr>
-							<th>Titel</th>
-							<th>Schilder</th>
-							<th>Stijl</th>
-							<th>Jaartal</th>
-							<th>Prijs</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${schilderijen}" var="schilderij">
-							<tr>
-								<th>${schilderij.titel}</th>
-								<th>${schilderij.schilder.naam}</th>
-								<th>${schilderij.stijl}</th>
-								<th>${schilderij.jaartal}</th>
-								<th>${schilderij.prijs}</th>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+				<c:choose>
+					<c:when test="${not empty schilderijen}">
+						<table>
+							<thead>
+								<tr>
+									<th>Titel</th>
+									<th>Schilder</th>
+									<th>Stijl</th>
+									<th>Jaartal</th>
+									<th>Prijs</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${schilderijen}" var="schilderij">
+									<tr>
+										<th>${schilderij.titel}</th>
+										<th>${schilderij.schilder.naam}</th>
+										<th>${schilderij.stijl}</th>
+										<th>${schilderij.jaartal}</th>
+										<th>${schilderij.prijs}</th>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:when>
+					<c:otherwise>
+						Er werden geen schilderijen gevonden.
+					</c:otherwise>
+				</c:choose>
 			</section>
 		</div>
 		<footer>

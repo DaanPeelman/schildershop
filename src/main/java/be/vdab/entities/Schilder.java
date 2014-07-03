@@ -23,7 +23,7 @@ public class Schilder implements Serializable {
 	@OneToMany(mappedBy = "schilder")
 	private Set<Product> schilderijen;
 	
-	protected Schilder() {
+	public Schilder() {
 	}
 
 	public Schilder(String naam) {
@@ -78,5 +78,24 @@ public class Schilder implements Serializable {
 		} else if (!naam.equals(other.naam))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return naam;
+	}
+
+	public void removeSchilderij(Product product) {
+		if (product.getSchilder() == this) {
+			schilderijen.remove(product);
+			product.setSchilder(null);
+		}
+	}
+
+	public void addSchilderij(Product product) {
+		schilderijen.add(product);
+		if (product.getSchilder() != this) {
+			product.setSchilder(this);
+		}
 	}
 }
