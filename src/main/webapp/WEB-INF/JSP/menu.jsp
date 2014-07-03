@@ -9,7 +9,7 @@
 		<label>Gebruikersnaam: <input name='j_username' autofocus></label>
 		<label>Paswoord: <input type='password' name='j_password'></label>
 		<input type='submit' value='Aanmelden' id='aanmeldknop'>
-		<p>U bent nieuw hier en zou u graag registreren? Klik <a href="<c:url value='/klanten/login' />"> hier </a></p>
+		<p>U bent nieuw hier en zou u graag registreren? Klik <a href="<c:url value='/gebruiker/login' />"> hier </a></p>
 	</form>
 	</li></security:authorize>
 </ul>

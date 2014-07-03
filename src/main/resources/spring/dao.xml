@@ -40,5 +40,7 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd'>
 			</bean>
 		</property>
 	</bean>
+	<bean class=
+'org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor'/>
 	<jpa:repositories base-package='be.vdab.dao'/>
 </beans>

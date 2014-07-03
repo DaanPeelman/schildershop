@@ -24,7 +24,7 @@
 	</form>
 	
 	<h1>Ik ben nieuw hier</h1>
-	<c:url var="url" value="/klanten" />
+	<c:url var="url" value="/gebruiker" />
 	<form:form commandName="gebruiker" action="${url}" method="post">
 		<div><form:label path="naam">Voornaam: <form:input path="naam" /><form:errors path="naam" cssClass="fout"/></form:label></div>
 		<div><form:label path="familienaam">Familienaam: <form:input path="familienaam" /><form:errors path="familienaam" cssClass="fout"/></form:label></div>
