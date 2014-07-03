@@ -19,4 +19,6 @@ public interface ProductService {
 
 	Iterable<Product> findByJaartalBetween(Integer vanJaartal,
 			Integer totJaartal);
+
+	void create(Product product);
 }

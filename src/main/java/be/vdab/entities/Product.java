@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "producten")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
 	private long productId;
@@ -26,11 +26,12 @@ public class Product implements Serializable {
 	private Schilder schilder;
 	private String stijl;
 	private BigDecimal prijs;
-	
-	protected Product() {
+
+	public Product() {
 	}
 
-	public Product(String titel, int jaartal, Schilder schilder, String stijl, BigDecimal prijs) {
+	public Product(String titel, int jaartal, Schilder schilder, String stijl,
+			BigDecimal prijs) {
 		this.titel = titel;
 		this.jaartal = jaartal;
 		this.schilder = schilder;
@@ -67,7 +68,14 @@ public class Product implements Serializable {
 	}
 
 	public void setSchilder(Schilder schilder) {
+		if (this.schilder != null
+				&& this.schilder.getSchilderijen().contains(this)) {
+			this.schilder.removeSchilderij(this);
+		}
 		this.schilder = schilder;
+		if (schilder != null && !schilder.getSchilderijen().contains(this)) {
+			schilder.addSchilderij(this);
+		}
 	}
 
 	public String getStijl() {

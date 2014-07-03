@@ -6,11 +6,13 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.dao.ProductDAO;
 import be.vdab.entities.Product;
 
 @Service
+@Transactional(readOnly = true)
 public class ProductServiceImpl implements ProductService {
 	private final ProductDAO productDAO;
 	
@@ -58,5 +60,11 @@ public class ProductServiceImpl implements ProductService {
 	public Iterable<Product> findByJaartalBetween(Integer vanJaartal,
 			Integer totJaartal) {
 		return productDAO.findByJaartalBetweenOrderByJaartalAsc(vanJaartal, totJaartal);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void create(Product product) {
+		product.setProductId(productDAO.save(product).getProductId());
 	}
 }

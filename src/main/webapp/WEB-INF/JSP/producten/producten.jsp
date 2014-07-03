@@ -88,7 +88,7 @@
 			<section class='content'>
 				<h1>Schilderijen</h1>
 				<c:choose>
-					<c:when test="{not empty schilderijen}">
+					<c:when test="${not empty schilderijen}">
 						<table>
 							<thead>
 								<tr>
