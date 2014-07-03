@@ -38,11 +38,16 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.GET, params = { "titel" })
 	public ModelAndView findByTitel(@Valid TitelForm titelForm,
 			BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/zoeken");
+		ModelAndView mav = new ModelAndView("producten/producten");
 		if (!bindingResult.hasErrors()) {
 			String titel = titelForm.getTitel().toLowerCase();
 			Iterable<Product> resultaat = productService.findByTitel(titel);
-			mav.addObject("resultaat", resultaat);
+			mav.addObject("schilderijen", resultaat);
+			mav.addObject("schilderForm", new SchilderForm());
+			mav.addObject("stijlForm", new StijlForm());
+			mav.addObject("stijlen", productService.findAllStijlen());
+			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
+			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
 		}
 		return mav;
 	}
@@ -50,12 +55,17 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.GET, params = { "schilderNaam" })
 	public ModelAndView zoek(@Valid SchilderForm schilderForm,
 			BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/zoeken");
+		ModelAndView mav = new ModelAndView("producten/producten");
 		if (!bindingResult.hasErrors()) {
 			String schilderNaam = schilderForm.getSchilderNaam().toLowerCase();
 			Iterable<Product> resultaat = productService
 					.findBySchilderNaam(schilderNaam);
-			mav.addObject("resultaat", resultaat);
+			mav.addObject("schilderijen", resultaat);
+			mav.addObject("titelForm", new TitelForm());
+			mav.addObject("stijlForm", new StijlForm());
+			mav.addObject("stijlen", productService.findAllStijlen());
+			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
+			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
 		}
 		return mav;
 	}
@@ -63,11 +73,15 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.GET, params = { "stijl" })
 	public ModelAndView findBystijl(@Valid StijlForm stijlForm,
 			BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/zoeken");
+		ModelAndView mav = new ModelAndView("producten/producten");
 		if (!bindingResult.hasErrors()) {
 			String stijl = stijlForm.getStijl().toLowerCase();
 			Iterable<Product> resultaat = productService.findByStijl(stijl);
-			mav.addObject("resultaat", resultaat);
+			mav.addObject("schilderijen", resultaat);
+			mav.addObject("titelForm", new TitelForm());
+			mav.addObject("stijlen", productService.findAllStijlen());
+			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
+			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
 		}
 		return mav;
 	}
@@ -76,7 +90,7 @@ public class ProductController {
 			"totPrijs" })
 	public ModelAndView findByPrijsBetween(
 			@Valid VanTotPrijsForm vanTotPrijsForm, BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/zoeken");
+		ModelAndView mav = new ModelAndView("producten/producten");
 		if (!bindingResult.hasErrors() && !vanTotPrijsForm.isValid()) {
 			bindingResult.reject("fouteVanTotPrijs",
 					new Object[] { vanTotPrijsForm.getVanPrijs(),
@@ -87,7 +101,12 @@ public class ProductController {
 			BigDecimal totPrijs = vanTotPrijsForm.getTotPrijs();
 			Iterable<Product> resultaat = productService.findByPrijsBetween(
 					vanPrijs, totPrijs);
-			mav.addObject("resultaat", resultaat);
+			mav.addObject("schilderijen", resultaat);
+			mav.addObject("titelForm", new TitelForm());
+			mav.addObject("schilderForm", new SchilderForm());
+			mav.addObject("stijlForm", new StijlForm());
+			mav.addObject("stijlen", productService.findAllStijlen());
+			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
 		}
 		return mav;
 	}
@@ -97,7 +116,7 @@ public class ProductController {
 	public ModelAndView findByJaartalBetween(
 			@Valid VanTotJaartalForm vanTotJaartalForm,
 			BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/zoeken");
+		ModelAndView mav = new ModelAndView("producten/producten");
 		if (!bindingResult.hasErrors() && !vanTotJaartalForm.isValid()) {
 			bindingResult.reject("fouteVanTotJaartal",
 					new Object[] { vanTotJaartalForm.getVanJaartal(),
@@ -108,7 +127,12 @@ public class ProductController {
 			Integer totJaartal = vanTotJaartalForm.getTotJaartal();
 			Iterable<Product> resultaat = productService.findByJaartalBetween(
 					vanJaartal, totJaartal);
-			mav.addObject("resultaat", resultaat);
+			mav.addObject("schilderijen", resultaat);
+			mav.addObject("titelForm", new TitelForm());
+			mav.addObject("schilderForm", new SchilderForm());
+			mav.addObject("stijlForm", new StijlForm());
+			mav.addObject("stijlen", productService.findAllStijlen());
+			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 		}
 		return mav;
 	}
