@@ -5,6 +5,7 @@
 <html lang='nl'>
 	<head>
 		<title>Schilderijen</title>
+		<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/styles/default.css' />
 	</head>
 	<body>
 		<header>

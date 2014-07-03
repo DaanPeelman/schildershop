@@ -22,9 +22,9 @@ public class KlantenController {
 		this.klantService = klantService;
 	}
 	
-	@RequestMapping(value = "/registreer", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView aanmeldForm() {
-		ModelAndView modelAndView = new ModelAndView("klanten/registreer");
+		ModelAndView modelAndView = new ModelAndView("klanten/login");
 		modelAndView.addObject("gebruiker", new Gebruiker());
 		
 		return modelAndView;
@@ -41,7 +41,7 @@ public class KlantenController {
 			}
 		}
 		
-		return new ModelAndView("klanten/registreer", "gebruiker", gebruiker);
+		return new ModelAndView("klanten/login", "gebruiker", gebruiker);
 	}
 	
 	@InitBinder("gebruiker")

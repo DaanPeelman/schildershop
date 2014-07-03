@@ -10,11 +10,14 @@
 		id='aanmeldform'>
 		<label>Gebruikersnaam: <input name='j_username' autofocus></label>
 		<label>Paswoord: <input type='password' name='j_password'></label>
-		<c:if test="${param.error }">
-			<div class="fout">Verkeerde gebruikersnaam of paswoord</div>
-		</c:if>
 		<input type='submit' value='Aanmelden' id='aanmeldknop'>
-		<p>U bent nieuw hier en zou u graag registreren? Klik <a href="<c:url value='/klanten/registreer' />"> hier </a></p>
+		<p>U bent nieuw hier en zou u graag registreren? Klik <a href="<c:url value='/klanten/login' />"> hier </a></p>
 	</form>
 	</li></security:authorize>
 </ul>
+
+<script>
+	document.getElementById('aanmeldform').onsubmit = function() {
+		document.getElementById('aanmeldknop').disabled = true;
+	};
+</script>
