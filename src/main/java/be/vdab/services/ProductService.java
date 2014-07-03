@@ -1,17 +1,22 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
-
 import be.vdab.entities.Product;
 
 public interface ProductService {
 	Iterable<Product> findAll();
 
-	Iterator<Product> zoek(String titel, String schilderNaam,
-			String stijl, BigDecimal vanPrijs, BigDecimal totPrijs,
-			Integer vanJaartal, Integer totJaartal);
-
 	Iterable<String> findAllStijlen();
 
+	Iterable<Product> findByTitel(String titel);
+
+	Iterable<Product> findBySchilderNaam(String schilderNaam);
+
+	Iterable<Product> findByStijl(String stijl);
+
+	Iterable<Product> findByPrijsBetween(BigDecimal vanPrijs,
+			BigDecimal totPrijs);
+
+	Iterable<Product> findByJaartalBetween(Integer vanJaartal,
+			Integer totJaartal);
 }
