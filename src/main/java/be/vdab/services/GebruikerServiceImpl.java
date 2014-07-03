@@ -21,7 +21,7 @@ public class GebruikerServiceImpl implements GebruikerService {
 	}
 	
 	@Override
-	public void voegToe(Gebruiker gebruiker) {
+	public void add(Gebruiker gebruiker) {
 		if(gebruikerDAO.findByEmailadres(gebruiker.getEmailadres()) != null) {
 			throw new GebruikerMetDezeEmailBestaatAlException();
 		}
@@ -38,7 +38,7 @@ public class GebruikerServiceImpl implements GebruikerService {
 	}
 	
 	@Override
-	public void wijzig(Gebruiker gebruiker) {
+	public void update(Gebruiker gebruiker) {
 		gebruikerDAO.save(gebruiker);
 	}
 }

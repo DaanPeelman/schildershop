@@ -3,7 +3,7 @@ package be.vdab.services;
 import be.vdab.entities.Gebruiker;
 
 public interface GebruikerService {
-	void voegToe(Gebruiker gebruiker);
+	void add(Gebruiker gebruiker);
 	Gebruiker findByEmailadres(String emailadres);
-	void wijzig(Gebruiker gebruiker);
+	void update(Gebruiker gebruiker);
 }

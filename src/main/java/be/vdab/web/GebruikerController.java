@@ -47,7 +47,7 @@ public class GebruikerController {
 		
 		if(!bindingResult.hasErrors()) {
 			try {
-				gebruikerService.voegToe(gebruiker);
+				gebruikerService.add(gebruiker);
 				return new ModelAndView("redirect:/");
 			} catch (GebruikerMetDezeEmailBestaatAlException e) {
 				bindingResult.rejectValue("emailadres", "gebruikerMetDezeEmailBestaatAl");
@@ -86,9 +86,10 @@ public class GebruikerController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public ModelAndView wijzigGegevens(HttpServletRequest request, @Valid Gebruiker gebruiker, BindingResult bindingResult) {		
 		Principal principal = request.getUserPrincipal();
+		
 		if(principal != null) {
 			if(!bindingResult.hasErrors()) {
-				gebruikerService.wijzig(gebruiker);
+				gebruikerService.update(gebruiker);
 				return new ModelAndView("gebruiker/gegevens");
 			}
 		}
