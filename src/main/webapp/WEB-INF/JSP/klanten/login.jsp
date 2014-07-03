@@ -8,7 +8,9 @@
 <title>Aanmelden</title>
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<ul>
+		<jsp:include page="../menuZonderLogin.jsp" />
+	</ul>
 	<h1>Ik ben al geregistreerd</h1>
 	<form method='post' action='<c:url value="/j_spring_security_check"/>' id='aanmeldform'>
 		<label>Gebruikersnaam: <input name='j_username' autofocus></label>
