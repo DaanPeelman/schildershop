@@ -1,8 +1,6 @@
 package be.vdab.web;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,46 +24,121 @@ public class ProductController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView findAll() {
-		ModelAndView mav = new ModelAndView("producten/producten", "schilderijen",
-				productService.findAll());
-		mav.addObject("zoekForm", new ZoekForm());
+		ModelAndView mav = new ModelAndView("producten/producten",
+				"schilderijen", productService.findAll());
+		mav.addObject("titelForm", new TitelForm());
+		mav.addObject("schilderForm", new SchilderForm());
+		mav.addObject("stijlForm", new StijlForm());
 		mav.addObject("stijlen", productService.findAllStijlen());
+		mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
+		mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, params = { "titel",
-			"schilderNaam", "stijl", "vanPrijs", "totPrijs", "vanJaartal",
-			"totJaartal" })
-	public ModelAndView zoek(@Valid ZoekForm zoekForm,
+	@RequestMapping(method = RequestMethod.GET, params = { "titel" })
+	public ModelAndView findByTitel(@Valid TitelForm titelForm,
 			BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("producten/zoeken");
 		if (!bindingResult.hasErrors()) {
-			if (!zoekForm.isValidJaartal()) {
-				bindingResult.reject("fouteVanTotJaartal", new Object[] {
-						zoekForm.getVanJaartal(), zoekForm.getTotJaartal() },
-						"");
-			} else if (!zoekForm.isValidPrijs()) {
-				bindingResult.reject("fouteVanTotPrijs", new Object[] {
-						zoekForm.getVanPrijs(), zoekForm.getTotPrijs() }, "");
-			} else {
-				String titel = zoekForm.getTitel().toLowerCase();
-				String schilderNaam = zoekForm.getSchilderNaam().toLowerCase();
-				String stijl = zoekForm.getStijl().toLowerCase();
-				BigDecimal vanPrijs = zoekForm.getVanPrijs();
-				BigDecimal totPrijs = zoekForm.getTotPrijs();
-				Integer vanJaartal = zoekForm.getVanJaartal();
-				Integer totJaartal = zoekForm.getTotJaartal();
-				Iterator<Product> resultaat = productService.zoek(titel,
-						schilderNaam, stijl, vanPrijs, totPrijs, vanJaartal,
-						totJaartal);
-				mav.addObject("resultaat", resultaat);
-			}
+			String titel = titelForm.getTitel().toLowerCase();
+			Iterable<Product> resultaat = productService.findByTitel(titel);
+			mav.addObject("resultaat", resultaat);
 		}
 		return mav;
 	}
 
-	@InitBinder("zoekForm")
-	public void intBinderZoekForm(DataBinder dataBinder) {
+	@RequestMapping(method = RequestMethod.GET, params = { "schilderNaam" })
+	public ModelAndView zoek(@Valid SchilderForm schilderForm,
+			BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView("producten/zoeken");
+		if (!bindingResult.hasErrors()) {
+			String schilderNaam = schilderForm.getSchilderNaam().toLowerCase();
+			Iterable<Product> resultaat = productService
+					.findBySchilderNaam(schilderNaam);
+			mav.addObject("resultaat", resultaat);
+		}
+		return mav;
+	}
 
+	@RequestMapping(method = RequestMethod.GET, params = { "stijl" })
+	public ModelAndView findBystijl(@Valid StijlForm stijlForm,
+			BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView("producten/zoeken");
+		if (!bindingResult.hasErrors()) {
+			String stijl = stijlForm.getStijl().toLowerCase();
+			Iterable<Product> resultaat = productService.findByStijl(stijl);
+			mav.addObject("resultaat", resultaat);
+		}
+		return mav;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, params = { "vanPrijs",
+			"totPrijs" })
+	public ModelAndView findByPrijsBetween(
+			@Valid VanTotPrijsForm vanTotPrijsForm, BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView("producten/zoeken");
+		if (!bindingResult.hasErrors() && !vanTotPrijsForm.isValid()) {
+			bindingResult.reject("fouteVanTotPrijs",
+					new Object[] { vanTotPrijsForm.getVanPrijs(),
+							vanTotPrijsForm.getTotPrijs() }, "");
+		}
+		if (!bindingResult.hasErrors()) {
+			BigDecimal vanPrijs = vanTotPrijsForm.getVanPrijs();
+			BigDecimal totPrijs = vanTotPrijsForm.getTotPrijs();
+			Iterable<Product> resultaat = productService.findByPrijsBetween(
+					vanPrijs, totPrijs);
+			mav.addObject("resultaat", resultaat);
+		}
+		return mav;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, params = {"vanJaartal",
+			"totJaartal"})
+	public ModelAndView findByJaartalBetween(
+			@Valid VanTotJaartalForm vanTotJaartalForm,
+			BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView("producten/zoeken");
+		if (!bindingResult.hasErrors() && !vanTotJaartalForm.isValid()) {
+			bindingResult.reject("fouteVanTotJaartal",
+					new Object[] { vanTotJaartalForm.getVanJaartal(),
+							vanTotJaartalForm.getTotJaartal() }, "");
+		}
+		if (!bindingResult.hasErrors()) {
+			Integer vanJaartal = vanTotJaartalForm.getVanJaartal();
+			Integer totJaartal = vanTotJaartalForm.getTotJaartal();
+			Iterable<Product> resultaat = productService.findByJaartalBetween(
+					vanJaartal, totJaartal);
+			mav.addObject("resultaat", resultaat);
+		}
+		return mav;
+	}
+
+	@InitBinder("titelForm")
+	public void intBinderTitelForm(DataBinder dataBinder) {
+		dataBinder.initDirectFieldAccess();
+	}
+
+	@InitBinder("schilderForm")
+	public void intBinderSchilderForm(DataBinder dataBinder) {
+		dataBinder.initDirectFieldAccess();
+	}
+
+	@InitBinder("stijlForm")
+	public void intBinderStijlForm(DataBinder dataBinder) {
+		dataBinder.initDirectFieldAccess();
+	}
+
+	@InitBinder("vanTotJaartalForm")
+	public void intBinderVanTotJaartalForm(DataBinder dataBinder) {
+		dataBinder.initDirectFieldAccess();
+	}
+
+	@InitBinder("vanTotPrijsForm")
+	public void intBinderVantotPrijsForm(DataBinder dataBinder) {
+		dataBinder.initDirectFieldAccess();
+	}
+
+	@InitBinder("product")
+	public void initBinderProduct(DataBinder dataBinder) {
 	}
 }
