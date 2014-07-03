@@ -44,7 +44,7 @@ public class GebruikerController {
 		
 		if(!bindingResult.hasErrors()) {
 			try {
-				gebruikerService.add(gebruiker);
+				gebruikerService.create(gebruiker);
 				return new ModelAndView("redirect:/");
 			} catch (GebruikerMetDezeEmailBestaatAlException e) {
 				bindingResult.rejectValue("emailadres", "gebruikerMetDezeEmailBestaatAl");

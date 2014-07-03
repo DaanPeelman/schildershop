@@ -1,6 +1,7 @@
 package be.vdab.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import be.vdab.dao.GebruikerDAO;
@@ -21,7 +22,7 @@ public class GebruikerServiceImpl implements GebruikerService {
 	}
 	
 	@Override
-	public void add(Gebruiker gebruiker) {
+	public void create(Gebruiker gebruiker) {
 		if(gebruikerDAO.findByEmailadres(gebruiker.getEmailadres()) != null) {
 			throw new GebruikerMetDezeEmailBestaatAlException();
 		}
@@ -29,6 +30,10 @@ public class GebruikerServiceImpl implements GebruikerService {
 		Rol rol = rolDAO.findOne(2L);		// automatisch een klant
 		gebruiker.addRol(rol);
 		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String nWachtwoord = encoder.encode(gebruiker.getWachtwoord());
+		System.out.println(nWachtwoord);
+		gebruiker.setWachtwoord(nWachtwoord);		// wachtwoord encryptie
 		gebruikerDAO.save(gebruiker);
 	}
 	

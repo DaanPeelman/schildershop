@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class WachtwoordValidator implements ConstraintValidator<Wachtwoord, String> {
-	private final static String WACHTWOORD_REGEX = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,20})$";
+	private final static String WACHTWOORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$";
 	private final static Pattern WACHTWOORD_PATTERN = Pattern.compile(WACHTWOORD_REGEX);
 	
 	@Override
