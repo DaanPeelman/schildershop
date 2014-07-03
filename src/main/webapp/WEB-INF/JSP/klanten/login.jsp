@@ -1,6 +1,7 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -11,6 +12,7 @@
 	<ul>
 		<jsp:include page="../menuZonderLogin.jsp" />
 	</ul>
+	<security:authorize access="isAnonymous()">
 	<h1>Ik ben al geregistreerd</h1>
 	<form method='post' action='<c:url value="/j_spring_security_check"/>' id='aanmeldform'>
 		<label>Gebruikersnaam: <input name='j_username' autofocus></label>
@@ -35,6 +37,10 @@
 		<div><form:label path="bevestigWachtwoord">Bevestig wachtwoord: <form:input path="bevestigWachtwoord" type="password" /><form:errors path="bevestigWachtwoord" cssClass="fout" /></form:label></div>
 		<div><input type="submit" value="Maak aan" /></div>
 	</form:form>
+	</security:authorize>
+	<security:authorize access="isAuthenticated()">
+		<h1>U bent al aangemeld</h1>
+	</security:authorize>
 </body>
 <script>
 	document.getElementById('aanmeldform').onsubmit = function() {
