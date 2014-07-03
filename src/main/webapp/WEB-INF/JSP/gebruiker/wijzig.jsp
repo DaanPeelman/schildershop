@@ -19,6 +19,7 @@
 	<jsp:include page="../menu.jsp" />
 	<c:url value="/gebruiker" var="url" />
 	<form:form commandName="gebruiker" action="${url}" method="put">
+	<h2>Uw gegevens wijzigen</h2>
 		<div>
 			<form:input path="gebruikerId" type="hidden" />
 		</div>
@@ -68,5 +69,6 @@
 			<input type="submit" value="Opslaan" />
 		</div>
 	</form:form>
+	<h2>Uw wachtwoord wijzigen</h2>
 </body>
 </html>
