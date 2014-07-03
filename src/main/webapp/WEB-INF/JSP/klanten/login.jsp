@@ -8,6 +8,7 @@
 <title>Aanmelden</title>
 </head>
 <body>
+	<jsp:include page="../menu.jsp" />
 	<h1>Aanmelden</h1>
 	<form method='post' action='<c:url value="/j_spring_security_check"/>'
 		id='aanmeldform'>
