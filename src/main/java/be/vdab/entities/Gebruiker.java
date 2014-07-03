@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -45,6 +46,8 @@ public class Gebruiker implements Serializable {
 	private Set<Bestelbon> bestellingen;
 	@Wachtwoord
 	private String wachtwoord;
+	@Transient
+	private String bevestigWachtwoord;
 	@Emailadres
 	private String emailadres;
 	private boolean actief;
@@ -57,7 +60,7 @@ public class Gebruiker implements Serializable {
 		rollen = new HashSet<>();
 	}
 
-	public Gebruiker(String naam, String familienaam, Adres adres, String wachtwoord, String emailadres) {
+	public Gebruiker(String naam, String familienaam, Adres adres, String wachtwoord, String bevestigWachtwoord, String emailadres) {
 		this.naam = naam;
 		this.familienaam = familienaam;
 		this.adres = adres;
@@ -66,6 +69,14 @@ public class Gebruiker implements Serializable {
 		this.emailadres = emailadres;
 		this.actief = true;
 		rollen = new HashSet<>();
+	}
+	
+	public boolean isValid() {
+		if(bevestigWachtwoord == null) {
+			return false;
+		}
+		
+		return wachtwoord.equals(bevestigWachtwoord);
 	}
 
 	public long getGebruikerId() {
@@ -114,6 +125,14 @@ public class Gebruiker implements Serializable {
 
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
+	}
+	
+	public String getBevestigWachtwoord() {
+		return bevestigWachtwoord;
+	}
+	
+	public void setBevestigWachtwoord(String bevestigWachtwoord) {
+		this.bevestigWachtwoord = bevestigWachtwoord;
 	}
 	
 	public String getEmailadres() {

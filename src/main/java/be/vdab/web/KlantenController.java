@@ -32,6 +32,10 @@ public class KlantenController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid Gebruiker gebruiker, BindingResult bindingResult) {
+		if(!bindingResult.hasErrors() && !gebruiker.isValid()) {
+			bindingResult.rejectValue("bevestigWachtwoord", "wachtwoordenNietGelijk");
+		}
+		
 		if(!bindingResult.hasErrors()) {
 			try {
 				klantService.voegToe(gebruiker);

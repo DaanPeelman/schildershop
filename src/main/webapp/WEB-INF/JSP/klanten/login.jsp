@@ -30,6 +30,7 @@
 		<div><form:label path="adres.postcode">Postcode: <form:input path="adres.postcode" /><form:errors path="adres.postcode" cssClass="fout"/></form:label></div>
 		<div><form:label path="emailadres">Emailadres: <form:input path="emailadres" /><form:errors path="emailadres" cssClass="fout"/></form:label></div>
 		<div><form:label path="wachtwoord">Wachtwoord <form:input path="wachtwoord" type="password"/><form:errors path="wachtwoord" cssClass="fout"/></form:label></div>
+		<div><form:label path="bevestigWachtwoord">Bevestig wachtwoord: <form:input path="bevestigWachtwoord" type="password" /><form:errors path="bevestigWachtwoord" cssClass="fout" /></form:label></div>
 		<div><input type="submit" value="Maak aan" /></div>
 	</form:form>
 </body>
