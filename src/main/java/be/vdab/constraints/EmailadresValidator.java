@@ -9,7 +9,6 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailadresValidator implements ConstraintValidator<Emailadres, String> {
 	private final static String EMAIL_REGEX = "^[A-Za-z0-9]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-	private final static Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
 	@Override
 	public void initialize(Emailadres emailadres) {
@@ -20,9 +19,8 @@ public class EmailadresValidator implements ConstraintValidator<Emailadres, Stri
 		if(emailadres == null) {
 			return true;
 		}
-		
-		Matcher matcher = EMAIL_PATTERN.matcher(emailadres);
-		return matcher.find();
+
+		return emailadres.matches(EMAIL_REGEX);
 	}
 	
 }
