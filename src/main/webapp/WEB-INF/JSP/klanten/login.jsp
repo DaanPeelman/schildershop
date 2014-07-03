@@ -8,7 +8,9 @@
 <title>Aanmelden</title>
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<ul>
+		<jsp:include page="../menuZonderLogin.jsp" />
+	</ul>
 	<h1>Ik ben al geregistreerd</h1>
 	<form method='post' action='<c:url value="/j_spring_security_check"/>' id='aanmeldform'>
 		<label>Gebruikersnaam: <input name='j_username' autofocus></label>
@@ -30,6 +32,7 @@
 		<div><form:label path="adres.postcode">Postcode: <form:input path="adres.postcode" /><form:errors path="adres.postcode" cssClass="fout"/></form:label></div>
 		<div><form:label path="emailadres">Emailadres: <form:input path="emailadres" /><form:errors path="emailadres" cssClass="fout"/></form:label></div>
 		<div><form:label path="wachtwoord">Wachtwoord <form:input path="wachtwoord" type="password"/><form:errors path="wachtwoord" cssClass="fout"/></form:label></div>
+		<div><form:label path="bevestigWachtwoord">Bevestig wachtwoord: <form:input path="bevestigWachtwoord" type="password" /><form:errors path="bevestigWachtwoord" cssClass="fout" /></form:label></div>
 		<div><input type="submit" value="Maak aan" /></div>
 	</form:form>
 </body>

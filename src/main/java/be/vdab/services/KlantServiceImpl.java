@@ -28,6 +28,7 @@ public class KlantServiceImpl implements KlantService {
 		
 		Rol rol = rolDAO.findOne(2L);		// automatisch een klant
 		klant.addRol(rol);
+		
 		klantDAO.save(klant);
 	}
 }

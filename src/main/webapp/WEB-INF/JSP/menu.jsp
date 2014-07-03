@@ -2,9 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <ul>
-	<li><a href='<c:url value="/" />'>Home</a>
-	<li><a href='<c:url value="/producten" />'>Producten</a></li>
-	<security:authorize access="isAuthenticated()"><li><a href="<c:url value='/j_spring_security_logout'/>">Afmelden</a></li></security:authorize>
+	<jsp:include page="menuZonderLogin.jsp"></jsp:include>
 	<security:authorize access="isAnonymous()"><li>
 		<form method='post' action='<c:url value="/j_spring_security_check"/>'
 		id='aanmeldform'>
