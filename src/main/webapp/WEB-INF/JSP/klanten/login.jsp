@@ -17,7 +17,6 @@
 			<div class="fout">Verkeerde gebruikersnaam of paswoord</div>
 		</c:if>
 		<input type='submit' value='Aanmelden' id='aanmeldknop'>
-		<p>U bent nieuw hier en zou u graag registreren? Klik <a href="<c:url value='/klanten/registreer' />"> hier </a></p>
 	</form>
 	
 	<h1>Ik ben nieuw hier</h1>
