@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.entities.Gebruiker;
+import be.vdab.entities.Rol;
 import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
 import be.vdab.services.GebruikerService;
 
@@ -65,6 +66,9 @@ public class GebruikerController {
 		if(principal != null) {
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 			modelAndView.addObject("gebruiker", gebruiker);
+			for(Rol rol:gebruiker.getRollen()) {
+				System.out.println("Rol: " + rol.getNaam());
+			}
 		}
 		
 		return modelAndView;
@@ -136,10 +140,5 @@ public class GebruikerController {
 		} else {
 			gebruiker.setAdres(new AdresForm(gebruiker.getAdres()));
 		}
-	}
-	
-	@InitBinder("wijzigWachtwoord")
-	public void initWachtwoordForm(DataBinder dataBinder) {
-		dataBinder.initDirectFieldAccess();
 	}
 }

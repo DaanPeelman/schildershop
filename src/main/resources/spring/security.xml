@@ -11,6 +11,10 @@ http://www.springframework.org/schema/security/spring-security.xsd'>
 		<form-login login-page="/gebruiker/login"
 			authentication-failure-url="/gebruiker/login?error=true" />
 		<logout />
+		<access-denied-handler error-page='/WEB-INF/JSP/forbidden.jsp'/>
+		<intercept-url pattern="/gebruiker/login" access="permitAll"/>
+		<intercept-url pattern="/gebruiker" access="hasRole('Klant')"/>
+		<intercept-url pattern="/gebruiker/*" access="hasRole('Klant')"/>
 	</http>
 	<authentication-manager>
 		<authentication-provider>
