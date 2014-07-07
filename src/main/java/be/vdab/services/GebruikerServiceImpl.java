@@ -9,6 +9,7 @@ import be.vdab.dao.RolDAO;
 import be.vdab.entities.Gebruiker;
 import be.vdab.entities.Rol;
 import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
+import be.vdab.valueobjects.Adres;
 
 @Service
 public class GebruikerServiceImpl implements GebruikerService {
@@ -44,6 +45,28 @@ public class GebruikerServiceImpl implements GebruikerService {
 	
 	@Override
 	public void update(Gebruiker gebruiker) {
+		gebruikerDAO.save(gebruiker);
+	}
+	
+	@Override
+	public void updateGegevens(long id, Adres adres) {
+		Gebruiker gebruiker = gebruikerDAO.findOne(id);
+		gebruiker.setAdres(adres);
+		gebruikerDAO.save(gebruiker);
+	}
+	
+	@Override
+	public Gebruiker find(long id) {
+		return gebruikerDAO.findOne(id);
+	}
+	
+	@Override
+	public void updateWachtwoord(long id, String wachtwoord) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Gebruiker gebruiker = gebruikerDAO.findOne(id);
+		String nWachtwoord = encoder.encode(wachtwoord);
+		
+		gebruiker.setWachtwoord(nWachtwoord);
 		gebruikerDAO.save(gebruiker);
 	}
 }

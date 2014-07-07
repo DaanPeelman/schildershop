@@ -6,10 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,24 +77,54 @@ public class GebruikerController {
 		Principal principal = request.getUserPrincipal();
 		if(principal != null) {
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
-			modelAndView.addObject("gebruiker", gebruiker);
+			modelAndView.addObject("adres", new AdresForm(gebruiker.getAdres()));
+			modelAndView.addObject("wijzigWachtwoord", new WijzigWachtwoordForm());
 		}
 		
 		return modelAndView;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ModelAndView wijzigGegevens(HttpServletRequest request, @Valid Gebruiker gebruiker, BindingResult bindingResult) {		
+	public ModelAndView wijzigGegevens(HttpServletRequest request,@ModelAttribute("adres")  @Valid AdresForm adres, BindingResult bindingResult) {		
 		Principal principal = request.getUserPrincipal();
+		long gebruikerId = (gebruikerService.findByEmailadres(request.getUserPrincipal().getName())).getGebruikerId();
 		
 		if(principal != null) {
 			if(!bindingResult.hasErrors()) {
-				gebruikerService.update(gebruiker);
-				return new ModelAndView("gebruiker/gegevens");
+				gebruikerService.updateGegevens(gebruikerId, adres);
+				return new ModelAndView("redirect:/gebruiker");
 			}
 		}
+		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
+		modelAndView.addObject("adres", adres);
+		modelAndView.addObject("wijzigWachtwoord", new WijzigWachtwoordForm());
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/wachtwoord", method = RequestMethod.PUT)
+	public ModelAndView wijzigWachtwoord(HttpServletRequest request, @ModelAttribute("wijzigWachtwoord") @Valid WijzigWachtwoordForm wachtwoordForm, BindingResult bindingResult) {
+		Principal principal = request.getUserPrincipal();
 		
-		return new ModelAndView("gebruiker/wijzig", "gebruiker", gebruiker);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
+		
+		if(!encoder.matches(wachtwoordForm.getOudWachtwoord(), gebruiker.getWachtwoord())){
+			bindingResult.rejectValue("oudWachtwoord", "oudWachtwoordNietGelijk");
+		}
+		if(!wachtwoordForm.isValid()) {
+			bindingResult.rejectValue("bevestigWachtwoord", "wachtwoordenNietGelijk");
+		}
+		if(!bindingResult.hasErrors()) {
+			gebruikerService.updateWachtwoord(gebruiker.getGebruikerId(), wachtwoordForm.getNieuwWachtwoord());
+			return new ModelAndView("redirect:/");
+		}
+		
+		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
+		
+		modelAndView.addObject("adres", new AdresForm(gebruiker.getAdres()));
+		modelAndView.addObject("wijzigWachtwoord", wachtwoordForm);
+		
+		return modelAndView;
 	}
 	
 	@InitBinder("gebruiker")
@@ -103,5 +136,10 @@ public class GebruikerController {
 		} else {
 			gebruiker.setAdres(new AdresForm(gebruiker.getAdres()));
 		}
+	}
+	
+	@InitBinder("wijzigWachtwoord")
+	public void initWachtwoordForm(DataBinder dataBinder) {
+		dataBinder.initDirectFieldAccess();
 	}
 }

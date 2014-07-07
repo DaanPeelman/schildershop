@@ -18,57 +18,51 @@
 	</security:authorize>
 	<jsp:include page="../menu.jsp" />
 	<c:url value="/gebruiker" var="url" />
-	<form:form commandName="gebruiker" action="${url}" method="put">
+	<form:form commandName="adres" action="${url}" method="put">
 	<h2>Uw gegevens wijzigen</h2>
 		<div>
-			<form:input path="gebruikerId" type="hidden" />
-		</div>
-		<div>
-			<form:label path="naam">Voornaam: <form:input
-					path="naam" />
-				<form:errors path="naam" />
+			<form:label path="straat">Straat: <form:input
+					path="straat" />
+				<form:errors path="straat" cssClass="fout" />
 			</form:label>
 		</div>
 		<div>
-			<form:label path="familienaam">Familienaam: <form:input
-					path="familienaam" />
-				<form:errors path="familienaam" />
+			<form:label path="nummer">Nummer: <form:input
+					path="nummer" />
+				<form:errors path="nummer" cssClass="fout" />
 			</form:label>
 		</div>
 		<div>
-			<form:label path="adres.straat">Straat: <form:input
-					path="adres.straat" />
-				<form:errors path="adres.straat" />
+			<form:label path="gemeente">Gemeente: <form:input
+					path="gemeente" />
+				<form:errors path="gemeente" cssClass="fout" />
 			</form:label>
 		</div>
 		<div>
-			<form:label path="adres.nummer">Nummer: <form:input
-					path="adres.nummer" />
-				<form:errors path="adres.nummer" />
+			<form:label path="postcode">Postcode: <form:input
+					path="postcode" />
+				<form:errors path="postcode" cssClass="fout" />
 			</form:label>
-		</div>
-		<div>
-			<form:label path="adres.gemeente">Gemeente: <form:input
-					path="adres.gemeente" />
-				<form:errors path="adres.gemeente" />
-			</form:label>
-		</div>
-		<div>
-			<form:label path="adres.postcode">Postcode: <form:input
-					path="adres.postcode" />
-				<form:errors path="adres.postcode" />
-			</form:label>
-		</div>
-		<div>
-			<form:input path="emailadres" type="hidden" />
-		</div>
-		<div>
-			<form:input path="wachtwoord" type="hidden" />
 		</div>
 		<div>
 			<input type="submit" value="Opslaan" />
 		</div>
 	</form:form>
-	<h2>Uw wachtwoord wijzigen</h2>
+	<c:url value="/gebruiker/wachtwoord" var="url" />
+	<form:form commandName="wijzigWachtwoord" action="${url}" method="put">
+		<h2>Uw wachtwoord wijzigen</h2>
+		<div>
+			<form:label path="oudWachtwoord">Huidig wachtwoord: <form:input path="oudWachtwoord" type="password" /><form:errors path="oudWachtwoord" cssClass="fout" /></form:label>
+		</div>
+		<div>
+			<form:label path="nieuwWachtwoord">Nieuw wachtwoord: <form:input path="nieuwWachtwoord" type="password" /><form:errors path="nieuwWachtwoord" cssClass="fout" /></form:label>
+		</div>
+		<div>
+			<form:label path="bevestigWachtwoord">Bevestig wachtwoord: <form:input path="bevestigWachtwoord" type="password" /><form:errors path="bevestigWachtwoord" cssClass="fout" /></form:label>
+		</div>
+		<div>
+			<input type="submit" />
+		</div>
+	</form:form>
 </body>
 </html>
