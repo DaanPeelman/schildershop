@@ -18,7 +18,7 @@
 	</security:authorize>
 	<jsp:include page="../menu.jsp" />
 	<c:url value="/gebruiker" var="url" />
-	<form:form commandName="adres" action="${url}" method="put">
+	<form:form commandName="adresForm" action="${url}" method="put">
 	<h2>Uw gegevens wijzigen</h2>
 		<div>
 			<form:label path="straat">Straat: <form:input path="straat" /><form:errors path="straat" cssClass="fout" /></form:label>
@@ -36,7 +36,7 @@
 		</div>
 	</form:form>
 	<c:url value="/gebruiker/wachtwoord" var="url" />
-	<form:form commandName="wijzigWachtwoord" action="${url}" method="put">
+	<form:form commandName="wijzigWachtwoordForm" action="${url}" method="put">
 		<h2>Uw wachtwoord wijzigen</h2>
 		<div>
 			<form:label path="oudWachtwoord">Huidig wachtwoord: <form:input path="oudWachtwoord" type="password" /><form:errors path="oudWachtwoord" cssClass="fout" /></form:label>

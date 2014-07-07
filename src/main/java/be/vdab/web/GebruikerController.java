@@ -42,6 +42,7 @@ public class GebruikerController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid Gebruiker gebruiker, BindingResult bindingResult) {
+		System.out.println("in post methode");
 		if(!bindingResult.hasErrors() && !gebruiker.isValid()) {
 			bindingResult.rejectValue("bevestigWachtwoord", "wachtwoordenNietGelijk");
 		}
@@ -55,23 +56,26 @@ public class GebruikerController {
 			}
 		}
 		
-		return new ModelAndView("gebruiker/login", "gebruiker", gebruiker);
+		ModelAndView modelAndView = new ModelAndView("gebruiker/login");
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView toonGegevens(HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView("gebruiker/gegevens");
-		
 		Principal principal = request.getUserPrincipal();
 		if(principal != null) {
+			ModelAndView modelAndView = new ModelAndView("gebruiker/gegevens");
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 			modelAndView.addObject("gebruiker", gebruiker);
 			for(Rol rol:gebruiker.getRollen()) {
 				System.out.println("Rol: " + rol.getNaam());
 			}
+			
+			return modelAndView;
 		}
 		
-		return modelAndView;
+		return new ModelAndView("redirect:/gebruiker/login");
 	}
 	
 	@RequestMapping(value = "/wijzig", method = RequestMethod.GET)
@@ -81,52 +85,50 @@ public class GebruikerController {
 		Principal principal = request.getUserPrincipal();
 		if(principal != null) {
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
-			modelAndView.addObject("adres", new AdresForm(gebruiker.getAdres()));
-			modelAndView.addObject("wijzigWachtwoord", new WijzigWachtwoordForm());
+			modelAndView.addObject("adresForm", new AdresForm(gebruiker.getAdres()));
+			modelAndView.addObject("wijzigWachtwoordForm", new WijzigWachtwoordForm());
 		}
 		
 		return modelAndView;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ModelAndView wijzigGegevens(HttpServletRequest request,@ModelAttribute("adres")  @Valid AdresForm adres, BindingResult bindingResult) {		
+	public ModelAndView wijzigGegevens(HttpServletRequest request, @Valid AdresForm adresForm, BindingResult bindingResult) {		
 		Principal principal = request.getUserPrincipal();
 		long gebruikerId = (gebruikerService.findByEmailadres(request.getUserPrincipal().getName())).getGebruikerId();
 		
 		if(principal != null) {
 			if(!bindingResult.hasErrors()) {
-				gebruikerService.updateGegevens(gebruikerId, adres);
+				gebruikerService.updateGegevens(gebruikerId, adresForm);
 				return new ModelAndView("redirect:/gebruiker");
 			}
 		}
 		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
-		modelAndView.addObject("adres", adres);
-		modelAndView.addObject("wijzigWachtwoord", new WijzigWachtwoordForm());
+		modelAndView.addObject("wijzigWachtwoordForm", new WijzigWachtwoordForm());
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/wachtwoord", method = RequestMethod.PUT)
-	public ModelAndView wijzigWachtwoord(HttpServletRequest request, @ModelAttribute("wijzigWachtwoord") @Valid WijzigWachtwoordForm wachtwoordForm, BindingResult bindingResult) {
+	public ModelAndView wijzigWachtwoord(HttpServletRequest request, @Valid WijzigWachtwoordForm wijzigWachtwoordForm, BindingResult bindingResult) {
 		Principal principal = request.getUserPrincipal();
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 		
-		if(!encoder.matches(wachtwoordForm.getOudWachtwoord(), gebruiker.getWachtwoord())){
+		if(!encoder.matches(wijzigWachtwoordForm.getOudWachtwoord(), gebruiker.getWachtwoord())){
 			bindingResult.rejectValue("oudWachtwoord", "oudWachtwoordNietGelijk");
 		}
-		if(!wachtwoordForm.isValid()) {
+		if(!wijzigWachtwoordForm.isValid()) {
 			bindingResult.rejectValue("bevestigWachtwoord", "wachtwoordenNietGelijk");
 		}
 		if(!bindingResult.hasErrors()) {
-			gebruikerService.updateWachtwoord(gebruiker.getGebruikerId(), wachtwoordForm.getNieuwWachtwoord());
+			gebruikerService.updateWachtwoord(gebruiker.getGebruikerId(), wijzigWachtwoordForm.getNieuwWachtwoord());
 			return new ModelAndView("redirect:/");
 		}
 		
 		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
 		
-		modelAndView.addObject("adres", new AdresForm(gebruiker.getAdres()));
-		modelAndView.addObject("wijzigWachtwoord", wachtwoordForm);
+		modelAndView.addObject("adresForm", new AdresForm(gebruiker.getAdres()));
 		
 		return modelAndView;
 	}
