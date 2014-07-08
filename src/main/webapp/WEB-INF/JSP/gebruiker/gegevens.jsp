@@ -16,6 +16,11 @@
 		<jsp:include page="../ingelogdMenu.jsp" />
 	</security:authorize>
 	<jsp:include page="../menu.jsp" />
+	<h1>Uw recente bestellingen</h1>
+<%-- 	<c:forEach var="bestelling" items="${bestellingen}"> --%>
+<%-- 		<div><c:out value="${bestelling.bestelbonId}" /></div> --%>
+<%-- 	</c:forEach> --%>
+	
 	<h1>Uw gegevens</h1>
 	<div>
 		<b>Naam: </b> ${gebruiker.naam}&nbsp;${gebruiker.familienaam}

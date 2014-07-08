@@ -17,19 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.vdab.entities.Bestelbon;
 import be.vdab.entities.Gebruiker;
 import be.vdab.entities.Rol;
 import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
+import be.vdab.services.BestelbonService;
 import be.vdab.services.GebruikerService;
 
 @Controller
 @RequestMapping("/gebruiker")
 public class GebruikerController {
 	private final GebruikerService gebruikerService;
+	private final BestelbonService bestelbonService;
 	
 	@Autowired
-	public GebruikerController(GebruikerService gebruikerService) {
+	public GebruikerController(GebruikerService gebruikerService, BestelbonService bestelbonService) {
 		this.gebruikerService = gebruikerService;
+		this.bestelbonService = bestelbonService;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -68,9 +72,11 @@ public class GebruikerController {
 			ModelAndView modelAndView = new ModelAndView("gebruiker/gegevens");
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 			modelAndView.addObject("gebruiker", gebruiker);
-			for(Rol rol:gebruiker.getRollen()) {
-				System.out.println("Rol: " + rol.getNaam());
+			
+			for(Bestelbon bestelbon:gebruiker.getBestellingen()) {
+				System.out.println("Bestelbon nr. " + bestelbon.getBestelbonId());
 			}
+//			modelAndView.addObject("bestellingen", gebruiker.getBestellingen());
 			
 			return modelAndView;
 		}

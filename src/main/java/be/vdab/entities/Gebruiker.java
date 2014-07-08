@@ -58,9 +58,10 @@ public class Gebruiker implements Serializable {
 	public Gebruiker() {
 		this.actief = true;
 		rollen = new HashSet<>();
+		bestellingen = new HashSet<>();
 	}
 
-	public Gebruiker(String naam, String familienaam, Adres adres, String wachtwoord, String bevestigWachtwoord, String emailadres) {
+	public Gebruiker(String naam, String familienaam, Adres adres, String wachtwoord, String emailadres) {
 		this.naam = naam;
 		this.familienaam = familienaam;
 		this.adres = adres;

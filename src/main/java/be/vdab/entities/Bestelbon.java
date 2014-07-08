@@ -21,7 +21,7 @@ public class Bestelbon implements Serializable {
 	@Embedded
 	private Adres leverAdres;
 	@ElementCollection
-	@CollectionTable(name = "bestelbonlijnen", joinColumns = @JoinColumn(name = "bestelbonNr"))
+	@CollectionTable(name = "bestelbonlijnen", joinColumns = @JoinColumn(name = "bestelbonId"))
 	private Set<Bestelbonlijn> bestelbonlijnen;
 	
 	protected Bestelbon() {
