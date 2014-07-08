@@ -22,9 +22,11 @@ public class SchilderServiceImpl implements SchilderService {
 	@Override
 	@Transactional(readOnly = false)
 	public void create(Schilder schilder) {
-		if (schilderDAO.findByNaamLike(schilder.getNaam()) != null) {
+		Iterable<Schilder> schilder2 = schilderDAO.findByNaamLike(schilder.getNaam());
+		if (schilder2.iterator().hasNext()) {
 			throw new SchilderMetDezeNaamBestaatAlException();
-		}
+		}		
+		
 		schilder.setSchilderId(schilderDAO.save(schilder).getSchilderId());
 	}
 

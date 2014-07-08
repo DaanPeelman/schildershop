@@ -17,12 +17,13 @@
 		<div>
 			<section class='content'>
 				<h1>Product toevoegen</h1>
-				<c:url value='/producten' var='producturl'/>
+				<c:url value='/producten/toevoegen' var='producturl'/>
 				<form:form action='${producturl}' method='post' commandName='product'
 					id='toevoegform'>
 					<jsp:include page='productformfields.jsp'/>
 					<input type='submit' value='Toevoegen' id='toevoegknop'>
 				</form:form>
+				${succesProduct}
 				<h2>Schilder toevoegen</h2>
 				<c:url value='/producten/toevoegen' var='schilderurl'/>
 				<form:form action='${schilderurl}' method='post' commandName='schilder'
@@ -33,6 +34,7 @@
 					</form:label>
 					<input type='submit' value='Toevoegen' id='toevoegknop'>
 				</form:form>
+				${succesSchilder}
 			</section>
 		</div>
 		<footer>

@@ -151,30 +151,33 @@ public class ProductController {
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "toevoegen", method = RequestMethod.POST)
 	public ModelAndView createProduct(@Valid Product product, BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView("producten/toevoegen", "schilder", new Schilder());
+		mav.addObject("schilders", schilderService.findAll());
 		if (!bindingResult.hasErrors()) {
 			productService.create(product);
-			return new ModelAndView("redirect:/");
+			mav.addObject("succesProduct", product.getTitel() + " is succesvol toegevoegd.");
+			mav.addObject("product", new Product());
 		}
-		ModelAndView mav = new ModelAndView("producten/toevoegen", "product", product);
-		mav.addObject("schilders", schilderService.findAll());
-		mav.addObject("schilder", new Schilder());
+		mav.addObject("product", product);
 		return mav;
 	}
 	
 	@RequestMapping(value = "toevoegen", method = RequestMethod.POST, params = { "naam" })
 	public ModelAndView createSchilder(@Valid Schilder schilder, BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView("producten/toevoegen", "product", new Product());
+		mav.addObject("schilders", schilderService.findAll());
 		if (!bindingResult.hasErrors()) {
 			try {
 				schilderService.create(schilder);
-				return new ModelAndView("redirect:/");
+				mav.addObject("schilder", new Schilder());
+				mav.addObject("succesSchilder", schilder.getNaam() + " is succesvol toegevoegd.");
+				return mav;
 			} catch (SchilderMetDezeNaamBestaatAlException ex) {
 				bindingResult.rejectValue("naam", "SchilderMetDezeNaamBestaatAl");
 			}
 		}
-		ModelAndView mav = new ModelAndView("producten/toevoegen", "product", new Product());
-		mav.addObject("schilders", schilderService.findAll());
 		mav.addObject("schilder", schilder);
 		return mav;
 	}
