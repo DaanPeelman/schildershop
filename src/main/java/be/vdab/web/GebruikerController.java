@@ -71,11 +71,6 @@ public class GebruikerController {
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 			modelAndView.addObject("gebruiker", gebruiker);
 			
-			for(Bestelbon bestelbon:gebruiker.getBestellingen()) {
-				System.out.println("Bestelbon nr. " + bestelbon.getBestelbonId());
-			}
-//			modelAndView.addObject("bestellingen", gebruiker.getBestellingen());
-			
 			return modelAndView;
 		}
 		

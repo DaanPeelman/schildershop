@@ -17,10 +17,14 @@
 	</security:authorize>
 	<jsp:include page="../menu.jsp" />
 	<h1>Uw recente bestellingen</h1>
-<%-- 	<c:forEach var="bestelling" items="${bestellingen}"> --%>
-<%-- 		<div><c:out value="${bestelling.bestelbonId}" /></div> --%>
-<%-- 	</c:forEach> --%>
-	
+	<c:if test="${not empty gebruiker.bestellingen}">
+		<c:forEach var="bestelling" items="${gebruiker.bestellingen}">
+			<div><c:out value="${bestelling.bestelbonId}" /></div>
+		</c:forEach>
+	</c:if>
+	<c:if test="${empty gebruiker.bestellingen}">
+		<div>U hebt geen recente bestellingen</div>
+	</c:if>
 	<h1>Uw gegevens</h1>
 	<div>
 		<b>Naam: </b> ${gebruiker.naam}&nbsp;${gebruiker.familienaam}
