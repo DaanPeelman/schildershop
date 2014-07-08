@@ -68,14 +68,15 @@ public class Product implements Serializable {
 	}
 
 	public void setSchilder(Schilder schilder) {
-		if (this.schilder != null
-				&& this.schilder.getSchilderijen().contains(this)) {
-			this.schilder.removeSchilderij(this);
-		}
+//		if (this.schilder != null
+//				&& this.schilder.getSchilderijen().contains(this)) {
+//			this.schilder.removeSchilderij(this);
+//		}
 		this.schilder = schilder;
-		if (schilder != null && !schilder.getSchilderijen().contains(this)) {
-			schilder.addSchilderij(this);
-		}
+		//Als dit uit commentaar wordt gehaald krijg je fout op toevoegen.jsp
+//		if (schilder != null && !schilder.getSchilderijen().contains(this)) {
+//			schilder.addSchilderij(this);
+//		}
 	}
 
 	public String getStijl() {

@@ -1,7 +1,6 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,9 +17,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import be.vdab.constraints.Emailadres;
 import be.vdab.constraints.Wachtwoord;
 import be.vdab.valueobjects.Adres;

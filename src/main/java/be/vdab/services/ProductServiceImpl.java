@@ -9,16 +9,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.dao.ProductDAO;
+import be.vdab.dao.SchilderDAO;
 import be.vdab.entities.Product;
+import be.vdab.entities.Schilder;
 
 @Service
 @Transactional(readOnly = true)
 public class ProductServiceImpl implements ProductService {
 	private final ProductDAO productDAO;
+	private final SchilderDAO schilderDAO;
 	
 	@Autowired
-	public ProductServiceImpl(ProductDAO productDAO) {
+	public ProductServiceImpl(ProductDAO productDAO, SchilderDAO schilderDAO) {
 		this.productDAO = productDAO;
+		this.schilderDAO = schilderDAO;
 	}
 
 	@Override
@@ -65,6 +69,8 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional(readOnly = false)
 	public void create(Product product) {
+		Schilder schilder = schilderDAO.findByNaamLike(product.getSchilder().getNaam()).iterator().next();
+		product.setSchilder(schilder);
 		product.setProductId(productDAO.save(product).getProductId());
 	}
 }
