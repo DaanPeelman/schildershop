@@ -6,9 +6,9 @@
 	</form:label>
 </div>
 <div>
-	<form:label path="schilder.naam">Schilder: 
-						<form:select path="schilder.naam" items="${schilders}"/>
-		<form:errors path="schilder.naam" cssClass="fout" />
+	<form:label path="schilder">Schilder: 
+						<form:select path="schilder" items="${schilders}"/>
+		<form:errors path="schilder" cssClass="fout" />
 	</form:label>
 </div>
 <div>
