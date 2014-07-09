@@ -19,7 +19,7 @@
 </div>
 <div>
 	<form:label path="prijs">Prijs: 
-						<form:input path="prijs" type='number' />
+						<form:input path="prijs" type='text' />
 		<form:errors path="prijs" cssClass="fout" />
 	</form:label>
 </div>

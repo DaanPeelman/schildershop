@@ -20,7 +20,7 @@ public class Product implements Serializable {
 	@GeneratedValue
 	private long productId;
 	private String titel;
-	private int jaartal;
+	private Integer jaartal;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "schilderId")
 	private Schilder schilder;
@@ -30,7 +30,7 @@ public class Product implements Serializable {
 	public Product() {
 	}
 
-	public Product(String titel, int jaartal, Schilder schilder, String stijl,
+	public Product(String titel, Integer jaartal, Schilder schilder, String stijl,
 			BigDecimal prijs) {
 		this.titel = titel;
 		this.jaartal = jaartal;
@@ -55,11 +55,11 @@ public class Product implements Serializable {
 		this.titel = titel;
 	}
 
-	public int getJaartal() {
+	public Integer getJaartal() {
 		return jaartal;
 	}
 
-	public void setJaartal(int jaartal) {
+	public void setJaartal(Integer jaartal) {
 		this.jaartal = jaartal;
 	}
 
@@ -72,8 +72,9 @@ public class Product implements Serializable {
 				&& this.schilder.getSchilderijen().contains(this)) {
 			this.schilder.removeSchilderij(this);
 		}
+		
 		this.schilder = schilder;
-		//Als dit uit commentaar wordt gehaald krijg je fout op toevoegen.jsp
+		
 		if (schilder != null && !schilder.getSchilderijen().contains(this)) {
 			schilder.addSchilderij(this);
 		}
