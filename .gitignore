@@ -1,3 +1,17 @@
-/target
 /bin
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse
 .classpath
+.project
+.settings/
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
