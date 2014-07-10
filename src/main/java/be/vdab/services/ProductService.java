@@ -1,6 +1,7 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
+
 import be.vdab.entities.Product;
 
 public interface ProductService {
@@ -21,4 +22,6 @@ public interface ProductService {
 			Integer totJaartal);
 
 	void create(Product product);
+
+	Product findOne(long productId);
 }

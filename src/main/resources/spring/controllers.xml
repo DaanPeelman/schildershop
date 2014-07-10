@@ -10,7 +10,7 @@ http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc.xsd'>
 	<mvc:annotation-driven validator="validator"/>
 	<context:component-scan base-package="be.vdab.web" />
-	<mvc:resources mapping='/images/**' location='/images/*' />
+	<mvc:resources mapping='/img/**' location='/img/' />
 	<mvc:resources mapping='/styles/**' location='/styles/*' />
 	<mvc:resources mapping='/scripts/**' location='/scripts/*' />
 	<bean
@@ -28,4 +28,6 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd'>
 		<property name="basename" value="classpath://resourceBundles/teksten" />
 		<property name="fallbackToSystemLocale" value="false" />
 	</bean>
+	<bean id='multipartResolver'
+	class='org.springframework.web.multipart.support.StandardServletMultipartResolver'/>
 </beans>

@@ -96,38 +96,72 @@ public class Product implements Serializable {
 		this.prijs = prijs;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + jaartal;
+		result = prime * result + ((jaartal == null) ? 0 : jaartal.hashCode());
+		result = prime * result + ((prijs == null) ? 0 : prijs.hashCode());
 		result = prime * result
 				+ ((schilder == null) ? 0 : schilder.hashCode());
 		result = prime * result + ((stijl == null) ? 0 : stijl.hashCode());
+		result = prime * result + ((titel == null) ? 0 : titel.hashCode());
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof Product)) {
 			return false;
+		}
 		Product other = (Product) obj;
-		if (jaartal != other.jaartal)
+		if (jaartal == null) {
+			if (other.jaartal != null) {
+				return false;
+			}
+		} else if (!jaartal.equals(other.jaartal)) {
 			return false;
+		}
+		if (prijs == null) {
+			if (other.prijs != null) {
+				return false;
+			}
+		} else if (!prijs.equals(other.prijs)) {
+			return false;
+		}
 		if (schilder == null) {
-			if (other.schilder != null)
+			if (other.schilder != null) {
 				return false;
-		} else if (!schilder.equals(other.schilder))
+			}
+		} else if (!schilder.equals(other.schilder)) {
 			return false;
+		}
 		if (stijl == null) {
-			if (other.stijl != null)
+			if (other.stijl != null) {
 				return false;
-		} else if (!stijl.equals(other.stijl))
+			}
+		} else if (!stijl.equals(other.stijl)) {
 			return false;
+		}
+		if (titel == null) {
+			if (other.titel != null) {
+				return false;
+			}
+		} else if (!titel.equals(other.titel)) {
+			return false;
+		}
 		return true;
 	}
 }

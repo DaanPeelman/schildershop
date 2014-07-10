@@ -102,7 +102,12 @@
 							<tbody>
 								<c:forEach items="${schilderijen}" var="schilderij">
 									<tr>
-										<th>${schilderij.titel}</th>
+										<th>
+											<c:url value="/producten/details" var="detailUrl">
+												<c:param name="id" value="${schilderij.productId}"/>
+											</c:url>
+											<a href="${detailUrl}">${schilderij.titel}</a>
+										</th>
 										<th>${schilderij.schilder.naam}</th>
 										<th>${schilderij.stijl}</th>
 										<th>${schilderij.jaartal}</th>

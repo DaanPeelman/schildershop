@@ -26,7 +26,6 @@ public class SchilderServiceImpl implements SchilderService {
 		if (schilder2.iterator().hasNext()) {
 			throw new SchilderMetDezeNaamBestaatAlException();
 		}		
-		
 		schilder.setSchilderId(schilderDAO.save(schilder).getSchilderId());
 	}
 
