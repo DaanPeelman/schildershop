@@ -35,7 +35,7 @@
 			<td><fmt:formatDate value="${bestelling.datum}" dateStyle="long"/></td>
 			<c:set var="prijs" value="0" />
 			<c:forEach var="bestellijn" items="${bestelling.bestelbonlijnen}">
-				<c:set var="prijs" value="${prijs + bestellijn.product.prijs * bestellijn.aantal}" />
+				<c:set var="prijs" value="${prijs + bestellijn.prijs * bestellijn.aantal}" />
 			</c:forEach>
 			<td>&euro;<fmt:formatNumber value="${prijs}" minFractionDigits="2" maxFractionDigits="2"/>
 			<td><a href="${url}">Info</a></td>
