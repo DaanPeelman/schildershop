@@ -25,7 +25,7 @@
 			<dt>Foto</dt>
 				<dd>
 					<c:url value='/img/${product.productId}.jpg' var='fotoURL'/>
-					<img alt="foto van het schilderij" src="${pageContext.servletContext.contextPath}/img/1.jpg">
+					<img alt="foto van het schilderij" src="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg">
 				</dd>
 			</c:if>
 		</div>

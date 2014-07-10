@@ -14,6 +14,7 @@ http://www.springframework.org/schema/security/spring-security.xsd'>
 		<intercept-url pattern="/gebruiker/login" access="permitAll"/>
 <!-- 		<intercept-url pattern="/gebruiker" access="hasRole('Klant')"/> -->
 		<intercept-url pattern="/gebruiker/*" access="hasRole('Klant')"/>
+		<intercept-url pattern="/producten/toevoegen" access="hasRole('Administrator')"/>
 	</http>
 	<authentication-manager>
 		<authentication-provider>

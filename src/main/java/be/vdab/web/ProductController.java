@@ -224,7 +224,8 @@ public class ProductController {
 		ModelAndView mav =  new ModelAndView("producten/details", "product",
 				product);
 		if (product != null) {
-			String productFotoPad = servletContext.getRealPath("/img") + "/" + product.getProductId() + ".jpg";
+			String productFotoPad = servletContext.getRealPath("/img") + "\\" + product.getProductId() + ".jpg";
+			System.out.println(productFotoPad);
 			File file = new File(productFotoPad);
 			System.out.println("heeft foto: " + file.exists());
 			mav.addObject("heeftFoto", file.exists());
