@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "schilders")
@@ -19,6 +20,7 @@ public class Schilder implements Serializable {
 	@Id
 	@GeneratedValue
 	private long schilderId;
+	@NotEmpty
 	private String naam;
 	@OneToMany(mappedBy = "schilder")
 	private Set<Product> schilderijen;

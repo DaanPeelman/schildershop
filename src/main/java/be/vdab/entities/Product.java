@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "producten")
@@ -19,12 +22,16 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue
 	private long productId;
+	@NotEmpty
 	private String titel;
+	@NotNull
 	private Integer jaartal;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "schilderId")
 	private Schilder schilder;
+	@NotEmpty
 	private String stijl;
+	@NotNull
 	private BigDecimal prijs;
 
 	public Product() {

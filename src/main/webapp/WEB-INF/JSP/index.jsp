@@ -9,10 +9,13 @@
 <title>Index</title>
 </head>
 <body>
+	<header>
+		<nav class="adminNav">
 	<security:authorize access="isAuthenticated()">
 		<jsp:include page="ingelogdMenu.jsp" />
 	</security:authorize>
 	<jsp:include page="menu.jsp" />
+	</header>
 	<h1>index</h1>
 </body>
 </html>
