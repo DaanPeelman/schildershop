@@ -23,14 +23,17 @@ public class Bestelbon implements Serializable {
 	@ElementCollection
 	@CollectionTable(name = "bestelbonlijnen", joinColumns = @JoinColumn(name = "bestelbonId"))
 	private Set<Bestelbonlijn> bestelbonlijnen;
+	private Date datum;
 	
 	protected Bestelbon() {
+		this.datum = new Date();
 	}
 
-	public Bestelbon(Gebruiker gebruiker, Adres leverAdres) {
+	public Bestelbon(Gebruiker gebruiker, Adres leverAdres, Date datum) {
 		this.gebruiker = gebruiker;
 		this.leverAdres = leverAdres;
 		bestelbonlijnen = new HashSet<>();
+		this.datum = datum;
 	}
 
 	public long getBestelbonId() {
@@ -41,12 +44,12 @@ public class Bestelbon implements Serializable {
 		this.bestelbonId = bestelbonId;
 	}
 
-	public Gebruiker getKlant() {
+	public Gebruiker getGebruiker() {
 		return gebruiker;
 	}
 
-	public void setKlant(Gebruiker klant) {
-		this.gebruiker = klant;
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
 	}
 
 	public Adres getLeverAdres() {
@@ -63,6 +66,14 @@ public class Bestelbon implements Serializable {
 
 	public void setBestelbonlijnen(Set<Bestelbonlijn> bestelbonlijnen) {
 		this.bestelbonlijnen = bestelbonlijnen;
+	}
+
+	public Date getDatum() {
+		return datum;
+	}
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
 	}
 
 	@Override

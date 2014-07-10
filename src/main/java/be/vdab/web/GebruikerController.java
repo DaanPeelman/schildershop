@@ -24,12 +24,10 @@ import be.vdab.services.GebruikerService;
 @RequestMapping("/gebruiker")
 public class GebruikerController {
 	private final GebruikerService gebruikerService;
-	private final BestelbonService bestelbonService;
 	
 	@Autowired
-	public GebruikerController(GebruikerService gebruikerService, BestelbonService bestelbonService) {
+	public GebruikerController(GebruikerService gebruikerService) {
 		this.gebruikerService = gebruikerService;
-		this.bestelbonService = bestelbonService;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
