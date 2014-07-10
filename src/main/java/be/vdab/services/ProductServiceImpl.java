@@ -8,10 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.vdab.dao.ProductDAO;
-import be.vdab.dao.SchilderDAO;
-import be.vdab.entities.Product;
-import be.vdab.entities.Schilder;
+import be.vdab.dao.*;
+import be.vdab.entities.*;
+import be.vdab.exceptions.ProductBestaatAlException;
 
 @Service
 @Transactional(readOnly = true)
@@ -71,6 +70,23 @@ public class ProductServiceImpl implements ProductService {
 	public void create(Product product) {
 		Schilder schilder = schilderDAO.findByNaamLike(product.getSchilder().getNaam()).iterator().next();
 		product.setSchilder(schilder);
-		product.setProductId(productDAO.save(product).getProductId());
+		Iterable<Product> productenMetDezelfdeTitel = productDAO.findByTitelContaining(product.getTitel());
+		Boolean isUniek = true;
+		while (isUniek && productenMetDezelfdeTitel.iterator().hasNext()) {
+			Product product2 = productenMetDezelfdeTitel.iterator().next();
+			if (product.equals(product2)) {
+				isUniek = false;
+			}
+		}
+		if (isUniek) {
+			product.setProductId(productDAO.save(product).getProductId());
+		} else {
+			throw new ProductBestaatAlException();
+		}
+	}
+
+	@Override
+	public Product findOne(long productId) {
+		return productDAO.findOne(productId);
 	}
 }

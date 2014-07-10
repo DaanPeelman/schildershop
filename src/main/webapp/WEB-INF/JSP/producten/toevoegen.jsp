@@ -19,9 +19,11 @@
 				<h1>Product toevoegen</h1>
 				<c:url value='/producten/toevoegen' var='producturl'/>
 				<form:form action='${producturl}' method='post' commandName='product'
-					id='toevoegform'>
+					id='toevoegform' enctype="multipart/form-data">
 					<jsp:include page='productformfields.jsp'/>
+					<label>Afbeelding<input type="file" name="foto"></label>
 					<input type='submit' value='Toevoegen' id='toevoegknop'>
+					<form:errors cssClass='fout'/>
 				</form:form>
 				${succesProduct}
 				<h2>Schilder toevoegen</h2>

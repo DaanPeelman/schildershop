@@ -2,6 +2,8 @@ package be.vdab.web;
 
 import java.util.Collections;
 
+import javax.servlet.ServletContext;
+
 import org.junit.*;
 import org.mockito.Mockito;
 
@@ -13,14 +15,16 @@ public class ProductControllerTest {
 	private ProductService productService;
 	private SchilderService schilderService;
 	private Iterable<Product> schilderijen;
+	private ServletContext context;
 	
 	@Before
 	public void setUp() {
 		schilderijen = Collections.emptyList();
 		productService = Mockito.mock(ProductService.class);
 		schilderService = Mockito.mock(SchilderService.class);
+		context = Mockito.mock(ServletContext.class);
 		Mockito.when(productService.findAll()).thenReturn(schilderijen);
-		productController = new ProductController(productService, schilderService);
+		productController = new ProductController(productService, schilderService, context);
 	}
 	
 	@Test
