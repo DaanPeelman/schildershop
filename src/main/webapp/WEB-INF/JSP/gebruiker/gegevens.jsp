@@ -32,7 +32,7 @@
 			<spring:param name="bestelbonId" value="${bestelling.bestelbonId}" />
 		</spring:url>
 		<tr>
-			<td><fmt:formatDate value="${bestelling.datum}" /></td>
+			<td><fmt:formatDate value="${bestelling.datum}" dateStyle="long"/></td>
 			<c:set var="prijs" value="0" />
 			<c:forEach var="bestellijn" items="${bestelling.bestelbonlijnen}">
 				<c:set var="prijs" value="${prijs + bestellijn.product.prijs * bestellijn.aantal}" />

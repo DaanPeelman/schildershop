@@ -1,6 +1,7 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
@@ -17,13 +18,15 @@ public class Bestelbonlijn implements Serializable {
 	@JoinColumn(name = "productId")
 	private Product product;
 	private int aantal;
+	private BigDecimal prijs;
 	
 	protected Bestelbonlijn() {
 	}
 
-	public Bestelbonlijn(Product product, int aantal) {
+	public Bestelbonlijn(Product product, int aantal, BigDecimal prijs) {
 		this.product = product;
 		this.aantal = aantal;
+		this.prijs = prijs;
 	}
 
 	public Product getProduct() {
@@ -40,5 +43,13 @@ public class Bestelbonlijn implements Serializable {
 
 	public void setAantal(int aantal) {
 		this.aantal = aantal;
+	}
+
+	public BigDecimal getPrijs() {
+		return prijs;
+	}
+
+	public void setPrijs(BigDecimal prijs) {
+		this.prijs = prijs;
 	}
 }
