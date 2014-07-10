@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import be.vdab.entities.Bestelbon;
 import be.vdab.entities.Gebruiker;
-import be.vdab.entities.Rol;
 import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
 import be.vdab.services.BestelbonService;
 import be.vdab.services.GebruikerService;
