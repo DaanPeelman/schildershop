@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.entities.Gebruiker;
 import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
-import be.vdab.services.BestelbonService;
 import be.vdab.services.GebruikerService;
 
 @Controller

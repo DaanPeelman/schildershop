@@ -23,7 +23,7 @@ public class GebruikerServiceImpl implements GebruikerService {
 	}
 	
 	@Override
-	public void create(Gebruiker gebruiker) {
+	public void create(Gebruiker gebruiker) throws GebruikerMetDezeEmailBestaatAlException{
 		if(gebruikerDAO.findByEmailadres(gebruiker.getEmailadres()) != null) {
 			throw new GebruikerMetDezeEmailBestaatAlException();
 		}
