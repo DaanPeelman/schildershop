@@ -22,8 +22,14 @@
 				<jsp:include page="ingelogdMenu.jsp" />
 			</security:authorize>
 			<jsp:include page="menu.jsp" />
+			<h1>index</h1>
 		</nav>
 	</header>
-	<h1>index</h1>
+	<div id="wrapper">
+		Hier komt de banner.
+	</div>
+	<footer>
+		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
+	</footer>
 </body>
 </html>

@@ -14,7 +14,7 @@
 				<jsp:include page="/WEB-INF/JSP/menu.jsp"/>
 			</nav>
 		</header>
-		<div>
+		<div id="wrapper">
 			<section class='content'>
 				<h1>Product toevoegen</h1>
 				<c:url value='/producten/toevoegen' var='producturl'/>

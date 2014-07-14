@@ -13,8 +13,12 @@
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
 </head>
 <body>
-	<a href="<c:url value='/'/>">Menu</a>
-	<div>U hebt geen toegang tot dit onderdeel.</div>
+	<header>
+		<a href="<c:url value='/'/>">Menu</a>
+	</header>
+	<div id="wrapper" >
+		U hebt geen toegang tot dit onderdeel.
+	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
 	</footer>
