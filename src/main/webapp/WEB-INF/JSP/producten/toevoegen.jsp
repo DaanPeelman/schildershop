@@ -5,9 +5,9 @@
 <html lang='nl'>
 	<head>
 		<title>Product toevoegen</title>
-		<link rel='stylesheet'
-			href='${pageContext.servletContext.contextPath}/styles/default.css'>
-		</head>
+		<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/styles/normalize.css' />
+		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700' rel='stylesheet' type='text/css'>
+		<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/styles/default.css' />
 	<body>
 		<header>
 			<nav>

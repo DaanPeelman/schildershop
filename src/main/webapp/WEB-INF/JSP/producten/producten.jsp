@@ -5,6 +5,8 @@
 <html lang='nl'>
 	<head>
 		<title>Schilderijen</title>
+		<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/styles/normalize.css' />
+		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700' rel='stylesheet' type='text/css'>
 		<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/styles/default.css' />
 	</head>
 	<body>
@@ -13,9 +15,9 @@
 				<jsp:include page="/WEB-INF/JSP/menu.jsp"/>
 			</nav>
 		</header>
-		<div>
+		<div id="wrapper">
 			<aside class='sidebar'>
-			<c:url var="url" value="/producten" />
+				<c:url var="url" value="/producten" />
 				<form:form commandName="titelForm" action="${url}" method="get">
 					<div>
 						<form:label path="titel">Titel: 

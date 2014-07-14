@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Uw gegevens</title>
+<link rel='stylesheet'
+	href='${pageContext.servletContext.contextPath}/styles/normalize.css' />
+<link
+	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700'
+	rel='stylesheet' type='text/css'>
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
-<title>Uw gegevens</title>
 </head>
 <body>
 	<security:authorize access="isAuthenticated()">
@@ -19,29 +24,32 @@
 	<jsp:include page="../menu.jsp" />
 	<h1>Uw recente bestellingen</h1>
 	<c:if test="${not empty gebruiker.bestellingen}">
-	<table>
-	<thead>
-		<tr>
-			<td>Datum</td>
-			<td>Prijs</td>
-			<td>Info</td>
-		</tr>
-	</thead>
-		<c:forEach var="bestelling" items="${gebruiker.bestellingen}">
-		<spring:url var="url" value="/bestellingen/{bestelbonId}">
-			<spring:param name="bestelbonId" value="${bestelling.bestelbonId}" />
-		</spring:url>
-		<tr>
-			<td><fmt:formatDate value="${bestelling.datum}" dateStyle="long"/></td>
-			<c:set var="prijs" value="0" />
-			<c:forEach var="bestellijn" items="${bestelling.bestelbonlijnen}">
-				<c:set var="prijs" value="${prijs + bestellijn.prijs * bestellijn.aantal}" />
+		<table>
+			<thead>
+				<tr>
+					<td>Datum</td>
+					<td>Prijs</td>
+					<td>Info</td>
+				</tr>
+			</thead>
+			<c:forEach var="bestelling" items="${gebruiker.bestellingen}">
+				<spring:url var="url" value="/bestellingen/{bestelbonId}">
+					<spring:param name="bestelbonId" value="${bestelling.bestelbonId}" />
+				</spring:url>
+				<tr>
+					<td><fmt:formatDate value="${bestelling.datum}"
+							dateStyle="long" /></td>
+					<c:set var="prijs" value="0" />
+					<c:forEach var="bestellijn" items="${bestelling.bestelbonlijnen}">
+						<c:set var="prijs"
+							value="${prijs + bestellijn.prijs * bestellijn.aantal}" />
+					</c:forEach>
+					<td>&euro;<fmt:formatNumber value="${prijs}"
+							minFractionDigits="2" maxFractionDigits="2" />
+					<td><a href="${url}">Info</a></td>
+				</tr>
 			</c:forEach>
-			<td>&euro;<fmt:formatNumber value="${prijs}" minFractionDigits="2" maxFractionDigits="2"/>
-			<td><a href="${url}">Info</a></td>
-		</tr>
-		</c:forEach>
-	</table>
+		</table>
 	</c:if>
 	<c:if test="${empty gebruiker.bestellingen}">
 		<div>U hebt geen recente bestellingen</div>

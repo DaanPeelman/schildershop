@@ -1,5 +1,74 @@
 @CHARSET "ISO-8859-1";
+/****************************
+GENERAL
+*****************************/
+
+#wrapper {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+a {
+  text-decoration: none;
+}
 
 .fout {
 	color: red;
+}
+
+
+
+/****************************
+HEADING
+*****************************/
+
+#logo {
+  text-align: center;
+  margin: 0;
+}
+
+h1 {
+  margin: 15px 0;
+  font-size: 1.75em;
+}
+
+/****************************
+COLORS
+*****************************/
+
+/* site body */
+body {
+  background-color: #ffdbc5;
+  color: #999;
+}
+
+a {
+  color: #BFA494;
+}
+
+header {
+  background: #7F6D62;
+  border-color: #403731;
+  font-family: 'Play', sans-serif;
+}
+
+/* logo text */
+h1, h2 {
+  color: #fff;
+}
+
+/* nav background on mobile */
+nav {
+  background: #403731;
+}
+
+ /* nav link */
+nav a, nav a:visited {
+  color: #fff;
+}
+
+/* selected nav link */
+nav a.selected, nav a:hover {
+  color: #E5C5B1;
 }

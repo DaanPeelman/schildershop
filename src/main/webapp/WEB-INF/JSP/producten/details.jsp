@@ -5,6 +5,8 @@
 <html lang='nl'>
 	<head>
 		<title>${product.titel}</title>
+		<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/styles/normalize.css' />
+		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700' rel='stylesheet' type='text/css'>
 		<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/styles/default.css' />
 	</head>
 	<body>
@@ -14,7 +16,7 @@
 			</nav>
 			<h1>${product.titel}</h1>
 		</header>
-		<div>
+		<div id="wrapper">
 			<section>
 				Schilder: ${product.schilder.naam}<br>
 				Stijl: ${product.stijl}<br>
