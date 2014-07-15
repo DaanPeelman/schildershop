@@ -14,7 +14,9 @@
 </head>
 <body>
 	<header>
-		<a href="<c:url value='/'/>">Menu</a>
+		<a href='<c:url value="/" />' id="logo" >
+	        Hier komt het logo
+	    </a>
 	</header>
 	<div id="wrapper" >
 		U hebt geen toegang tot dit onderdeel.

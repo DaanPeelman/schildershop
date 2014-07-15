@@ -63,6 +63,7 @@ public class ProductController {
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
+			mav.addObject("filter", "genaamd " + titel);
 		}
 		return mav;
 	}
@@ -81,6 +82,7 @@ public class ProductController {
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
+			mav.addObject("filter", "van " + schilderNaam);
 		}
 		return mav;
 	}
@@ -98,6 +100,7 @@ public class ProductController {
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
+			mav.addObject("filter", "in de stijl " + stijl);
 		}
 		return mav;
 	}
@@ -123,6 +126,7 @@ public class ProductController {
 			mav.addObject("stijlForm", new StijlForm());
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
+			mav.addObject("filter", "tussen €" + vanPrijs + " en €" + totPrijs);
 		}
 		return mav;
 	}
@@ -149,6 +153,7 @@ public class ProductController {
 			mav.addObject("stijlForm", new StijlForm());
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
+			mav.addObject("filter", "gemaakt tussen " + vanJaartal + " en " + totJaartal);
 		}
 		return mav;
 	}
@@ -225,9 +230,7 @@ public class ProductController {
 				product);
 		if (product != null) {
 			String productFotoPad = servletContext.getRealPath("/img") + "\\" + product.getProductId() + ".jpg";
-			System.out.println(productFotoPad);
 			File file = new File(productFotoPad);
-			System.out.println("heeft foto: " + file.exists());
 			mav.addObject("heeftFoto", file.exists());
 		}
 		return mav;

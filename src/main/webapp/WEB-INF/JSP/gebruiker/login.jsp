@@ -17,22 +17,22 @@
 </head>
 <body>
 	<header>
-		<security:authorize access="isAuthenticated()">
-			<jsp:include page="../ingelogdMenu.jsp" />
-		</security:authorize>
-		<ul>
-			<jsp:include page="../menuZonderLogin.jsp" />
-		</ul>
+		<a href='<c:url value="/" />' id="logo" >
+	        Hier komt het logo
+	    </a>
+		<nav>
+			<security:authorize access="isAuthenticated()">
+				<jsp:include page="../ingelogdMenu.jsp" />
+			</security:authorize>
+			<ul>
+				<jsp:include page="../menuZonderLogin.jsp" />
+			</ul>
+		</nav>
+		<h1>Inloggen</h1>
 	</header>
 	<div id="wrapper">
-		<security:authorize access="isAuthenticated()">
-			<jsp:include page="../ingelogdMenu.jsp" />
-		</security:authorize>
-		<ul>
-			<jsp:include page="../menuZonderLogin.jsp" />
-		</ul>
 		<security:authorize access="isAnonymous()">
-			<h1>Ik ben al geregistreerd</h1>
+			<h2>Ik ben al geregistreerd</h2>
 			<form method='post'
 				action='<c:url value="/j_spring_security_check"/>' id='aanmeldform'>
 				<label>Gebruikersnaam: <input name='j_username' autofocus></label>
@@ -43,7 +43,7 @@
 				<input type='submit' value='Aanmelden' id='aanmeldknop'>
 			</form>
 
-			<h1>Ik ben nieuw hier</h1>
+			<h2>Ik ben nieuw hier</h2>
 			<c:url var="url" value="/gebruiker" />
 			<form:form commandName="gebruiker" action="${url}" method="post">
 				<div>

@@ -19,10 +19,15 @@
 </head>
 <body>
 	<header>
-		<security:authorize access="isAuthenticated()">
-			<jsp:include page="../ingelogdMenu.jsp" />
-		</security:authorize>
-		<jsp:include page="../menu.jsp" />
+		<a href='<c:url value="/" />' id="logo" >
+	        Hier komt het logo
+	    </a>
+		<nav>
+			<security:authorize access="isAuthenticated()">
+				<jsp:include page="../ingelogdMenu.jsp" />
+			</security:authorize>
+			<jsp:include page="../menu.jsp" />
+		</nav>
 		<h1>Uw recente bestellingen</h1>
 	</header>
 	<div id="wrapper">
@@ -57,7 +62,7 @@
 		<c:if test="${empty gebruiker.bestellingen}">
 			<div>U hebt geen recente bestellingen</div>
 		</c:if>
-		<h1>Uw gegevens</h1>
+		<h2>Uw gegevens</h2>
 		<div>
 			<b>Naam: </b> ${gebruiker.naam}&nbsp;${gebruiker.familienaam}
 		</div>

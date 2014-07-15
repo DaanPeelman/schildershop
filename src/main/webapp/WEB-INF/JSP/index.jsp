@@ -17,13 +17,16 @@
 </head>
 <body>
 	<header>
-		<nav class="adminNav">
+		<a href='<c:url value="/" />' id="logo" >
+	        Hier komt het logo
+	    </a>
+		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="ingelogdMenu.jsp" />
 			</security:authorize>
 			<jsp:include page="menu.jsp" />
-			<h1>index</h1>
 		</nav>
+		<h1>index</h1>
 	</header>
 	<div id="wrapper">
 		Hier komt de banner.

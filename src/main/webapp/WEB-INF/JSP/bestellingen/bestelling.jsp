@@ -19,10 +19,17 @@
 </head>
 <body>
 	<header>
-		<security:authorize access="isAuthenticated()">
-			<jsp:include page="../ingelogdMenu.jsp" />
-		</security:authorize>
-		<jsp:include page="../menu.jsp" />
+		<a href='<c:url value="/" />' id="logo" >
+	        Hier komt het logo
+	    </a>
+		<nav>
+			<security:authorize access="isAuthenticated()">
+				<jsp:include page="../ingelogdMenu.jsp"/>
+			</security:authorize>
+			<ul>
+				<jsp:include page="../menuZonderLogin.jsp" />
+			</ul>
+		</nav>
 		<h1>
 			Overzicht bestelling van
 			<fmt:formatDate value="${bestelbon.datum}" dateStyle="long" />

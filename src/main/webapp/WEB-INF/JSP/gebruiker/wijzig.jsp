@@ -18,16 +18,19 @@
 </head>
 <body>
 	<header>
-		<security:authorize access="isAuthenticated()">
-			<jsp:include page="../ingelogdMenu.jsp" />
-		</security:authorize>
-		<jsp:include page="../menu.jsp" />
+		<a href='<c:url value="/" />' id="logo" >
+	        Hier komt het logo
+	    </a>
+		<nav>
+			<security:authorize access="isAuthenticated()">
+				<jsp:include page="../ingelogdMenu.jsp"/>
+			</security:authorize>
+			<ul>
+				<jsp:include page="../menu.jsp" />
+			</ul>
+		</nav>
 	</header>
 	<div id="wrapper">
-		<security:authorize access="isAuthenticated()">
-			<jsp:include page="../ingelogdMenu.jsp" />
-		</security:authorize>
-		<jsp:include page="../menu.jsp" />
 		<c:url value="/gebruiker" var="url" />
 		<form:form commandName="adresForm" action="${url}" method="put">
 			<h2>Uw gegevens wijzigen</h2>
