@@ -3,6 +3,10 @@
 GENERAL
 *****************************/
 
+body {
+  font-family: 'Merriweather', serif;
+}
+
 #wrapper {
   max-width: 940px;
   margin: 0 auto;
@@ -31,7 +35,42 @@ HEADING
 h1 {
   margin: 15px 0;
   font-size: 1.75em;
+  font-family: 'Play', sans-serif;
+  font-weight: normal;
+  line-height: 0.8em;
 }
+
+h2 {
+  font-size: 0.75em;
+  margin: -5px 0 0;
+  font-weight: normal;
+}
+
+
+
+/****************************
+NAVIGATION
+*****************************/
+
+nav {
+  padding: 10px 0;
+  margin: 20px 0 0;
+}
+
+
+
+/****************************
+FOOTER
+*****************************/
+
+footer {
+  font-size: 0.75em;
+  text-align: center;
+  padding-top: 50px;
+  color: #c4c4c4;
+}
+
+
 
 /****************************
 COLORS
@@ -50,7 +89,6 @@ a {
 header {
   background: #7F6D62;
   border-color: #403731;
-  font-family: 'Play', sans-serif;
 }
 
 /* logo text */
