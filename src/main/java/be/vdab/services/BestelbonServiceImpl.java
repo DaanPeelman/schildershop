@@ -19,4 +19,14 @@ public class BestelbonServiceImpl implements BestelbonService {
 	public Iterable<Bestelbon> findAll() {
 		return bestelbonDAO.findAll();
 	}
+	
+	@Override
+	public Bestelbon read(long id) {
+		return bestelbonDAO.findOne(id);
+	}
+	
+	@Override
+	public void create(Bestelbon bestelbon) {
+		bestelbonDAO.save(bestelbon);
+	}
 }

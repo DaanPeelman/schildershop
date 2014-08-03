@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,6 +46,14 @@
 			</tr>
 		</c:forEach>
 		</table>
+		<c:url var="url" value="/bestellingen" />
+		<form:form commandName="adresForm" action="${url}" method="post">
+			<div><form:label path="straat">Straat <form:input path="straat"/><form:errors path="straat" /></form:label></div>
+			<div><form:label path="nummer">Nummer: <form:input path="nummer" /><form:errors path="nummer" /></form:label></div>
+			<div><form:label path="gemeente">Gemeente: <form:input path="gemeente"/><form:errors path="gemeente" /></form:label></div>
+			<div><form:label path="postcode">Postcode: <form:input path="postcode"/><form:errors path="postcode" /></form:label></div>
+			<input type="submit" value="Uitchecken" />
+		</form:form>
 	</c:if>
 	<c:if test="${empty mandje.bestelbonlijnen}">
 		<p>Er zijn geen producten in uw mandje</p>

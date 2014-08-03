@@ -1,7 +1,9 @@
 package be.vdab.web;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +17,28 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.dao.BestelbonDAO;
+import be.vdab.dao.GebruikerDAO;
 import be.vdab.dao.ProductDAO;
 import be.vdab.entities.Bestelbon;
 import be.vdab.entities.Bestelbonlijn;
+import be.vdab.entities.Gebruiker;
 import be.vdab.entities.Product;
+import be.vdab.services.BestelbonService;
 
 @Controller
 @RequestMapping(value = "/bestellingen")
 @SessionAttributes("mandje")
 public class BestelbonController {
-	private final BestelbonDAO bestelbonDAO;
+	private final BestelbonService bestelbonService;
 	private final ProductDAO productDAO;
+	private final GebruikerDAO gebruikerDAO;
 	private Bestelbon mandje = new Bestelbon();
 	
 	@Autowired
-	public BestelbonController(BestelbonDAO bestelbonDAO, ProductDAO productDAO) {
-		this.bestelbonDAO = bestelbonDAO;
-		this.productDAO = productDAO;		
+	public BestelbonController(BestelbonService bestelbonService, ProductDAO productDAO, GebruikerDAO gebruikerDAO) {
+		this.bestelbonService = bestelbonService;
+		this.productDAO = productDAO;
+		this.gebruikerDAO = gebruikerDAO;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -51,25 +58,42 @@ public class BestelbonController {
 			}
 			return new ModelAndView("redirect:/bestellingen/mandje");
 		}
+		String view = String.format("producten/%d", mandjeForm.getProductId());
+		return new ModelAndView(view);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
+		if(!bindingResult.hasErrors()) {
+			Principal principal = request.getUserPrincipal();
+			Gebruiker gebruiker = gebruikerDAO.findByEmailadres(principal.getName());
+			
+			mandje.setLeverAdres(adresForm);
+			mandje.setGebruiker(gebruiker);
+			
+			bestelbonService.create(mandje);
+			
+			return new ModelAndView("redirect:/");
+		}
 		
-		return new ModelAndView("producten/details");
+		return new ModelAndView("bestellingen/mandje");
 	}
 	
 	@RequestMapping(value = "{bestelbonId}", method = RequestMethod.GET)
 	public ModelAndView read(@PathVariable long bestelbonId) {
 		ModelAndView modelAndView = new ModelAndView("bestellingen/bestelling");
-		modelAndView.addObject("bestelbon", bestelbonDAO.findOne(bestelbonId));
+		modelAndView.addObject("bestelbon", bestelbonService.read(bestelbonId));
 		
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/mandje")
+	@RequestMapping(value = "/mandje", method = RequestMethod.GET)
 	public ModelAndView showMandje() {
-		System.out.println("mandje: ");
-		for(Bestelbonlijn bestelbonlijn:mandje.getBestelbonlijnen()) {
-			System.out.println(bestelbonlijn.getProduct().getTitel());
-		}
+		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
 		
-		return new ModelAndView("/bestellingen/mandje", "mandje", mandje);
+		modelAndView.addObject("mandje", mandje);
+		modelAndView.addObject("adresForm", new AdresForm());
+		
+		return modelAndView;
 	}
 }
