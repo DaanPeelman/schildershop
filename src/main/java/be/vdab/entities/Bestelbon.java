@@ -25,8 +25,9 @@ public class Bestelbon implements Serializable {
 	private Set<Bestelbonlijn> bestelbonlijnen;
 	private Date datum;
 	
-	protected Bestelbon() {
+	public Bestelbon() {
 		this.datum = new Date();
+		bestelbonlijnen = new HashSet<>();
 	}
 
 	public Bestelbon(Gebruiker gebruiker, Adres leverAdres, Date datum) {
@@ -66,6 +67,10 @@ public class Bestelbon implements Serializable {
 
 	public void setBestelbonlijnen(Set<Bestelbonlijn> bestelbonlijnen) {
 		this.bestelbonlijnen = bestelbonlijnen;
+	}
+	
+	public void addBestelbonlijn(Bestelbonlijn bestelbonlijn) {
+		this.bestelbonlijnen.add(bestelbonlijn);
 	}
 
 	public Date getDatum() {

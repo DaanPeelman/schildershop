@@ -1,8 +1,8 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -31,6 +31,8 @@
 		<h1>${product.titel}</h1>
 	</header>
 	<div id="wrapper">
+	<c:url value="/bestellingen"  var="url"/>
+	<form:form commandName="mandjeForm" action="${url}" method="put">
 		<section>
 			Schilder: ${product.schilder.naam}<br> Stijl: ${product.stijl}<br>
 			Jaar: ${product.jaartal}<br> Prijs: €${product.prijs}
@@ -43,6 +45,10 @@
 					src="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg">
 			</dd>
 		</c:if>
+		<form:input path="productId" type="hidden" />
+		<form:label path="aantal">Aantal <form:input path="aantal" type="text"/><form:errors path="aantal" /></form:label>
+		<input type="submit" value="Koop" />
+	</form:form>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp" />

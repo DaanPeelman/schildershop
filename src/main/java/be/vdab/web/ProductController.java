@@ -233,6 +233,9 @@ public class ProductController {
 			File file = new File(productFotoPad);
 			mav.addObject("heeftFoto", file.exists());
 		}
+		MandjeForm mandjeForm = new MandjeForm(id);
+		mav.addObject("mandjeForm", mandjeForm);
+		
 		return mav;
 	}
 
