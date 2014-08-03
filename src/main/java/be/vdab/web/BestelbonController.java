@@ -75,8 +75,9 @@ public class BestelbonController {
 			
 			return new ModelAndView("redirect:/");
 		}
-		
-		return new ModelAndView("bestellingen/mandje");
+		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
+		modelAndView.addObject("mandje", mandje);
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "{bestelbonId}", method = RequestMethod.GET)
