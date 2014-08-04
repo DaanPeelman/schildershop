@@ -223,9 +223,9 @@ public class ProductController {
 		return mav;
 	}
 
-	@RequestMapping(value = "details", method = RequestMethod.GET, params = "id")
-	public ModelAndView read(@RequestParam long id) {
-		Product product = productService.findOne(id);
+	@RequestMapping(value = "{productId}", method = RequestMethod.GET)
+	public ModelAndView read(@PathVariable long productId) {
+		Product product = productService.findOne(productId);
 		ModelAndView mav =  new ModelAndView("producten/details", "product",
 				product);
 		if (product != null) {
@@ -233,7 +233,7 @@ public class ProductController {
 			File file = new File(productFotoPad);
 			mav.addObject("heeftFoto", file.exists());
 		}
-		MandjeForm mandjeForm = new MandjeForm(id);
+		MandjeForm mandjeForm = new MandjeForm(productId);
 		mav.addObject("mandjeForm", mandjeForm);
 		
 		return mav;

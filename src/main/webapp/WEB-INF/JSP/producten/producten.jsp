@@ -3,6 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+	<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -117,9 +118,10 @@
 						<tbody>
 							<c:forEach items="${schilderijen}" var="schilderij">
 								<tr>
-									<th><c:url value="/producten/details" var="detailUrl">
-											<c:param name="id" value="${schilderij.productId}" />
-										</c:url> <a href="${detailUrl}">${schilderij.titel}</a></th>
+									<spring:url value="/producten/{productId}" var="productURL">
+										<spring:param name="productId" value="${schilderij.productId}" />
+									</spring:url>
+									<th><a href="${productURL}">${schilderij.titel}</a></th>
 									<th>${schilderij.schilder.naam}</th>
 									<th>${schilderij.stijl}</th>
 									<th>${schilderij.jaartal}</th>
