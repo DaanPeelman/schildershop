@@ -47,7 +47,7 @@
 					</spring:url>
 					<tr>
 						<td><fmt:formatDate value="${bestelling.datum}"
-								dateStyle="long" /></td>
+								pattern="dd/MM/yyyy" /></td>
 						<c:set var="prijs" value="0" />
 						<c:forEach var="bestellijn" items="${bestelling.bestelbonlijnen}">
 							<c:set var="prijs"
