@@ -85,7 +85,7 @@
 			<b>Postcode: </b> ${gebruiker.adres.postcode}
 		</div>
 		<div>
-			<a href="<c:url value='/gebruiker/wijzig' />">Wijzig gegevens</a>
+			<a href="<c:url value='/gebruiker/wijzig' />">Wijzig uw gegevens of wachtwoord</a>
 		</div>
 	</div>
 	<footer>

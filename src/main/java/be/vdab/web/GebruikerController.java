@@ -94,7 +94,7 @@ public class GebruikerController {
 		if(principal != null) {
 			if(!bindingResult.hasErrors()) {
 				gebruikerService.updateGegevens(gebruikerId, adresForm);
-				return new ModelAndView("redirect:/gebruiker");
+				return new ModelAndView("gebruiker/gegevensSucces");
 			}
 		}
 		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
