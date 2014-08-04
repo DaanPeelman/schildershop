@@ -42,12 +42,29 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="bestelling" items="${bestellingen}" end="0">
+					<c:set var="bestelDatum" value="${bestelling.datum}" />
+				</c:forEach>
+				<tr>
+					<fmt:formatDate var="fmtDatum" value="${bestelDatum}" pattern="MMMM yyyy" />
+					<td colspan="3"><b><c:out value="${fmtDatum}" /></b></td>
+				</tr>
+				
 				<c:forEach var="bestelling" items="${bestellingen}">
+				
+				<c:if test="${(bestelDatum.year != bestelling.datum.year) || (bestelDatum.month != bestelling.datum.month)}">
+					<c:set var="bestelDatum" value="${bestelling.datum}" />
+					<tr>
+						<fmt:formatDate var="fmtDatum" value="${bestelDatum}" pattern="MMMM yyyy" />
+						<td colspan="3"><b><c:out value="${fmtDatum}" /></b></td>
+					</tr>
+				</c:if>
+				
 					<spring:url var="url" value="/bestellingen/{bestelbonId}">
 						<spring:param name="bestelbonId" value="${bestelling.bestelbonId}" />
 					</spring:url>
 					<tr>
-						<td><fmt:formatDate value="${bestelling.datum}" dateStyle="long" /></td>
+						<td><fmt:formatDate value="${bestelling.datum}" pattern="dd/MM/yyyy" /></td>
 						<c:set var="prijs" value="0" />
 						<c:forEach var="bestellijn" items="${bestelling.bestelbonlijnen}">
 							<c:set var="prijs"
@@ -56,6 +73,8 @@
 						<td>&euro;<fmt:formatNumber value="${prijs}" minFractionDigits="2" maxFractionDigits="2" />
 						<td><a href="${url}">Info</a></td>
 					</tr>
+					
+					
 				</c:forEach>
 			</tbody>
 		</table>

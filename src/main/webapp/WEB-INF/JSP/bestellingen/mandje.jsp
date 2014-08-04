@@ -49,6 +49,7 @@
 		</c:forEach>
 		</tbody>
 		</table>
+		<h2>Afleveradres</h2>
 		<c:url var="url" value="/bestellingen" />
 		<form:form commandName="adresForm" action="${url}" method="post">
 			<div><form:label path="straat">Straat <form:input path="straat"/><form:errors path="straat" cssClass="fout"/></form:label></div>
