@@ -1,5 +1,6 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -17,6 +18,12 @@
 		<a href='<c:url value="/" />' id="logo" >
 	        Hier komt het logo
 	    </a>
+	    	<nav>
+			<security:authorize access="isAuthenticated()">
+				<jsp:include page="ingelogdMenu.jsp" />
+			</security:authorize>
+			<jsp:include page="menu.jsp" />
+		</nav>
 	</header>
 	<div id="wrapper" >
 		U hebt geen toegang tot dit onderdeel.

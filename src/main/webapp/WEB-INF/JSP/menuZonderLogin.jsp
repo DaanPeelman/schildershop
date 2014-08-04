@@ -6,10 +6,7 @@
 
 <li><a href='<c:url value="/" />'>Home</a>
 <li><a href='<c:url value="/producten" />'>Producten</a></li>
-<security:authorize url='/producten/toevoegen'>
-	<li><a href='<c:url value="/producten/toevoegen" />'>Product/Schilder
-			toevoegen</a></li>
-</security:authorize>
+<li><a href='<c:url value="/bestellingen/mandje" />'>Mandje</a>
 <security:authorize access="isAuthenticated()">
 	<li><a href="<c:url value='/j_spring_security_logout'/>">Afmelden</a></li>
 </security:authorize>

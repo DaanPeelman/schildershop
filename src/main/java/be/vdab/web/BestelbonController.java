@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.dao.BestelbonDAO;
@@ -41,7 +42,51 @@ public class BestelbonController {
 		this.gebruikerDAO = gebruikerDAO;
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
+		if(!bindingResult.hasErrors()) {
+			Principal principal = request.getUserPrincipal();
+			Gebruiker gebruiker = gebruikerDAO.findByEmailadres(principal.getName());
+			
+			mandje.setLeverAdres(adresForm);
+			mandje.setGebruiker(gebruiker);
+			
+			bestelbonService.create(mandje);
+			
+			mandje = new Bestelbon();
+			
+			return new ModelAndView("bestellingen/succes");
+		}
+		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
+		modelAndView.addObject("mandje", mandje);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "{bestelbonId}", method = RequestMethod.GET)
+	public ModelAndView read(@PathVariable long bestelbonId, HttpServletRequest request) {
+		Principal principal = request.getUserPrincipal();
+		Gebruiker gebruiker = gebruikerDAO.findByEmailadres(principal.getName());
+		
+		Bestelbon bestelbon = bestelbonService.read(bestelbonId);
+		
+		if(gebruiker == bestelbon.getGebruiker()) {
+			return new ModelAndView("bestellingen/bestelling", "bestelbon", bestelbon);
+		}
+		
+		return new ModelAndView("forbidden");
+	}
+	
+	@RequestMapping(value = "/mandje", method = RequestMethod.GET)
+	public ModelAndView showMandje() {
+		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
+		
+		modelAndView.addObject("mandje", mandje);
+		modelAndView.addObject("adresForm", new AdresForm());
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "mandje", method = RequestMethod.PUT)
 	public ModelAndView addBestellijn(@Valid MandjeForm mandjeForm, BindingResult bindingResult) {
 		if(!bindingResult.hasErrors()) {
 			System.out.println("IN ADDBESTELLIJN");
@@ -60,41 +105,5 @@ public class BestelbonController {
 		}
 		String view = String.format("producten/%d", mandjeForm.getProductId());
 		return new ModelAndView(view);
-	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
-		if(!bindingResult.hasErrors()) {
-			Principal principal = request.getUserPrincipal();
-			Gebruiker gebruiker = gebruikerDAO.findByEmailadres(principal.getName());
-			
-			mandje.setLeverAdres(adresForm);
-			mandje.setGebruiker(gebruiker);
-			
-			bestelbonService.create(mandje);
-			
-			return new ModelAndView("redirect:/");
-		}
-		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
-		modelAndView.addObject("mandje", mandje);
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "{bestelbonId}", method = RequestMethod.GET)
-	public ModelAndView read(@PathVariable long bestelbonId) {
-		ModelAndView modelAndView = new ModelAndView("bestellingen/bestelling");
-		modelAndView.addObject("bestelbon", bestelbonService.read(bestelbonId));
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/mandje", method = RequestMethod.GET)
-	public ModelAndView showMandje() {
-		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
-		
-		modelAndView.addObject("mandje", mandje);
-		modelAndView.addObject("adresForm", new AdresForm());
-		
-		return modelAndView;
 	}
 }

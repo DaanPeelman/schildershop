@@ -31,7 +31,7 @@
 		<h1>${product.titel}</h1>
 	</header>
 	<div id="wrapper">
-	<c:url value="/bestellingen"  var="url"/>
+	<c:url value="/bestellingen/mandje"  var="url"/>
 	<form:form commandName="mandjeForm" action="${url}" method="put">
 		<section>
 			Schilder: ${product.schilder.naam}<br> Stijl: ${product.stijl}<br>

@@ -2,7 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -24,9 +25,7 @@
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="../ingelogdMenu.jsp" />
 			</security:authorize>
-			<ul>
-				<jsp:include page="../menuZonderLogin.jsp" />
-			</ul>
+			<jsp:include page="../menu.jsp" />
 		</nav>
 		<h1>Uw mandje</h1>
 		</header>
@@ -34,10 +33,13 @@
 				<c:if test="${not empty mandje.bestelbonlijnen}">
 				<table>
 				<thead>
+				<tr>
 					<td>Titel</td>
 					<td>Aantal</td>
 					<td>Prijs</td>
+					</tr>
 				</thead>
+				<tbody>
 		<c:forEach items="${mandje.bestelbonlijnen}" var="bestelbonlijn">
 		<tr>
 			<td>${bestelbonlijn.product.titel}</td>
@@ -45,6 +47,7 @@
 			<td>${bestelbonlijn.product.prijs}</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 		</table>
 		<c:url var="url" value="/bestellingen" />
 		<form:form commandName="adresForm" action="${url}" method="post">
