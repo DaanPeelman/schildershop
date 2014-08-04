@@ -1,12 +1,10 @@
 package be.vdab.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import be.vdab.dao.BestelbonDAO;
 import be.vdab.entities.Bestelbon;
-import be.vdab.entities.Gebruiker;
 
 @Service
 public class BestelbonServiceImpl implements BestelbonService {

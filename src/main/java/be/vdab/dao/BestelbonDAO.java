@@ -1,6 +1,5 @@
 package be.vdab.dao;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import be.vdab.entities.Bestelbon;

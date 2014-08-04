@@ -9,43 +9,40 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import be.vdab.dao.BestelbonDAO;
-import be.vdab.dao.GebruikerDAO;
-import be.vdab.dao.ProductDAO;
 import be.vdab.entities.Bestelbon;
 import be.vdab.entities.Bestelbonlijn;
 import be.vdab.entities.Gebruiker;
 import be.vdab.entities.Product;
 import be.vdab.services.BestelbonService;
+import be.vdab.services.GebruikerService;
+import be.vdab.services.ProductService;
 
 @Controller
 @RequestMapping(value = "/bestellingen")
 @SessionAttributes("mandje")
 public class BestelbonController {
 	private final BestelbonService bestelbonService;
-	private final ProductDAO productDAO;
-	private final GebruikerDAO gebruikerDAO;
+	private final ProductService productService;
+	private final GebruikerService gebruikerService;
 	private Bestelbon mandje = new Bestelbon();
 	
 	@Autowired
-	public BestelbonController(BestelbonService bestelbonService, ProductDAO productDAO, GebruikerDAO gebruikerDAO) {
+	public BestelbonController(BestelbonService bestelbonService, ProductService productService, GebruikerService gebruikerService) {
 		this.bestelbonService = bestelbonService;
-		this.productDAO = productDAO;
-		this.gebruikerDAO = gebruikerDAO;
+		this.productService = productService;
+		this.gebruikerService = gebruikerService;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView readAll(HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
-		Iterable<Bestelbon> bestellingen = gebruikerDAO.findByEmailadres(principal.getName()).getBestellingen();
+		Iterable<Bestelbon> bestellingen = gebruikerService.findByEmailadres(principal.getName()).getBestellingen();
 		
 		return new ModelAndView("bestellingen/bestellingen", "bestellingen", bestellingen);
 	}
@@ -54,7 +51,7 @@ public class BestelbonController {
 	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
 		if(!bindingResult.hasErrors()) {
 			Principal principal = request.getUserPrincipal();
-			Gebruiker gebruiker = gebruikerDAO.findByEmailadres(principal.getName());
+			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 			
 			mandje.setLeverAdres(adresForm);
 			mandje.setGebruiker(gebruiker);
@@ -73,7 +70,7 @@ public class BestelbonController {
 	@RequestMapping(value = "{bestelbonId}", method = RequestMethod.GET)
 	public ModelAndView read(@PathVariable long bestelbonId, HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
-		Gebruiker gebruiker = gebruikerDAO.findByEmailadres(principal.getName());
+		Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 		
 		Bestelbon bestelbon = bestelbonService.read(bestelbonId);
 		
@@ -99,7 +96,7 @@ public class BestelbonController {
 		if(!bindingResult.hasErrors()) {
 			System.out.println("IN ADDBESTELLIJN");
 			
-			Product product = productDAO.findOne(mandjeForm.getProductId());
+			Product product = productService.findOne(mandjeForm.getProductId());
 			int aantal = mandjeForm.getAantal();
 			BigDecimal prijs = product.getPrijs();
 			
