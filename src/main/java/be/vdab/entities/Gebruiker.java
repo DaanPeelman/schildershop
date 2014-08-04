@@ -11,12 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
 import be.vdab.constraints.Emailadres;
 import be.vdab.constraints.Wachtwoord;
 import be.vdab.valueobjects.Adres;
@@ -39,6 +41,7 @@ public class Gebruiker implements Serializable {
 	@Embedded
 	private Adres adres;
 	@OneToMany(mappedBy = "gebruiker")
+	@OrderBy("datum DESC")
 	private Set<Bestelbon> bestellingen;
 	@Wachtwoord
 	private String wachtwoord;

@@ -42,6 +42,14 @@ public class BestelbonController {
 		this.gebruikerDAO = gebruikerDAO;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView readAll(HttpServletRequest request) {
+		Principal principal = request.getUserPrincipal();
+		Iterable<Bestelbon> bestellingen = gebruikerDAO.findByEmailadres(principal.getName()).getBestellingen();
+		
+		return new ModelAndView("bestellingen/bestellingen", "bestellingen", bestellingen);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
 		if(!bindingResult.hasErrors()) {

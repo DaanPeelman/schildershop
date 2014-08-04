@@ -31,6 +31,7 @@
 		<h1>Uw recente bestellingen</h1>
 	</header>
 	<div id="wrapper">
+		<h2>Uw recente bestellingen</h2>
 		<c:if test="${not empty gebruiker.bestellingen}">
 			<table>
 				<thead>
@@ -40,7 +41,7 @@
 						<td>Info</td>
 					</tr>
 				</thead>
-				<c:forEach var="bestelling" items="${gebruiker.bestellingen}">
+				<c:forEach var="bestelling" items="${gebruiker.bestellingen}" begin='0' end='2'>
 					<spring:url var="url" value="/bestellingen/{bestelbonId}">
 						<spring:param name="bestelbonId" value="${bestelling.bestelbonId}" />
 					</spring:url>
@@ -58,6 +59,8 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<c:url var="bestellingenURL" value="/bestellingen" />
+			<a href="${bestellingenURL}">Bekijk al mijn bestellingen</a>
 		</c:if>
 		<c:if test="${empty gebruiker.bestellingen}">
 			<div>U hebt geen recente bestellingen</div>
