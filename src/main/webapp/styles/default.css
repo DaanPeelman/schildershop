@@ -2,77 +2,87 @@
 /****************************
 GENERAL
 *****************************/
-
 body {
-  font-family: 'Merriweather', serif;
+	font-family: 'Merriweather', serif;
 }
 
 #wrapper {
-  max-width: 940px;
-  margin: 0 auto;
-  padding: 0 5%;
+	max-width: 940px;
+	margin: 0 auto -100px;;
+	padding: 0 5%;
+	height: auto;
+	height: 100%;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 h2 {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 .fout {
 	color: red;
 }
 
+#detailImg {
+	float: left;
+	padding-right: 1em;
+	width: 20em;
+}
 
+.push {
+	height: 100px;
+	clear: both;
+}
 
 /****************************
 HEADING
 *****************************/
-
 #logo {
-  text-align: center;
-  margin: 0;
+	text-align: center;
+	margin: 0;
 }
 
 h1 {
-  margin: 15px 0;
-  font-size: 1.75em;
-  font-family: 'Play', sans-serif;
-  font-weight: normal;
-  line-height: 0.8em;
+	margin: 15px 0;
+	font-size: 1.75em;
+	font-family: 'Play', sans-serif;
+	font-weight: normal;
+	line-height: 0.8em;
+	padding-left: 15px;
 }
-
-
 
 /****************************
 NAVIGATION
 *****************************/
-
 nav {
-  padding: 10px 0;
-  margin: 20px 0 0;
+	padding: 10px 0;
+	margin: 20px 0 0;
+	text-align: center;
 }
 
-#adminnav { 
-/* tijdelijke opmaak, enkel voor het contrast */
+nav ul li {
+	display: inline;
+	padding-left: 15px;
+}
+
+#adminnav {
+	/* tijdelijke opmaak, enkel voor het contrast */
 	background: red;
 }
-
 
 /****************************
 FOOTER
 *****************************/
-
 footer {
-  font-size: 0.75em;
-  text-align: center;
-  padding-top: 50px;
-  color: #c4c4c4;
+	font-size: 0.75em;
+	text-align: center;
+	padding-top: 50px;
+	height: 100px;
+	clear: both;
 }
-
-
 
 /****************************
 COLORS
@@ -80,22 +90,22 @@ COLORS
 
 /* site body */
 body {
-  background-color: #ffdbc5;
-  color: #999;
+	background-color: #ffebde99;
+	color: #303030;
 }
 
 a {
-  color: #BFA494;
+	color: #4c4c4c;
 }
 
 header {
-  background: #7F6D62;
-  border-color: #403731;
+	background: #7F6D62;
+	border-color: #403731;
 }
 
 /* logo text */
 h1 {
-  color: #fff;
+	color: #fff;
 }
 
 h2 {
@@ -104,15 +114,19 @@ h2 {
 
 /* nav background on mobile */
 nav {
-  background: #403731;
+	background: #403731;
 }
 
- /* nav link */
-nav a, nav a:visited {
-  color: #fff;
+/* nav link */
+nav a,nav a:visited {
+	color: #fff;
 }
 
 /* selected nav link */
-nav a.selected, nav a:hover {
-  color: #E5C5B1;
+nav a.selected,nav a:hover {
+	color: #E5C5B1;
+}
+
+footer {
+	color: #c4c4c4;
 }

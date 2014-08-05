@@ -31,24 +31,26 @@
 		<h1>${product.titel}</h1>
 	</header>
 	<div id="wrapper">
-	<c:url value="/bestellingen/mandje"  var="url"/>
-	<form:form commandName="mandjeForm" action="${url}" method="put">
-		<section>
-			Schilder: ${product.schilder.naam}<br> Stijl: ${product.stijl}<br>
-			Jaar: ${product.jaartal}<br> Prijs: €${product.prijs}
-		</section>
-		<c:if test='${heeftFoto}'>
-			<dt>Foto</dt>
-			<dd>
+		<c:url value="/bestellingen/mandje"  var="url"/>
+		<form:form commandName="mandjeForm" action="${url}" method="put">
+			<c:if test='${heeftFoto}'>
 				<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
-				<img alt="foto van het schilderij"
+				<img alt="foto van het schilderij" id="detailImg"
 					src="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg">
-			</dd>
-		</c:if>
-		<form:input path="productId" type="hidden" />
-		<form:label path="aantal">Aantal <form:input path="aantal" type="text"/><form:errors path="aantal" /></form:label>
-		<input type="submit" value="Koop" />
-	</form:form>
+			</c:if>
+			<section>
+				Schilder: ${product.schilder.naam}<br> Stijl: ${product.stijl}<br>
+				Jaar: ${product.jaartal}<br> Prijs: €${product.prijs}
+			</section>
+			<form:input path="productId" type="hidden" />
+			<form:label path="aantal">
+				Aantal: 
+				<form:input path="aantal" type="text"/>
+				<form:errors path="aantal" />
+			</form:label>
+			<input type="submit" value="Koop" />
+		</form:form>
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp" />

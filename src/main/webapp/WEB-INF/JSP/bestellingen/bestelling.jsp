@@ -72,6 +72,7 @@
 			<fmt:formatNumber value="${totalePrijs}" minFractionDigits="2"
 				maxFractionDigits="2" />
 		</div>
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>

@@ -52,6 +52,7 @@
 			</form:form>
 			${succesSchilder}
 		</section>
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp" />

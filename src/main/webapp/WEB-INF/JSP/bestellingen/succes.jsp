@@ -27,10 +27,11 @@
 			</security:authorize>
 			<jsp:include page="../menu.jsp" />
 		</nav>
-		<h1>succes</h1>
+		<h1>Succes</h1>
 		</header>
 	<div id="wrapper">
 		<p>Uw bestelling is geplaatst</p>
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>

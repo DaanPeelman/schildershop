@@ -26,7 +26,8 @@
 		</nav>
 	</header>
 	<div id="wrapper" >
-		U hebt geen toegang tot dit onderdeel.
+		<p>U hebt geen toegang tot dit onderdeel.</p>
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>

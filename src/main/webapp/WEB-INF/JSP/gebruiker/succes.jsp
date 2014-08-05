@@ -32,6 +32,7 @@
 	<div id="wrapper">
 		<h2>Registratie succesvol</h2>
 		<p>U bent succesvol geregistreerd. U kan u nu aanmelden met de gebruikersnaam ${gebruikersnaam} en bijhorend wachtwoord</p>
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>

@@ -87,6 +87,7 @@
 		<div>
 			<a href="<c:url value='/gebruiker/wijzig' />">Wijzig uw gegevens of wachtwoord</a>
 		</div>
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp" />

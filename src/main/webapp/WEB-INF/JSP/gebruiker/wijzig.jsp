@@ -87,6 +87,7 @@
 			<div>
 				<input type="submit" value="Opslaan" />
 			</div>
+			<div class="push"></div>
 		</form:form>
 	</div>
 	<footer>

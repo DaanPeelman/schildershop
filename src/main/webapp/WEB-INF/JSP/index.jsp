@@ -30,6 +30,7 @@
 	</header>
 	<div id="wrapper">
 		Hier komt de banner.
+		<div class="push"></div>
 	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
