@@ -37,6 +37,23 @@ h2 {
 	clear: both;
 }
 
+.sidebar {
+	float: left;
+	width: 160px;
+	margin: 0;
+	padding: 1em;
+}
+
+section.content {
+	margin-left: 190px;
+	padding: 1em;
+}
+
+td {
+	text-allign: right;
+	padding-right: 2em;
+}
+
 
 
 /****************************
@@ -57,12 +74,13 @@ h1 {
 	padding-left: 15px;
 }
 
+
+
 /****************************
 NAVIGATION
 *****************************/
 nav {
 	padding: 10px 0;
-	margin: 20px 0 0;
 	text-align: center;
 }
 
@@ -76,6 +94,8 @@ nav ul li {
 	background: red;
 }
 
+
+
 /****************************
 FOOTER
 *****************************/
@@ -86,6 +106,8 @@ footer {
 	height: 100px;
 	clear: both;
 }
+
+
 
 /****************************
 COLORS
@@ -99,6 +121,10 @@ body {
 
 a {
 	color: #4c4c4c;
+}
+
+a:hover {
+	color: #B2806B;
 }
 
 header {

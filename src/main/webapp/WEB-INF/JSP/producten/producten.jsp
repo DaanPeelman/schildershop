@@ -124,11 +124,11 @@
 									<spring:url value="/producten/{productId}" var="productURL">
 										<spring:param name="productId" value="${schilderij.productId}" />
 									</spring:url>
-									<th><a href="${productURL}">${schilderij.titel}</a></th>
-									<th>${schilderij.schilder.naam}</th>
-									<th>${schilderij.stijl}</th>
-									<th>${schilderij.jaartal}</th>
-									<th>${schilderij.prijs}</th>
+									<td><a href="${productURL}">${schilderij.titel}</a></td>
+									<td>${schilderij.schilder.naam}</td>
+									<td>${schilderij.stijl}</td>
+									<td>${schilderij.jaartal}</td>
+									<td>${schilderij.prijs}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
