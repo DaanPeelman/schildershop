@@ -60,9 +60,10 @@ td {
 HEADING
 *****************************/
 #logo img{
+	position: absolute;
 	text-align: center;
-	margin: 0;
-	height: 5em;
+	height: 10em;
+	z-index: 1;
 }
 
 h1 {

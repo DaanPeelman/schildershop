@@ -17,11 +17,12 @@
 </head>
 <body>
 	<header>
-		<a href='<c:url value="/" />' id="logo" >
+		<div><a href='<c:url value="/" />' id="logo" >
 	        <img
 			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
 			alt="logo">
 	    </a>
+	    </div>
 		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="ingelogdMenu.jsp" />
