@@ -3,7 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
-	<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -18,7 +18,10 @@
 </head>
 <body>
 	<header>
-		<a href='<c:url value="/" />' id="logo"> Hier komt het logo </a>
+		<a href='<c:url value="/" />' id="logo"> <img
+			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
+			alt="logo">
+		</a>
 		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="../ingelogdMenu.jsp" />

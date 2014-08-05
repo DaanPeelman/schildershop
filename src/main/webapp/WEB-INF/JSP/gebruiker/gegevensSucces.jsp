@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-    <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +19,10 @@
 </head>
 <body>
 	<header>
-		<a href='<c:url value="/" />' id="logo" >
-	        Hier komt het logo
-	    </a>
+		<a href='<c:url value="/" />' id="logo"> <img
+			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
+			alt="logo">
+		</a>
 		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="../ingelogdMenu.jsp" />
@@ -28,14 +30,14 @@
 			<jsp:include page="../menu.jsp" />
 		</nav>
 		<h1>Succes</h1>
-		</header>
+	</header>
 	<div id="wrapper">
 		<h2>Gegevens gewijzigd</h2>
 		<p>Uw gegevens zijn succesvol gewijzigd</p>
 		<div class="push"></div>
 	</div>
 	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
+		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 	</footer>
 </body>
 </html>
