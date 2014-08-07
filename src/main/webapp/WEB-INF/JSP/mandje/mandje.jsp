@@ -39,20 +39,26 @@
 					<td>Titel</td>
 					<td>Aantal</td>
 					<td>Prijs</td>
+					<td>Totaal</td>
+					<td>&nbsp;</td>
 					</tr>
 				</thead>
 				<tbody>
 				<c:url var="verwijderUrl" value="/mandje" />
+				<c:set var="totaalPrijs" value="0" />
 		<c:forEach items="${mandje.bestelbonlijnen}" var="bestelbonlijn">
 		<tr>
 			<td>${bestelbonlijn.product.titel}</td>
 			<td>${bestelbonlijn.aantal}</td>
 			<td>${bestelbonlijn.product.prijs}</td>
+			<td>${bestelbonlijn.aantal * bestelbonlijn.product.prijs}</td>
 			<td><form:form commandName="verwijderUitMandjeForm" action="${verwijderUrl}" method="delete"><form:input path="productId" type="hidden" value="${bestelbonlijn.product.productId}"/><input type="submit" value="Verwijder" /></form:form></td>
 			</tr>
+			<c:set var="totaalPrijs" value="${totaalPrijs + (bestelbonlijn.product.prijs * bestelbonlijn.aantal)}" />
 		</c:forEach>
 		</tbody>
 		</table>
+		<p>Totaal: &euro;${totaalPrijs}</p>
 		<h2>Afleveradres</h2>
 		<c:url var="url" value="/bestellingen" />
 		<form:form commandName="adresForm" action="${url}" method="post">
