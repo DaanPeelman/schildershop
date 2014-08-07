@@ -152,7 +152,7 @@ public class Product implements Serializable {
 			if (other.schilder != null) {
 				return false;
 			}
-		} else if (!schilder.equals(other.schilder)) {
+		} else if (!schilder.getNaam().equals(other.schilder.getNaam())) {
 			return false;
 		}
 		if (stijl == null) {
