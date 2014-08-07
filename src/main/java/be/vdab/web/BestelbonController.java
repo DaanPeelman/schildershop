@@ -1,6 +1,5 @@
 package be.vdab.web;
 
-import java.math.BigDecimal;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,31 +8,31 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionAttributeStore;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.entities.Bestelbon;
-import be.vdab.entities.Bestelbonlijn;
 import be.vdab.entities.Gebruiker;
-import be.vdab.entities.Product;
 import be.vdab.services.BestelbonService;
 import be.vdab.services.GebruikerService;
 import be.vdab.services.ProductService;
 
 @Controller
 @RequestMapping(value = "/bestellingen")
-@SessionAttributes("mandje")
 public class BestelbonController {
 	private final BestelbonService bestelbonService;
 	private final ProductService productService;
 	private final GebruikerService gebruikerService;
-	private Bestelbon mandje = new Bestelbon();
 	
 	@Autowired
-	public BestelbonController(BestelbonService bestelbonService, ProductService productService, GebruikerService gebruikerService) {
+	public BestelbonController(BestelbonService bestelbonService, ProductService productService, GebruikerService gebruikerService, MandjeController mandjeController) {
 		this.bestelbonService = bestelbonService;
 		this.productService = productService;
 		this.gebruikerService = gebruikerService;
@@ -49,20 +48,22 @@ public class BestelbonController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
+		Bestelbon mandje = (Bestelbon)request.getSession().getAttribute("mandje");
 		if(!bindingResult.hasErrors()) {
 			Principal principal = request.getUserPrincipal();
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
+			
 			
 			mandje.setLeverAdres(adresForm);
 			mandje.setGebruiker(gebruiker);
 			
 			bestelbonService.create(mandje);
 			
-			mandje = new Bestelbon();
+			request.getSession().removeAttribute("mandje");
 			
 			return new ModelAndView("bestellingen/succes");
 		}
-		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
+		ModelAndView modelAndView = new ModelAndView("/mandje");
 		modelAndView.addObject("mandje", mandje);
 		return modelAndView;
 	}
@@ -79,36 +80,5 @@ public class BestelbonController {
 		}
 		
 		return new ModelAndView("forbidden");
-	}
-	
-	@RequestMapping(value = "/mandje", method = RequestMethod.GET)
-	public ModelAndView showMandje() {
-		ModelAndView modelAndView = new ModelAndView("bestellingen/mandje");
-		
-		modelAndView.addObject("mandje", mandje);
-		modelAndView.addObject("adresForm", new AdresForm());
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "mandje", method = RequestMethod.PUT)
-	public ModelAndView addBestellijn(@Valid MandjeForm mandjeForm, BindingResult bindingResult) {
-		if(!bindingResult.hasErrors()) {
-			System.out.println("IN ADDBESTELLIJN");
-			
-			Product product = productService.findOne(mandjeForm.getProductId());
-			int aantal = mandjeForm.getAantal();
-			BigDecimal prijs = product.getPrijs();
-			
-			mandje.addBestelbonlijn(new Bestelbonlijn(product, aantal, prijs));
-			
-			System.out.println("mandje na toevoegen: ");
-			for(Bestelbonlijn bestelbonlijn:mandje.getBestelbonlijnen()) {
-				System.out.println(bestelbonlijn.getProduct().getTitel());
-			}
-			return new ModelAndView("redirect:/bestellingen/mandje");
-		}
-		String view = String.format("producten/%d", mandjeForm.getProductId());
-		return new ModelAndView(view);
 	}
 }

@@ -33,7 +33,7 @@
 		<h1>${product.titel}</h1>
 	</header>
 	<div id="wrapper">
-		<c:url value="/bestellingen/mandje"  var="url"/>
+		<c:url value="/mandje"  var="url"/>
 		<form:form commandName="mandjeForm" action="${url}" method="put">
 			<c:if test='${heeftFoto}'>
 				<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
