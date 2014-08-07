@@ -42,11 +42,13 @@
 					</tr>
 				</thead>
 				<tbody>
+				<c:url var="verwijderUrl" value="/mandje" />
 		<c:forEach items="${mandje.bestelbonlijnen}" var="bestelbonlijn">
 		<tr>
 			<td>${bestelbonlijn.product.titel}</td>
 			<td>${bestelbonlijn.aantal}</td>
 			<td>${bestelbonlijn.product.prijs}</td>
+			<td><form:form commandName="verwijderUitMandjeForm" action="${verwijderUrl}" method="delete"><form:input path="productId" type="hidden" value="${bestelbonlijn.product.productId}"/><input type="submit" value="Verwijder" /></form:form></td>
 			</tr>
 		</c:forEach>
 		</tbody>
