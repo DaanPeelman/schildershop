@@ -24,4 +24,6 @@ public interface ProductService {
 	void create(Product product);
 
 	Product findOne(long productId);
+
+	Iterable<Product> findByZoekterm(String zoekterm);
 }

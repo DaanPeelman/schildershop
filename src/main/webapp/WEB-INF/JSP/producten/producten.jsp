@@ -35,35 +35,11 @@
 	<div id="wrapper">
 		<aside class='sidebar'>
 			<c:url var="url" value="/producten" />
-			<form:form commandName="titelForm" action="${url}" method="get">
+			<form:form commandName="zoekTermForm" action="${url}" method="get">
 				<div>
-					<form:label path="titel">Titel: 
-						<form:input path="titel" autofocus='autofocus' />
-						<form:errors path="titel" cssClass="fout" />
-					</form:label>
-				</div>
-				<div>
-					<input type="submit" value="Zoek" />
-					<form:errors cssClass='fout' element='div' />
-				</div>
-			</form:form>
-			<form:form commandName="schilderForm" action="${url}" method="get">
-				<div>
-					<form:label path="schilderNaam">Schilder: 
-						<form:input path="schilderNaam" />
-						<form:errors path="schilderNaam" cssClass="fout" />
-					</form:label>
-				</div>
-				<div>
-					<input type="submit" value="Zoek" />
-					<form:errors cssClass='fout' element='div' />
-				</div>
-			</form:form>
-			<form:form commandName="stijlForm" action="${url}" method="get">
-				<div>
-					<form:label path="stijl">Stijl: 
-						<form:select path="stijl" items="${stijlen}" />
-						<form:errors path="stijl" cssClass="fout" />
+					<form:label path="zoekterm">
+						<form:input path="zoekterm" autofocus='autofocus' />
+						<form:errors path="zoekterm" cssClass="fout" />
 					</form:label>
 				</div>
 				<div>

@@ -19,4 +19,6 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
 
 	Iterable<Product> findByJaartalBetweenOrderByJaartalAsc(Integer vanJaartal,
 			Integer totJaartal);
+
+	Iterable<Product> findByStijlContaining(String stijl);
 }
