@@ -1,6 +1,8 @@
 package be.vdab.web;
 
 import java.math.BigDecimal;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -8,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,15 +35,23 @@ public class MandjeController {
 	public ModelAndView showMandje(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
 		
-		Bestelbon mandje = (Bestelbon)request.getSession(true).getAttribute("mandje");
+		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
 		
 		if(mandje == null) {
-			mandje = new Bestelbon();
+			mandje = new ConcurrentHashMap<>();
 			request.getSession().setAttribute("mandje", mandje);
 		}
 		
-		modelAndView.addObject("mandje", mandje);
+		Bestelbon productenInMandje = new Bestelbon();
+		
+		for(Long productId:mandje.keySet()) {
+			Product product = productService.findOne(productId);
+			productenInMandje.addBestelbonlijn(new Bestelbonlijn(product, mandje.get(productId).intValue(), product.getPrijs()));
+		}
+		
+		modelAndView.addObject("mandje", productenInMandje);
 		modelAndView.addObject("adresForm", new AdresForm());
+		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
 		
 		return modelAndView;
 	}
@@ -50,45 +61,32 @@ public class MandjeController {
 		if(!bindingResult.hasErrors()) {
 			System.out.println("IN ADDBESTELLIJN");
 			
-			Product product = productService.findOne(productAankoopForm.getProductId());
+			Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
+			
+			System.out.println("productId = " + productAankoopForm.getProductId());
+			Long productId = productAankoopForm.getProductId();
 			int aantal = productAankoopForm.getAantal();
-			BigDecimal prijs = product.getPrijs();
-			
-			Bestelbonlijn bestellijn = new Bestelbonlijn(product, aantal, prijs);
-			
-			Bestelbon mandje = (Bestelbon)request.getSession(true).getAttribute("mandje");
 			
 			if(mandje == null) {
-				mandje = new Bestelbon();
+				mandje = new ConcurrentHashMap<>();
 			}
 			
-			mandje.addBestelbonlijn(bestellijn);
-			
-			System.out.println("mandje na toevoegen: ");
-			for(Bestelbonlijn bestelbonlijn:mandje.getBestelbonlijnen()) {
-				System.out.println("is " + bestelbonlijn.getProduct().toString() + " hetzelde als " + product.toString() + "? " + bestelbonlijn.getProduct().equals(product));
-			}
+			mandje.put(productId, aantal);
+
+			request.getSession(true).setAttribute("mandje", mandje);
 			return new ModelAndView("redirect:/mandje");
 		}
-		String view = String.format("producten/%d", productAankoopForm.getProductId());
-		return new ModelAndView(view);
+		return new ModelAndView("producten/details");
 	}
 	
-	/*
-	@RequestMapping(method = RequestMethod.DELETE, params = {"productId"})
-	public ModelAndView deleteBestellijn(@Param long productId) {
-		System.out.println("in deleteBestellijn");
+	@RequestMapping(method = RequestMethod.DELETE)
+	public ModelAndView deleteBestellijn(@ModelAttribute VerwijderUitMandjeForm verwijderUitMandjeForm, HttpServletRequest request) {
+		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession().getAttribute("mandje");
 		
-		for(Bestelbonlijn bestelbonlijn:mandje.getBestelbonlijnen()) {
-			if(bestelbonlijn.getProduct().getProductId() == productId) {
-				mandje.verwijderBestelbonlijn(bestelbonlijn);
-			}
-		}
+		mandje.remove(verwijderUitMandjeForm.getProductId());
+		
+		request.getSession().setAttribute("mandje", mandje);
+		
 		return new ModelAndView("redirect:/mandje");
 	}
-	
-	void removeMandje(){
-		mandje = new Bestelbon();
-	}
-	*/
 }
