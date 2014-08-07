@@ -76,8 +76,7 @@ public class MandjeController {
 			request.getSession(true).setAttribute("mandje", mandje);
 			return new ModelAndView("redirect:/mandje");
 		}
-		String view = String.format("producten/%d", productAankoopForm.getProductId());
-		return new ModelAndView(view);
+		return new ModelAndView("producten/details");
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
