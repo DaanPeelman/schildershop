@@ -1,7 +1,8 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!doctype html>
 <html lang='nl'>
@@ -17,23 +18,22 @@
 </head>
 <body>
 	<header>
-		<a href='<c:url value="/" />' id="logo" >
-	        <img
-			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
-			alt="logo">
-	    </a>
+		<div>
+			<a href='<c:url value="/" />' id="logo"> <img
+				src="${pageContext.servletContext.contextPath}/img/logoSS.png"
+				alt="logo">
+			</a>
+		</div>
 		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="../ingelogdMenu.jsp" />
 			</security:authorize>
-			<ul>
-				<jsp:include page="../menuZonderLogin.jsp" />
-			</ul>
+			<jsp:include page="../menu.jsp" />
 		</nav>
 		<h1>${product.titel}</h1>
 	</header>
 	<div id="wrapper">
-		<c:url value="/mandje"  var="url"/>
+		<c:url value="/mandje" var="url" />
 		<form:form commandName="mandjeForm" action="${url}" method="put">
 			<c:if test='${heeftFoto}'>
 				<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
@@ -47,7 +47,7 @@
 			<form:input path="productId" type="hidden" />
 			<form:label path="aantal">
 				Aantal: 
-				<form:input path="aantal" type="text"/>
+				<form:input path="aantal" type="text" />
 				<form:errors path="aantal" />
 			</form:label>
 			<input type="submit" value="Koop" />
