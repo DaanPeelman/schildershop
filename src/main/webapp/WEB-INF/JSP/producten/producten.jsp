@@ -10,11 +10,31 @@
 <title>Schilderijen</title>
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/normalize.css' />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 <link
 	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700'
 	rel='stylesheet' type='text/css'>
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$("#slider-range").slider({
+			range : true,
+			min : 0,
+			max : 1500,
+			values : [ 0, 1500 ],
+			slide : function(event, ui) {
+				$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+			}
+		});
+		$("#amount").val(
+				"$" + $("#slider-range").slider("values", 0) + " - $"
+						+ $("#slider-range").slider("values", 1));
+	});
+</script>
 </head>
 <body>
 	<header>
@@ -48,6 +68,9 @@
 				</div>
 			</form:form>
 			<form:form commandName="vanTotPrijsForm" action="${url}" method="get">
+				<label for="amount">Price range:</label>
+				<input type="text" id="amount" readonly>
+				<div id="slider-range"></div>
 				<div>
 					<form:label path="vanPrijs">Prijs vanaf 
 						<form:input path="vanPrijs" type='number' />
