@@ -74,6 +74,8 @@
 			<fmt:formatNumber value="${totalePrijs}" minFractionDigits="2"
 				maxFractionDigits="2" />
 		</div>
+		<h2>Afleveradres</h2>
+		<p>${bestelbon.leverAdres.straat} ${bestelbon.leverAdres.nummer}, ${bestelbon.leverAdres.postcode} ${bestelbon.leverAdres.gemeente}</p>
 		<div class="push"></div>
 	</div>
 	<footer>
