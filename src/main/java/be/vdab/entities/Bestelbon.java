@@ -69,7 +69,7 @@ public class Bestelbon implements Serializable {
 	}
 
 	public Set<Bestelbonlijn> getBestelbonlijnen() {
-		return bestelbonlijnen;
+		return Collections.unmodifiableSet(bestelbonlijnen);
 	}
 
 	public void setBestelbonlijnen(Set<Bestelbonlijn> bestelbonlijnen) {

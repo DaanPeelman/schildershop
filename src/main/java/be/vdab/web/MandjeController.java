@@ -1,8 +1,12 @@
 package be.vdab.web;
 
+
+import java.io.File;
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -23,10 +27,12 @@ import be.vdab.services.ProductService;
 @RequestMapping(value = "/mandje")
 public class MandjeController {
 	private final ProductService productService;
+	private ServletContext servletContext;
 	
 	@Autowired
-	public MandjeController(ProductService productService) {
+	public MandjeController(ProductService productService, ServletContext servletContext) {
 		this.productService = productService;
+		this.servletContext = servletContext;
 	}
 
 	
@@ -56,15 +62,15 @@ public class MandjeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ModelAndView addBestellijn(@Valid ProductAankoopForm productAankoopForm, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView addBestellijn(@Valid MandjeForm mandjeForm, BindingResult bindingResult, HttpServletRequest request) {
+		Long productId = mandjeForm.getProductId();
 		if(!bindingResult.hasErrors()) {
 			System.out.println("IN ADDBESTELLIJN");
 			
 			Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
 			
-			System.out.println("productId = " + productAankoopForm.getProductId());
-			Long productId = productAankoopForm.getProductId();
-			int aantal = productAankoopForm.getAantal();
+			System.out.println("productId = " + mandjeForm.getProductId());
+			int aantal = mandjeForm.getAantal();
 			
 			if(mandje == null) {
 				mandje = new ConcurrentHashMap<>();
@@ -75,7 +81,16 @@ public class MandjeController {
 			request.getSession(true).setAttribute("mandje", mandje);
 			return new ModelAndView("redirect:/mandje");
 		}
-		return new ModelAndView("producten/details");
+		ModelAndView modelAndView = new ModelAndView("producten/details");
+		Product product = productService.findOne(productId);
+		
+		String productFotoPad = servletContext.getRealPath("/img") + "\\" + product.getProductId() + ".jpg";
+		File file = new File(productFotoPad);
+		modelAndView.addObject("heeftFoto", file.exists());
+		
+		modelAndView.addObject("product", product);
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)

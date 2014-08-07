@@ -1,6 +1,9 @@
 package be.vdab.web;
 
+import javax.validation.constraints.NotNull;
+
 public class VerwijderUitMandjeForm {
+	@NotNull
 	private long productId;
 	
 	protected VerwijderUitMandjeForm() {
