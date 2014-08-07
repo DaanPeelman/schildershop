@@ -89,4 +89,19 @@ public class ProductServiceImpl implements ProductService {
 	public Product findOne(long productId) {
 		return productDAO.findOne(productId);
 	}
+
+	@Override
+	public Iterable<Product> findByZoekterm(String zoekterm) {
+		Set<Product> resultaat = new HashSet<>();
+		for (Product product : productDAO.findByTitelContaining(zoekterm)) {
+			resultaat.add(product);
+		}
+		for (Product product : productDAO.findBySchilderNaamContaining(zoekterm)) {
+			resultaat.add(product);
+		}
+		for (Product product : productDAO.findByStijlContaining(zoekterm)) {
+			resultaat.add(product);
+		}
+		return resultaat;
+	}
 }

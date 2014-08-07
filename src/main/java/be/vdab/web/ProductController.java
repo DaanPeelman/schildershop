@@ -41,70 +41,28 @@ public class ProductController {
 	public ModelAndView findAll() {
 		ModelAndView mav = new ModelAndView("producten/producten",
 				"schilderijen", productService.findAll());
-		mav.addObject("titelForm", new TitelForm());
-		mav.addObject("schilderForm", new SchilderForm());
-		mav.addObject("stijlForm", new StijlForm());
-		mav.addObject("stijlen", productService.findAllStijlen());
+		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 		mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, params = { "titel" })
-	public ModelAndView findByTitel(@Valid TitelForm titelForm,
+	@RequestMapping(method = RequestMethod.GET, params = { "zoekterm" })
+	public ModelAndView findByZoekterm(@Valid ZoekTermForm zoekTermForm,
 			BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("producten/producten");
 		if (!bindingResult.hasErrors()) {
-			String titel = titelForm.getTitel().toLowerCase();
-			Iterable<Product> resultaat = productService.findByTitel(titel);
+			String zoekterm = zoekTermForm.getZoekterm().toLowerCase();
+			Iterable<Product> resultaat = productService.findByZoekterm(zoekterm);
 			mav.addObject("schilderijen", resultaat);
-			mav.addObject("schilderForm", new SchilderForm());
-			mav.addObject("stijlForm", new StijlForm());
-			mav.addObject("stijlen", productService.findAllStijlen());
+			mav.addObject("zoekTermForm", new ZoekTermForm());
 			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
-			mav.addObject("filter", "genaamd " + titel);
+			mav.addObject("filter", "met " + zoekterm);
 		}
 		return mav;
 	}
-
-	@RequestMapping(method = RequestMethod.GET, params = { "schilderNaam" })
-	public ModelAndView zoek(@Valid SchilderForm schilderForm,
-			BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/producten");
-		if (!bindingResult.hasErrors()) {
-			String schilderNaam = schilderForm.getSchilderNaam().toLowerCase();
-			Iterable<Product> resultaat = productService
-					.findBySchilderNaam(schilderNaam);
-			mav.addObject("schilderijen", resultaat);
-			mav.addObject("titelForm", new TitelForm());
-			mav.addObject("stijlForm", new StijlForm());
-			mav.addObject("stijlen", productService.findAllStijlen());
-			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
-			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
-			mav.addObject("filter", "van " + schilderNaam);
-		}
-		return mav;
-	}
-
-	@RequestMapping(method = RequestMethod.GET, params = { "stijl" })
-	public ModelAndView findBystijl(@Valid StijlForm stijlForm,
-			BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/producten");
-		if (!bindingResult.hasErrors()) {
-			String stijl = stijlForm.getStijl().toLowerCase();
-			Iterable<Product> resultaat = productService.findByStijl(stijl);
-			mav.addObject("schilderijen", resultaat);
-			mav.addObject("titelForm", new TitelForm());
-			mav.addObject("schilderForm", new SchilderForm());
-			mav.addObject("stijlen", productService.findAllStijlen());
-			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
-			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
-			mav.addObject("filter", "in de stijl " + stijl);
-		}
-		return mav;
-	}
-
+	
 	@RequestMapping(method = RequestMethod.GET, params = { "vanPrijs",
 			"totPrijs" })
 	public ModelAndView findByPrijsBetween(
@@ -121,9 +79,7 @@ public class ProductController {
 			Iterable<Product> resultaat = productService.findByPrijsBetween(
 					vanPrijs, totPrijs);
 			mav.addObject("schilderijen", resultaat);
-			mav.addObject("titelForm", new TitelForm());
-			mav.addObject("schilderForm", new SchilderForm());
-			mav.addObject("stijlForm", new StijlForm());
+			mav.addObject("zoekTermForm", new ZoekTermForm());
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
 			mav.addObject("filter", "tussen €" + vanPrijs + " en €" + totPrijs);
@@ -148,9 +104,7 @@ public class ProductController {
 			Iterable<Product> resultaat = productService.findByJaartalBetween(
 					vanJaartal, totJaartal);
 			mav.addObject("schilderijen", resultaat);
-			mav.addObject("titelForm", new TitelForm());
-			mav.addObject("schilderForm", new SchilderForm());
-			mav.addObject("stijlForm", new StijlForm());
+			mav.addObject("zoekTermForm", new ZoekTermForm());
 			mav.addObject("stijlen", productService.findAllStijlen());
 			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
 			mav.addObject("filter", "gemaakt tussen " + vanJaartal + " en " + totJaartal);
