@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -57,6 +58,7 @@ public class Schilder implements Serializable {
 		this.schilderijen = schilderijen;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,21 +69,26 @@ public class Schilder implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof Schilder)) {
 			return false;
+		}
 		Schilder other = (Schilder) obj;
 		if (naam == null) {
-			if (other.naam != null)
+			if (other.naam != null) {
 				return false;
-		} else if (!naam.equals(other.naam))
+			}
+		} else if (!naam.equals(other.naam)) {
 			return false;
+		}
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return naam;

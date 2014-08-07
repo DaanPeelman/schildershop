@@ -103,9 +103,6 @@ public class Product implements Serializable {
 		this.prijs = prijs;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -113,15 +110,12 @@ public class Product implements Serializable {
 		result = prime * result + ((jaartal == null) ? 0 : jaartal.hashCode());
 		result = prime * result + ((prijs == null) ? 0 : prijs.hashCode());
 		result = prime * result
-				+ ((schilder == null) ? 0 : schilder.hashCode());
+				+ ((schilder == null) ? 0 : schilder.getNaam().hashCode());
 		result = prime * result + ((stijl == null) ? 0 : stijl.hashCode());
 		result = prime * result + ((titel == null) ? 0 : titel.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -152,7 +146,7 @@ public class Product implements Serializable {
 			if (other.schilder != null) {
 				return false;
 			}
-		} else if (!schilder.getNaam().equals(other.schilder.getNaam())) {
+		} else if (!schilder.equals(other.schilder)) {
 			return false;
 		}
 		if (stijl == null) {
@@ -171,4 +165,12 @@ public class Product implements Serializable {
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", titel=" + titel
+				+ ", jaartal=" + jaartal + ", schilder=" + schilder
+				+ ", stijl=" + stijl + ", prijs=" + prijs + "]";
+	}
+
 }
