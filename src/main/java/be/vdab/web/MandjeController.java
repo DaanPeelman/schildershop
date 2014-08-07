@@ -1,6 +1,5 @@
 package be.vdab.web;
 
-import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

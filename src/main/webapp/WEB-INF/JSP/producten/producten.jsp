@@ -21,18 +21,50 @@
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script>
 	$(function() {
-		$("#slider-range").slider({
-			range : true,
-			min : 0,
-			max : 1500,
-			values : [ 0, 1500 ],
-			slide : function(event, ui) {
-				$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-			}
-		});
+		$("#slider-range-prijs").slider(
+				{
+					range : true,
+					min : 0,
+					max : 2000,
+					values : [ 0, 2000 ],
+					slide : function(event, ui) {
+						$("#amount").val(
+								"$" + ui.values[0] + " - $" + ui.values[1]);
+						$("#vanPrijs").val(
+								$("#slider-range-prijs").slider("values", 0));
+						$("#totPrijs").val(
+								$("#slider-range-prijs").slider("values", 1));
+					}
+				});
 		$("#amount").val(
-				"$" + $("#slider-range").slider("values", 0) + " - $"
-						+ $("#slider-range").slider("values", 1));
+				"$" + $("#slider-range-prijs").slider("values", 0) + " - $"
+						+ $("#slider-range-prijs").slider("values", 1));
+
+	});
+</script>
+<script>
+	$(function() {
+		$("#slider-range-jaartal")
+				.slider(
+						{
+							range : true,
+							min : 0,
+							max : 2000,
+							values : [ 0, 2000 ],
+							slide : function(event, ui) {
+								$("#periode").val(ui.values[0] + " - " + ui.values[1]);
+								$("#vanJaartal").val(
+										$("#slider-range-jaartal").slider(
+												"values", 0));
+								$("#totJaartal").val(
+										$("#slider-range-jaartal").slider(
+												"values", 1));
+							}
+						});
+		$("#periode").val(
+				$("#slider-range-jaartal").slider("values", 0)
+						+ " - " + $("#slider-range-jaartal").slider("values", 1));
+
 	});
 </script>
 </head>
@@ -68,19 +100,11 @@
 				</div>
 			</form:form>
 			<form:form commandName="vanTotPrijsForm" action="${url}" method="get">
-				<label for="amount">Price range:</label>
+				<label for="amount">Prijs:</label>
 				<input type="text" id="amount" readonly>
-				<div id="slider-range"></div>
-				<div>
-					<form:label path="vanPrijs">Prijs vanaf 
-						<form:input path="vanPrijs" type='number' />
-						<form:errors path="vanPrijs" cssClass="fout" />
-					</form:label>
-					<form:label path="totPrijs"> tot 
-						<form:input path="totPrijs" type='number' />
-						<form:errors path="totPrijs" cssClass="fout" />
-					</form:label>
-				</div>
+				<div id="slider-range-prijs"></div>
+				<form:input type="hidden" path="vanPrijs" id="vanPrijs" />
+				<form:input type="hidden" path="totPrijs" id="totPrijs" />
 				<div>
 					<input type="submit" value="Zoek" />
 					<form:errors cssClass='fout' element='div' />
@@ -89,14 +113,11 @@
 			<form:form commandName="vanTotJaartalForm" action="${url}"
 				method="get">
 				<div>
-					<form:label path="vanJaartal">Gemaakt tussen 
-						<form:input path="vanJaartal" type='number' />
-						<form:errors path="vanJaartal" cssClass="fout" />
-					</form:label>
-					<form:label path="totJaartal"> en 
-						<form:input path="totJaartal" type='number' />
-						<form:errors path="totJaartal" cssClass="fout" />
-					</form:label>
+					<label for="periode">Periode:</label> <input type="text"
+						id="periode" readonly>
+					<div id="slider-range-jaartal"></div>
+					<form:input type="hidden" path="vanJaartal" id="vanJaartal" />
+					<form:input type="hidden" path="totJaartal" id="totJaartal" />
 				</div>
 				<div>
 					<input type="submit" value="Zoek" />
