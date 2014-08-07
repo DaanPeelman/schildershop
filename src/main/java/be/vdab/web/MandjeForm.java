@@ -1,11 +1,13 @@
 package be.vdab.web;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class MandjeForm {
 	@NotNull
 	private long productId;
 	@NotNull
+	@Min(1)
 	private Integer aantal;
 	
 	MandjeForm() {
