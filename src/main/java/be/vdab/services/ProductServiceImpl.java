@@ -1,7 +1,6 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -118,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
 	public Iterable<Product> findNieuwsteVijfProducten() {
 		Pageable pageable = new PageRequest(0, 5, Direction.DESC, "productId");
 		Page<Product> pageProducten = productDAO.findAll(pageable);
-		
+
 		List<Product> producten = pageProducten.getContent();
 
 		return producten;

@@ -2,9 +2,6 @@ package be.vdab.dao;
 
 import java.math.BigDecimal;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import be.vdab.entities.Product;
@@ -24,6 +21,4 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
 			Integer totJaartal);
 
 	Iterable<Product> findByStijlContaining(String stijl);
-	
-	//Page<Product> findAll(Pageable pageable, Sort sort);
 }

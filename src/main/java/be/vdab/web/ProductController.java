@@ -187,8 +187,8 @@ public class ProductController {
 			File file = new File(productFotoPad);
 			mav.addObject("heeftFoto", file.exists());
 		}
-		MandjeForm mandjeForm = new MandjeForm(productId);
-		mav.addObject("mandjeForm", mandjeForm);
+		BestelProductForm bestelProductForm = new BestelProductForm(productId);
+		mav.addObject("bestelProductForm", bestelProductForm);
 		
 		return mav;
 	}

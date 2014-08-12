@@ -3,22 +3,22 @@ package be.vdab.web;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class MandjeForm {
+public class BestelProductForm {
 	@NotNull
 	private long productId;
 	@NotNull
 	@Min(1)
 	private Integer aantal;
 	
-	MandjeForm() {
+	BestelProductForm() {
 	}
 	
-	MandjeForm(long productNr) {
+	BestelProductForm(long productNr) {
 		super();
 		this.productId = productNr;
 	}
 
-	MandjeForm(long productNr, Integer aantal) {
+	BestelProductForm(long productNr, Integer aantal) {
 		super();
 		this.productId = productNr;
 		this.aantal = aantal;

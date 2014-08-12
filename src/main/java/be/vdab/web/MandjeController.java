@@ -2,7 +2,6 @@ package be.vdab.web;
 
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -62,15 +61,15 @@ public class MandjeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ModelAndView addBestellijn(@Valid MandjeForm mandjeForm, BindingResult bindingResult, HttpServletRequest request) {
-		Long productId = mandjeForm.getProductId();
+	public ModelAndView addBestellijn(@Valid BestelProductForm bestelProductForm, BindingResult bindingResult, HttpServletRequest request) {
+		Long productId = bestelProductForm.getProductId();
 		if(!bindingResult.hasErrors()) {
 			System.out.println("IN ADDBESTELLIJN");
 			
 			Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
 			
-			System.out.println("productId = " + mandjeForm.getProductId());
-			int aantal = mandjeForm.getAantal();
+			System.out.println("productId = " + bestelProductForm.getProductId());
+			int aantal = bestelProductForm.getAantal();
 			
 			if(mandje == null) {
 				mandje = new ConcurrentHashMap<>();

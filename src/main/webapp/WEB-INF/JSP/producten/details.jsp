@@ -34,7 +34,7 @@
 	</header>
 	<div id="wrapper">
 		<c:url value="/mandje" var="url" />
-		<form:form commandName="mandjeForm" action="${url}" method="put">
+		<form:form commandName="bestelProductForm" action="${url}" method="put">
 			<c:if test='${heeftFoto}'>
 				<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
 				<img alt="foto van het schilderij" id="detailImg"
