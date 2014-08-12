@@ -38,10 +38,6 @@ public class Schilder implements Serializable {
 		return schilderId;
 	}
 
-	public void setSchilderId(long schilderId) {
-		this.schilderId = schilderId;
-	}
-
 	public String getNaam() {
 		return naam;
 	}

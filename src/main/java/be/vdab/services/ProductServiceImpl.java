@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 		if (isUniek) {
-			product.setProductId(productDAO.save(product).getProductId());
+			productDAO.save(product).getProductId();
 		} else {
 			throw new ProductBestaatAlException();
 		}

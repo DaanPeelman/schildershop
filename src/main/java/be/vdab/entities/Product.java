@@ -49,10 +49,6 @@ public class Product implements Serializable {
 		return productId;
 	}
 
-	public void setProductId(long productId) {
-		this.productId = productId;
-	}
-
 	public String getTitel() {
 		return titel;
 	}
