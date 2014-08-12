@@ -39,6 +39,7 @@ public class MandjeController {
 	public ModelAndView showMandje(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
 		
+		@SuppressWarnings("unchecked")
 		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
 		
 		if(mandje == null) {
@@ -66,6 +67,7 @@ public class MandjeController {
 		if(!bindingResult.hasErrors()) {
 			System.out.println("IN ADDBESTELLIJN");
 			
+			@SuppressWarnings("unchecked")
 			Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
 			
 			System.out.println("productId = " + bestelProductForm.getProductId());
@@ -94,6 +96,7 @@ public class MandjeController {
 	
 	@RequestMapping(method = RequestMethod.DELETE)
 	public ModelAndView deleteBestellijn(@ModelAttribute VerwijderUitMandjeForm verwijderUitMandjeForm, HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
 		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession().getAttribute("mandje");
 		
 		mandje.remove(verwijderUitMandjeForm.getProductId());
