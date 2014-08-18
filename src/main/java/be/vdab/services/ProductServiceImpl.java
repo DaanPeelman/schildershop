@@ -1,15 +1,23 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.vdab.dao.*;
-import be.vdab.entities.*;
+import be.vdab.dao.ProductDAO;
+import be.vdab.dao.SchilderDAO;
+import be.vdab.entities.Product;
+import be.vdab.entities.Schilder;
 import be.vdab.exceptions.ProductBestaatAlException;
 
 @Service
@@ -79,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 		if (isUniek) {
-			product.setProductId(productDAO.save(product).getProductId());
+			productDAO.save(product).getProductId();
 		} else {
 			throw new ProductBestaatAlException();
 		}
@@ -103,5 +111,15 @@ public class ProductServiceImpl implements ProductService {
 			resultaat.add(product);
 		}
 		return resultaat;
+	}
+	
+	@Override
+	public Iterable<Product> findNieuwsteVijfProducten() {
+		Pageable pageable = new PageRequest(0, 5, Direction.DESC, "productId");
+		Page<Product> pageProducten = productDAO.findAll(pageable);
+
+		List<Product> producten = pageProducten.getContent();
+
+		return producten;
 	}
 }

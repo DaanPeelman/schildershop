@@ -25,8 +25,9 @@ public class SchilderServiceImpl implements SchilderService {
 		Iterable<Schilder> schilder2 = schilderDAO.findByNaamLike(schilder.getNaam());
 		if (schilder2.iterator().hasNext()) {
 			throw new SchilderMetDezeNaamBestaatAlException();
-		}		
-		schilder.setSchilderId(schilderDAO.save(schilder).getSchilderId());
+		}
+		schilderDAO.save(schilder);
+		System.out.println("SchilderId" + schilder.getSchilderId());
 	}
 
 	@Override

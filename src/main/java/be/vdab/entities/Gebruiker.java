@@ -83,10 +83,6 @@ public class Gebruiker implements Serializable {
 		return gebruikerId;
 	}
 
-	public void setGebruikerId(long gebruikerId) {
-		this.gebruikerId = gebruikerId;
-	}
-
 	public String getNaam() {
 		return naam;
 	}

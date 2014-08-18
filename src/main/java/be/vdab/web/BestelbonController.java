@@ -47,6 +47,7 @@ public class BestelbonController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
 		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession().getAttribute("mandje");
 		
 		Principal principal = request.getUserPrincipal();

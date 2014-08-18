@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +30,33 @@
 			</security:authorize>
 			<jsp:include page="menu.jsp" />
 		</nav>
-		<h1>index</h1>
+		<h1>Onze nieuwste producten:</h1>
 	</header>
 	<div id="wrapper">
 		Hier komt de banner.
+		<c:if test="${not empty laatsteProducten}">
+		<table>
+			<thead>
+				<tr>
+					<td>Titel</td>
+					<td>Schilder</td>
+					<td>Jaartal</td>
+					<td>Stijl</td>
+					<td>Prijs</td>
+				</tr>
+			</thead>
+			<c:forEach var="product" items="${laatsteProducten}">
+			<c:url var="url" value="/producten/${product.productId}" />
+				<tr>
+					<td><a href="${url}">${product.titel}</a></td>
+					<td>${product.schilder.naam}</td>
+					<td>${product.jaartal}</td>
+					<td>${product.stijl}</td>
+					<td>&euro;<fmt:formatNumber minFractionDigits="2" maxFractionDigits="2" value="${product.prijs}" /></td>
+				<tr>
+			</c:forEach>
+		</table>
+		</c:if>
 		<div class="push"></div>
 	</div>
 	<footer>

@@ -2,7 +2,6 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -48,10 +47,6 @@ public class Product implements Serializable {
 
 	public long getProductId() {
 		return productId;
-	}
-
-	public void setProductId(long productId) {
-		this.productId = productId;
 	}
 
 	public String getTitel() {

@@ -48,10 +48,6 @@ public class Bestelbon implements Serializable {
 		return bestelbonId;
 	}
 
-	public void setBestelbonId(long bestelbonId) {
-		this.bestelbonId = bestelbonId;
-	}
-
 	public Gebruiker getGebruiker() {
 		return gebruiker;
 	}

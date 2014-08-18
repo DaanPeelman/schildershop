@@ -38,10 +38,6 @@ public class Rol implements Serializable {
 		return rolId;
 	}
 
-	public void setRolId(long rolId) {
-		this.rolId = rolId;
-	}
-
 	public String getNaam() {
 		return naam;
 	}
