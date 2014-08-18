@@ -1,7 +1,6 @@
 package be.vdab.constraints;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import javax.validation.*;
 
 public class WachtwoordValidator implements ConstraintValidator<Wachtwoord, String> {
 	private final static String WACHTWOORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$";

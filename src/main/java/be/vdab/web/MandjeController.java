@@ -12,14 +12,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import be.vdab.entities.Bestelbon;
-import be.vdab.entities.Bestelbonlijn;
-import be.vdab.entities.Product;
+import be.vdab.entities.*;
 import be.vdab.services.ProductService;
 
 @Controller

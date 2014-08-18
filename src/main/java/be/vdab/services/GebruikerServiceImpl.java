@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import be.vdab.dao.GebruikerDAO;
-import be.vdab.dao.RolDAO;
-import be.vdab.entities.Gebruiker;
-import be.vdab.entities.Rol;
+import be.vdab.dao.*;
+import be.vdab.entities.*;
 import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
 import be.vdab.valueobjects.Adres;
 
