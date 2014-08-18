@@ -33,15 +33,13 @@ public class IndexController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index() {
 		Map<Product, Boolean> mapProducten = new ConcurrentHashMap<>();
-		Iterable<Product> producten = productService.findNieuwsteVijfProducten();
+		Iterable<Product> producten = productService.findNieuwsteProducten();
 		
 		for(Product product:producten) {
 			String productFotoPad = servletContext.getRealPath("/img") + "\\" + product.getProductId() + ".jpg";
 			File file = new File(productFotoPad);
 			mapProducten.put(product, file.exists());
 		}
-		
-		System.out.println("aantal producten in map: " + mapProducten.size());
 		
 		ModelAndView modelAndView = new ModelAndView("index");
 		modelAndView.addObject("laatsteProducten", mapProducten);

@@ -27,5 +27,5 @@ public interface ProductService {
 
 	Iterable<Product> findByZoekterm(String zoekterm);
 	
-	Iterable<Product> findNieuwsteVijfProducten();
+	Iterable<Product> findNieuwsteProducten();
 }
