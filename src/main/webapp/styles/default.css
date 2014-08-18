@@ -47,6 +47,25 @@ label {
 	color: red;
 }
 
+.nieuwProduct {
+	float: left;
+	clear: both;
+	
+	margin-bottom: 1em;
+	min-height: 2em;
+}
+
+.nieuwProduct h2 {
+	float: left;
+	margin-top: 0;
+}
+
+.nieuwProduct img {
+	float: left;
+	padding-right: 1em;
+	height: 15em;
+}
+
 #detailImg {
 	float: left;
 	padding-right: 1em;

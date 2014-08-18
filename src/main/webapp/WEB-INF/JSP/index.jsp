@@ -33,29 +33,17 @@
 		<h1>Onze nieuwste producten:</h1>
 	</header>
 	<div id="wrapper">
-		Hier komt de banner.
 		<c:if test="${not empty laatsteProducten}">
-		<table>
-			<thead>
-				<tr>
-					<td>Titel</td>
-					<td>Schilder</td>
-					<td>Jaartal</td>
-					<td>Stijl</td>
-					<td>Prijs</td>
-				</tr>
-			</thead>
 			<c:forEach var="product" items="${laatsteProducten}">
-			<c:url var="url" value="/producten/${product.productId}" />
-				<tr>
-					<td><a href="${url}">${product.titel}</a></td>
-					<td>${product.schilder.naam}</td>
-					<td>${product.jaartal}</td>
-					<td>${product.stijl}</td>
-					<td>&euro;<fmt:formatNumber minFractionDigits="2" maxFractionDigits="2" value="${product.prijs}" /></td>
-				<tr>
+				<c:url var="url" value="/producten/${product.key.productId}" />
+				<div class="nieuwProduct">
+					<c:if test="${product.value}">
+						<img src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" />
+					</c:if>
+					<h2><a href="${url}" ><c:out value="${product.key.titel}" /></a></h2>
+					<p>&euro;<fmt:formatNumber value="${product.key.prijs}" minFractionDigits="2" maxFractionDigits="2" /></p>
+				</div>
 			</c:forEach>
-		</table>
 		</c:if>
 		<div class="push"></div>
 	</div>

@@ -14,9 +14,9 @@ public interface ProductService {
 	Product findOne(long productId);
 
 	Iterable<Product> findByZoekterm(String zoekterm);
-	
-	Iterable<Product> findNieuwsteVijfProducten();
 
 	Iterable<Product> findByZoektermen(String zoekterm, BigDecimal vanPrijs,
 			BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal);
+	
+	Iterable<Product> findNieuwsteProducten();
 }

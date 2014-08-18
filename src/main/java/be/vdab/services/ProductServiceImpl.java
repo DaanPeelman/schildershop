@@ -84,8 +84,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Iterable<Product> findNieuwsteVijfProducten() {
-		Pageable pageable = new PageRequest(0, 5, Direction.DESC, "productId");
+	public Iterable<Product> findNieuwsteProducten() {
+		Pageable pageable = new PageRequest(0, 3, Direction.DESC, "productId");
 		Page<Product> pageProducten = productDAO.findAll(pageable);
 
 		List<Product> producten = pageProducten.getContent();
