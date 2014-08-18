@@ -24,7 +24,7 @@
 		$("#slider-range-prijs").slider(
 				{
 					range : true,
-					min : "${minPrijs}",
+					min : 0,
 					max : "${maxPrijs}",
 					values : [ "${minPrijs}", "${maxPrijs}" ],
 					slide : function(event, ui) {

@@ -114,4 +114,24 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return resultaat;
 	}
+
+	@Override
+	public Integer findMinPrijs() {
+		return productDAO.findMinPrijs();
+	}
+	
+	@Override
+	public Integer findMaxPrijs() {
+		return productDAO.findMaxPrijs();
+	}
+	
+	@Override
+	public Integer findMinJaartal() {
+		return productDAO.findMinJaartal();
+	}
+	
+	@Override
+	public Integer findMaxJaartal() {
+		return productDAO.findMaxJaartal();
+	}
 }

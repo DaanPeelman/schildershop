@@ -4,4 +4,24 @@
 	xsi:schemaLocation='http://java.sun.com/xml/ns/persistence/orm
 	http://java.sun.com/xml/ns/persistence/orm_2_0.xsd'
 	version='2.0'>
+	<named-query name="Product.findMinPrijs">
+	    <query>
+	        select min(prijs) from Product
+	    </query>
+	</named-query>
+	<named-query name="Product.findMaxPrijs">
+	    <query>
+	        select max(prijs) from Product
+	    </query>
+	</named-query>
+	<named-query name="Product.findMinJaartal">
+	    <query>
+	        select min(jaartal) from Product
+	    </query>
+	</named-query>
+	<named-query name="Product.findMaxJaartal">
+	    <query>
+	        select max(jaartal) from Product
+	    </query>
+	</named-query>
 </entity-mappings>

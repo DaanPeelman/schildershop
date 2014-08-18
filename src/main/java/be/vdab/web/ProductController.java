@@ -40,10 +40,7 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("producten/producten",
 				"schilderijen", productService.findAll());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
-		mav.addObject("minPrijs", 0);
-		mav.addObject("maxPrijs", 2400);
-		mav.addObject("minDatum", 1400);
-		mav.addObject("maxDatum", 2700);
+		mav = addMinsMaxs(mav);
 		return mav;
 	}
 
@@ -81,10 +78,7 @@ public class ProductController {
 			mav.addObject("filter", filter);
 		}
 		mav.addObject("zoekTermForm", new ZoekTermForm());
-		mav.addObject("minPrijs", 0);
-		mav.addObject("maxPrijs", 2400);
-		mav.addObject("minDatum", 1400);
-		mav.addObject("maxDatum", 2600);
+		mav = addMinsMaxs(mav);
 		return mav;
 	}
 
@@ -178,5 +172,13 @@ public class ProductController {
 
 	@InitBinder("product")
 	public void initBinderProduct(DataBinder dataBinder) {
+	}
+	
+	private ModelAndView addMinsMaxs(ModelAndView mav) {
+		mav.addObject("minPrijs", productService.findMinPrijs());
+		mav.addObject("maxPrijs", productService.findMaxPrijs());
+		mav.addObject("minDatum", productService.findMinJaartal());
+		mav.addObject("maxDatum", productService.findMaxJaartal());
+		return mav;
 	}
 }

@@ -21,4 +21,12 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
 			Integer totJaartal);
 
 	Iterable<Product> findByStijlContaining(String stijl);
+
+	Integer findMinPrijs();
+	
+	Integer findMaxPrijs();
+	
+	Integer findMinJaartal();
+	
+	Integer findMaxJaartal();
 }

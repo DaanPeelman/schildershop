@@ -19,4 +19,12 @@ public interface ProductService {
 			BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal);
 	
 	Iterable<Product> findNieuwsteProducten();
+
+	Integer findMinPrijs();
+
+	Integer findMaxPrijs();
+
+	Integer findMinJaartal();
+
+	Integer findMaxJaartal();
 }
