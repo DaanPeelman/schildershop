@@ -1,15 +1,13 @@
 package be.vdab.web;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.*;
@@ -42,73 +40,51 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("producten/producten",
 				"schilderijen", productService.findAll());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
-		mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
-		mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
+		mav.addObject("minPrijs", 0);
+		mav.addObject("maxPrijs", 2400);
+		mav.addObject("minDatum", 1400);
+		mav.addObject("maxDatum", 2700);
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, params = { "zoekterm" })
-	public ModelAndView findByZoekterm(@Valid ZoekTermForm zoekTermForm,
+	@RequestMapping(method = RequestMethod.GET, params = { "zoekterm",
+			"vanPrijs", "totPrijs", "vanJaartal", "totJaartal" })
+	public ModelAndView findByZoektermen(@Valid ZoekTermForm zoekTermForm,
 			BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("producten/producten");
+		if (!bindingResult.hasErrors() && !zoekTermForm.isValidPrijs()) {
+			bindingResult.reject("fouteVanTotPrijs", new Object[] {
+					zoekTermForm.getVanPrijs(), zoekTermForm.getTotPrijs() },
+					"");
+		}
+		if (!bindingResult.hasErrors() && !zoekTermForm.isValidJaartal()) {
+			bindingResult.reject("fouteVanTotJaartal",
+					new Object[] { zoekTermForm.getVanJaartal(),
+							zoekTermForm.getTotJaartal() }, "");
+		}
 		if (!bindingResult.hasErrors()) {
 			String zoekterm = zoekTermForm.getZoekterm().toLowerCase();
-			Iterable<Product> resultaat = productService.findByZoekterm(zoekterm);
+			BigDecimal vanPrijs = zoekTermForm.getVanPrijs();
+			BigDecimal totPrijs = zoekTermForm.getTotPrijs();
+			Integer vanJaartal = zoekTermForm.getVanJaartal();
+			Integer totJaartal = zoekTermForm.getTotJaartal();
+			Iterable<Product> resultaat = productService.findByZoektermen(
+					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal);
 			mav.addObject("schilderijen", resultaat);
 			mav.addObject("zoekTermForm", new ZoekTermForm());
-			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
-			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
-			mav.addObject("filter", "met " + zoekterm);
+			String filter = "tussen €" + vanPrijs + " en €"
+					+ totPrijs + ", gemaakt tussen " + vanJaartal + " en "
+							+ totJaartal;
+			if (!zoekterm.equals("")) {
+				filter += ", met " + zoekterm;
+			}
+			mav.addObject("filter", filter);
 		}
-		return mav;
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, params = { "vanPrijs",
-			"totPrijs" })
-	public ModelAndView findByPrijsBetween(
-			@Valid VanTotPrijsForm vanTotPrijsForm, BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/producten");
-		if (!bindingResult.hasErrors() && !vanTotPrijsForm.isValid()) {
-			bindingResult.reject("fouteVanTotPrijs",
-					new Object[] { vanTotPrijsForm.getVanPrijs(),
-							vanTotPrijsForm.getTotPrijs() }, "");
-		}
-		if (!bindingResult.hasErrors()) {
-			BigDecimal vanPrijs = vanTotPrijsForm.getVanPrijs();
-			BigDecimal totPrijs = vanTotPrijsForm.getTotPrijs();
-			Iterable<Product> resultaat = productService.findByPrijsBetween(
-					vanPrijs, totPrijs);
-			mav.addObject("schilderijen", resultaat);
-			mav.addObject("zoekTermForm", new ZoekTermForm());
-			mav.addObject("stijlen", productService.findAllStijlen());
-			mav.addObject("vanTotJaartalForm", new VanTotJaartalForm());
-			mav.addObject("filter", "tussen €" + vanPrijs + " en €" + totPrijs);
-		}
-		return mav;
-	}
-
-	@RequestMapping(method = RequestMethod.GET, params = { "vanJaartal",
-			"totJaartal" })
-	public ModelAndView findByJaartalBetween(
-			@Valid VanTotJaartalForm vanTotJaartalForm,
-			BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("producten/producten");
-		if (!bindingResult.hasErrors() && !vanTotJaartalForm.isValid()) {
-			bindingResult.reject("fouteVanTotJaartal",
-					new Object[] { vanTotJaartalForm.getVanJaartal(),
-							vanTotJaartalForm.getTotJaartal() }, "");
-		}
-		if (!bindingResult.hasErrors()) {
-			Integer vanJaartal = vanTotJaartalForm.getVanJaartal();
-			Integer totJaartal = vanTotJaartalForm.getTotJaartal();
-			Iterable<Product> resultaat = productService.findByJaartalBetween(
-					vanJaartal, totJaartal);
-			mav.addObject("schilderijen", resultaat);
-			mav.addObject("zoekTermForm", new ZoekTermForm());
-			mav.addObject("stijlen", productService.findAllStijlen());
-			mav.addObject("vanTotPrijsForm", new VanTotPrijsForm());
-			mav.addObject("filter", "gemaakt tussen " + vanJaartal + " en " + totJaartal);
-		}
+		mav.addObject("zoekTermForm", new ZoekTermForm());
+		mav.addObject("minPrijs", 0);
+		mav.addObject("maxPrijs", 2400);
+		mav.addObject("minDatum", 1400);
+		mav.addObject("maxDatum", 2600);
 		return mav;
 	}
 
@@ -139,7 +115,8 @@ public class ProductController {
 				productService.create(product);
 				if (part != null && part.getSize() != 0) {
 					String productFotosPad = servletContext.getRealPath("/img");
-					part.write(productFotosPad + "/" + product.getProductId() + ".jpg");
+					part.write(productFotosPad + "/" + product.getProductId()
+							+ ".jpg");
 				}
 				mav.addObject("succesProduct", product.getTitel()
 						+ " is succesvol toegevoegd.");
@@ -180,26 +157,22 @@ public class ProductController {
 	@RequestMapping(value = "{productId}", method = RequestMethod.GET)
 	public ModelAndView read(@PathVariable long productId) {
 		Product product = productService.findOne(productId);
-		ModelAndView mav =  new ModelAndView("producten/details", "product",
+		ModelAndView mav = new ModelAndView("producten/details", "product",
 				product);
 		if (product != null) {
-			String productFotoPad = servletContext.getRealPath("/img") + "\\" + product.getProductId() + ".jpg";
+			String productFotoPad = servletContext.getRealPath("/img") + "\\"
+					+ product.getProductId() + ".jpg";
 			File file = new File(productFotoPad);
 			mav.addObject("heeftFoto", file.exists());
 		}
 		BestelProductForm bestelProductForm = new BestelProductForm(productId);
 		mav.addObject("bestelProductForm", bestelProductForm);
-		
+
 		return mav;
 	}
 
-	@InitBinder("vanTotJaartalForm")
-	public void intBinderVanTotJaartalForm(DataBinder dataBinder) {
-		dataBinder.initDirectFieldAccess();
-	}
-
-	@InitBinder("vanTotPrijsForm")
-	public void intBinderVantotPrijsForm(DataBinder dataBinder) {
+	@InitBinder("zoekTermForm")
+	public void intBinderZoekTermForm(DataBinder dataBinder) {
 		dataBinder.initDirectFieldAccess();
 	}
 

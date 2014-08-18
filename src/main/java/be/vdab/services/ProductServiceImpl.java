@@ -1,23 +1,16 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.vdab.dao.ProductDAO;
-import be.vdab.dao.SchilderDAO;
-import be.vdab.entities.Product;
-import be.vdab.entities.Schilder;
+import be.vdab.dao.*;
+import be.vdab.entities.*;
 import be.vdab.exceptions.ProductBestaatAlException;
 
 @Service
@@ -25,7 +18,7 @@ import be.vdab.exceptions.ProductBestaatAlException;
 public class ProductServiceImpl implements ProductService {
 	private final ProductDAO productDAO;
 	private final SchilderDAO schilderDAO;
-	
+
 	@Autowired
 	public ProductServiceImpl(ProductDAO productDAO, SchilderDAO schilderDAO) {
 		this.productDAO = productDAO;
@@ -40,45 +33,21 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Iterable<String> findAllStijlen() {
 		Set<String> stijlen = new HashSet<>();
-		for (Product product: productDAO.findAll()) {
+		for (Product product : productDAO.findAll()) {
 			stijlen.add(product.getStijl());
 		}
 		return stijlen;
 	}
 
 	@Override
-	public Iterable<Product> findByTitel(String titel) {
-		return productDAO.findByTitelContaining(titel);
-	}
-
-	@Override
-	public Iterable<Product> findBySchilderNaam(String schilderNaam) {
-		return productDAO.findBySchilderNaamContaining(schilderNaam);
-	}
-
-	@Override
-	public Iterable<Product> findByStijl(String stijl) {
-		return productDAO.findByStijlLike(stijl);
-	}
-
-	@Override
-	public Iterable<Product> findByPrijsBetween(BigDecimal vanPrijs,
-			BigDecimal totPrijs) {
-		return productDAO.findByPrijsBetweenOrderByPrijsAsc(vanPrijs, totPrijs);
-	}
-
-	@Override
-	public Iterable<Product> findByJaartalBetween(Integer vanJaartal,
-			Integer totJaartal) {
-		return productDAO.findByJaartalBetweenOrderByJaartalAsc(vanJaartal, totJaartal);
-	}
-
-	@Override
 	@Transactional(readOnly = false)
 	public void create(Product product) {
-		Schilder schilder = schilderDAO.findByNaamLike(product.getSchilder().getNaam()).iterator().next();
+		Schilder schilder = schilderDAO
+				.findByNaamLike(product.getSchilder().getNaam()).iterator()
+				.next();
 		product.setSchilder(schilder);
-		Iterable<Product> productenMetDezelfdeTitel = productDAO.findByTitelContaining(product.getTitel());
+		Iterable<Product> productenMetDezelfdeTitel = productDAO
+				.findByTitelContaining(product.getTitel());
 		Boolean isUniek = true;
 		while (isUniek && productenMetDezelfdeTitel.iterator().hasNext()) {
 			Product product2 = productenMetDezelfdeTitel.iterator().next();
@@ -104,7 +73,8 @@ public class ProductServiceImpl implements ProductService {
 		for (Product product : productDAO.findByTitelContaining(zoekterm)) {
 			resultaat.add(product);
 		}
-		for (Product product : productDAO.findBySchilderNaamContaining(zoekterm)) {
+		for (Product product : productDAO
+				.findBySchilderNaamContaining(zoekterm)) {
 			resultaat.add(product);
 		}
 		for (Product product : productDAO.findByStijlContaining(zoekterm)) {
@@ -112,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return resultaat;
 	}
-	
+
 	@Override
 	public Iterable<Product> findNieuwsteVijfProducten() {
 		Pageable pageable = new PageRequest(0, 5, Direction.DESC, "productId");
@@ -121,5 +91,27 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> producten = pageProducten.getContent();
 
 		return producten;
+	}
+
+	@Override
+	public Iterable<Product> findByZoektermen(String zoekterm,
+			BigDecimal vanPrijs, BigDecimal totPrijs, Integer vanJaartal,
+			Integer totJaartal) {
+		Set<Product> resultaat = new HashSet<>();
+		for (Product ztRes : findByZoekterm(zoekterm)) {
+			for (Product prijsRes : productDAO
+					.findByPrijsBetweenOrderByPrijsAsc(vanPrijs, totPrijs)) {
+				if (ztRes.equals(prijsRes)) {
+					for (Product jtRes : productDAO
+							.findByJaartalBetweenOrderByJaartalAsc(vanJaartal,
+									totJaartal)) {
+						if (ztRes.equals(jtRes)) {
+							resultaat.add(ztRes);
+						}
+					}
+				}
+			}
+		}
+		return resultaat;
 	}
 }

@@ -24,9 +24,9 @@
 		$("#slider-range-prijs").slider(
 				{
 					range : true,
-					min : 0,
-					max : 2000,
-					values : [ 0, 2000 ],
+					min : "${minPrijs}",
+					max : "${maxPrijs}",
+					values : [ "${minPrijs}", "${maxPrijs}" ],
 					slide : function(event, ui) {
 						$("#amount").val(
 								"$" + ui.values[0] + " - $" + ui.values[1]);
@@ -46,24 +46,23 @@
 	$(function() {
 		$("#slider-range-jaartal")
 				.slider(
-						{
-							range : true,
-							min : 0,
-							max : 2000,
-							values : [ 0, 2000 ],
-							slide : function(event, ui) {
-								$("#periode").val(ui.values[0] + " - " + ui.values[1]);
-								$("#vanJaartal").val(
-										$("#slider-range-jaartal").slider(
-												"values", 0));
-								$("#totJaartal").val(
-										$("#slider-range-jaartal").slider(
-												"values", 1));
-							}
-						});
+				{
+					range : true,
+					min : 0,
+					max : "${maxDatum}",
+					values : [ "${minDatum}", "${maxDatum}" ],
+					slide : function(event, ui) {
+						$("#periode").val(
+								ui.values[0] + " - " + ui.values[1]);
+						$("#vanJaartal").val(
+								$("#slider-range-jaartal").slider("values", 0));
+						$("#totJaartal").val(
+								$("#slider-range-jaartal").slider("values", 1));
+					}
+				});
 		$("#periode").val(
-				$("#slider-range-jaartal").slider("values", 0)
-						+ " - " + $("#slider-range-jaartal").slider("values", 1));
+				$("#slider-range-jaartal").slider("values", 0) + " - "
+						+ $("#slider-range-jaartal").slider("values", 1));
 
 	});
 </script>
@@ -95,29 +94,18 @@
 					</form:label>
 				</div>
 				<div>
-					<input type="submit" value="Zoek" />
-					<form:errors cssClass='fout' element='div' />
+					<label for="amount">Prijs:</label> <input type="text" id="amount"
+						readonly>
+					<div id="slider-range-prijs"></div>
+					<form:input type="hidden" path="vanPrijs" id="vanPrijs" value="${minPrijs}"/>
+					<form:input type="hidden" path="totPrijs" id="totPrijs" value="${maxPrijs}"/>
 				</div>
-			</form:form>
-			<form:form commandName="vanTotPrijsForm" action="${url}" method="get">
-				<label for="amount">Prijs:</label>
-				<input type="text" id="amount" readonly>
-				<div id="slider-range-prijs"></div>
-				<form:input type="hidden" path="vanPrijs" id="vanPrijs" />
-				<form:input type="hidden" path="totPrijs" id="totPrijs" />
-				<div>
-					<input type="submit" value="Zoek" />
-					<form:errors cssClass='fout' element='div' />
-				</div>
-			</form:form>
-			<form:form commandName="vanTotJaartalForm" action="${url}"
-				method="get">
 				<div>
 					<label for="periode">Periode:</label> <input type="text"
 						id="periode" readonly>
 					<div id="slider-range-jaartal"></div>
-					<form:input type="hidden" path="vanJaartal" id="vanJaartal" />
-					<form:input type="hidden" path="totJaartal" id="totJaartal" />
+					<form:input type="hidden" path="vanJaartal" id="vanJaartal" value="${minDatum}" />
+					<form:input type="hidden" path="totJaartal" id="totJaartal" value="${maxDatum}" />
 				</div>
 				<div>
 					<input type="submit" value="Zoek" />
@@ -155,8 +143,8 @@
 					</table>
 				</c:when>
 				<c:otherwise>
-						Er werden geen schilderijen gevonden.
-					</c:otherwise>
+					Er werden geen schilderijen gevonden.
+				</c:otherwise>
 			</c:choose>
 		</section>
 		<div class="push"></div>

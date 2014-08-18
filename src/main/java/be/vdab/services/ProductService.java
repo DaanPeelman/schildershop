@@ -9,18 +9,6 @@ public interface ProductService {
 
 	Iterable<String> findAllStijlen();
 
-	Iterable<Product> findByTitel(String titel);
-
-	Iterable<Product> findBySchilderNaam(String schilderNaam);
-
-	Iterable<Product> findByStijl(String stijl);
-
-	Iterable<Product> findByPrijsBetween(BigDecimal vanPrijs,
-			BigDecimal totPrijs);
-
-	Iterable<Product> findByJaartalBetween(Integer vanJaartal,
-			Integer totJaartal);
-
 	void create(Product product);
 
 	Product findOne(long productId);
@@ -28,4 +16,7 @@ public interface ProductService {
 	Iterable<Product> findByZoekterm(String zoekterm);
 	
 	Iterable<Product> findNieuwsteVijfProducten();
+
+	Iterable<Product> findByZoektermen(String zoekterm, BigDecimal vanPrijs,
+			BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal);
 }
