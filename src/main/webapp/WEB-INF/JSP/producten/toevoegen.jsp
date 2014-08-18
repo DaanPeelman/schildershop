@@ -56,9 +56,9 @@
 			${succesSchilder}
 		</section>
 		<div class="push"></div>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-	</footer>
 </body>
 </html>

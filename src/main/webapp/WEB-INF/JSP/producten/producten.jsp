@@ -147,9 +147,9 @@ var iMax = parseInt("${maxDatum}");
 			</c:choose>
 		</section>
 		<div class="push"></div>
-	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 	</footer>
+	</div>
 </body>
 </html>

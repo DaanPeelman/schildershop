@@ -111,10 +111,10 @@
 			<h1>U bent al aangemeld</h1>
 		</security:authorize>
 		<div class="push"></div>
-	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 	</footer>
+	</div>
 </body>
 <script>
 	document.getElementById('aanmeldform').onsubmit = function() {

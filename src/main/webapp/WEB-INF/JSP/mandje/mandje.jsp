@@ -74,9 +74,9 @@
 		<p>Er zijn geen producten in uw mandje</p>
 	</c:if>
 	<div class="push"></div>
-	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
 	</footer>
+	</div>
 </body>
 </html>

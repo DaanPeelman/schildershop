@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
-	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +18,12 @@
 </head>
 <body>
 	<header>
-		<div><a href='<c:url value="/" />' id="logo" >
-	        <img
-			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
-			alt="logo">
-	    </a>
-	    </div>
+		<div>
+			<a href='<c:url value="/" />' id="logo"> <img
+				src="${pageContext.servletContext.contextPath}/img/logoSS.png"
+				alt="logo">
+			</a>
+		</div>
 		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="ingelogdMenu.jsp" />
@@ -38,17 +38,24 @@
 				<c:url var="url" value="/producten/${product.key.productId}" />
 				<div class="nieuwProduct">
 					<c:if test="${product.value}">
-						<img src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" />
+						<img
+							src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" />
 					</c:if>
-					<h2><a href="${url}" ><c:out value="${product.key.titel}" /></a></h2>
-					<p>&euro;<fmt:formatNumber value="${product.key.prijs}" minFractionDigits="2" maxFractionDigits="2" /></p>
+					<h2>
+						<a href="${url}"><c:out value="${product.key.titel}" /></a>
+					</h2>
+					<p>
+						&euro;
+						<fmt:formatNumber value="${product.key.prijs}"
+							minFractionDigits="2" maxFractionDigits="2" />
+					</p>
 				</div>
 			</c:forEach>
 		</c:if>
 		<div class="push"></div>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
-	</footer>
 </body>
 </html>

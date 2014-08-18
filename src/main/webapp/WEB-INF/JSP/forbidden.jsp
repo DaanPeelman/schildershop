@@ -30,9 +30,9 @@
 	<div id="wrapper" >
 		<p>U hebt geen toegang tot dit onderdeel.</p>
 		<div class="push"></div>
-	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
 	</footer>
+	</div>
 </body>
 </html>

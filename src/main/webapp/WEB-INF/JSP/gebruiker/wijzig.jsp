@@ -18,14 +18,13 @@
 </head>
 <body>
 	<header>
-		<a href='<c:url value="/" />' id="logo" >
-	        <img
+		<a href='<c:url value="/" />' id="logo"> <img
 			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
 			alt="logo">
-	    </a>
+		</a>
 		<nav>
 			<security:authorize access="isAuthenticated()">
-				<jsp:include page="../ingelogdMenu.jsp"/>
+				<jsp:include page="../ingelogdMenu.jsp" />
 			</security:authorize>
 			<ul>
 				<jsp:include page="../menu.jsp" />
@@ -91,9 +90,9 @@
 			</div>
 			<div class="push"></div>
 		</form:form>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-	</footer>
 </body>
 </html>
