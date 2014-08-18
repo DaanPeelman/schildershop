@@ -7,9 +7,11 @@ body {
 }
 
 #wrapper {
-	max-width: 940px;
+	width: 1014px;
 	margin: 0 auto -100px;;
-	padding: 0 5%;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 20px;
 	height: auto;
 	height: 100%;
 }
@@ -19,7 +21,7 @@ p {
 	margin-bottom: 1.3em;
 }
 
-a:link, a:visited, a:hover {
+a:link,a:visited,a:hover {
 	text-decoration: none;
 }
 
@@ -50,7 +52,6 @@ label {
 .nieuwProduct {
 	float: left;
 	clear: both;
-	
 	margin-bottom: 1em;
 	min-height: 2em;
 }
@@ -79,14 +80,12 @@ label {
 
 .sidebar {
 	float: left;
-	width: 160px;
-	margin: 0;
-	padding: 1em;
+	width: 30%;
 }
 
 section.content {
-	margin-left: 190px;
-	padding: 1em;
+	float: right;
+	width: 70%;
 }
 
 td {
@@ -97,6 +96,12 @@ td {
 /****************************
 HEADING
 *****************************/
+header {
+	width: 1014px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 #logo img {
 	position: absolute;
 	text-align: center;
@@ -117,27 +122,32 @@ h1 {
 NAVIGATION
 *****************************/
 nav {
+	width: 1014px;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
 	padding: 10px 0;
+	margin-bottom: 20px;
+}
+
+nav ul {
+	font-size: 1.2em;
 	text-align: center;
 }
 
 nav ul li {
 	display: inline;
-	padding-left: 15px;
-}
-
-#adminnav {
-	/* tijdelijke opmaak, enkel voor het contrast */
-	background: red;
+	margin-left: 20 px;
 }
 
 /****************************
 FOOTER
 *****************************/
 footer {
+	width: 1014px;
+	border-top: 1px solid;
 	font-size: 0.75em;
 	text-align: center;
-	padding-top: 50px;
+	padding-top: 20px;
 	height: 100px;
 	clear: both;
 }
@@ -181,16 +191,25 @@ h3 {
 /* nav background on mobile */
 nav {
 	background: #403731;
+	border-color: #d0c7c2;
+}
+
+footer {
+	border-color: #d0c7c2;
 }
 
 /* nav link */
-nav li,nav a:visited {
+nav ul li a:link,nav ul li a:visited {
 	color: #fff;
 }
 
 /* selected nav link */
-nav a.selected,nav a:hover {
-	color: #E5C5B1;
+nav ul li a:hover,nav ul li a:active {
+	color: #a46137;
+}
+
+#adminnav li a:hover,nav ul li a:active {
+	color: #b00;
 }
 
 footer {
