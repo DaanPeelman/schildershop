@@ -21,12 +21,14 @@
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script>
 	$(function() {
+		var iMin = parseInt("${minPrijs}");
+		var iMax = parseInt("${maxPrijs}");
 		$("#slider-range-prijs").slider(
 				{
 					range : true,
-					min : 0,
-					max : "${maxPrijs}",
-					values : [ "${minPrijs}", "${maxPrijs}" ],
+					min : iMin,
+					max : iMax,
+					values : [ iMin, iMax ],
 					slide : function(event, ui) {
 						$("#amount").val(
 								"$" + ui.values[0] + " - $" + ui.values[1]);
@@ -44,13 +46,16 @@
 </script>
 <script>
 	$(function() {
+		var iMin = parseInt("${minDatum}");
+		var iMax = parseInt("${maxDatum}");
+		
 		$("#slider-range-jaartal")
 				.slider(
 				{
 					range : true,
-					min : 0,
-					max : "${maxDatum}",
-					values : [ "${minDatum}", "${maxDatum}" ],
+					min : iMin,
+					max : iMax,
+					values : [ iMin, iMax ],
 					slide : function(event, ui) {
 						$("#periode").val(
 								ui.values[0] + " - " + ui.values[1]);
