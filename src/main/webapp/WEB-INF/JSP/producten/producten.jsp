@@ -30,12 +30,9 @@
 					max : iMax,
 					values : [ iMin, iMax ],
 					slide : function(event, ui) {
-						$("#amount").val(
-								"$" + ui.values[0] + " - $" + ui.values[1]);
-						$("#vanPrijs").val(
-								$("#slider-range-prijs").slider("values", 0));
-						$("#totPrijs").val(
-								$("#slider-range-prijs").slider("values", 1));
+						$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+						$("#vanPrijs").val(ui.values[0]);
+						$("#totPrijs").val(ui.values[1]);
 					}
 				});
 		$("#amount").val(
@@ -45,9 +42,10 @@
 	});
 </script>
 <script>
+var iMin = parseInt("${minDatum}");
+var iMax = parseInt("${maxDatum}");
 	$(function() {
-		var iMin = parseInt("${minDatum}");
-		var iMax = parseInt("${maxDatum}");
+		
 		
 		$("#slider-range-jaartal")
 				.slider(
@@ -57,18 +55,14 @@
 					max : iMax,
 					values : [ iMin, iMax ],
 					slide : function(event, ui) {
-						$("#periode").val(
-								ui.values[0] + " - " + ui.values[1]);
-						$("#vanJaartal").val(
-								$("#slider-range-jaartal").slider("values", 0));
-						$("#totJaartal").val(
-								$("#slider-range-jaartal").slider("values", 1));
+						$("#periode").val(ui.values[0] + " - " + ui.values[1]);
+						$("#vanJaartal").val(ui.values[0]);
+						$("#totJaartal").val(ui.values[1]);
 					}
 				});
 		$("#periode").val(
 				$("#slider-range-jaartal").slider("values", 0) + " - "
 						+ $("#slider-range-jaartal").slider("values", 1));
-
 	});
 </script>
 </head>
