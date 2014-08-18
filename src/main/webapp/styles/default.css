@@ -14,12 +14,33 @@ body {
 	height: 100%;
 }
 
-a {
+p {
+	text-align: justify;
+	margin-bottom: 1.3em;
+}
+
+a:link, a:visited, a:hover {
 	text-decoration: none;
+}
+
+a:active {
+	text-decoration: underline;
 }
 
 h2 {
 	font-weight: normal;
+	font-size: 2em;
+	margin-bottom: 1.3em;
+}
+
+h3 {
+	font-size: 2.4em;
+	F margin-bottom: 1.2em;
+}
+
+label {
+	font-size: 1.4em;
+	letter-spacing: 0.01em;
 }
 
 .fout {
@@ -54,12 +75,10 @@ td {
 	padding-right: 2em;
 }
 
-
-
 /****************************
 HEADING
 *****************************/
-#logo img{
+#logo img {
 	position: absolute;
 	text-align: center;
 	height: 10em;
@@ -68,14 +87,12 @@ HEADING
 
 h1 {
 	margin: 15px 0;
-	font-size: 1.75em;
+	font-size: 3em;
 	font-family: 'Play', sans-serif;
 	font-weight: normal;
 	line-height: 0.8em;
 	padding-left: 15px;
 }
-
-
 
 /****************************
 NAVIGATION
@@ -95,8 +112,6 @@ nav ul li {
 	background: red;
 }
 
-
-
 /****************************
 FOOTER
 *****************************/
@@ -108,15 +123,13 @@ footer {
 	clear: both;
 }
 
-
-
 /****************************
 COLORS
 *****************************/
 
 /* site body */
 body {
-	background-color: #ffebde;
+	background-color: #fcfcfb;
 	color: #303030;
 }
 
@@ -139,7 +152,11 @@ h1 {
 }
 
 h2 {
-	color: #666;
+	color: #900;
+}
+
+h3 {
+	color: #700;
 }
 
 /* nav background on mobile */

@@ -160,20 +160,20 @@ public class ProductController {
 			BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("producten/toevoegen", "product",
 				new Product());
-		mav.addObject("schilders", schilderService.findAll());
 		if (!bindingResult.hasErrors()) {
 			try {
 				schilderService.create(schilder);
 				mav.addObject("schilder", new Schilder());
 				mav.addObject("succesSchilder", schilder.getNaam()
 						+ " is succesvol toegevoegd.");
+				mav.addObject("schilders", schilderService.findAll());
 				return mav;
 			} catch (SchilderMetDezeNaamBestaatAlException ex) {
 				bindingResult.rejectValue("naam",
 						"SchilderMetDezeNaamBestaatAl");
 			}
 		}
-		mav.addObject("schilder", schilder);
+		mav.addObject("schilders", schilderService.findAll());
 		return mav;
 	}
 
@@ -191,21 +191,6 @@ public class ProductController {
 		mav.addObject("mandjeForm", mandjeForm);
 		
 		return mav;
-	}
-
-	@InitBinder("titelForm")
-	public void intBinderTitelForm(DataBinder dataBinder) {
-		dataBinder.initDirectFieldAccess();
-	}
-
-	@InitBinder("schilderForm")
-	public void intBinderSchilderForm(DataBinder dataBinder) {
-		dataBinder.initDirectFieldAccess();
-	}
-
-	@InitBinder("stijlForm")
-	public void intBinderStijlForm(DataBinder dataBinder) {
-		dataBinder.initDirectFieldAccess();
 	}
 
 	@InitBinder("vanTotJaartalForm")

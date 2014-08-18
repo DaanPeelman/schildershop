@@ -30,7 +30,7 @@
 			</security:authorize>
 			<jsp:include page="../menu.jsp" />
 		</nav>
-		<h1>Uw recente bestellingen</h1>
+		<h1>Gegevens</h1>
 	</header>
 	<div id="wrapper">
 		<h2>Uw recente bestellingen</h2>

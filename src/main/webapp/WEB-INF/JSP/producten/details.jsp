@@ -42,7 +42,7 @@
 			</c:if>
 			<section>
 				Schilder: ${product.schilder.naam}<br> Stijl: ${product.stijl}<br>
-				Jaar: ${product.jaartal}<br> Prijs: €${product.prijs}
+				Jaar: ${product.jaartal}<br> Prijs: &euro;${product.prijs}
 			</section>
 			<form:input path="productId" type="hidden" />
 			<form:label path="aantal">
