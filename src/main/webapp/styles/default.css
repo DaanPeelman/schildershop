@@ -97,9 +97,7 @@ td {
 HEADING
 *****************************/
 header {
-	width: 1014px;
 	padding-top: 20px;
-	padding-bottom: 20px;
 }
 
 #logo img {
@@ -127,11 +125,11 @@ nav {
 	border-bottom: 1px solid;
 	padding: 10px 0;
 	margin-bottom: 20px;
+	text-align: center;
 }
 
 nav ul {
 	font-size: 1.2em;
-	text-align: center;
 }
 
 nav ul li {
@@ -196,6 +194,10 @@ nav {
 
 footer {
 	border-color: #d0c7c2;
+}
+
+nav {
+	color: #b00;
 }
 
 /* nav link */
