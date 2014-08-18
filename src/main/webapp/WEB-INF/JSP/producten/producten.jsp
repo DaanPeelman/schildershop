@@ -23,18 +23,17 @@
 	$(function() {
 		var iMin = parseInt("${minPrijs}");
 		var iMax = parseInt("${maxPrijs}");
-		$("#slider-range-prijs").slider(
-				{
-					range : true,
-					min : iMin,
-					max : iMax,
-					values : [ iMin, iMax ],
-					slide : function(event, ui) {
-						$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-						$("#vanPrijs").val(ui.values[0]);
-						$("#totPrijs").val(ui.values[1]);
-					}
-				});
+		$("#slider-range-prijs").slider({
+			range : true,
+			min : iMin,
+			max : iMax,
+			values : [ iMin, iMax ],
+			slide : function(event, ui) {
+				$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+				$("#vanPrijs").val(ui.values[0]);
+				$("#totPrijs").val(ui.values[1]);
+			}
+		});
 		$("#amount").val(
 				"$" + $("#slider-range-prijs").slider("values", 0) + " - $"
 						+ $("#slider-range-prijs").slider("values", 1));
@@ -42,24 +41,21 @@
 	});
 </script>
 <script>
-var iMin = parseInt("${minDatum}");
-var iMax = parseInt("${maxDatum}");
+	var iMin = parseInt("${minDatum}");
+	var iMax = parseInt("${maxDatum}");
 	$(function() {
-		
-		
-		$("#slider-range-jaartal")
-				.slider(
-				{
-					range : true,
-					min : iMin,
-					max : iMax,
-					values : [ iMin, iMax ],
-					slide : function(event, ui) {
-						$("#periode").val(ui.values[0] + " - " + ui.values[1]);
-						$("#vanJaartal").val(ui.values[0]);
-						$("#totJaartal").val(ui.values[1]);
-					}
-				});
+
+		$("#slider-range-jaartal").slider({
+			range : true,
+			min : iMin,
+			max : iMax,
+			values : [ iMin, iMax ],
+			slide : function(event, ui) {
+				$("#periode").val(ui.values[0] + " - " + ui.values[1]);
+				$("#vanJaartal").val(ui.values[0]);
+				$("#totJaartal").val(ui.values[1]);
+			}
+		});
 		$("#periode").val(
 				$("#slider-range-jaartal").slider("values", 0) + " - "
 						+ $("#slider-range-jaartal").slider("values", 1));
@@ -92,19 +88,23 @@ var iMax = parseInt("${maxDatum}");
 						<form:errors path="zoekterm" cssClass="fout" />
 					</form:label>
 				</div>
-				<div>
-					<label for="amount">Prijs:</label> <input type="text" id="amount"
-						readonly>
+				<div class="slider">
+					<label for="amount">Prijs:</label> <input type="text"
+						id="amount" readonly>
 					<div id="slider-range-prijs"></div>
-					<form:input type="hidden" path="vanPrijs" id="vanPrijs" value="${minPrijs}"/>
-					<form:input type="hidden" path="totPrijs" id="totPrijs" value="${maxPrijs}"/>
+					<form:input type="hidden" path="vanPrijs" id="vanPrijs"
+						value="${minPrijs}" />
+					<form:input type="hidden" path="totPrijs" id="totPrijs"
+						value="${maxPrijs}" />
 				</div>
-				<div>
+				<div class="slider">
 					<label for="periode">Periode:</label> <input type="text"
 						id="periode" readonly>
 					<div id="slider-range-jaartal"></div>
-					<form:input type="hidden" path="vanJaartal" id="vanJaartal" value="${minDatum}" />
-					<form:input type="hidden" path="totJaartal" id="totJaartal" value="${maxDatum}" />
+					<form:input type="hidden" path="vanJaartal" id="vanJaartal"
+						value="${minDatum}" />
+					<form:input type="hidden" path="totJaartal" id="totJaartal"
+						value="${maxDatum}" />
 				</div>
 				<div>
 					<input type="submit" value="Zoek" />
@@ -147,9 +147,9 @@ var iMax = parseInt("${maxDatum}");
 			</c:choose>
 		</section>
 		<div class="push"></div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-	</footer>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
 </body>
 </html>
