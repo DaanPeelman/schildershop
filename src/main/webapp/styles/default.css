@@ -32,7 +32,7 @@ a:active {
 h2 {
 	font-weight: normal;
 	font-size: 2em;
-	margin-bottom: 1.3em;
+	margin-bottom: 1.1em;
 }
 
 h3 {
@@ -108,6 +108,20 @@ td {
 #slider-range-prijs,#slider-range-jaartal {
 	width: 10em;
 	height: 0.5em;
+}
+
+#klein {
+	width: 3em;
+}
+
+#toevoegform span {
+	display: block;
+	padding-top: 0.3em;
+}
+
+#toevoegknop {
+	display: block;
+	margin-top: 0.5em;
 }
 
 

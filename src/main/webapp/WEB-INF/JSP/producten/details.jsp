@@ -47,7 +47,7 @@
 			<form:input path="productId" type="hidden" />
 			<form:label path="aantal">
 				Aantal: 
-				<form:input path="aantal" type="text" />
+				<form:input path="aantal" type="text" id="klein"/>
 				<form:errors path="aantal" />
 			</form:label>
 			<input type="submit" value="Koop" />
