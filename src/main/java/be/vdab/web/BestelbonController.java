@@ -1,9 +1,6 @@
 package be.vdab.web;
 
 import java.security.Principal;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
