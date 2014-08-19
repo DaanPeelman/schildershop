@@ -37,8 +37,9 @@
 			<form:form action='${producturl}' method='post' commandName='product'
 				id='toevoegform' enctype="multipart/form-data">
 				<jsp:include page='productformfields.jsp' />
-				<label>Afbeelding<input type="file" name="foto"></label>
-				<br>
+				<label><span>Afbeelding: </span><input type="file"
+					name="foto"></label>
+				
 				<input type='submit' value='Toevoegen' id='toevoegknop'>
 				<form:errors cssClass='fout' />
 			</form:form>
@@ -47,8 +48,9 @@
 			<c:url value='/producten/toevoegen' var='schilderurl' />
 			<form:form action='${schilderurl}' method='post'
 				commandName='schilder' id='toevoegform'>
-				<form:label path="naam">Schilder: 
-						<form:input path="naam" />
+				<form:label path="naam">
+					<span>Schilder: </span>
+					<form:input path="naam" />
 					<form:errors path="naam" cssClass="fout" />
 				</form:label>
 				<input type='submit' value='Toevoegen' id='toevoegknop'>
@@ -56,9 +58,9 @@
 			${succesSchilder}
 		</section>
 		<div class="push"></div>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-	</footer>
 </body>
 </html>
