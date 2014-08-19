@@ -23,11 +23,14 @@ public class BestelbonController {
 	private final ProductService productService;
 	private final GebruikerService gebruikerService;
 	
+	private Mandje mandje;
+	
 	@Autowired
-	public BestelbonController(BestelbonService bestelbonService, ProductService productService, GebruikerService gebruikerService, MandjeController mandjeController) {
+	public BestelbonController(BestelbonService bestelbonService, ProductService productService, GebruikerService gebruikerService, Mandje mandje) {
 		this.bestelbonService = bestelbonService;
 		this.productService = productService;
 		this.gebruikerService = gebruikerService;
+		this.mandje = mandje;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -40,24 +43,21 @@ public class BestelbonController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
-		@SuppressWarnings("unchecked")
-		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession().getAttribute("mandje");
-		
 		Principal principal = request.getUserPrincipal();
 		Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 		
 		
 		Bestelbon bestelbon = new Bestelbon(gebruiker, adresForm);
 		
-		for(Long productId: mandje.keySet()) {
+		for(Long productId: mandje.getProducten().keySet()) {
 			Product product = productService.findOne(productId);
-			bestelbon.addBestelbonlijn(new Bestelbonlijn(product, mandje.get(productId).intValue(), product.getPrijs()));
+			bestelbon.addBestelbonlijn(new Bestelbonlijn(product, mandje.getAantal(productId).intValue(), product.getPrijs()));
 		}
 		
 		if(!bindingResult.hasErrors()) {
 			bestelbonService.create(bestelbon);
 			
-			request.getSession().removeAttribute("mandje");
+			mandje.leegMandje();
 			
 			return new ModelAndView("bestellingen/succes");
 		}

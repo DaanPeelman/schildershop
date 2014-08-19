@@ -22,32 +22,26 @@ import be.vdab.services.ProductService;
 @RequestMapping(value = "/mandje")
 public class MandjeController {
 	private final ProductService productService;
+	private Mandje mandje;
 	private ServletContext servletContext;
 	
 	@Autowired
-	public MandjeController(ProductService productService, ServletContext servletContext) {
+	public MandjeController(ProductService productService, Mandje mandje, ServletContext servletContext) {
 		this.productService = productService;
+		this.mandje = mandje;
 		this.servletContext = servletContext;
 	}
 
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView showMandje(HttpServletRequest request) {
+	public ModelAndView showMandje() {
 		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
-		
-		@SuppressWarnings("unchecked")
-		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
-		
-		if(mandje == null) {
-			mandje = new ConcurrentHashMap<>();
-			request.getSession().setAttribute("mandje", mandje);
-		}
 		
 		Bestelbon productenInMandje = new Bestelbon();
 		
-		for(Long productId:mandje.keySet()) {
+		for(Long productId:mandje.getProducten().keySet()) {
 			Product product = productService.findOne(productId);
-			productenInMandje.addBestelbonlijn(new Bestelbonlijn(product, mandje.get(productId).intValue(), product.getPrijs()));
+			productenInMandje.addBestelbonlijn(new Bestelbonlijn(product, mandje.getAantal((productId).intValue()), product.getPrijs()));
 		}
 		
 		modelAndView.addObject("mandje", productenInMandje);
@@ -58,24 +52,11 @@ public class MandjeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ModelAndView addBestellijn(@Valid BestelProductForm bestelProductForm, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView addBestellijn(@Valid BestelProductForm bestelProductForm, BindingResult bindingResult) {
 		Long productId = bestelProductForm.getProductId();
-		if(!bindingResult.hasErrors()) {
-			System.out.println("IN ADDBESTELLIJN");
-			
-			@SuppressWarnings("unchecked")
-			Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession(true).getAttribute("mandje");
-			
-			System.out.println("productId = " + bestelProductForm.getProductId());
-			int aantal = bestelProductForm.getAantal();
-			
-			if(mandje == null) {
-				mandje = new ConcurrentHashMap<>();
-			}
-			
-			mandje.put(productId, aantal);
+		if(!bindingResult.hasErrors()) {			
+			mandje.addProduct(productId, bestelProductForm.getAantal());
 
-			request.getSession(true).setAttribute("mandje", mandje);
 			return new ModelAndView("redirect:/mandje");
 		}
 		ModelAndView modelAndView = new ModelAndView("producten/details");
@@ -91,13 +72,8 @@ public class MandjeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
-	public ModelAndView deleteBestellijn(@ModelAttribute VerwijderUitMandjeForm verwijderUitMandjeForm, HttpServletRequest request) {
-		@SuppressWarnings("unchecked")
-		Map<Long, Integer> mandje = (ConcurrentHashMap<Long, Integer>)request.getSession().getAttribute("mandje");
-		
-		mandje.remove(verwijderUitMandjeForm.getProductId());
-		
-		request.getSession().setAttribute("mandje", mandje);
+	public ModelAndView deleteBestellijn(@ModelAttribute VerwijderUitMandjeForm verwijderUitMandjeForm) {
+		mandje.removeProduct(verwijderUitMandjeForm.getProductId());
 		
 		return new ModelAndView("redirect:/mandje");
 	}
