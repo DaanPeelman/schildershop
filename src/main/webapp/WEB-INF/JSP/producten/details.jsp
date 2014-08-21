@@ -34,28 +34,31 @@
 	</header>
 	<div id="wrapper">
 		<c:url value="/mandje" var="url" />
-		<form:form commandName="bestelProductForm" action="${url}" method="put">
+		<form:form commandName="bestelProductForm" action="${url}"
+			method="put">
 			<c:if test='${heeftFoto}'>
 				<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
 				<img alt="foto van het schilderij" id="detailImg"
 					src="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg">
 			</c:if>
-			<section>
-				Schilder: ${product.schilder.naam}<br> Stijl: ${product.stijl}<br>
-				Jaar: ${product.jaartal}<br> Prijs: &euro;${product.prijs}
-			</section>
-			<form:input path="productId" type="hidden" />
-			<form:label path="aantal">
+			<div>
+				<section>
+					Schilder: ${product.schilder.naam}<br> Stijl: ${product.stijl}<br>
+					Jaar: ${product.jaartal}<br> Prijs: &euro;${product.prijs}
+				</section>
+				<form:input path="productId" type="hidden" />
+				<form:label path="aantal">
 				Aantal: 
-				<form:input path="aantal" type="text" id="klein"/>
-				<form:errors path="aantal" />
-			</form:label>
-			<input type="submit" value="Koop" />
+				<form:input path="aantal" type="text" id="klein" />
+					<form:errors path="aantal" />
+				</form:label>
+				<input type="submit" value="Koop" />
+			</div>
 		</form:form>
 		<div class="push"></div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-	</footer>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
 </body>
 </html>
