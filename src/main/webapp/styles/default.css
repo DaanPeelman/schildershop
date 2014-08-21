@@ -41,8 +41,17 @@ h3 {
 }
 
 label {
-	font-size: 1.4em;
+	font-size: 1em;
 	letter-spacing: 0.01em;
+}
+
+input {
+	width: 10em;
+}
+
+input[type=submit] {
+	width: auto;
+	border-radius: 5px;
 }
 
 .fout {
@@ -97,7 +106,6 @@ td {
 HEADING
 *****************************/
 header {
-	width: 1014px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
@@ -122,7 +130,6 @@ h1 {
 NAVIGATION
 *****************************/
 nav {
-	width: 1014px;
 	border-top: 1px solid;
 	border-bottom: 1px solid;
 	padding: 10px 0;
@@ -137,6 +144,10 @@ nav ul {
 nav ul li {
 	display: inline;
 	margin-left: 20 px;
+}
+
+#icoon img {
+	height: 1em;
 }
 
 /****************************
@@ -198,8 +209,7 @@ footer {
 	border-color: #d0c7c2;
 }
 
-/* nav link */
-nav ul li a:link,nav ul li a:visited {
+nav * {
 	color: #fff;
 }
 
@@ -210,6 +220,10 @@ nav ul li a:hover,nav ul li a:active {
 
 #adminnav li a:hover,nav ul li a:active {
 	color: #b00;
+}
+
+nav input {
+	color: #000;
 }
 
 footer {
