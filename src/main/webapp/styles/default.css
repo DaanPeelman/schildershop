@@ -61,7 +61,7 @@ h3 {
 #detailImg {
 	float: left;
 	padding-right: 1em;
-	width: 20em;
+	width: 50%;
 }
 
 .push {
@@ -115,18 +115,13 @@ input[type=submit] {
 	padding-right: 0.7em;
 }
 
+#klein {
+	width: 3em;
+}
+
 #slider-range-prijs, #slider-range-jaartal {
-	background: #fff;
 	height:0.5em;
 	width: 9.5em;
-}
-
-#slider-range-prijs *, #slider-range-jaartal * {
-	background: #FFA639;
-}
-
-.fout {
-	color: red;
 }
 
 /****************************
@@ -257,4 +252,16 @@ nav input {
 
 footer {
 	color: #999;
+}
+
+#slider-range-prijs, #slider-range-jaartal {
+	background: #fff;
+}
+
+#slider-range-prijs *, #slider-range-jaartal * {
+	background: #FFA639;
+}
+
+.fout {
+	color: red;
 }
