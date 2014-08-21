@@ -1,6 +1,7 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -15,24 +16,23 @@
 </head>
 <body>
 	<header>
-		<a href='<c:url value="/" />' id="logo" >
-	        <img
+		<a href='<c:url value="/" />' id="logo"> <img
 			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
 			alt="logo">
-	    </a>
-	    	<nav>
+		</a>
+		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="ingelogdMenu.jsp" />
 			</security:authorize>
 			<jsp:include page="menu.jsp" />
 		</nav>
 	</header>
-	<div id="wrapper" >
+	<div id="wrapper">
 		<p>U hebt geen toegang tot dit onderdeel.</p>
 		<div class="push"></div>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp"/>
-	</footer>
 </body>
 </html>
