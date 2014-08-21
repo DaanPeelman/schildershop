@@ -35,9 +35,9 @@
 		<h2>Gegevens gewijzigd</h2>
 		<p>Uw gegevens zijn succesvol gewijzigd</p>
 		<div class="push"></div>
-	</div>
 	<footer>
 		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 	</footer>
+	</div>f
 </body>
 </html>
