@@ -40,24 +40,6 @@ h3 {
 	F margin-bottom: 1.2em;
 }
 
-label {
-	font-size: 1em;
-	letter-spacing: 0.01em;
-}
-
-input {
-	width: 10em;
-}
-
-input[type=submit] {
-	width: auto;
-	border-radius: 5px;
-}
-
-.fout {
-	color: red;
-}
-
 .nieuwProduct {
 	float: left;
 	clear: both;
@@ -90,6 +72,7 @@ input[type=submit] {
 .sidebar {
 	float: left;
 	width: 30%;
+	padding-top: 3em;
 }
 
 section.content {
@@ -102,12 +85,55 @@ td {
 	padding-right: 2em;
 }
 
+
+/****************************
+FORMS
+*****************************/
+form div * {
+	display: block;
+	margin-bottom: 0.3em;
+}
+
+form div {
+	margin-bottom: 1em;
+}
+
+label {
+	font-size: 1em;
+	letter-spacing: 0.01em;
+}
+
+input {
+	width: 10em;
+	margin-left: 0.5em;
+}
+
+input[type=submit] {
+	width: auto;
+	border-radius: 5px;
+	padding-left: 0.7em;
+	padding-right: 0.7em;
+}
+
+#slider-range-prijs, #slider-range-jaartal {
+	background: #fff;
+	height:0.5em;
+	width: 9.5em;
+}
+
+#slider-range-prijs *, #slider-range-jaartal * {
+	background: #FFA639;
+}
+
+.fout {
+	color: red;
+}
+
 /****************************
 HEADING
 *****************************/
 header {
 	padding-top: 20px;
-	padding-bottom: 20px;
 }
 
 #logo img {
@@ -230,5 +256,5 @@ nav input {
 }
 
 footer {
-	color: #c4c4c4;
+	color: #999;
 }
