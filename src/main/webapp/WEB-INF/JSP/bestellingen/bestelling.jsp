@@ -40,10 +40,10 @@
 		<table>
 			<thead>
 				<tr>
-					<td>Naam</td>
-					<td>Aantal</td>
-					<td>Prijs per eenheid</td>
-					<td>Totale prijs</td>
+					<th>Naam</th>
+					<th>Aantal</th>
+					<th>Prijs per eenheid</th>
+					<th>Totale prijs</th>
 				</tr>
 			</thead>
 			<tbody>
