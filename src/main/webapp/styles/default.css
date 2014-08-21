@@ -32,7 +32,7 @@ a:active {
 h2 {
 	font-weight: normal;
 	font-size: 2em;
-	margin-bottom: 1.3em;
+	margin-bottom: 1.1em;
 }
 
 h3 {
@@ -124,6 +124,10 @@ input[type=submit] {
 	width: 9.5em;
 }
 
+.sidebar #aanmeldform h2{
+	margin-top: 0;
+}
+
 /****************************
 HEADING
 *****************************/
@@ -168,6 +172,10 @@ nav ul {
 nav ul li {
 	display: inline;
 	margin-left: 20 px;
+}
+
+#aanmeldform input {
+	text-align: left;
 }
 
 #icoon img {
