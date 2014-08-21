@@ -37,9 +37,9 @@
 			<table>
 				<thead>
 					<tr>
-						<td>Datum</td>
-						<td>Prijs</td>
-						<td>Info</td>
+						<th>Datum</th>
+						<th>Prijs</th>
+						<th>Info</th>
 					</tr>
 				</thead>
 				<c:forEach var="bestelling" items="${gebruiker.bestellingen}"
