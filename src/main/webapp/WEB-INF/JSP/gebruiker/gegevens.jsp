@@ -19,11 +19,10 @@
 </head>
 <body>
 	<header>
-		<a href='<c:url value="/" />' id="logo" >
-	        <img
+		<a href='<c:url value="/" />' id="logo"> <img
 			src="${pageContext.servletContext.contextPath}/img/logoSS.png"
 			alt="logo">
-	    </a>
+		</a>
 		<nav>
 			<security:authorize access="isAuthenticated()">
 				<jsp:include page="../ingelogdMenu.jsp" />
@@ -43,7 +42,8 @@
 						<td>Info</td>
 					</tr>
 				</thead>
-				<c:forEach var="bestelling" items="${gebruiker.bestellingen}" begin='0' end='2'>
+				<c:forEach var="bestelling" items="${gebruiker.bestellingen}"
+					begin='0' end='2'>
 					<spring:url var="url" value="/bestellingen/{bestelbonId}">
 						<spring:param name="bestelbonId" value="${bestelling.bestelbonId}" />
 					</spring:url>
@@ -87,12 +87,13 @@
 			<b>Postcode: </b> ${gebruiker.adres.postcode}
 		</div>
 		<div>
-			<a href="<c:url value='/gebruiker/wijzig' />">Wijzig uw gegevens of wachtwoord</a>
+			<a href="<c:url value='/gebruiker/wijzig' />">Wijzig uw gegevens
+				of wachtwoord</a>
 		</div>
 		<div class="push"></div>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-	</footer>
 </body>
 </html>
