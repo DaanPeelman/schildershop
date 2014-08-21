@@ -136,9 +136,12 @@ nav {
 	margin-bottom: 20px;
 }
 
-nav ul {
-	font-size: 1.2em;
+nav * {
 	text-align: center;
+}
+
+nav ul {
+	font-size: 1.2em;	
 }
 
 nav ul li {

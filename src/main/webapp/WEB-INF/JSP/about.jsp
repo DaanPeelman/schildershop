@@ -35,11 +35,17 @@
 		<h1>About us</h1>
 	</header>
 	<div id="wrapper">
-		<p>SchilderShop is het Java eindproject van <a href='https://www.linkedin.com/pub/daan-peelman/95/5b9/a78/nl' target="_blank">Daan Peelman</a> en <a href='https://www.linkedin.com/in/lisasteendam' target="_blank">Lisa Steendam</a>.</p>
+		<p>
+			SchilderShop is het Java eindproject van <a
+				href='https://www.linkedin.com/pub/daan-peelman/95/5b9/a78/nl'
+				target="_blank">Daan Peelman</a> en <a
+				href='https://www.linkedin.com/in/lisasteendam' target="_blank">Lisa
+				Steendam</a>.
+		</p>
 		<div class="push"></div>
+		<footer>
+			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-	</footer>
 </body>
 </html>
