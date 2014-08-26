@@ -6,22 +6,22 @@
 	version='2.0'>
 	<named-query name="Product.findMinPrijs">
 	    <query>
-	        select min(prijs) from Product
+	        select min(p.prijs) from Product p
 	    </query>
 	</named-query>
 	<named-query name="Product.findMaxPrijs">
 	    <query>
-	        select max(prijs) from Product
+	        select max(p.prijs) from Product p
 	    </query>
 	</named-query>
 	<named-query name="Product.findMinJaartal">
 	    <query>
-	        select min(jaartal) from Product
+	        select min(p.jaartal) from Product p
 	    </query>
 	</named-query>
 	<named-query name="Product.findMaxJaartal">
 	    <query>
-	        select max(jaartal) from Product
+	        select max(p.jaartal) from Product p
 	    </query>
 	</named-query>
 </entity-mappings>
