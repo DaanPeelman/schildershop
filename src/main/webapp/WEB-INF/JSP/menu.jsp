@@ -6,18 +6,8 @@
 <ul>
 	<jsp:include page="menuZonderLogin.jsp"></jsp:include>
 	<security:authorize access="isAnonymous()">
-		<li>
-			<form method='post'
-				action='<c:url value="/j_spring_security_check"/>' id='aanmeldform'>
-				<label>Gebruikersnaam: <input name='j_username' autofocus></label>
-				<label>Paswoord: <input type='password' name='j_password'></label>
-				<input type='submit' value='Aanmelden' id='aanmeldknop'>
-				<p>
-					U bent nieuw hier en zou u graag registreren? Klik <a
-						href="<c:url value='/gebruiker/login' />"> hier </a>
-				</p>
-			</form>
-		</li>
+	<c:url value="/gebruiker/login" var="url" />
+		<li><a href="${url}">Aanmelden</a></li>
 	</security:authorize>
 </ul>
 
