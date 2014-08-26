@@ -34,7 +34,7 @@ public class IndexController {
 		Iterable<Product> producten = productService.findNieuwsteProducten();
 		
 		for(Product product:producten) {
-			String productFotoPad = servletContext.getRealPath("/img") + "\\" + product.getProductId() + ".jpg";
+			String productFotoPad = servletContext.getRealPath(File.separator + "img") + File.separator + product.getProductId() + ".jpg";
 			File file = new File(productFotoPad);
 			mapProducten.put(product, file.exists());
 		}

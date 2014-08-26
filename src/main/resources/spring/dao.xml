@@ -16,14 +16,6 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd'>
 	<context:property-placeholder location='classpath:/spring/database.properties'
 		ignore-unresolvable='true' />
 		<jee:jndi-lookup id="dataSource" jndi-name="jdbc/schildershop" />
-<!-- 	<bean id='dataSource' class='com.mchange.v2.c3p0.ComboPooledDataSource' -->
-<!-- 		destroy-method='close'> -->
-<!-- 		<property name='driverClass' value='${database.driverClass}' /> -->
-<!-- 		<property name='jdbcUrl' value='${database.jdbcUrl}' /> -->
-<!-- 		<property name='user' value='${database.user}' /> -->
-<!-- 		<property name='password' value='${database.password}' /> -->
-<!-- 		<property name='maxIdleTime' value='${database.maxIdleTime}' /> -->
-<!-- 	</bean> -->
 
 	<bean id='transactionManager' class='org.springframework.orm.jpa.JpaTransactionManager'>
 		<constructor-arg ref='entityManagerFactory' />
