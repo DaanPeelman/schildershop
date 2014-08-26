@@ -55,7 +55,6 @@
 				<input type="submit" value="Koop" />
 			</div>
 		</form:form>
-		<div class="push"></div>
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 		</footer>

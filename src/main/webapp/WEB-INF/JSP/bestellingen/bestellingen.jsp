@@ -90,8 +90,6 @@
 		<c:if test="${empty bestellingen}">
 			<p>U hebt nog geen bestellingen</p>
 		</c:if>
-		<div class="push"></div>
-
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 		</footer>

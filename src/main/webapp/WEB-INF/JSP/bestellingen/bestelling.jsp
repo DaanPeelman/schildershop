@@ -76,7 +76,6 @@
 		<h2>Afleveradres</h2>
 		<p>${bestelbon.leverAdres.straat} ${bestelbon.leverAdres.nummer},
 			${bestelbon.leverAdres.postcode} ${bestelbon.leverAdres.gemeente}</p>
-		<div class="push"></div>
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 		</footer>

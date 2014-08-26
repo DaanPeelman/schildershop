@@ -42,7 +42,6 @@
 				href='https://www.linkedin.com/in/lisasteendam' target="_blank">Lisa
 				Steendam</a>.
 		</p>
-		<div class="push"></div>
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 		</footer>

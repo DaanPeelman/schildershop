@@ -52,7 +52,6 @@
 				</div>
 			</c:forEach>
 		</c:if>
-		<div class="push"></div>
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 		</footer>

@@ -88,7 +88,6 @@
 			<div>
 				<input type="submit" value="Opslaan" />
 			</div>
-			<div class="push"></div>
 		</form:form>
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />

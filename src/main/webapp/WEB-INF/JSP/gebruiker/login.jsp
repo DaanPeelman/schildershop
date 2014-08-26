@@ -114,7 +114,6 @@
 		<security:authorize access="isAuthenticated()">
 			<h1>U bent al aangemeld</h1>
 		</security:authorize>
-		<div class="push"></div>
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 		</footer>

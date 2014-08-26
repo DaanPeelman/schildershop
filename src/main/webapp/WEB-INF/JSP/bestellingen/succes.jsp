@@ -33,7 +33,6 @@
 	</header>
 	<div id="wrapper">
 		<p>Uw bestelling is geplaatst</p>
-		<div class="push"></div>
 		<footer>
 			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
 		</footer>
