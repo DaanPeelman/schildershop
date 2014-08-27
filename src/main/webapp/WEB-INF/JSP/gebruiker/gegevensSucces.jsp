@@ -24,9 +24,6 @@
 			alt="logo">
 		</a>
 		<nav>
-			<security:authorize access="isAuthenticated()">
-				<jsp:include page="../ingelogdMenu.jsp" />
-			</security:authorize>
 			<jsp:include page="../menu.jsp" />
 		</nav>
 		<h1>Succes</h1>

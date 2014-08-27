@@ -21,12 +21,7 @@
 			alt="logo">
 		</a>
 		<nav>
-			<security:authorize access="isAuthenticated()">
-				<jsp:include page="../ingelogdMenu.jsp" />
-			</security:authorize>
-			<ul>
-				<jsp:include page="../menuZonderLogin.jsp" />
-			</ul>
+			<jsp:include page="../menu.jsp" />
 		</nav>
 		<h1>Toevoegen</h1>
 	</header>
@@ -39,7 +34,7 @@
 				<jsp:include page='productformfields.jsp' />
 				<label><span>Afbeelding: </span><input type="file"
 					name="foto"></label>
-				
+
 				<input type='submit' value='Toevoegen' id='toevoegknop'>
 				<form:errors cssClass='fout' />
 			</form:form>

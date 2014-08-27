@@ -164,11 +164,7 @@ nav ul {
 
 nav ul li {
 	display: inline;
-	margin-left: 20 px;
-}
-
-#aanmeldform input {
-	text-align: left;
+	margin-left: 30 px;
 }
 
 #icoon img {
@@ -241,10 +237,6 @@ nav * {
 /* selected nav link */
 nav ul li a:hover,nav ul li a:active {
 	color: #a46137;
-}
-
-#adminnav li a:hover,nav ul li a:active {
-	color: #b00;
 }
 
 nav input {

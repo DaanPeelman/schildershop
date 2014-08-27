@@ -23,12 +23,7 @@
 			alt="logo">
 		</a>
 		<nav>
-			<security:authorize access="isAuthenticated()">
-				<jsp:include page="../ingelogdMenu.jsp" />
-			</security:authorize>
-			<ul>
-				<jsp:include page="../menu.jsp" />
-			</ul>
+			<jsp:include page="../menu.jsp" />
 		</nav>
 	</header>
 	<div id="wrapper">
