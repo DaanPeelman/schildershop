@@ -8,7 +8,6 @@ body {
 
 #wrapper {
 	width: 1014px;
-	margin: 0 auto -100px;;
 	padding-right: 5px;
 	padding-left: 5px;
 	height: auto;
@@ -61,11 +60,6 @@ h3 {
 	float: left;
 	padding-right: 1em;
 	width: 50%;
-}
-
-.push {
-	height: 100px;
-	clear: both;
 }
 
 .sidebar {
@@ -192,8 +186,6 @@ footer {
 	font-size: 0.75em;
 	text-align: center;
 	padding-top: 20px;
-	height: 100px;
-	clear: both;
 }
 
 /****************************
