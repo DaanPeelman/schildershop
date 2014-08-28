@@ -29,4 +29,6 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
 	Integer findMinJaartal();
 	
 	Integer findMaxJaartal();
+	
+	Iterable<Product> findByProductIdGreaterThan(long id);
 }
