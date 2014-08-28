@@ -59,10 +59,10 @@
 				<img alt="portret Daan Peelman"
 					src="${pageContext.servletContext.contextPath}/img/daan.jpg"
 					class="portret">
-				<p>As a newly trained Java Developer I'm looking for the
-					opportunity of a first job experience. I'm an active and friendly
-					team player eager to learn within IT and software development.
-					Fluent in Java, JSP, Servlets, Hibernate,...</p>
+				<p>Als beginnend Java Ontwikkelaar ben ik opzoek naar de kans op
+					een eerste professionele werkervaring. Ik ben een vriendelijk en
+					actief persoon die houdt van leren binnen de IT wereld.</p>
+				<p>Vloeiend in Java, JSP, Servlets, Hibernate,...</p>
 			</div>
 			<br style="clear: both;" />
 			<div>
