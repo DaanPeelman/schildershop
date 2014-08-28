@@ -138,8 +138,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@PostConstruct
-	@Override
-	public void createTest() {
+	protected void deleteAlleNieuweProducten() {
 		Iterable<Product> productenTeVerwijderen = productDAO.findByProductIdGreaterThan(12);
 		productDAO.deleteInBatch(productenTeVerwijderen);
 	}
