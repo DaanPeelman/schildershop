@@ -1,5 +1,6 @@
 package be.vdab.web;
 
+import java.awt.Image;
 import java.io.*;
 import java.math.BigDecimal;
 
@@ -99,6 +100,10 @@ public class ProductController {
 			if (!"image/jpeg".equals(contentType)
 					&& "image/pjpeg".equals(contentType)) {
 				bindingResult.reject("fotoFout");
+			}
+			
+			if(part.getSize() > 1000000) {
+				bindingResult.reject("teGroteFoto");
 			}
 		}
 		ModelAndView mav = new ModelAndView("producten/toevoegen", "schilder",

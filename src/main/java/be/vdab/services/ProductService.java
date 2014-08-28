@@ -27,6 +27,4 @@ public interface ProductService {
 	Integer findMinJaartal();
 
 	Integer findMaxJaartal();
-	
-	void createTest();
 }
