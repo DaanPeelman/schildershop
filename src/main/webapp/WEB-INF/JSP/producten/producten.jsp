@@ -15,6 +15,8 @@
 <link
 	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700'
 	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css"
+	rel="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -63,89 +65,94 @@
 </script>
 </head>
 <body>
-	<header>
-		<div>
-			<a href='<c:url value="/" />' id="logo"> <img
-				src="${pageContext.servletContext.contextPath}/img/logoSS.png"
-				alt="logo">
-			</a>
-		</div>
-		<nav>
-			<jsp:include page="../menu.jsp" />
-		</nav>
-		<h1>Producten ${filter}</h1>
-	</header>
-	<div id="wrapper">
-		<aside class='sidebar'>
-			<c:url var="url" value="/producten" />
-			<form:form commandName="zoekTermForm" action="${url}" method="get">
-				<div>
-					<form:label path="zoekterm">
-						<form:input path="zoekterm" autofocus='autofocus' />
-						<form:errors path="zoekterm" cssClass="fout" />
-					</form:label>
-				</div>
-				<div class="slider">
-					<label for="amount">Prijs:</label> <input type="text" id="amount"
-						readonly>
-					<div id="slider-range-prijs"></div>
-					<form:input type="hidden" path="vanPrijs" id="vanPrijs"
-						value="${minPrijs}" />
-					<form:input type="hidden" path="totPrijs" id="totPrijs"
-						value="${maxPrijs}" />
-				</div>
-				<div class="slider">
-					<label for="periode">Periode:</label> <input type="text"
-						id="periode" readonly>
-					<div id="slider-range-jaartal"></div>
-					<form:input type="hidden" path="vanJaartal" id="vanJaartal"
-						value="${minDatum}" />
-					<form:input type="hidden" path="totJaartal" id="totJaartal"
-						value="${maxDatum}" />
-				</div>
-				<div>
-					<input type="submit" value="Zoek" />
-					<form:errors cssClass='fout' element='div' />
-				</div>
-			</form:form>
-		</aside>
-		<section class='content'>
-			<c:choose>
-				<c:when test="${not empty schilderijen}">
-					<table>
-						<thead>
-							<tr>
-								<th>Titel</th>
-								<th>Schilder</th>
-								<th>Stijl</th>
-								<th>Jaartal</th>
-								<th>Prijs</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${schilderijen}" var="schilderij">
+	<div class="sticky_wrapper">
+		<header>
+			<div>
+				<a href='<c:url value="/" />' id="logo"> <img
+					src="${pageContext.servletContext.contextPath}/img/logoSS.png"
+					alt="logo">
+				</a>
+			</div>
+			<nav>
+				<jsp:include page="../menu.jsp" />
+			</nav>
+			<h1>Producten ${filter}</h1>
+		</header>
+		<div id="wrapper">
+			<aside class='sidebar'>
+				<c:url var="url" value="/producten" />
+				<form:form commandName="zoekTermForm" action="${url}" method="get">
+					<div>
+						<form:label path="zoekterm">
+							<form:input path="zoekterm" autofocus='autofocus' />
+							<form:errors path="zoekterm" cssClass="fout" />
+						</form:label>
+					</div>
+					<div class="slider">
+						<label for="amount">Prijs:</label> <input type="text" id="amount"
+							readonly>
+						<div id="slider-range-prijs"></div>
+						<form:input type="hidden" path="vanPrijs" id="vanPrijs"
+							value="${minPrijs}" />
+						<form:input type="hidden" path="totPrijs" id="totPrijs"
+							value="${maxPrijs}" />
+					</div>
+					<div class="slider">
+						<label for="periode">Periode:</label> <input type="text"
+							id="periode" readonly>
+						<div id="slider-range-jaartal"></div>
+						<form:input type="hidden" path="vanJaartal" id="vanJaartal"
+							value="${minDatum}" />
+						<form:input type="hidden" path="totJaartal" id="totJaartal"
+							value="${maxDatum}" />
+					</div>
+					<div>
+						<input type="submit" value="Zoek" />
+						<form:errors cssClass='fout' element='div' />
+					</div>
+				</form:form>
+			</aside>
+			<section class='content'>
+				<c:choose>
+					<c:when test="${not empty schilderijen}">
+						<table>
+							<thead>
 								<tr>
-									<spring:url value="/producten/{productId}" var="productURL">
-										<spring:param name="productId" value="${schilderij.productId}" />
-									</spring:url>
-									<td><a href="${productURL}">${schilderij.titel}</a></td>
-									<td>${schilderij.schilder.naam}</td>
-									<td>${schilderij.stijl}</td>
-									<td>${schilderij.jaartal}</td>
-									<td>${schilderij.prijs}</td>
+									<th>Titel</th>
+									<th>Schilder</th>
+									<th>Stijl</th>
+									<th>Jaartal</th>
+									<th>Prijs</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</c:when>
-				<c:otherwise>
+							</thead>
+							<tbody>
+								<c:forEach items="${schilderijen}" var="schilderij">
+									<tr>
+										<spring:url value="/producten/{productId}" var="productURL">
+											<spring:param name="productId"
+												value="${schilderij.productId}" />
+										</spring:url>
+										<td><a href="${productURL}">${schilderij.titel}</a></td>
+										<td>${schilderij.schilder.naam}</td>
+										<td>${schilderij.stijl}</td>
+										<td>${schilderij.jaartal}</td>
+										<td>${schilderij.prijs}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:when>
+					<c:otherwise>
 					Er werden geen schilderijen gevonden.
 				</c:otherwise>
-			</c:choose>
-		</section>
-		<footer>
-			<jsp:include page="/WEB-INF/JSP/footer.jsp" />
-		</footer>
+				</c:choose>
+			</section>
+		</div>
+		<div class="push"></div>
 	</div>
+	<!--  END sticky_wrapper -->
+	<footer>
+		<jsp:include page="/WEB-INF/JSP/footer.jsp" />
+	</footer>
 </body>
 </html>

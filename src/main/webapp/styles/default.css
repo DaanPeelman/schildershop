@@ -6,16 +6,6 @@ body {
 	font-family: 'Merriweather', serif;
 }
 
-#wrapper {
-	width: 1014px;
-	padding-right: 5px;
-	padding-left: 5px;
-	height: auto;
-	height: 100%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
 p {
 	text-align: justify;
 	margin-bottom: 1.3em;
@@ -80,6 +70,19 @@ td {
 	padding-right: 2em;
 }
 
+.portret {
+	float: left;
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	background: no-repeat;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	margin: 1em;
+}
 
 /****************************
 FORMS
@@ -114,12 +117,12 @@ input[type=submit] {
 	width: 3em;
 }
 
-#slider-range-prijs, #slider-range-jaartal {
-	height:0.5em;
+#slider-range-prijs,#slider-range-jaartal {
+	height: 0.5em;
 	width: 9.5em;
 }
 
-.sidebar #aanmeldform h2{
+.sidebar #aanmeldform h2 {
 	margin-top: 0;
 }
 
@@ -130,13 +133,6 @@ header {
 	padding-top: 20px;
 }
 
-#logo img {
-	position: absolute;
-	text-align: center;
-	height: 8em;
-	z-index: 1;
-}
-
 h1 {
 	margin: 15px 0;
 	font-size: 3em;
@@ -144,6 +140,13 @@ h1 {
 	font-weight: normal;
 	line-height: 0.8em;
 	padding-left: 15px;
+}
+
+#logo img {
+	position: absolute;
+	text-align: center;
+	height: 8em;
+	z-index: 1;
 }
 
 /****************************
@@ -161,7 +164,7 @@ nav * {
 }
 
 nav ul {
-	font-size: 1.2em;	
+	font-size: 1.2em;
 }
 
 nav ul li {
@@ -177,8 +180,8 @@ nav ul li {
 FOOTER
 *****************************/
 footer {
-	position: absolute;
-	bottom: 0;
+/* 	position: absolute; */
+/* 	bottom: 0; */
 	width: 1014px;
 	border-top: 1px solid;
 	font-size: 0.75em;
@@ -252,11 +255,11 @@ footer {
 	color: #999;
 }
 
-#slider-range-prijs, #slider-range-jaartal {
+#slider-range-prijs,#slider-range-jaartal {
 	background: #fff;
 }
 
-#slider-range-prijs *, #slider-range-jaartal * {
+#slider-range-prijs *,#slider-range-jaartal * {
 	background: #FFA639;
 }
 
