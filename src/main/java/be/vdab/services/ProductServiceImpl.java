@@ -3,6 +3,8 @@ package be.vdab.services;
 import java.math.BigDecimal;
 import java.util.*;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.domain.Sort.Direction;
@@ -133,5 +135,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Integer findMaxJaartal() {
 		return productDAO.findMaxJaartal();
+	}
+	
+	@PostConstruct
+	@Override
+	public void createTest() {
+		Iterable<Product> productenTeVerwijderen = productDAO.findByProductIdGreaterThan(12);
+		productDAO.deleteInBatch(productenTeVerwijderen);
 	}
 }
