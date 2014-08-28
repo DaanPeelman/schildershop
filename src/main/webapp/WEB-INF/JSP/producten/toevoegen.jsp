@@ -34,8 +34,7 @@
 				<jsp:include page='productformfields.jsp' />
 				<label><span>Afbeelding: </span><input type="file"
 					name="foto"></label>
-
-				<input type='submit' value='Toevoegen' id='toevoegknop'>
+				<br><input type='submit' value='Toevoegen' id='toevoegknop'>
 				<form:errors cssClass='fout' />
 			</form:form>
 			${succesProduct}
