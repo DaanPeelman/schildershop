@@ -1,6 +1,5 @@
 package be.vdab.web;
 
-import java.awt.Image;
 import java.io.*;
 import java.math.BigDecimal;
 

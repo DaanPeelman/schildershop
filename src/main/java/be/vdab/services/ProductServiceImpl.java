@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,11 +14,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.vdab.dao.BestelbonDAO;
 import be.vdab.dao.ProductDAO;
 import be.vdab.dao.SchilderDAO;
-import be.vdab.entities.Bestelbon;
-import be.vdab.entities.Bestelbonlijn;
 import be.vdab.entities.Product;
 import be.vdab.entities.Schilder;
 import be.vdab.exceptions.ProductBestaatAlException;
@@ -30,13 +25,11 @@ import be.vdab.exceptions.ProductBestaatAlException;
 public class ProductServiceImpl implements ProductService {
 	private final ProductDAO productDAO;
 	private final SchilderDAO schilderDAO;
-	private final BestelbonDAO bestelbonDAO;
 
 	@Autowired
-	public ProductServiceImpl(ProductDAO productDAO, SchilderDAO schilderDAO, BestelbonDAO bestelbonDAO) {
+	public ProductServiceImpl(ProductDAO productDAO, SchilderDAO schilderDAO) {
 		this.productDAO = productDAO;
 		this.schilderDAO = schilderDAO;
-		this.bestelbonDAO = bestelbonDAO;
 	}
 
 	@Override
@@ -133,34 +126,35 @@ public class ProductServiceImpl implements ProductService {
 	public Integer findMinPrijs() {
 		return productDAO.findMinPrijs();
 	}
-	
+
 	@Override
 	public Integer findMaxPrijs() {
 		return productDAO.findMaxPrijs();
 	}
-	
+
 	@Override
 	public Integer findMinJaartal() {
 		return productDAO.findMinJaartal();
 	}
-	
+
 	@Override
 	public Integer findMaxJaartal() {
 		return productDAO.findMaxJaartal();
 	}
-	
-//	@PostConstruct
-//	protected void deleteAlleNieuweProducten() {
-//		Iterable<Product> productenTeVerwijderen = productDAO.findByProductIdGreaterThan(12);
-//		List<Bestelbon> bestelbonnen = bestelbonDAO.findAll();
-//		
-//		for(Bestelbon bestelbon:bestelbonnen) {
-//			Set<Bestelbonlijn> bestelbonlijnen = bestelbon.getBestelbonlijnen();
-//			
-//			for(Bestelbonlijn bestelbonlijn:bestelbonlijnen) {
-//				System.out.println(bestelbonlijn);
-//			}
-//		}
-//		//productDAO.deleteInBatch(productenTeVerwijderen);
-//	}
+
+	// @PostConstruct
+	// protected void deleteAlleNieuweProducten() {
+	// Iterable<Product> productenTeVerwijderen =
+	// productDAO.findByProductIdGreaterThan(12);
+	// List<Bestelbon> bestelbonnen = bestelbonDAO.findAll();
+	//
+	// for(Bestelbon bestelbon:bestelbonnen) {
+	// Set<Bestelbonlijn> bestelbonlijnen = bestelbon.getBestelbonlijnen();
+	//
+	// for(Bestelbonlijn bestelbonlijn:bestelbonlijnen) {
+	// System.out.println(bestelbonlijn);
+	// }
+	// }
+	// //productDAO.deleteInBatch(productenTeVerwijderen);
+	// }
 }
