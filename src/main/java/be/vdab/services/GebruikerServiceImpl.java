@@ -3,6 +3,7 @@ package be.vdab.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.dao.*;
 import be.vdab.entities.*;
@@ -10,6 +11,7 @@ import be.vdab.exceptions.GebruikerMetDezeEmailBestaatAlException;
 import be.vdab.valueobjects.Adres;
 
 @Service
+@Transactional(readOnly = true)
 public class GebruikerServiceImpl implements GebruikerService {
 	private final RolDAO rolDAO;
 	private final GebruikerDAO gebruikerDAO;
@@ -20,6 +22,7 @@ public class GebruikerServiceImpl implements GebruikerService {
 		this.rolDAO = rolDAO;
 	}
 	
+	@Transactional(readOnly = false)
 	@Override
 	public void create(Gebruiker gebruiker) throws GebruikerMetDezeEmailBestaatAlException{
 		if(gebruikerDAO.findByEmailadres(gebruiker.getEmailadres()) != null) {
@@ -41,11 +44,13 @@ public class GebruikerServiceImpl implements GebruikerService {
 		return gebruikerDAO.findByEmailadres(emailadres);
 	}
 	
+	@Transactional(readOnly = false)
 	@Override
 	public void update(Gebruiker gebruiker) {
 		gebruikerDAO.save(gebruiker);
 	}
 	
+	@Transactional(readOnly = false)
 	@Override
 	public void updateGegevens(long id, Adres adres) {
 		Gebruiker gebruiker = gebruikerDAO.findOne(id);
@@ -58,6 +63,7 @@ public class GebruikerServiceImpl implements GebruikerService {
 		return gebruikerDAO.findOne(id);
 	}
 	
+	@Transactional(readOnly = false)
 	@Override
 	public void updateWachtwoord(long id, String wachtwoord) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
