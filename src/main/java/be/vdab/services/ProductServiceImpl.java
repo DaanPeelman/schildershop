@@ -152,7 +152,6 @@ public class ProductServiceImpl implements ProductService {
 	// Set<Bestelbonlijn> bestelbonlijnen = bestelbon.getBestelbonlijnen();
 	//
 	// for(Bestelbonlijn bestelbonlijn:bestelbonlijnen) {
-	// System.out.println(bestelbonlijn);
 	// }
 	// }
 	// //productDAO.deleteInBatch(productenTeVerwijderen);

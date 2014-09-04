@@ -34,7 +34,6 @@ public class GebruikerServiceImpl implements GebruikerService {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String nWachtwoord = encoder.encode(gebruiker.getWachtwoord());
-		System.out.println(nWachtwoord);
 		gebruiker.setWachtwoord(nWachtwoord);		// wachtwoord encryptie
 		gebruikerDAO.save(gebruiker);
 	}

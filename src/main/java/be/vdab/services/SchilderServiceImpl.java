@@ -27,7 +27,6 @@ public class SchilderServiceImpl implements SchilderService {
 			throw new SchilderMetDezeNaamBestaatAlException();
 		}
 		schilderDAO.save(schilder);
-		System.out.println("SchilderId" + schilder.getSchilderId());
 	}
 
 	@Override
