@@ -14,9 +14,12 @@
 	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900%7CPlay:400,700'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
-	rel="${pageContext.servletContext.contextPath}/styles/layout.css" />
+	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/styles/lightbox.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/javascript/lightbox.min.js"></script>
 </head>
 <body>
 	<div class="sticky_wrapper">
@@ -38,8 +41,8 @@
 				method="put">
 				<c:if test='${heeftFoto}'>
 					<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
-					<img alt="foto van het schilderij" id="detailImg"
-						src="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg">
+					<a href="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg" title="${product.titel}" rel="lightbox"><img alt="foto van het schilderij" id="detailImg"
+						src="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg"></a>
 				</c:if>
 				<div>
 					<section>
