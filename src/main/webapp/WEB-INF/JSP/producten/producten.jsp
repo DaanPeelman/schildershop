@@ -16,7 +16,7 @@
 	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900%7CPlay:400,700'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
-	rel="${pageContext.servletContext.contextPath}/styles/layout.css" />
+	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
