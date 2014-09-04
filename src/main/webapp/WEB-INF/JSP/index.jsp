@@ -4,6 +4,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +50,13 @@
 							<fmt:formatNumber value="${product.key.prijs}"
 								minFractionDigits="2" maxFractionDigits="2" />
 						</p>
+						<c:url value="/mandje" var="url" />
+						<form:form commandName="bestelProductForm" action="${url}" method="put">
+							<form:input path="productId" value="${product.key.productId}" type="hidden" />
+							<form:label path="aantal">Aantal:</form:label>
+							<form:input path="aantal"/>
+							<input type="submit" value="Koop" />
+						</form:form>
 					</div>
 				</c:forEach>
 			</c:if>

@@ -45,6 +45,7 @@ public class IndexController {
 		ModelAndView modelAndView = new ModelAndView("index");
 		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		modelAndView.addObject("laatsteProducten", mapProducten);
+		modelAndView.addObject("bestelProductForm", new BestelProductForm());
 		
 		return modelAndView;
 	}
