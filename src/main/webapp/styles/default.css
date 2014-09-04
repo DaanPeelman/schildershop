@@ -184,7 +184,19 @@ a {
 a:hover {
 	color: #B2806B;
 }
-
+#icoon {
+	background-image:url('../img/icoon_kar.png');
+	background-size: 27px 27px;
+    background-repeat: no-repeat;
+    background-position: 0 10px; 
+    
+    padding-left: 25px;
+}
+#icoon:hover {
+	background-image:url('../img/icoon_kar_hover.png');
+	background-size: 27px 27px;
+    background-repeat: no-repeat;
+}
 header {
 	background: #7F6D62;
 	border-color: #403731;
