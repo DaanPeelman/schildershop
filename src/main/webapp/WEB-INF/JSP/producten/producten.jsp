@@ -23,13 +23,24 @@
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script>
 	$(function() {
-		var iMin = parseInt("${minPrijs}");
-		var iMax = parseInt("${maxPrijs}");
+		var iMinPrijs = parseInt("${minPrijs}");
+		var iMaxPrijs = parseInt("${maxPrijs}");
+		
+		var sMinPrijs = parseInt("${sMinPrijs}");
+		var sMaxPrijs = parseInt("${sMaxPrijs}");
+		
+		if(isNaN(sMinPrijs)) {
+			sMinPrijs = iMinPrijs;
+		}
+		if(isNaN(sMaxPrijs)) {
+			sMaxPrijs = iMaxPrijs;
+		}
+		
 		$("#slider-range-prijs").slider({
 			range : true,
-			min : iMin,
-			max : iMax,
-			values : [ iMin, iMax ],
+			min : iMinPrijs,
+			max : iMaxPrijs,
+			values : [ sMinPrijs, sMaxPrijs ],
 			slide : function(event, ui) {
 				$("#amount").val("€" + ui.values[0] + " - €" + ui.values[1]);
 				$("#vanPrijs").val(ui.values[0]);
@@ -41,17 +52,26 @@
 						+ $("#slider-range-prijs").slider("values", 1));
 
 	});
-</script>
-<script>
-	var iMin = parseInt("${minDatum}");
-	var iMax = parseInt("${maxDatum}");
+
+	var iMinJaar = parseInt("${minDatum}");
+	var iMaxJaar = parseInt("${maxDatum}");
+	
+	var sMinJaar = parseInt("${sMinJaar}");
+	var sMaxJaar = parseInt("${sMaxJaar}");
+	
+	if(isNaN(sMinJaar)) {
+		sMinJaar = iMinJaar;
+	}
+	if(isNaN(sMaxJaar)) {
+		sMaxJaar = iMaxJaar;
+	}
 	$(function() {
 
 		$("#slider-range-jaartal").slider({
 			range : true,
-			min : iMin,
-			max : iMax,
-			values : [ iMin, iMax ],
+			min : iMinJaar,
+			max : iMaxJaar,
+			values : [ sMinJaar, sMaxJaar ],
 			slide : function(event, ui) {
 				$("#periode").val(ui.values[0] + " - " + ui.values[1]);
 				$("#vanJaartal").val(ui.values[0]);

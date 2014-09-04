@@ -75,7 +75,6 @@ public class ProductController {
 			Iterable<Product> resultaat = productService.findByZoektermen(
 					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal);
 			mav.addObject("schilderijen", resultaat);
-			mav.addObject("zoekTermForm", new ZoekTermForm());
 			String filter = "tussen €" + vanPrijs + " en €"
 					+ totPrijs + ", gemaakt tussen " + vanJaartal + " en "
 							+ totJaartal;
@@ -84,8 +83,13 @@ public class ProductController {
 			}
 			mav.addObject("filter", filter);
 		}
-		mav.addObject("zoekTermForm", new ZoekTermForm());
+
 		mav = addMinsMaxs(mav);
+		mav.addObject("sMinPrijs", zoekTermForm.getVanPrijs());
+		mav.addObject("sMaxPrijs", zoekTermForm.getTotPrijs());
+		mav.addObject("sMinJaar", zoekTermForm.getVanJaartal());
+		mav.addObject("sMaxJaar", zoekTermForm.getTotJaartal());
+		
 		return mav;
 	}
 
