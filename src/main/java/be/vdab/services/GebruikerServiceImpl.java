@@ -29,7 +29,7 @@ public class GebruikerServiceImpl implements GebruikerService {
 			throw new GebruikerMetDezeEmailBestaatAlException();
 		}
 		
-		Rol rol = rolDAO.findOne(2L);		// automatisch een klant
+		Rol rol = rolDAO.findByNaamIs("Klant");		// automatisch een klant
 		gebruiker.addRol(rol);
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
