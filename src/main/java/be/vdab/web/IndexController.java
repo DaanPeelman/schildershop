@@ -22,10 +22,13 @@ public class IndexController {
 	
 	private final ProductService productService;
 	
+	private Mandje mandje;
+	
 	@Autowired
-	public IndexController(ProductService productService, ServletContext servletContext) {
+	public IndexController(ProductService productService, ServletContext servletContext, Mandje mandje) {
 		this.productService = productService;
 		this.servletContext = servletContext;
+		this.mandje = mandje;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -40,6 +43,7 @@ public class IndexController {
 		}
 		
 		ModelAndView modelAndView = new ModelAndView("index");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		modelAndView.addObject("laatsteProducten", mapProducten);
 		
 		return modelAndView;

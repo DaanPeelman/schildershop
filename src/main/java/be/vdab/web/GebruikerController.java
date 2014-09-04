@@ -21,14 +21,18 @@ import be.vdab.services.GebruikerService;
 public class GebruikerController {
 	private final GebruikerService gebruikerService;
 	
+	private Mandje mandje;
+	
 	@Autowired
-	public GebruikerController(GebruikerService gebruikerService) {
+	public GebruikerController(GebruikerService gebruikerService, Mandje mandje) {
 		this.gebruikerService = gebruikerService;
+		this.mandje = mandje;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView aanmeldForm() {
 		ModelAndView modelAndView = new ModelAndView("gebruiker/login");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		modelAndView.addObject("gebruiker", new Gebruiker());
 		
 		return modelAndView;
@@ -44,13 +48,19 @@ public class GebruikerController {
 		if(!bindingResult.hasErrors()) {
 			try {
 				gebruikerService.create(gebruiker);
-				return new ModelAndView("gebruiker/succes", "gebruikersnaam", gebruiker.getEmailadres());
+				
+				ModelAndView modelAndView = new ModelAndView("gebruiker/succes");
+				modelAndView.addObject("gebruikersnaam", gebruiker.getEmailadres());
+				modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+				
+				return modelAndView;
 			} catch (GebruikerMetDezeEmailBestaatAlException e) {
 				bindingResult.rejectValue("emailadres", "gebruikerMetDezeEmailBestaatAl");
 			}
 		}
 		
 		ModelAndView modelAndView = new ModelAndView("gebruiker/login");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		
 		return modelAndView;
 	}
@@ -59,19 +69,22 @@ public class GebruikerController {
 	public ModelAndView toonGegevens(HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
 		if(principal != null) {
-			ModelAndView modelAndView = new ModelAndView("gebruiker/gegevens");
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
+			
+			ModelAndView modelAndView = new ModelAndView("gebruiker/gegevens");
+			modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 			modelAndView.addObject("gebruiker", gebruiker);
 			
 			return modelAndView;
 		}
-		
+
 		return new ModelAndView("redirect:/gebruiker/login");
 	}
 	
 	@RequestMapping(value = "/wijzig", method = RequestMethod.GET)
 	public ModelAndView wijzigGegevensForm(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		
 		Principal principal = request.getUserPrincipal();
 		if(principal != null) {
@@ -91,11 +104,16 @@ public class GebruikerController {
 		if(principal != null) {
 			if(!bindingResult.hasErrors()) {
 				gebruikerService.updateGegevens(gebruikerId, adresForm);
-				return new ModelAndView("gebruiker/gegevensSucces");
+				ModelAndView modelAndView = new ModelAndView("gebruiker/gegevensSucces");
+				modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+				
+				return modelAndView;
 			}
 		}
 		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		modelAndView.addObject("wijzigWachtwoordForm", new WijzigWachtwoordForm());
+		
 		return modelAndView;
 	}
 	
@@ -119,6 +137,7 @@ public class GebruikerController {
 		
 		ModelAndView modelAndView = new ModelAndView("gebruiker/wijzig");
 		
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		modelAndView.addObject("adresForm", new AdresForm(gebruiker.getAdres()));
 		
 		return modelAndView;

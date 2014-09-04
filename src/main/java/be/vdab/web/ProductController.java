@@ -26,12 +26,15 @@ public class ProductController {
 	private final ServletContext servletContext;
 	private final Logger logger = LoggerFactory
 			.getLogger(ProductController.class);
+	
+	private Mandje mandje;
 
 	@Autowired
 	public ProductController(ProductService productService,
-			SchilderService schilderService, ServletContext servletContext) {
+			SchilderService schilderService, Mandje mandje, ServletContext servletContext) {
 		this.productService = productService;
 		this.schilderService = schilderService;
+		this.mandje = mandje;
 		this.servletContext = servletContext;
 	}
 
@@ -39,8 +42,10 @@ public class ProductController {
 	public ModelAndView findAll() {
 		ModelAndView mav = new ModelAndView("producten/producten",
 				"schilderijen", productService.findAll());
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav = addMinsMaxs(mav);
+		
 		return mav;
 	}
 
@@ -49,6 +54,8 @@ public class ProductController {
 	public ModelAndView findByZoektermen(@Valid ZoekTermForm zoekTermForm,
 			BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("producten/producten");
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
+		
 		if (!bindingResult.hasErrors() && !zoekTermForm.isValidPrijs()) {
 			bindingResult.reject("fouteVanTotPrijs", new Object[] {
 					zoekTermForm.getVanPrijs(), zoekTermForm.getTotPrijs() },
@@ -86,8 +93,10 @@ public class ProductController {
 	public ModelAndView createForm() {
 		ModelAndView mav = new ModelAndView("producten/toevoegen", "product",
 				new Product());
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("schilders", schilderService.findAll());
 		mav.addObject("schilder", new Schilder());
+		
 		return mav;
 	}
 
@@ -107,6 +116,7 @@ public class ProductController {
 		}
 		ModelAndView mav = new ModelAndView("producten/toevoegen", "schilder",
 				new Schilder());
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("schilders", schilderService.findAll());
 		if (!bindingResult.hasErrors()) {
 			try {
@@ -135,6 +145,7 @@ public class ProductController {
 			BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("producten/toevoegen", "product",
 				new Product());
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		if (!bindingResult.hasErrors()) {
 			try {
 				schilderService.create(schilder);
@@ -157,6 +168,7 @@ public class ProductController {
 		Product product = productService.findOne(productId);
 		ModelAndView mav = new ModelAndView("producten/details", "product",
 				product);
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		if (product != null) {
 			String productFotoPad = servletContext.getRealPath(File.separator + "img") + File.separator
 					+ product.getProductId() + ".jpg";

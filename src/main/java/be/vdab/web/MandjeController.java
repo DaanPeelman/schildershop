@@ -32,6 +32,7 @@ public class MandjeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showMandje() {
 		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		
 		Bestelbon productenInMandje = new Bestelbon();
 		
@@ -56,6 +57,8 @@ public class MandjeController {
 			return new ModelAndView("redirect:/mandje");
 		}
 		ModelAndView modelAndView = new ModelAndView("producten/details");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+		
 		Product product = productService.findOne(productId);
 		
 		String productFotoPad = servletContext.getRealPath("/img") + "\\" + product.getProductId() + ".jpg";

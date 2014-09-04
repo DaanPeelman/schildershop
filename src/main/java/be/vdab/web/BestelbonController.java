@@ -35,7 +35,10 @@ public class BestelbonController {
 		Principal principal = request.getUserPrincipal();
 		Iterable<Bestelbon> bestellingen = gebruikerService.findByEmailadres(principal.getName()).getBestellingen();
 		
-		return new ModelAndView("bestellingen/bestellingen", "bestellingen", bestellingen);
+		ModelAndView modelAndView = new ModelAndView("bestellingen/bestellingen");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -55,12 +58,16 @@ public class BestelbonController {
 			bestelbonService.create(bestelbon);
 			
 			mandje.leegMandje();
+			ModelAndView modelAndView = new ModelAndView("bestellingen/succes");
+			modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 			
-			return new ModelAndView("bestellingen/succes");
+			return modelAndView;
 		}
 		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		modelAndView.addObject("mandje", bestelbon);
 		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
+		
 		return modelAndView;
 	}
 	
@@ -72,9 +79,14 @@ public class BestelbonController {
 		Bestelbon bestelbon = bestelbonService.read(bestelbonId);
 		
 		if(gebruiker == bestelbon.getGebruiker()) {
-			return new ModelAndView("bestellingen/bestelling", "bestelbon", bestelbon);
+			ModelAndView modelAndView = new ModelAndView("bestellingen/bestelling");
+			modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+			
+			return modelAndView;
 		}
+		ModelAndView modelAndView = new ModelAndView("forbidden");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		
-		return new ModelAndView("forbidden");
+		return modelAndView;
 	}
 }
