@@ -4,7 +4,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!doctype html>
+<!DOCTYPE html>
 <html lang='nl'>
 <head>
 <title>${product.titel}</title>
