@@ -19,6 +19,11 @@ img {
 	max-width: 100%;
 }
 
+h2 {
+	margin: -5px 0 0;
+	font-weight: normal;
+}
+
 h3 {
 	margin: 0 0 1em 0;
 }
@@ -70,7 +75,7 @@ header {
 	margin: 0 0 30px 0;
 	padding: 5px 0 0 0;
 	width: 100%;
-	text-align:center;
+	text-align: center;
 }
 
 #logo img {
@@ -84,11 +89,6 @@ h1 {
 	font-size: 1.75em;
 	font-weight: normal;
 	line-height: 0.8em;
-}
-
-h2 {
-	margin: -5px 0 0;
-	font-weight: normal;
 }
 
 /****************************
@@ -113,10 +113,11 @@ nav li {
 nav a {
 	font-weight: 800;
 	padding: 15px 10px;
+	letter-spacing: 0.0625em;
 }
 
 #icoon img {
-	height: 1em;
+	height: 1.5em;
 }
 
 /****************************
@@ -139,7 +140,7 @@ PAGE: INDEX
 	clear: both;
 	min-height: 2em;
 	width: 90%;
-	margin: 2.5%;
+	margin: 5%;
 }
 
 .nieuwProduct h2 {
@@ -221,12 +222,12 @@ nav ul li a:hover,nav ul li a:active {
 	color: #a46137;
 }
 
-nav input {
-	color: #000;
-}
-
 footer {
 	color: #999;
+}
+
+.contact_link {
+	color: #a46137;
 }
 
 .nieuwProduct {
@@ -243,4 +244,63 @@ footer {
 
 .fout {
 	color: red;
+}
+
+/**********************************
+  **********************************
+  RESPONSIVE: OTHER SCREEN SIZES
+  **********************************
+  ***********************************/
+@media screen and (min-width: 480px) {
+	/****************************
+  TWO COLUMN LAYOUT
+  *****************************/
+	#primary {
+		width: 50%;
+		float: left;
+	}
+	#secondary {
+		width: 40%;
+		float: right;
+	}
+
+	/****************************
+  PAGE: PORTFOLIO
+  *****************************/
+	#gallery li {
+		width: 28.33333%;
+	}
+	#gallery li:nth-child(4n) {
+		clear: left;
+	}
+
+	/****************************
+  PAGE: ABOUT
+  *****************************/
+	.portret {
+		float: left;
+		margin: 0 5% 80px 0;
+	}
+	
+	img.portret ~ * {
+		overflow: hidden;
+	}
+}
+
+@media screen and (min-width: 660px) {
+	/****************************
+  HEADER
+  *****************************/
+	nav {
+		font-size : 1.125em;
+	}
+
+	h1 {
+		font-size: 2.5em;
+	}
+	
+	header {
+		border-bottom: 5px solid #403731;
+		margin-bottom: 60px;
+	}
 }

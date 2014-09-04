@@ -31,7 +31,7 @@
 		</header>
 		<div id="wrapper">
 			<security:authorize access="isAnonymous()">
-				<div class="sidebar">
+				<div id="primary">
 					<form method='post'
 						action='<c:url value="/j_spring_security_check"/>'
 						id='aanmeldform'>
@@ -46,7 +46,7 @@
 						</div>
 					</form>
 				</div>
-				<section class="content">
+				<section id="secondary">
 					<h2>Ik ben nieuw hier</h2>
 					<c:url var="url" value="/gebruiker" />
 					<form:form commandName="gebruiker" action="${url}" method="post">

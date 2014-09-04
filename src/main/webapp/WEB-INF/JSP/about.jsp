@@ -37,9 +37,9 @@
 		<div id="wrapper">
 			<h2>Wat</h2>
 			<p>
-				SchilderShop is het Java eindproject van <a
+				SchilderShop is het Java eindproject van <a class="contact_link"
 					href='https://www.linkedin.com/pub/daan-peelman/95/5b9/a78/nl'
-					target="_blank">Daan Peelman</a> en <a
+					target="_blank">Daan Peelman</a> en <a class="contact_link"
 					href='https://www.linkedin.com/in/lisasteendam' target="_blank">Lisa
 					Steendam</a>. Het is een webshop die replica's van bekende schilderijen
 				verkoopt. Klantaccounts kunnen er hun aankoophistorie bekijken en
@@ -50,7 +50,7 @@
 			<p>
 				De database achter de site draait op MySQL, de code van de site zelf
 				is Java-based en maakt gebruik van JPA, Hibernate en Spring. De code
-				kan je <a href='https://github.com/DaanPeelman/schildershop'
+				kan je <a class="contact_link" href='https://github.com/DaanPeelman/schildershop'
 					target="_blank">hier</a> bekijken. Om dit project als team in goede
 				banen te leiden gebruikten we Github en Scrum.
 			</p>
@@ -80,7 +80,6 @@
 					<li>Bereid om in het buitenland te werken</li>
 					<li>Ook voor een IBO of stage mag u mij contacteren</li>
 				</ul>
-				<p>Huidige cursus: Android</p>
 			</div>
 		</div>
 		<div class="push"></div>
