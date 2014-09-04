@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 <link
-	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700'
+	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900%7CPlay:400,700'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
 	rel="${pageContext.servletContext.contextPath}/styles/layout.css" />
@@ -31,13 +31,13 @@
 			max : iMax,
 			values : [ iMin, iMax ],
 			slide : function(event, ui) {
-				$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+				$("#amount").val("€" + ui.values[0] + " - €" + ui.values[1]);
 				$("#vanPrijs").val(ui.values[0]);
 				$("#totPrijs").val(ui.values[1]);
 			}
 		});
 		$("#amount").val(
-				"$" + $("#slider-range-prijs").slider("values", 0) + " - $"
+				"€" + $("#slider-range-prijs").slider("values", 0) + " - €"
 						+ $("#slider-range-prijs").slider("values", 1));
 
 	});

@@ -4,7 +4,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!doctype html>
+<!DOCTYPE html>
 <html lang='nl'>
 <head>
 <title>Over Schildershop</title>
@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 <link
-	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900|Play:400,700'
+	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900%7CPlay:400,700'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
 	rel="${pageContext.servletContext.contextPath}/styles/layout.css" />
