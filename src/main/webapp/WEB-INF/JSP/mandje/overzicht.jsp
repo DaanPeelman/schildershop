@@ -62,13 +62,15 @@
 					Totaal: &euro;
 					<fmt:formatNumber minFractionDigits="2" maxFractionDigits="2">${totaalPrijs}</fmt:formatNumber>
 				</p>
-				<h2>Leveradres</h2>
-				<p>${productenInMandje.leverAdres.straat}&nbsp;${productenInMandje.leverAdres.nummer},
-					${productenInMandje.leverAdres.postcode}&nbsp;${productenInMandje.leverAdres.gemeente}</p>
-				<c:url var="url" value="/bestellingen" />
-				<form action="${url}" method="post">
-					<input type="submit" value="Bestel" />
-				</form>
+				<div class="lagereDiv">
+					<h2>Leveradres</h2>
+					<p class="adres">${productenInMandje.leverAdres.straat}&nbsp;${productenInMandje.leverAdres.nummer},
+						${productenInMandje.leverAdres.postcode}&nbsp;${productenInMandje.leverAdres.gemeente}</p>
+					<c:url var="url" value="/bestellingen" />
+					<form action="${url}" method="post">
+						<input type="submit" value="Bestel" />
+					</form>
+				</div>
 			</c:if>
 			<c:if test="${empty productenInMandje.bestelbonlijnen}">
 				<p>Er zijn geen producten in uw mandje.</p>
