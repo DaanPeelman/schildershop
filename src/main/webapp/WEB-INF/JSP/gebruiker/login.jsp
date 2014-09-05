@@ -37,70 +37,85 @@
 						id='aanmeldform'>
 						<h2>Ik ben al geregistreerd</h2>
 						<div>
-							<label>Gebruikersnaam: </label><input name='j_username' autofocus>
-							<label>Paswoord: </label><input type='password' name='j_password'>
-							<c:if test="${param.error }">
-								<div class="fout">Verkeerde gebruikersnaam of paswoord</div>
-							</c:if>
+							<label><span>Gebruikersnaam: </span><input
+								name='j_username' autofocus></label>
+						</div>
+						<div>
+							<label><span>Paswoord: </span><input type='password'
+								name='j_password'></label>
+						</div>
+						<c:if test="${param.error }">
+							<div class="fout">Verkeerde gebruikersnaam of paswoord</div>
+						</c:if>
+						<div>
 							<input type='submit' value='Aanmelden' id='aanmeldknop'>
 						</div>
 					</form>
 				</div>
-				<section id="secondary">
+				<section id="secondary" class="lagereDiv">
 					<h2>Ik ben nieuw hier</h2>
 					<c:url var="url" value="/gebruiker" />
 					<form:form commandName="gebruiker" action="${url}" method="post">
 						<div>
-							<form:label path="naam">Voornaam: <form:input
-									path="naam" />
+							<form:label path="naam">
+								<span>Voornaam: </span>
+								<form:input path="naam" />
 								<form:errors path="naam" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="familienaam">Familienaam: <form:input
-									path="familienaam" />
+							<form:label path="familienaam">
+								<span>Familienaam: </span>
+								<form:input path="familienaam" />
 								<form:errors path="familienaam" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="adres.straat">Straat: <form:input
-									path="adres.straat" />
+							<form:label path="adres.straat">
+								<span>Straat: </span>
+								<form:input path="adres.straat" />
 								<form:errors path="adres.straat" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="adres.nummer">Huisnr.: <form:input
-									path="adres.nummer" />
+							<form:label path="adres.nummer">
+								<span>Huisnr.: </span>
+								<form:input path="adres.nummer" />
 								<form:errors path="adres.nummer" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="adres.gemeente">Gemeente: <form:input
-									path="adres.gemeente" />
+							<form:label path="adres.gemeente">
+								<span>Gemeente: </span>
+								<form:input path="adres.gemeente" />
 								<form:errors path="adres.gemeente" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="adres.postcode">Postcode: <form:input
-									path="adres.postcode" />
+							<form:label path="adres.postcode">
+								<span>Postcode: </span>
+								<form:input path="adres.postcode" />
 								<form:errors path="adres.postcode" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="emailadres">Emailadres: <form:input
-									path="emailadres" />
+							<form:label path="emailadres">
+								<span>Emailadres: </span>
+								<form:input path="emailadres" />
 								<form:errors path="emailadres" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="wachtwoord">Wachtwoord <form:input
-									path="wachtwoord" type="password" />
+							<form:label path="wachtwoord">
+								<span>Wachtwoord </span>
+								<form:input path="wachtwoord" type="password" />
 								<form:errors path="wachtwoord" cssClass="fout" />
 							</form:label>
 						</div>
 						<div>
-							<form:label path="bevestigWachtwoord">Bevestig wachtwoord: <form:input
-									path="bevestigWachtwoord" type="password" />
+							<form:label path="bevestigWachtwoord">
+								<span>Bevestig wachtwoord: </span>
+								<form:input path="bevestigWachtwoord" type="password" />
 								<form:errors path="bevestigWachtwoord" cssClass="fout" />
 							</form:label>
 						</div>
