@@ -34,21 +34,24 @@
 				<table>
 					<thead>
 						<tr>
-							<td>Titel</td>
-							<td>Aantal</td>
-							<td>Prijs</td>
-							<td>Totaal</td>
+							<th>Titel</th>
+							<th>Aantal</th>
+							<th>Prijs</th>
+							<th>Totaal</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:set var="totaalPrijs" value="0" />
-						<c:forEach items="${productenInMandje.bestelbonlijnen}" var="bestelbonlijn" varStatus="i">
+						<c:forEach items="${productenInMandje.bestelbonlijnen}"
+							var="bestelbonlijn" varStatus="i">
 							<tr>
 								<td>${bestelbonlijn.product.titel}</td>
 								<td>${bestelbonlijn.aantal}</td>
-								<td>&euro;<fmt:formatNumber minFractionDigits="2" maxFractionDigits="2" value="${bestelbonlijn.prijs}" /></td>
 								<td>&euro;<fmt:formatNumber minFractionDigits="2"
-										maxFractionDigits="2" value="${bestelbonlijn.aantal * bestelbonlijn.product.prijs}" /></td>
+										maxFractionDigits="2" value="${bestelbonlijn.prijs}" /></td>
+								<td>&euro;<fmt:formatNumber minFractionDigits="2"
+										maxFractionDigits="2"
+										value="${bestelbonlijn.aantal * bestelbonlijn.product.prijs}" /></td>
 							</tr>
 							<c:set var="totaalPrijs"
 								value="${totaalPrijs + (bestelbonlijn.product.prijs * bestelbonlijn.aantal)}" />
@@ -59,15 +62,18 @@
 					Totaal: &euro;
 					<fmt:formatNumber minFractionDigits="2" maxFractionDigits="2">${totaalPrijs}</fmt:formatNumber>
 				</p>
-				<h2>Leveradres</h2>
-				<p>${productenInMandje.leverAdres.straat}&nbsp;${productenInMandje.leverAdres.nummer}, ${productenInMandje.leverAdres.postcode}&nbsp;${productenInMandje.leverAdres.gemeente}</p>
-				<c:url var="url" value="/bestellingen" />
-				<form action="${url}" method="post">
-					<input type="submit" value="Bestel" />
-				</form>
+				<div class="lagereDiv">
+					<h2>Leveradres</h2>
+					<p class="adres">${productenInMandje.leverAdres.straat}&nbsp;${productenInMandje.leverAdres.nummer},
+						${productenInMandje.leverAdres.postcode}&nbsp;${productenInMandje.leverAdres.gemeente}</p>
+					<c:url var="url" value="/bestellingen" />
+					<form action="${url}" method="post">
+						<input type="submit" value="Bestel" />
+					</form>
+				</div>
 			</c:if>
 			<c:if test="${empty productenInMandje.bestelbonlijnen}">
-				<p>Er zijn geen producten in uw mandje</p>
+				<p>Er zijn geen producten in uw mandje.</p>
 			</c:if>
 		</div>
 		<div class="push"></div>

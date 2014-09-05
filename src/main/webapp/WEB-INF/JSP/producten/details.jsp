@@ -15,11 +15,14 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/styles/lightbox.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.servletContext.contextPath}/styles/lightbox.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/javascript/lightbox.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.servletContext.contextPath}/javascript/lightbox.min.js"></script>
 </head>
 <body>
 	<div class="sticky_wrapper">
@@ -41,10 +44,13 @@
 				method="post">
 				<c:if test='${heeftFoto}'>
 					<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
-					<a href="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg" title="${product.titel}" rel="lightbox"><img alt="foto van het schilderij" id="detailImg"
+					<a
+						href="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg"
+						title="${product.titel}" rel="lightbox"><img
+						alt="foto van het schilderij" class="extraMarginBottom"
 						src="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg"></a>
 				</c:if>
-				<div>
+				<div class="extraMarginBottom">
 					<section>
 						Schilder: ${product.schilder.naam}<br> Stijl:
 						${product.stijl}<br> Jaar: ${product.jaartal}<br> Prijs:
@@ -52,11 +58,11 @@
 					</section>
 					<form:input path="productId" type="hidden" />
 					<form:label path="aantal">
-				Aantal: 
-				<form:input path="aantal" type="text" id="klein" />
+						<span>Aantal: </span>
+						<form:input path="aantal" type="text" />
 						<form:errors path="aantal" />
 					</form:label>
-					<input type="submit" value="Koop" />
+					<input type="submit" value="Bestel" />
 				</div>
 			</form:form>
 		</div>

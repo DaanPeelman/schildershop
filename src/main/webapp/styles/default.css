@@ -49,12 +49,13 @@ th,td {
 	padding-top: 0.8em;
 }
 
+.center {
+	text-align: center;
+}
+
 /****************************
 FORMS
 *****************************/
-form div * {
-	
-}
 
 form div {
 	min-width: 300px;
@@ -75,10 +76,6 @@ label>span {
 	margin-top: 10px;
 }
 
-input {
-	min-width: 5em;
-}
-
 input[type="text"],input[type="email"],textarea,select {
 	height: 20px;
 	margin-top: 2px;
@@ -90,22 +87,19 @@ input[type="text"],input[type="email"],textarea,select {
 	-webkit-box-shadow: inset 0px 1px 4px #ECECEC;
 }
 
+.naCheckbox input{
+	margin-right: 0.75em;
+}
+
 input[type=submit] {
 	margin-left: 0.5em;
 	margin-top: 0.25em;
-}
-
-#klein {
-	
 }
 
 #slider-range-prijs,#slider-range-jaartal {
 	
 }
 
-.sidebar #aanmeldform h2 {
-	
-}
 
 /****************************
 HEADING
@@ -229,6 +223,24 @@ PAGE: ABOUT
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
 
+
+/****************************
+PAGE: OVERZICHT
+*****************************/
+
+.adres {
+	margin-top: 0;
+}
+
+
+/****************************
+PAGE: DETAILS
+*****************************/
+
+.extraMarginBottom {
+	margin-bottom: 1em;
+}
+
 /****************************
 COLORS
 *****************************/
@@ -338,16 +350,6 @@ footer {
 	#secondary {
 		width: 40%;
 		float: right;
-	}
-
-	/****************************
-  PAGE: PORTFOLIO
-  *****************************/
-	#gallery li {
-		width: 28.33333%;
-	}
-	#gallery li:nth-child(4n) {
-		clear: left;
 	}
 
 	/****************************
