@@ -36,8 +36,8 @@ table {
 	margin-bottom: 1em;
 }
 
-th {
-	padding: 0.5em;
+th, td {
+	padding: 0.25em;
 }
 
 /****************************
