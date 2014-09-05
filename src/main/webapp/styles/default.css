@@ -32,6 +32,14 @@ a:active {
 	text-decoration: underline;
 }
 
+table {
+	margin-bottom: 1em;
+}
+
+th {
+	padding: 0.5em;
+}
+
 /****************************
 FORMS
 *****************************/
@@ -186,6 +194,15 @@ PAGE: ABOUT
 	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+
+/****************************
+PAGE: BESTELLING
+*****************************/
+
+.lagereDiv {
+	margin-top: 3em;
 }
 
 /****************************

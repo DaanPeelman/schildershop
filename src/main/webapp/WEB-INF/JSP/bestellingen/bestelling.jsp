@@ -15,7 +15,7 @@
 	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900%7CPlay:400,700'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
-	rel="${pageContext.servletContext.contextPath}/styles/layout.css" />
+	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
 </head>
@@ -35,45 +35,49 @@
 			</h1>
 		</header>
 		<div id="wrapper">
-			<table>
-				<thead>
-					<tr>
-						<th>Naam</th>
-						<th>Aantal</th>
-						<th>Prijs per eenheid</th>
-						<th>Totale prijs</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:set var="totalePrijs" value="0" />
-					<c:forEach var="bestellijn" items="${bestelbon.bestelbonlijnen}">
-						<spring:url value="/producten/{productId}" var="url">
-							<spring:param name="productId"
-								value="${bestellijn.product.productId}" />
-						</spring:url>
-						<tr>
-							<td><a href="${url}"><c:out
-										value="${bestellijn.product.titel}" /></a></td>
-							<td>${bestellijn.aantal}</td>
-							<td>&euro;<fmt:formatNumber value="${bestellijn.prijs}"
-									minFractionDigits="2" maxFractionDigits="2" /></td>
-							<c:set var="totaleRijPrijs"
-								value="${bestellijn.aantal * bestellijn.prijs}" />
-							<td>&euro;<fmt:formatNumber value="${totaleRijPrijs}"
-									minFractionDigits="2" maxFractionDigits="2" /></td>
-						</tr>
-						<c:set var="totalePrijs" value="${totalePrijs + totaleRijPrijs}" />
-					</c:forEach>
-				</tbody>
-			</table>
 			<div>
-				Totaal: &euro;
-				<fmt:formatNumber value="${totalePrijs}" minFractionDigits="2"
-					maxFractionDigits="2" />
+				<table>
+					<thead>
+						<tr>
+							<th>Naam</th>
+							<th>Aantal</th>
+							<th>Prijs per eenheid</th>
+							<th>Totale prijs</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:set var="totalePrijs" value="0" />
+						<c:forEach var="bestellijn" items="${bestelbon.bestelbonlijnen}">
+							<spring:url value="/producten/{productId}" var="url">
+								<spring:param name="productId"
+									value="${bestellijn.product.productId}" />
+							</spring:url>
+							<tr>
+								<td><a href="${url}"><c:out
+											value="${bestellijn.product.titel}" /></a></td>
+								<td>${bestellijn.aantal}</td>
+								<td>&euro;<fmt:formatNumber value="${bestellijn.prijs}"
+										minFractionDigits="2" maxFractionDigits="2" /></td>
+								<c:set var="totaleRijPrijs"
+									value="${bestellijn.aantal * bestellijn.prijs}" />
+								<td>&euro;<fmt:formatNumber value="${totaleRijPrijs}"
+										minFractionDigits="2" maxFractionDigits="2" /></td>
+							</tr>
+							<c:set var="totalePrijs" value="${totalePrijs + totaleRijPrijs}" />
+						</c:forEach>
+					</tbody>
+				</table>
+				<div>
+					Totaal: &euro;
+					<fmt:formatNumber value="${totalePrijs}" minFractionDigits="2"
+						maxFractionDigits="2" />
+				</div>
 			</div>
-			<h2>Afleveradres</h2>
-			<p>${bestelbon.leverAdres.straat}${bestelbon.leverAdres.nummer},
-				${bestelbon.leverAdres.postcode} ${bestelbon.leverAdres.gemeente}</p>
+			<div class="lagereDiv">
+				<h2>Afleveradres</h2>
+				<p>${bestelbon.leverAdres.straat}${bestelbon.leverAdres.nummer},
+					${bestelbon.leverAdres.postcode} ${bestelbon.leverAdres.gemeente}</p>
+			</div>
 		</div>
 		<div class="push"></div>
 	</div>

@@ -29,12 +29,12 @@
 			<nav>
 				<jsp:include page="../menu.jsp" />
 			</nav>
-			<h1>succes</h1>
+			<h1>Succes</h1>
 		</header>
 		<div id="wrapper">
 			<h2>Registratie succesvol</h2>
 			<p>U bent succesvol geregistreerd. U kan u nu aanmelden met de
-				gebruikersnaam ${gebruikersnaam} en bijhorend wachtwoord</p>
+				gebruikersnaam ${gebruikersnaam} en bijhorend wachtwoord.</p>
 		</div>
 		<div class="push"></div>
 	</div>
