@@ -37,6 +37,7 @@ public class BestelbonController {
 		
 		ModelAndView modelAndView = new ModelAndView("bestellingen/bestellingen");
 		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+		modelAndView.addObject("bestellingen", bestellingen);
 		
 		return modelAndView;
 	}
