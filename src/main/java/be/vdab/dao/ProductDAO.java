@@ -31,4 +31,6 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
 	Integer findMaxJaartal();
 	
 	Iterable<Product> findByProductIdGreaterThan(long id);
+	
+	Iterable<Product> findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetweenOrderByTitelAsc(String titelTerm, BigDecimal vanPrijsTitel, BigDecimal totPrijsTitel, int startJaarTitel, int eindJaarTitel, String stijlTerm, BigDecimal vanPrijsStijl, BigDecimal totPrijsStijl, int startJaarStijl, int eindJaarStijl, String Schilderterm, BigDecimal vanPrijsSchilder, BigDecimal totPrijsSchilder, int startJaarSchilder, int eindJaarSchilder);
 }
