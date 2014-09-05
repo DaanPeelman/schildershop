@@ -50,6 +50,33 @@
 										$('#postcode').val("");
 									}
 								});
+						
+						$('table input').change(function() {
+							var naam = $(this).attr('id');
+							
+							if(!isNaN($(this).val())) {
+								var nAantal = parseInt($(this).val());
+								if(nAantal > 0) {									
+									var aVelden = $('table input:not([type="hidden"]').size();
+									var nTotaal = 0;
+									for(var i = 0; i < aVelden; i++) {
+										var sNaamAantal = "#lijnen" + i;
+										var nAantal = parseInt($(sNaamAantal).val());
+
+										var sNaamPrijs = "#lijnen" + i + "Prijs";
+										var nPrijs = parseFloat($(sNaamPrijs).html());
+										
+										var sNaamTotaal = "#lijnen" + i + "Totaal";
+										$(sNaamTotaal).html(nAantal * nPrijs);
+										
+										nTotaal += (nAantal * nPrijs);
+									}
+									
+									$('#totaal').html(nTotaal.toFixed(2));
+								}
+							}
+							
+						});
 					});
 </script>
 </head>
@@ -93,13 +120,13 @@
 										value="${bestelbonlijn.product.productId}" />
 									<td class="center"><form:input path="lijnen[${i.index}].aantal"
 											type="text" title="voer het aantal in dat u wil bestellen"
-											value="${bestelbonlijn.aantal}" /> <form:errors
+											value="${bestelbonlijn.aantal}" id="lijnen${i.index}"/> <form:errors
 											path="lijnen[${i.index}].aantal" cssClass="fout" /></td>
-									<td>&euro;<fmt:formatNumber minFractionDigits="2"
-											maxFractionDigits="2" value="${bestelbonlijn.product.prijs}" /></td>
-									<td>&euro;<fmt:formatNumber minFractionDigits="2"
+									<td>&euro;<span id="lijnen${i.index}Prijs"><fmt:formatNumber minFractionDigits="2"
+											maxFractionDigits="2" value="${bestelbonlijn.product.prijs}" /></span></td>
+									<td>&euro;<span id="lijnen${i.index}Totaal"><fmt:formatNumber minFractionDigits="2"
 											maxFractionDigits="2"
-											value="${bestelbonlijn.aantal * bestelbonlijn.product.prijs}" /></td>
+											value="${bestelbonlijn.aantal * bestelbonlijn.product.prijs}" /></span></td>
 									<td><a href="${verwijderUrl}"
 										title="verwijder dit product uit uw mandje">X</a></td>
 								</tr>
@@ -110,7 +137,7 @@
 					</table>
 					<p>
 						Totaal: &euro;
-						<fmt:formatNumber minFractionDigits="2" maxFractionDigits="2">${totaalPrijs}</fmt:formatNumber>
+						<span id="totaal"><fmt:formatNumber minFractionDigits="2" maxFractionDigits="2">${totaalPrijs}</fmt:formatNumber></span>
 					</p>
 					<div class="lagereDiv">
 						<h2>Afleveradres</h2>
