@@ -67,7 +67,7 @@
 										var nPrijs = parseFloat($(sNaamPrijs).html());
 										
 										var sNaamTotaal = "#lijnen" + i + "Totaal";
-										$(sNaamTotaal).html(nAantal * nPrijs);
+										$(sNaamTotaal).html((nAantal * nPrijs).toFixed(2));
 										
 										nTotaal += (nAantal * nPrijs);
 									}
