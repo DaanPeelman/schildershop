@@ -56,9 +56,6 @@ th,td {
 /****************************
 FORMS
 *****************************/
-form div * {
-	
-}
 
 form div {
 	min-width: 300px;
@@ -103,9 +100,6 @@ input[type=submit] {
 	
 }
 
-.sidebar #aanmeldform h2 {
-	
-}
 
 /****************************
 HEADING
@@ -238,6 +232,15 @@ PAGE: OVERZICHT
 	margin-top: 0;
 }
 
+
+/****************************
+PAGE: DETAILS
+*****************************/
+
+.extraMarginBottom {
+	margin-bottom: 1em;
+}
+
 /****************************
 COLORS
 *****************************/
@@ -347,16 +350,6 @@ footer {
 	#secondary {
 		width: 40%;
 		float: right;
-	}
-
-	/****************************
-  PAGE: PORTFOLIO
-  *****************************/
-	#gallery li {
-		width: 28.33333%;
-	}
-	#gallery li:nth-child(4n) {
-		clear: left;
 	}
 
 	/****************************
