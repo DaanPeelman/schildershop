@@ -123,13 +123,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Integer findMinPrijs() {
-		return productDAO.findMinPrijs();
-	}
-
-	@Override
 	public Integer findMaxPrijs() {
-		return productDAO.findMaxPrijs();
+		return (int) (Math.ceil((productDAO.findMaxPrijs() + 10) / 10) * 10);
 	}
 
 	@Override

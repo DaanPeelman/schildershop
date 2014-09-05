@@ -20,8 +20,6 @@ public interface ProductService {
 	
 	Iterable<Product> findNieuwsteProducten();
 
-	Integer findMinPrijs();
-
 	Integer findMaxPrijs();
 
 	Integer findMinJaartal();
