@@ -54,7 +54,7 @@
 							</p>
 							<c:url value="/mandje" var="url" />
 							<form:form commandName="bestelProductForm" action="${url}"
-								method="put">
+								method="post">
 								<form:input path="productId" value="${product.key.productId}"
 									type="hidden" />
 								<form:label path="aantal">Aantal:</form:label>
