@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import be.vdab.dao.GebruikerDAO;
 import be.vdab.entities.*;
 import be.vdab.services.GebruikerService;
 import be.vdab.services.ProductService;
