@@ -42,23 +42,29 @@
 					target="_blank">Daan Peelman</a> en <a class="contact_link"
 					href='https://www.linkedin.com/in/lisasteendam' target="_blank">Lisa
 					Steendam</a>. Het is een webshop die replica's van bekende schilderijen
-				verkoopt. Klantaccounts kunnen er hun aankoophistorie bekijken en
-				administratoraccounts kunnen nieuwe schilders en schilderijen
-				toevoegen.
+				verkoopt. Je kan als klant of administrator een account aanmaken.
+				Klanten kunnen er hun aankoophistorie bekijken en administrators
+				kunnen nieuwe schilders en schilderijen toevoegen.
 			</p>
 			<h2>Hoe</h2>
 			<p>
 				De database achter de site draait op MySQL, de code van de site zelf
 				is Java-based en maakt gebruik van JPA, Hibernate en Spring. De code
-				kan je <a class="contact_link" href='https://github.com/DaanPeelman/schildershop'
-					target="_blank">hier</a> bekijken. Om dit project als team in goede
-				banen te leiden gebruikten we Github en Scrum.
+				kan je <a class="contact_link"
+					href='https://github.com/DaanPeelman/schildershop' target="_blank">hier</a>
+				bekijken. Om dit project als team in goede banen te leiden
+				gebruikten we Github en Scrum.
 			</p>
 			<h2>Wie</h2>
 			<div>
 				<img alt="portret Daan Peelman"
 					src="${pageContext.servletContext.contextPath}/img/daan.jpg"
 					class="portret">
+				<h3>
+					<a class="contact_link"
+						href='https://www.linkedin.com/pub/daan-peelman/95/5b9/a78/nl'
+						target="_blank">Daan Peelman</a>
+				</h3>
 				<p>Als beginnend Java Ontwikkelaar ben ik opzoek naar de kans op
 					een eerste professionele werkervaring. Ik ben een vriendelijk en
 					actief persoon die houdt van leren binnen de IT wereld.</p>
@@ -69,6 +75,11 @@
 				<img alt="portret Lisa Steendam"
 					src="${pageContext.servletContext.contextPath}/img/lisa.jpg"
 					class="portret">
+				<h3>
+					<a class="contact_link"
+						href='https://www.linkedin.com/in/lisasteendam' target="_blank">Lisa
+						Steendam</a>
+				</h3>
 				<p>Als gemotiveerde junior software ontwikkelaar, ben ik
 					momenteel op zoek naar werkgelegenheid als onderdeel van een
 					dynamisch software development team. De studentenjobs die ik de
