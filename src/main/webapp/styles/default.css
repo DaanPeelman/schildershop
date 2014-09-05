@@ -142,21 +142,29 @@ PAGE: INDEX
 	width: 90%;
 	margin: 5%;
 	overflow: hidden;
-	padding-bottom: 10px;
+	padding-bottom: 1em;
 }
 
 .nieuwProductImg {
 	display: block;
-	height: 148px;
+	height: 200px;
 	overflow: hidden;
 	vertical-align: baseline;
 	z-index: -10;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.nieuwProductImg img {
+	min-height: 100%;
+    min-width: 100%;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
 }
 
 .nieuwProductInfo {
 	z-index: 100;
-	width: 190px;
-	height: 42px;
 	color: #444;
 	padding-left: 1em;
 }

@@ -39,7 +39,8 @@
 					<c:url var="url" value="/producten/${product.key.productId}" />
 					<div class="nieuwProduct">
 						<c:if test="${product.value}">
-							<span class="nieuwProductImg"><img
+							<span class="nieuwProductImg"
+								style="background-image: url('${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg');"><img
 								src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" /></span>
 						</c:if>
 						<div class="nieuwProductInfo">
