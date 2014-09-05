@@ -113,18 +113,18 @@
 							readonly>
 						<div id="slider-range-prijs"></div>
 						<form:input type="hidden" path="vanPrijs" id="vanPrijs"
-							value="${minPrijs}" />
+							value="${sMinPrijs}" />
 						<form:input type="hidden" path="totPrijs" id="totPrijs"
-							value="${maxPrijs}" />
+							value="${sMaxPrijs}" />
 					</div>
 					<div class="slider">
 						<label for="periode">Periode:</label> <input type="text"
 							id="periode" readonly>
 						<div id="slider-range-jaartal"></div>
 						<form:input type="hidden" path="vanJaartal" id="vanJaartal"
-							value="${minDatum}" />
+							value="${sMinJaar}" />
 						<form:input type="hidden" path="totJaartal" id="totJaartal"
-							value="${maxDatum}" />
+							value="${sMaxJaar}" />
 					</div>
 					<div>
 						<input type="submit" value="Zoek" />
