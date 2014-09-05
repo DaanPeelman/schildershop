@@ -15,7 +15,7 @@
 	href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic,900%7CPlay:400,700'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
-	rel="${pageContext.servletContext.contextPath}/styles/layout.css" />
+	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
 </head>
@@ -32,7 +32,7 @@
 			<h1>Succes</h1>
 		</header>
 		<div id="wrapper">
-			<p>Uw bestelling is geplaatst</p>
+			<p>Uw bestelling is geplaatst.</p>
 		</div>
 		<div class="push"></div>
 	</div>
