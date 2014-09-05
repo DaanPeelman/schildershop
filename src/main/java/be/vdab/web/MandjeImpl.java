@@ -7,10 +7,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import be.vdab.valueobjects.Adres;
+
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
 public class MandjeImpl implements Mandje{
-	Map<Long, Integer> producten;
+	private Map<Long, Integer> producten;
+	private Adres adres;
 	
 	public MandjeImpl() {
 		producten = new ConcurrentHashMap<>();
@@ -27,13 +30,18 @@ public class MandjeImpl implements Mandje{
 	}
 	
 	@Override
-	public void leegMandje() {
-		producten.clear();
+	public void setAdres(Adres adres) {
+		this.adres = adres;
 	}
 	
 	@Override
-	public Integer getAantal(long productId) {
-		return producten.get(productId);
+	public Adres getAdres() {
+		return adres;
+	}
+	
+	@Override
+	public void leegMandje() {
+		producten.clear();
 	}
 
 	@Override

@@ -43,31 +43,23 @@ public class BestelbonController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView create(@Valid AdresForm adresForm, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView create(HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
 		Gebruiker gebruiker = gebruikerService.findByEmailadres(principal.getName());
 		
 		
-		Bestelbon bestelbon = new Bestelbon(gebruiker, adresForm);
+		Bestelbon bestelbon = new Bestelbon(gebruiker, mandje.getAdres());
 		
 		for(Long productId: mandje.getProducten().keySet()) {
 			Product product = productService.findOne(productId);
-			bestelbon.addBestelbonlijn(new Bestelbonlijn(product, mandje.getAantal(productId).intValue(), product.getPrijs()));
+			bestelbon.addBestelbonlijn(new Bestelbonlijn(product, mandje.getProducten().get(productId), product.getPrijs()));
 		}
 		
-		if(!bindingResult.hasErrors()) {
-			bestelbonService.create(bestelbon);
+		bestelbonService.create(bestelbon);
 			
-			mandje.leegMandje();
-			ModelAndView modelAndView = new ModelAndView("bestellingen/succes");
-			modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
-			
-			return modelAndView;
-		}
-		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
+		mandje.leegMandje();
+		ModelAndView modelAndView = new ModelAndView("bestellingen/succes");
 		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
-		modelAndView.addObject("mandje", bestelbon);
-		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
 		
 		return modelAndView;
 	}

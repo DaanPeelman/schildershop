@@ -44,23 +44,31 @@ public class MandjeController {
 		
 		for(Long productId:mandje.getProducten().keySet()) {
 			Product product = productService.findOne(productId);
-			productenInMandje.addBestelbonlijn(new Bestelbonlijn(product, mandje.getAantal((productId).intValue()), product.getPrijs()));
+			productenInMandje.addBestelbonlijn(new Bestelbonlijn(product, mandje.getProducten().get(productId), product.getPrijs()));
 		}
 		
-		modelAndView.addObject("mandje", productenInMandje);
-		modelAndView.addObject("adresForm", new AdresForm());
+		modelAndView.addObject("productenInMandje", productenInMandje);
+		
+		MandjeForm mandjeForm;
+		
+		if(mandje.getAdres() == null) {
+			mandjeForm = new MandjeForm(new AdresForm());
+		} else {
+			mandjeForm = new MandjeForm(new AdresForm(mandje.getAdres()));
+		}
+		modelAndView.addObject("mandjeForm", mandjeForm);
 		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
 		
 		if(request.getUserPrincipal() != null) {
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(request.getUserPrincipal().getName());
 			
-			modelAndView.addObject("adres", gebruiker.getAdres());
+			modelAndView.addObject("adresGebruiker", gebruiker.getAdres());
 		}
 		
 		return modelAndView;
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView addBestellijn(@Valid BestelProductForm bestelProductForm, BindingResult bindingResult) {
 		Long productId = bestelProductForm.getProductId();
 		if(!bindingResult.hasErrors()) {			
@@ -82,10 +90,63 @@ public class MandjeController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE)
-	public ModelAndView deleteBestellijn(@ModelAttribute VerwijderUitMandjeForm verwijderUitMandjeForm) {
-		mandje.removeProduct(verwijderUitMandjeForm.getProductId());
+	@RequestMapping(method = RequestMethod.PUT)
+	public ModelAndView wijzigMandje(@Valid MandjeForm mandjeForm, BindingResult bindingResult, HttpServletRequest request) {
+		if(!bindingResult.hasErrors()) {
+			for(MandjeFormLijn lijn:mandjeForm.getLijnen()) {
+				mandje.addProduct(lijn.getId(), lijn.getAantal());
+			}
+			
+			mandje.setAdres(mandjeForm.getAdres());
+			
+			return new ModelAndView("redirect:/mandje/overzicht");
+		}
+		
+		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+		
+		Bestelbon productenInMandje = new Bestelbon();
+		
+		for(Long productId:mandje.getProducten().keySet()) {
+			Product product = productService.findOne(productId);
+			productenInMandje.addBestelbonlijn(new Bestelbonlijn(product, mandje.getProducten().get(productId), product.getPrijs()));
+		}
+		
+		modelAndView.addObject("productenInMandje", productenInMandje);
+		
+		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
+		
+		if(request.getUserPrincipal() != null) {
+			Gebruiker gebruiker = gebruikerService.findByEmailadres(request.getUserPrincipal().getName());
+			
+			modelAndView.addObject("adresGebruiker", gebruiker.getAdres());
+		}
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "{id}/verwijder", method = RequestMethod.GET)
+	public ModelAndView deleteBestellijn(@PathVariable long id) {
+		mandje.removeProduct(id);
 		
 		return new ModelAndView("redirect:/mandje");
+	}
+	
+	@RequestMapping(value = "overzicht", method = RequestMethod.GET)
+	ModelAndView showOverzicht() {
+		ModelAndView modelAndView = new ModelAndView("mandje/overzicht");
+		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+		
+		Bestelbon productenInMandje = new Bestelbon();
+		
+		for(long id:mandje.getProducten().keySet()) {
+			Product product = productService.findOne(id);
+			productenInMandje.addBestelbonlijn(new Bestelbonlijn(product, mandje.getProducten().get(id), product.getPrijs()));
+		}
+		productenInMandje.setLeverAdres(mandje.getAdres());
+		
+		modelAndView.addObject("productenInMandje", productenInMandje);
+		
+		return modelAndView;
 	}
 }

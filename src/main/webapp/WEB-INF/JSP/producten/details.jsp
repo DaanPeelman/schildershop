@@ -38,7 +38,7 @@
 		<div id="wrapper">
 			<c:url value="/mandje" var="url" />
 			<form:form commandName="bestelProductForm" action="${url}"
-				method="put">
+				method="post">
 				<c:if test='${heeftFoto}'>
 					<c:url value='/img/${product.productId}.jpg' var='fotoURL' />
 					<a href="${pageContext.servletContext.contextPath}/img/${product.productId}.jpg" title="${product.titel}" rel="lightbox"><img alt="foto van het schilderij" id="detailImg"
