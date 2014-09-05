@@ -19,6 +19,24 @@
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#cbxThuisAdres').change(function(){
+			if($('#cbxThuisAdres').is(':checked')) {
+				$('#straat').val("${adres.straat}");
+				$('#nummer').val("${adres.nummer}");
+				$('#gemeente').val("${adres.gemeente}");
+				$('#postcode').val("${adres.postcode}");
+			} else {
+				$('#straat').val("");
+				$('#nummer').val("");
+				$('#gemeente').val("");
+				$('#postcode').val("");
+			}
+		});
+	});
+	</script>
 </head>
 <body>
 	<div class="sticky_wrapper">
@@ -72,6 +90,9 @@
 					<fmt:formatNumber minFractionDigits="2" maxFractionDigits="2">${totaalPrijs}</fmt:formatNumber>
 				</p>
 				<h2>Afleveradres</h2>
+				<c:if test="${not empty adres}">
+					<label><input id="cbxThuisAdres" type="checkbox" />Gebruik mijn thuisadres</label>
+				</c:if>
 				<c:url var="url" value="/bestellingen" />
 				<form:form commandName="adresForm" action="${url}" method="post">
 					<div>

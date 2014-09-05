@@ -196,7 +196,6 @@ public class ProductController {
 	}
 	
 	private ModelAndView addMinsMaxs(ModelAndView mav) {
-		mav.addObject("minPrijs", productService.findMinPrijs());
 		mav.addObject("maxPrijs", productService.findMaxPrijs());
 		mav.addObject("minDatum", productService.findMinJaartal());
 		mav.addObject("maxDatum", productService.findMaxJaartal());

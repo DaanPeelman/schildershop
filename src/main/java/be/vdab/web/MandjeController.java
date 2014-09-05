@@ -2,7 +2,9 @@ package be.vdab.web;
 
 
 import java.io.File;
+
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,26 +13,30 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.vdab.dao.GebruikerDAO;
 import be.vdab.entities.*;
+import be.vdab.services.GebruikerService;
 import be.vdab.services.ProductService;
 
 @Controller
 @RequestMapping(value = "/mandje")
 public class MandjeController {
 	private final ProductService productService;
+	private final GebruikerService gebruikerService;
 	private Mandje mandje;
 	private ServletContext servletContext;
 	
 	@Autowired
-	public MandjeController(ProductService productService, Mandje mandje, ServletContext servletContext) {
+	public MandjeController(ProductService productService, GebruikerService gebruikerService, Mandje mandje, ServletContext servletContext) {
 		this.productService = productService;
+		this.gebruikerService = gebruikerService;
 		this.mandje = mandje;
 		this.servletContext = servletContext;
 	}
 
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView showMandje() {
+	public ModelAndView showMandje(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView("mandje/mandje");
 		modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
 		
@@ -44,6 +50,12 @@ public class MandjeController {
 		modelAndView.addObject("mandje", productenInMandje);
 		modelAndView.addObject("adresForm", new AdresForm());
 		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
+		
+		if(request.getUserPrincipal() != null) {
+			Gebruiker gebruiker = gebruikerService.findByEmailadres(request.getUserPrincipal().getName());
+			
+			modelAndView.addObject("adres", gebruiker.getAdres());
+		}
 		
 		return modelAndView;
 	}
