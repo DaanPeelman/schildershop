@@ -33,7 +33,7 @@
 		</header>
 		<div id="wrapper">
 			<h2>Gegevens gewijzigd</h2>
-			<p>Uw gegevens zijn succesvol gewijzigd</p>
+			<p>Uw gegevens zijn succesvol gewijzigd.</p>
 		</div>
 		<div class="push"></div>
 	</div>

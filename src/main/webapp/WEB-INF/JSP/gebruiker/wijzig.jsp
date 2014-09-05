@@ -34,26 +34,30 @@
 			<form:form commandName="adresForm" action="${url}" method="put">
 				<h2>Uw gegevens wijzigen</h2>
 				<div>
-					<form:label path="straat">Straat: <form:input
-							path="straat" />
+					<form:label path="straat">
+						<span>Straat: </span>
+						<form:input path="straat" />
 						<form:errors path="straat" cssClass="fout" />
 					</form:label>
 				</div>
 				<div>
-					<form:label path="nummer">Nummer: <form:input
-							path="nummer" />
+					<form:label path="nummer">
+						<span>Nummer: </span>
+						<form:input path="nummer" />
 						<form:errors path="nummer" cssClass="fout" />
 					</form:label>
 				</div>
 				<div>
-					<form:label path="gemeente">Gemeente: <form:input
-							path="gemeente" />
+					<form:label path="gemeente">
+						<span>Gemeente: </span>
+						<form:input path="gemeente" />
 						<form:errors path="gemeente" cssClass="fout" />
 					</form:label>
 				</div>
 				<div>
-					<form:label path="postcode">Postcode: <form:input
-							path="postcode" />
+					<form:label path="postcode">
+						<span>Postcode: </span>
+						<form:input path="postcode" />
 						<form:errors path="postcode" cssClass="fout" />
 					</form:label>
 				</div>
@@ -61,32 +65,35 @@
 					<input type="submit" value="Opslaan" />
 				</div>
 			</form:form>
-			<c:url value="/gebruiker/wachtwoord" var="url" />
-			<form:form commandName="wijzigWachtwoordForm" action="${url}"
-				method="put">
-				<h2>Uw wachtwoord wijzigen</h2>
-				<div>
-					<form:label path="oudWachtwoord">Huidig wachtwoord: <form:input
-							path="oudWachtwoord" type="password" />
-						<form:errors path="oudWachtwoord" cssClass="fout" />
-					</form:label>
-				</div>
-				<div>
-					<form:label path="nieuwWachtwoord">Nieuw wachtwoord: <form:input
-							path="nieuwWachtwoord" type="password" />
-						<form:errors path="nieuwWachtwoord" cssClass="fout" />
-					</form:label>
-				</div>
-				<div>
-					<form:label path="bevestigWachtwoord">Bevestig wachtwoord: <form:input
-							path="bevestigWachtwoord" type="password" />
-						<form:errors path="bevestigWachtwoord" cssClass="fout" />
-					</form:label>
-				</div>
-				<div>
-					<input type="submit" value="Opslaan" />
-				</div>
-			</form:form>
+			<div class="lagereDiv">
+				<c:url value="/gebruiker/wachtwoord" var="url" />
+				<form:form commandName="wijzigWachtwoordForm" action="${url}"
+					method="put">
+					<h2>Uw wachtwoord wijzigen</h2>
+					<div>
+						<form:label path="oudWachtwoord">
+							<span>Huidig wachtwoord: </span>
+							<form:input path="oudWachtwoord" type="password" />
+							<form:errors path="oudWachtwoord" cssClass="fout" />
+						</form:label>
+					</div>
+					<div>
+						<form:label path="nieuwWachtwoord"><span>Nieuw wachtwoord: </span><form:input
+								path="nieuwWachtwoord" type="password" />
+							<form:errors path="nieuwWachtwoord" cssClass="fout" />
+						</form:label>
+					</div>
+					<div>
+						<form:label path="bevestigWachtwoord"><span>Bevestig wachtwoord: </span><form:input
+								path="bevestigWachtwoord" type="password" />
+							<form:errors path="bevestigWachtwoord" cssClass="fout" />
+						</form:label>
+					</div>
+					<div>
+						<input type="submit" value="Opslaan" />
+					</div>
+				</form:form>
+			</div>
 		</div>
 		<div class="push"></div>
 	</div>
