@@ -81,6 +81,7 @@ public class BestelbonController {
 		if(gebruiker == bestelbon.getGebruiker()) {
 			ModelAndView modelAndView = new ModelAndView("bestellingen/bestelling");
 			modelAndView.addObject("aantalInMandje", mandje.getProducten().size());
+			modelAndView.addObject("bestelbon", bestelbon);
 			
 			return modelAndView;
 		}
