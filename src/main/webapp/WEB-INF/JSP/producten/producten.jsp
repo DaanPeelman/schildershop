@@ -23,14 +23,13 @@
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script>
 	$(function() {
-		var iMinPrijs = parseInt("${minPrijs}");
 		var iMaxPrijs = parseInt("${maxPrijs}");
 		
 		var sMinPrijs = parseInt("${sMinPrijs}");
 		var sMaxPrijs = parseInt("${sMaxPrijs}");
 		
 		if(isNaN(sMinPrijs)) {
-			sMinPrijs = iMinPrijs;
+			sMinPrijs = 0;
 		}
 		if(isNaN(sMaxPrijs)) {
 			sMaxPrijs = iMaxPrijs;
@@ -38,7 +37,7 @@
 		
 		$("#slider-range-prijs").slider({
 			range : true,
-			min : iMinPrijs,
+			min : 0,
 			max : iMaxPrijs,
 			values : [ sMinPrijs, sMaxPrijs ],
 			slide : function(event, ui) {
@@ -50,6 +49,9 @@
 		$("#amount").val(
 				"€" + $("#slider-range-prijs").slider("values", 0) + " - €"
 						+ $("#slider-range-prijs").slider("values", 1));
+		$("#vanPrijs").val($("#slider-range-prijs").slider("values", 0));
+		$("#totPrijs").val($("#slider-range-prijs").slider("values", 1));
+		
 
 	});
 
@@ -81,6 +83,8 @@
 		$("#periode").val(
 				$("#slider-range-jaartal").slider("values", 0) + " - "
 						+ $("#slider-range-jaartal").slider("values", 1));
+		$("#vanJaartal").val($("#slider-range-jaartal").slider("values", 0));
+		$("#totJaartal").val($("#slider-range-jaartal").slider("values", 1));
 	});
 </script>
 </head>
@@ -112,19 +116,15 @@
 						<label for="amount">Prijs:</label> <input type="text" id="amount"
 							readonly>
 						<div id="slider-range-prijs"></div>
-						<form:input type="hidden" path="vanPrijs" id="vanPrijs"
-							value="${sMinPrijs}" />
-						<form:input type="hidden" path="totPrijs" id="totPrijs"
-							value="${sMaxPrijs}" />
+						<form:input type="hidden" path="vanPrijs" id="vanPrijs" />
+						<form:input type="hidden" path="totPrijs" id="totPrijs" />
 					</div>
 					<div class="slider">
 						<label for="periode">Periode:</label> <input type="text"
 							id="periode" readonly>
 						<div id="slider-range-jaartal"></div>
-						<form:input type="hidden" path="vanJaartal" id="vanJaartal"
-							value="${sMinJaar}" />
-						<form:input type="hidden" path="totJaartal" id="totJaartal"
-							value="${sMaxJaar}" />
+						<form:input type="hidden" path="vanJaartal" id="vanJaartal" />
+						<form:input type="hidden" path="totJaartal" id="totJaartal" />
 					</div>
 					<div>
 						<input type="submit" value="Zoek" />
