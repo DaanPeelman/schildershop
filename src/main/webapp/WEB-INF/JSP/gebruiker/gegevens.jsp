@@ -68,28 +68,30 @@
 			<c:if test="${empty gebruiker.bestellingen}">
 				<div>U hebt geen recente bestellingen</div>
 			</c:if>
-			<h2>Uw gegevens</h2>
-			<div>
-				<b>Naam: </b> ${gebruiker.naam}&nbsp;${gebruiker.familienaam}
-			</div>
-			<div>
-				<b>Emailadres: </b> ${gebruiker.emailadres}
-			</div>
-			<div>
-				<b>Straat: </b> ${gebruiker.adres.straat}
-			</div>
-			<div>
-				<b>Huisnummer: </b> ${gebruiker.adres.nummer}
-			</div>
-			<div>
-				<b>Gemeente: </b> ${gebruiker.adres.gemeente}
-			</div>
-			<div>
-				<b>Postcode: </b> ${gebruiker.adres.postcode}
-			</div>
-			<div>
-				<a href="<c:url value='/gebruiker/wijzig' />">Wijzig uw gegevens
-					of wachtwoord</a>
+			<div class="lagereDiv">
+				<h2>Uw gegevens</h2>
+				<div>
+					<b>Naam: </b> ${gebruiker.naam}&nbsp;${gebruiker.familienaam}
+				</div>
+				<div>
+					<b>Emailadres: </b> ${gebruiker.emailadres}
+				</div>
+				<div>
+					<b>Straat: </b> ${gebruiker.adres.straat}
+				</div>
+				<div>
+					<b>Huisnummer: </b> ${gebruiker.adres.nummer}
+				</div>
+				<div>
+					<b>Gemeente: </b> ${gebruiker.adres.gemeente}
+				</div>
+				<div>
+					<b>Postcode: </b> ${gebruiker.adres.postcode}
+				</div>
+				<div class="opmerking">
+					<a href="<c:url value='/gebruiker/wijzig' />">Wijzig uw
+						gegevens of wachtwoord</a>
+				</div>
 			</div>
 		</div>
 		<div class="push"></div>
