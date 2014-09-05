@@ -48,7 +48,7 @@ label {
 }
 
 input {
-	
+	width: 5em;
 }
 
 input[type=submit] {
@@ -138,18 +138,31 @@ PAGE: INDEX
 .nieuwProduct {
 	float: left;
 	clear: both;
-	min-height: 2em;
+	min-height: 300px;
 	width: 90%;
 	margin: 5%;
+	overflow: hidden;
+	padding-bottom: 10px;
 }
 
-.nieuwProduct h2 {
+.nieuwProductImg {
+	display: block;
+	height: 148px;
+	overflow: hidden;
+	vertical-align: baseline;
+	z-index: -10;
+}
+
+.nieuwProductInfo {
+	z-index: 100;
+	width: 190px;
+	height: 42px;
+	color: #444;
+	padding-left: 1em;
+}
+
+.nieuwProductInfo h2 {
 	margin-top: 0;
-}
-
-.nieuwProduct img {
-	float: left;
-	padding-right: 1em;
 }
 
 /****************************
@@ -184,19 +197,21 @@ a {
 a:hover {
 	color: #B2806B;
 }
+
 #icoon {
-	background-image:url('../img/icoon_kar.png');
+	background-image: url('../img/icoon_kar.png');
 	background-size: 27px 27px;
-    background-repeat: no-repeat;
-    background-position: 0 10px; 
-    
-    padding-left: 25px;
+	background-repeat: no-repeat;
+	background-position: 0 10px;
+	padding-left: 25px;
 }
+
 #icoon:hover {
-	background-image:url('../img/icoon_kar_hover.png');
+	background-image: url('../img/icoon_kar_hover.png');
 	background-size: 27px 27px;
-    background-repeat: no-repeat;
+	background-repeat: no-repeat;
 }
+
 header {
 	background: #7F6D62;
 	border-color: #403731;
@@ -293,7 +308,6 @@ footer {
 		float: left;
 		margin: 0 5% 80px 0;
 	}
-	
 	img.portret ~ * {
 		overflow: hidden;
 	}
@@ -304,13 +318,11 @@ footer {
   HEADER
   *****************************/
 	nav {
-		font-size : 1.125em;
+		font-size: 1.125em;
 	}
-
 	h1 {
 		font-size: 2.5em;
 	}
-	
 	header {
 		border-bottom: 5px solid #403731;
 		margin-bottom: 60px;
