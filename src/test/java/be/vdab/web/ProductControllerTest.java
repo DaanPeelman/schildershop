@@ -16,6 +16,7 @@ public class ProductControllerTest {
 	private SchilderService schilderService;
 	private Iterable<Product> schilderijen;
 	private ServletContext context;
+	private Mandje mandje;
 	
 	@Before
 	public void setUp() {
@@ -23,8 +24,9 @@ public class ProductControllerTest {
 		productService = Mockito.mock(ProductService.class);
 		schilderService = Mockito.mock(SchilderService.class);
 		context = Mockito.mock(ServletContext.class);
+		mandje = Mockito.mock(Mandje.class);
 		Mockito.when(productService.findAll()).thenReturn(schilderijen);
-		productController = new ProductController(productService, schilderService, context);
+		productController = new ProductController(productService, schilderService, mandje, context);
 	}
 	
 	@Test
