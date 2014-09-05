@@ -75,22 +75,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Iterable<Product> findByZoekterm(String zoekterm) {
-		Set<Product> resultaat = new HashSet<>();
-		for (Product product : productDAO.findByTitelContaining(zoekterm)) {
-			resultaat.add(product);
-		}
-		for (Product product : productDAO
-				.findBySchilderNaamContaining(zoekterm)) {
-			resultaat.add(product);
-		}
-		for (Product product : productDAO.findByStijlContaining(zoekterm)) {
-			resultaat.add(product);
-		}
-		return resultaat;
-	}
-
-	@Override
 	public Iterable<Product> findNieuwsteProducten() {
 		Pageable pageable = new PageRequest(0, 3, Direction.DESC, "productId");
 		Page<Product> pageProducten = productDAO.findAll(pageable);
@@ -101,25 +85,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Iterable<Product> findByZoektermen(String zoekterm,
-			BigDecimal vanPrijs, BigDecimal totPrijs, Integer vanJaartal,
-			Integer totJaartal) {
-		Set<Product> resultaat = new HashSet<>();
-		for (Product ztRes : findByZoekterm(zoekterm)) {
-			for (Product prijsRes : productDAO
-					.findByPrijsBetweenOrderByPrijsAsc(vanPrijs, totPrijs)) {
-				if (ztRes.equals(prijsRes)) {
-					for (Product jtRes : productDAO
-							.findByJaartalBetweenOrderByJaartalAsc(vanJaartal,
-									totJaartal)) {
-						if (ztRes.equals(jtRes)) {
-							resultaat.add(ztRes);
-						}
-					}
-				}
-			}
-		}
-		return resultaat;
+	public Iterable<Product> findByZoektermen(String zoekterm, BigDecimal vanPrijs, BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal) {
+		System.out.println("van: ");
+		Iterable<Product> gevondenProducten = productDAO.findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetweenOrderByTitelAsc(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal);
+		return gevondenProducten;
 	}
 
 	@Override
