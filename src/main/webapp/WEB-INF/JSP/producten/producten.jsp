@@ -113,15 +113,15 @@
 						</form:label>
 					</div>
 					<div class="slider">
-						<label for="amount">Prijs:</label> <input type="text" id="amount"
-							readonly>
+						<label for="amount"><span>Prijs: </span><input type="text" id="amount"
+							readonly></label>
 						<div id="slider-range-prijs"></div>
 						<form:input type="hidden" path="vanPrijs" id="vanPrijs" />
 						<form:input type="hidden" path="totPrijs" id="totPrijs" />
 					</div>
 					<div class="slider">
-						<label for="periode">Periode:</label> <input type="text"
-							id="periode" readonly>
+						<label for="periode"><span>Periode: </span><input type="text"
+							id="periode" readonly></label> 
 						<div id="slider-range-jaartal"></div>
 						<form:input type="hidden" path="vanJaartal" id="vanJaartal" />
 						<form:input type="hidden" path="totJaartal" id="totJaartal" />
@@ -132,7 +132,7 @@
 					</div>
 				</form:form>
 			</aside>
-			<section class='content'>
+			<section class='content lagereDiv'>
 				<c:choose>
 					<c:when test="${not empty schilderijen}">
 						<table>
