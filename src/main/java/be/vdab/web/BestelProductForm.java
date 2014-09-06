@@ -10,11 +10,13 @@ public class BestelProductForm {
 	private Integer aantal;
 	
 	BestelProductForm() {
+		this.aantal = 1;
 	}
 	
 	BestelProductForm(long productNr) {
 		super();
 		this.productId = productNr;
+		this.aantal = 1;
 	}
 
 	BestelProductForm(long productNr, Integer aantal) {
