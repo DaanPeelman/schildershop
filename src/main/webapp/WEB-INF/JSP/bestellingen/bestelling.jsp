@@ -18,6 +18,7 @@
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div class="sticky_wrapper">

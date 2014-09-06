@@ -19,22 +19,23 @@
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script>
 	$(function() {
 		var iMaxPrijs = parseInt("${maxPrijs}");
-		
+
 		var sMinPrijs = parseInt("${sMinPrijs}");
 		var sMaxPrijs = parseInt("${sMaxPrijs}");
-		
-		if(isNaN(sMinPrijs)) {
+
+		if (isNaN(sMinPrijs)) {
 			sMinPrijs = 0;
 		}
-		if(isNaN(sMaxPrijs)) {
+		if (isNaN(sMaxPrijs)) {
 			sMaxPrijs = iMaxPrijs;
 		}
-		
+
 		$("#slider-range-prijs").slider({
 			range : true,
 			min : 0,
@@ -51,20 +52,19 @@
 						+ $("#slider-range-prijs").slider("values", 1));
 		$("#vanPrijs").val($("#slider-range-prijs").slider("values", 0));
 		$("#totPrijs").val($("#slider-range-prijs").slider("values", 1));
-		
 
 	});
 
 	var iMinJaar = parseInt("${minDatum}");
 	var iMaxJaar = parseInt("${maxDatum}");
-	
+
 	var sMinJaar = parseInt("${sMinJaar}");
 	var sMaxJaar = parseInt("${sMaxJaar}");
-	
-	if(isNaN(sMinJaar)) {
+
+	if (isNaN(sMinJaar)) {
 		sMinJaar = iMinJaar;
 	}
-	if(isNaN(sMaxJaar)) {
+	if (isNaN(sMaxJaar)) {
 		sMaxJaar = iMaxJaar;
 	}
 	$(function() {
@@ -113,15 +113,15 @@
 						</form:label>
 					</div>
 					<div class="slider">
-						<label for="amount"><span>Prijs: </span><input type="text" id="amount"
-							readonly></label>
+						<label for="amount"><span>Prijs: </span><input type="text"
+							id="amount" readonly></label>
 						<div id="slider-range-prijs"></div>
 						<form:input type="hidden" path="vanPrijs" id="vanPrijs" />
 						<form:input type="hidden" path="totPrijs" id="totPrijs" />
 					</div>
 					<div class="slider">
-						<label for="periode"><span>Periode: </span><input type="text"
-							id="periode" readonly></label> 
+						<label for="periode"><span>Periode: </span><input
+							type="text" id="periode" readonly></label>
 						<div id="slider-range-jaartal"></div>
 						<form:input type="hidden" path="vanJaartal" id="vanJaartal" />
 						<form:input type="hidden" path="totJaartal" id="totJaartal" />
@@ -132,7 +132,7 @@
 					</div>
 				</form:form>
 			</aside>
-			<section class='content lagereDiv'>
+			<div class='lagereDiv mobileHide'>
 				<c:choose>
 					<c:when test="${not empty schilderijen}">
 						<table>
@@ -166,7 +166,8 @@
 					Er werden geen schilderijen gevonden.
 				</c:otherwise>
 				</c:choose>
-			</section>
+			</div>
+			<div class="mobileShow">TEXT OR IMAGE FOR MOBILE HERE</div>
 		</div>
 		<div class="push"></div>
 	</div>
