@@ -25,7 +25,7 @@ public class ProductControllerTest {
 		schilderService = Mockito.mock(SchilderService.class);
 		context = Mockito.mock(ServletContext.class);
 		mandje = Mockito.mock(Mandje.class);
-		Mockito.when(productService.findAll()).thenReturn(schilderijen);
+		Mockito.when(productService.findAll(0)).thenReturn(schilderijen);
 		productController = new ProductController(productService, schilderService, mandje, context);
 	}
 	

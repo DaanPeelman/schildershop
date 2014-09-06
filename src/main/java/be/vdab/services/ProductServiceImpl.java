@@ -1,6 +1,7 @@
 package be.vdab.services;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,8 +34,17 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Iterable<Product> findAll() {
-		return productDAO.findAll(new Sort("titel", "jaartal"));
+	public Iterable<Product> findAll(int page) {
+		PageRequest pageRequest = new PageRequest(page - 1, 5, Sort.Direction.ASC, "titel");
+		
+		Iterable<Product> producten = productDAO.findAll(pageRequest);
+		
+		List<Product> gevondenProducten = new ArrayList<>();
+		for(Product product:producten) {
+			gevondenProducten.add(product);
+		}
+		
+		return gevondenProducten;
 	}
 
 	@Override
@@ -85,8 +95,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Iterable<Product> findByZoektermen(String zoekterm, BigDecimal vanPrijs, BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal) {
-		Iterable<Product> gevondenProducten = productDAO.findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetweenOrderByTitelAsc(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal);
+	public Iterable<Product> findByZoektermen(String zoekterm, BigDecimal vanPrijs, BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal, int page) {
+		PageRequest pageRequest = new PageRequest(page - 1, 5);
+		Iterable<Product> producten = productDAO.findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetweenOrderByTitelAsc(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, pageRequest);
+		
+		List<Product> gevondenProducten = new ArrayList<>();
+		for(Product product:producten) {
+			gevondenProducten.add(product);
+		}
+		
 		return gevondenProducten;
 	}
 
@@ -103,6 +120,20 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Integer findMaxJaartal() {
 		return productDAO.findMaxJaartal();
+	}
+	
+	@Override
+	public long findAantalProducten() {
+		return productDAO.count();
+	}
+	
+	@Override
+	public long findAantalProductenMetZoekterm(String zoekterm,
+			BigDecimal vanPrijs, BigDecimal totPrijs, Integer vanJaartal,
+			Integer totJaartal) {
+		List<Product> producten =  (List<Product>) productDAO.findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetween(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal);
+		
+		return producten.size();
 	}
 
 	// @PostConstruct

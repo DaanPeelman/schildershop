@@ -4,6 +4,7 @@ import java.io.*;
 import java.math.BigDecimal;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
 
@@ -41,10 +42,38 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView findAll() {
 		ModelAndView mav = new ModelAndView("producten/producten",
-				"schilderijen", productService.findAll());
+				"schilderijen", productService.findAll(1));
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav = addMinsMaxs(mav);
+		
+		mav.addObject("huidigUrl", "/producten");
+		mav.addObject("huidigePagina", 1);
+		mav.addObject("hasMore", 5 < productService.findAantalProducten());
+		mav.addObject("hasLess", false);
+		
+		return mav;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, params = {"page"})
+	public ModelAndView findAll(@RequestParam String page) {
+		int iPage;
+		try {
+			iPage = Integer.parseInt(page);
+			
+		} catch(NumberFormatException e) {
+			iPage = 1;
+		}
+		ModelAndView mav = new ModelAndView("producten/producten",
+				"schilderijen", productService.findAll(iPage));
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
+		mav.addObject("zoekTermForm", new ZoekTermForm());
+		mav = addMinsMaxs(mav);
+		
+		mav.addObject("huidigUrl", "/producten");
+		mav.addObject("huidigePagina", page);
+		mav.addObject("hasMore", (iPage * 5) < productService.findAantalProducten());
+		mav.addObject("hasLess", ((iPage * 5) - 5) > 0);
 		
 		return mav;
 	}
@@ -52,7 +81,7 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.GET, params = { "zoekterm",
 			"vanPrijs", "totPrijs", "vanJaartal", "totJaartal" })
 	public ModelAndView findByZoektermen(@Valid ZoekTermForm zoekTermForm,
-			BindingResult bindingResult) {
+			BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("producten/producten");
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		
@@ -73,7 +102,7 @@ public class ProductController {
 			Integer vanJaartal = zoekTermForm.getVanJaartal();
 			Integer totJaartal = zoekTermForm.getTotJaartal();
 			Iterable<Product> resultaat = productService.findByZoektermen(
-					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal);
+					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, 1);
 			mav.addObject("schilderijen", resultaat);
 			String filter = "tussen €" + vanPrijs + " en €"
 					+ totPrijs + ", gemaakt tussen " + vanJaartal + " en "
@@ -82,6 +111,8 @@ public class ProductController {
 				filter += ", met " + zoekterm;
 			}
 			mav.addObject("filter", filter);
+			mav.addObject("hasMore", 5 < productService.findAantalProductenMetZoekterm(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal));
+			mav.addObject("hasLess", false);
 		}
 
 		mav = addMinsMaxs(mav);
@@ -89,6 +120,70 @@ public class ProductController {
 		mav.addObject("sMaxPrijs", zoekTermForm.getTotPrijs());
 		mav.addObject("sMinJaar", zoekTermForm.getVanJaartal());
 		mav.addObject("sMaxJaar", zoekTermForm.getTotJaartal());
+		
+		String url = "/producten?zoekterm=" + zoekTermForm.getZoekterm() + "&vanPrijs=" + zoekTermForm.getVanPrijs() + "&totPrijs=" + zoekTermForm.getTotPrijs()  + "&vanJaartal=" + zoekTermForm.getVanJaartal() + "&totJaartal=" + zoekTermForm.getTotJaartal();
+		mav.addObject("huidigUrl", url);
+		mav.addObject("huidigePagina", 1);
+		
+		return mav;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, params = { "zoekterm",
+			"vanPrijs", "totPrijs", "vanJaartal", "totJaartal", "page" })
+	public ModelAndView findByZoektermen(@Valid ZoekTermForm zoekTermForm,
+			BindingResult bindingResult, @RequestParam String page, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("producten/producten");
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
+		
+		if (!bindingResult.hasErrors() && !zoekTermForm.isValidPrijs()) {
+			bindingResult.reject("fouteVanTotPrijs", new Object[] {
+					zoekTermForm.getVanPrijs(), zoekTermForm.getTotPrijs() },
+					"");
+		}
+		if (!bindingResult.hasErrors() && !zoekTermForm.isValidJaartal()) {
+			bindingResult.reject("fouteVanTotJaartal",
+					new Object[] { zoekTermForm.getVanJaartal(),
+							zoekTermForm.getTotJaartal() }, "");
+		}
+		if (!bindingResult.hasErrors()) {
+			String zoekterm = zoekTermForm.getZoekterm().toLowerCase();
+			BigDecimal vanPrijs = zoekTermForm.getVanPrijs();
+			BigDecimal totPrijs = zoekTermForm.getTotPrijs();
+			Integer vanJaartal = zoekTermForm.getVanJaartal();
+			Integer totJaartal = zoekTermForm.getTotJaartal();
+			
+			int iPage;
+			
+			try {
+				iPage = Integer.parseInt(page);
+			} catch (NumberFormatException e) {
+				iPage = 1;
+			}
+			
+			Iterable<Product> resultaat = productService.findByZoektermen(
+					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, iPage);
+			mav.addObject("schilderijen", resultaat);
+			String filter = "tussen €" + vanPrijs + " en €"
+					+ totPrijs + ", gemaakt tussen " + vanJaartal + " en "
+							+ totJaartal;
+			if (!zoekterm.equals("")) {
+				filter += ", met " + zoekterm;
+			}
+			mav.addObject("filter", filter);
+			
+			mav.addObject("hasMore", (iPage * 5) < productService.findAantalProductenMetZoekterm(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal));
+			mav.addObject("hasLess", ((iPage * 5) - 5) > 0);
+		}
+
+		mav = addMinsMaxs(mav);
+		mav.addObject("sMinPrijs", zoekTermForm.getVanPrijs());
+		mav.addObject("sMaxPrijs", zoekTermForm.getTotPrijs());
+		mav.addObject("sMinJaar", zoekTermForm.getVanJaartal());
+		mav.addObject("sMaxJaar", zoekTermForm.getTotJaartal());
+		
+		String url = "/producten?zoekterm=" + zoekTermForm.getZoekterm() + "&vanPrijs=" + zoekTermForm.getVanPrijs() + "&totPrijs=" + zoekTermForm.getTotPrijs()  + "&vanJaartal=" + zoekTermForm.getVanJaartal() + "&totJaartal=" + zoekTermForm.getTotJaartal();
+		mav.addObject("huidigUrl", url);
+		mav.addObject("huidigePagina", page);
 		
 		return mav;
 	}
@@ -176,7 +271,6 @@ public class ProductController {
 		if (product != null) {
 			String productFotoPad = servletContext.getRealPath(File.separator + "img") + File.separator
 					+ product.getProductId() + ".jpg";
-			System.out.println(productFotoPad);
 			File file = new File(productFotoPad);
 			mav.addObject("heeftFoto", file.exists());
 		}

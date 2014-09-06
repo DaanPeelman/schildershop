@@ -155,6 +155,21 @@
 									</div></li>
 							</c:forEach>
 						</ul>
+						<p>
+							<c:if test="${hasLess}">
+								<c:url value="${huidigUrl}" var="vorigeUrl">
+									<c:param name="page" value="${huidigePagina - 1}" />
+								</c:url>
+								<a href="${vorigeUrl}">&lt; Vorige</a>
+							</c:if>
+							&nbsp;&nbsp;${huidigePagina}&nbsp;&nbsp;
+							<c:if test="${hasMore}">
+								<c:url value="${huidigUrl}" var="volgendeUrl">
+									<c:param name="page" value="${huidigePagina + 1}" />
+								</c:url>
+								<a href="${volgendeUrl}">Volgende &gt;</a>
+							</c:if>
+						</p>
 					</c:when>
 					<c:otherwise>
 					Er werden geen schilderijen gevonden.

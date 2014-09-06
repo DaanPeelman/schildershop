@@ -2,6 +2,8 @@ package be.vdab.dao;
 
 import java.math.BigDecimal;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import be.vdab.entities.Product;
@@ -32,5 +34,6 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
 	
 	Iterable<Product> findByProductIdGreaterThan(long id);
 	
-	Iterable<Product> findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetweenOrderByTitelAsc(String titelTerm, BigDecimal vanPrijsTitel, BigDecimal totPrijsTitel, int startJaarTitel, int eindJaarTitel, String stijlTerm, BigDecimal vanPrijsStijl, BigDecimal totPrijsStijl, int startJaarStijl, int eindJaarStijl, String Schilderterm, BigDecimal vanPrijsSchilder, BigDecimal totPrijsSchilder, int startJaarSchilder, int eindJaarSchilder);
+	Iterable<Product> findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetween(String titelTerm, BigDecimal vanPrijsTitel, BigDecimal totPrijsTitel, int startJaarTitel, int eindJaarTitel, String stijlTerm, BigDecimal vanPrijsStijl, BigDecimal totPrijsStijl, int startJaarStijl, int eindJaarStijl, String Schilderterm, BigDecimal vanPrijsSchilder, BigDecimal totPrijsSchilder, int startJaarSchilder, int eindJaarSchilder);
+	Page<Product> findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetweenOrderByTitelAsc(String titelTerm, BigDecimal vanPrijsTitel, BigDecimal totPrijsTitel, int startJaarTitel, int eindJaarTitel, String stijlTerm, BigDecimal vanPrijsStijl, BigDecimal totPrijsStijl, int startJaarStijl, int eindJaarStijl, String Schilderterm, BigDecimal vanPrijsSchilder, BigDecimal totPrijsSchilder, int startJaarSchilder, int eindJaarSchilder, Pageable pageable);
 }
