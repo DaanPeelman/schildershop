@@ -56,7 +56,6 @@ th,td {
 /****************************
 FORMS
 *****************************/
-
 form div {
 	min-width: 300px;
 	margin-bottom: 0.25em;
@@ -87,7 +86,7 @@ input[type="text"],input[type="email"],textarea,select {
 	-webkit-box-shadow: inset 0px 1px 4px #ECECEC;
 }
 
-.naCheckbox input{
+.naCheckbox input {
 	margin-right: 0.75em;
 }
 
@@ -95,11 +94,6 @@ input[type=submit] {
 	margin-left: 0.5em;
 	margin-top: 0.25em;
 }
-
-#slider-range-prijs,#slider-range-jaartal {
-	
-}
-
 
 /****************************
 HEADING
@@ -223,20 +217,45 @@ PAGE: ABOUT
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
 
-
 /****************************
 PAGE: OVERZICHT
 *****************************/
-
 .adres {
 	margin-top: 0;
 }
 
+/****************************
+PAGE: PRODUCTEN
+*****************************/
+.sidebar {
+	border-bottom: 1.5px solid;
+	padding: 5%;
+}
+
+div#slider-range-prijs,div#slider-range-jaartal {
+	min-width: initial;
+	min-width: 10%;
+	max-width: 5em;
+}
+
+.ui-widget {
+	font-size: 1em;
+}
+
+/* Smartphone Portrait and Landscape */
+@media only screen and (min-device-width : 320px) and (max-device-width
+	: 480px) {
+	.mobileShow {
+		display: inline;
+	}
+	.mobileHide {
+		display: none;
+	}
+}
 
 /****************************
 PAGE: DETAILS
 *****************************/
-
 .extraMarginBottom {
 	margin-bottom: 1em;
 }
@@ -297,7 +316,7 @@ nav {
 	border-color: #d0c7c2;
 }
 
-footer {
+footer,.sidebar {
 	border-color: #d0c7c2;
 }
 
@@ -353,14 +372,24 @@ footer {
 	}
 
 	/****************************
-  PAGE: ABOUT
-  *****************************/
+ 	 PAGE: ABOUT
+  	*****************************/
 	.portret {
 		float: left;
 		margin: 0 5% 80px 0;
 	}
 	img.portret ~ * {
 		overflow: hidden;
+	}
+
+	/****************************
+  	PAGE: PRODUCTEN
+  	*****************************/
+	.mobileShow {
+		display: none;
+	}
+	.mobileHide {
+		display: inline;
 	}
 }
 
