@@ -56,17 +56,24 @@ public class ProductController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, params = {"page"})
-	public ModelAndView findAll(@RequestParam int page) {
+	public ModelAndView findAll(@RequestParam String page) {
+		int iPage;
+		try {
+			iPage = Integer.parseInt(page);
+			
+		} catch(NumberFormatException e) {
+			iPage = 1;
+		}
 		ModelAndView mav = new ModelAndView("producten/producten",
-				"schilderijen", productService.findAll(page));
+				"schilderijen", productService.findAll(iPage));
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav = addMinsMaxs(mav);
 		
 		mav.addObject("huidigUrl", "/producten");
 		mav.addObject("huidigePagina", page);
-		mav.addObject("hasMore", (page * 5) < productService.findAantalProducten());
-		mav.addObject("hasLess", ((page * 5) - 5) > 0);
+		mav.addObject("hasMore", (iPage * 5) < productService.findAantalProducten());
+		mav.addObject("hasLess", ((iPage * 5) - 5) > 0);
 		
 		return mav;
 	}
@@ -124,7 +131,7 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.GET, params = { "zoekterm",
 			"vanPrijs", "totPrijs", "vanJaartal", "totJaartal", "page" })
 	public ModelAndView findByZoektermen(@Valid ZoekTermForm zoekTermForm,
-			BindingResult bindingResult, @RequestParam int page, HttpServletRequest request) {
+			BindingResult bindingResult, @RequestParam String page, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("producten/producten");
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		
@@ -144,8 +151,17 @@ public class ProductController {
 			BigDecimal totPrijs = zoekTermForm.getTotPrijs();
 			Integer vanJaartal = zoekTermForm.getVanJaartal();
 			Integer totJaartal = zoekTermForm.getTotJaartal();
+			
+			int iPage;
+			
+			try {
+				iPage = Integer.parseInt(page);
+			} catch (NumberFormatException e) {
+				iPage = 1;
+			}
+			
 			Iterable<Product> resultaat = productService.findByZoektermen(
-					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, page);
+					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, iPage);
 			mav.addObject("schilderijen", resultaat);
 			String filter = "tussen €" + vanPrijs + " en €"
 					+ totPrijs + ", gemaakt tussen " + vanJaartal + " en "
@@ -155,9 +171,9 @@ public class ProductController {
 			}
 			mav.addObject("filter", filter);
 			
-			mav.addObject("hasMore", (page * 5) < productService.findAantalProductenMetZoekterm(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal));
+			mav.addObject("hasMore", (iPage * 5) < productService.findAantalProductenMetZoekterm(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal));
 			System.out.println("aantal producten: " + productService.findAantalProductenMetZoekterm(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal));
-			mav.addObject("hasLess", ((page * 5) - 5) > 0);
+			mav.addObject("hasLess", ((iPage * 5) - 5) > 0);
 		}
 
 		mav = addMinsMaxs(mav);
