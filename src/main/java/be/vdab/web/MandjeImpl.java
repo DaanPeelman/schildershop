@@ -1,5 +1,6 @@
 package be.vdab.web;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,7 +12,9 @@ import be.vdab.valueobjects.Adres;
 
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
-public class MandjeImpl implements Mandje{
+public class MandjeImpl implements Mandje, Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Map<Long, Integer> producten;
 	private Adres adres;
 	
