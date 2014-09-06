@@ -172,7 +172,6 @@ public class ProductController {
 			mav.addObject("filter", filter);
 			
 			mav.addObject("hasMore", (iPage * 5) < productService.findAantalProductenMetZoekterm(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal));
-			System.out.println("aantal producten: " + productService.findAantalProductenMetZoekterm(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal));
 			mav.addObject("hasLess", ((iPage * 5) - 5) > 0);
 		}
 
@@ -272,7 +271,6 @@ public class ProductController {
 		if (product != null) {
 			String productFotoPad = servletContext.getRealPath(File.separator + "img") + File.separator
 					+ product.getProductId() + ".jpg";
-			System.out.println(productFotoPad);
 			File file = new File(productFotoPad);
 			mav.addObject("heeftFoto", file.exists());
 		}
