@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import be.vdab.entities.Product;
 
 public interface ProductService {
-	Iterable<Product> findAll();
+	Iterable<Product> findAll(int page);
 
 	Iterable<String> findAllStijlen();
 
@@ -14,7 +14,7 @@ public interface ProductService {
 	Product findOne(long productId);
 
 	Iterable<Product> findByZoektermen(String zoekterm, BigDecimal vanPrijs,
-			BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal);
+			BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal, int page);
 	
 	Iterable<Product> findNieuwsteProducten();
 
@@ -23,4 +23,8 @@ public interface ProductService {
 	Integer findMinJaartal();
 
 	Integer findMaxJaartal();
+	
+	long findAantalProducten();
+	long findAantalProductenMetZoekterm(String zoekterm, BigDecimal vanPrijs,
+			BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal);
 }

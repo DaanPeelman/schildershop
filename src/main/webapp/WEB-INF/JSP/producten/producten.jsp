@@ -161,6 +161,18 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<c:if test="${hasLess}">
+							<c:url value="${huidigUrl}" var="vorigeUrl">
+								<c:param name="page" value="${huidigePagina - 1}" />
+							</c:url>
+							<a href="${vorigeUrl}">&lt;</a>
+						</c:if>
+						<c:if test="${hasMore}">
+							<c:url value="${huidigUrl}" var="volgendeUrl">
+								<c:param name="page" value="${huidigePagina + 1}" />
+							</c:url>
+							<a href="${volgendeUrl}">&gt;</a>
+						</c:if>
 					</c:when>
 					<c:otherwise>
 					Er werden geen schilderijen gevonden.
