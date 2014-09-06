@@ -1,5 +1,6 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
@@ -19,7 +20,7 @@
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script>
@@ -132,35 +133,28 @@
 					</div>
 				</form:form>
 			</aside>
-			<div class='lagereDiv mobileHide'>
+			<div class='lagereDiv' id='mobileHide'>
 				<c:choose>
 					<c:when test="${not empty schilderijen}">
-						<table>
-							<thead>
-								<tr>
-									<th>Titel</th>
-									<th>Schilder</th>
-									<th>Stijl</th>
-									<th>Jaartal</th>
-									<th>Prijs</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${schilderijen}" var="schilderij">
-									<tr>
-										<spring:url value="/producten/{productId}" var="productURL">
-											<spring:param name="productId"
-												value="${schilderij.productId}" />
-										</spring:url>
-										<td><a href="${productURL}">${schilderij.titel}</a></td>
-										<td>${schilderij.schilder.naam}</td>
-										<td>${schilderij.stijl}</td>
-										<td>${schilderij.jaartal}</td>
-										<td>${schilderij.prijs}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<ul>
+							<c:forEach items="${schilderijen}" var="schilderij">
+							
+								<spring:url value="/producten/{productId}" var="productURL">
+									<spring:param name="productId" value="${schilderij.productId}" />
+								</spring:url>
+								<li class="nieuwProduct"><c:if test="${schilderij.value}">
+										<span class="nieuwProductImg"
+											style="background-image: url('${pageContext.servletContext.contextPath}/img/${productURL}.jpg');"><img
+											src="${pageContext.servletContext.contextPath}/img/${productURL}.jpg" /></span>
+									</c:if>
+									<div class="nieuwProductInfo">
+										<span><a href="${productURL}">${schilderij.titel}</a></span><span>${schilderij.schilder.naam}</span><span>${schilderij.stijl}</span><span>${schilderij.jaartal}</span><span>
+											&euro;<fmt:formatNumber value="${schilderij.prijs}"
+												minFractionDigits="2" maxFractionDigits="2" />
+										</span>
+									</div></li>
+							</c:forEach>
+						</ul>
 					</c:when>
 					<c:otherwise>
 					Er werden geen schilderijen gevonden.

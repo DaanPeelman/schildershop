@@ -248,7 +248,7 @@ div#slider-range-prijs,div#slider-range-jaartal {
 	.mobileShow {
 		display: inline;
 	}
-	.mobileHide {
+	#mobileHide {
 		display: none;
 	}
 }
@@ -388,7 +388,7 @@ footer {
 	.mobileShow {
 		display: none;
 	}
-	.mobileHide {
+	#mobileHide {
 		display: inline;
 	}
 }
