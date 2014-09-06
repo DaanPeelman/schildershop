@@ -138,14 +138,14 @@
 					<c:when test="${not empty schilderijen}">
 						<ul>
 							<c:forEach items="${schilderijen}" var="schilderij">
-							
+
 								<spring:url value="/producten/{productId}" var="productURL">
 									<spring:param name="productId" value="${schilderij.productId}" />
 								</spring:url>
-								<li class="nieuwProduct"><c:if test="${schilderij.value}">
+								<li class="nieuwProduct"><c:if test="${heeftFoto}">
 										<span class="nieuwProductImg"
-											style="background-image: url('${pageContext.servletContext.contextPath}/img/${productURL}.jpg');"><img
-											src="${pageContext.servletContext.contextPath}/img/${productURL}.jpg" /></span>
+											style="background-image: url('${pageContext.servletContext.contextPath}/img/${schilderij.productId}.jpg');"><img
+											src="${pageContext.servletContext.contextPath}/img/${schilderij.productId}.jpg" /></span>
 									</c:if>
 									<div class="nieuwProductInfo">
 										<span><a href="${productURL}">${schilderij.titel}</a></span><span>${schilderij.schilder.naam}</span><span>${schilderij.stijl}</span><span>${schilderij.jaartal}</span><span>
