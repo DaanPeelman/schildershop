@@ -86,7 +86,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Iterable<Product> findByZoektermen(String zoekterm, BigDecimal vanPrijs, BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal) {
-		System.out.println("van: ");
 		Iterable<Product> gevondenProducten = productDAO.findByTitelContainingAndPrijsBetweenAndJaartalBetweenOrStijlContainingAndPrijsBetweenAndJaartalBetweenOrSchilderNaamContainingAndPrijsBetweenAndJaartalBetweenOrderByTitelAsc(zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal);
 		return gevondenProducten;
 	}

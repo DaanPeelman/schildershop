@@ -22,7 +22,6 @@ class AdresForm extends Adres {
 	
 	@Override
 	public void setGemeente(String gemeente) {
-		System.out.println("gemeente op " + gemeente + " zetten");
 		super.setGemeente(gemeente);
 	}
 	
