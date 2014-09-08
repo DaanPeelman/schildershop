@@ -56,7 +56,6 @@ public class MandjeController {
 			mandjeForm = new MandjeForm(new AdresForm(mandje.getAdres()));
 		}
 		modelAndView.addObject("mandjeForm", mandjeForm);
-		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
 		
 		if(request.getUserPrincipal() != null) {
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(request.getUserPrincipal().getName());
@@ -112,8 +111,6 @@ public class MandjeController {
 		}
 		
 		modelAndView.addObject("productenInMandje", productenInMandje);
-		
-		modelAndView.addObject("verwijderUitMandjeForm", new VerwijderUitMandjeForm());
 		
 		if(request.getUserPrincipal() != null) {
 			Gebruiker gebruiker = gebruikerService.findByEmailadres(request.getUserPrincipal().getName());
