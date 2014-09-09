@@ -75,7 +75,8 @@ label>span {
 	margin-top: 10px;
 }
 
-input[type="text"],input[type="email"],input[type="number"], input[type="password"], textarea {
+input[type="text"],input[type="email"],input[type="number"],input[type="password"],textarea
+	{
 	height: 20px;
 	margin-top: 2px;
 	outline: 0 none;
@@ -372,14 +373,18 @@ footer {
 	/****************************
 	FORMS
 	*****************************/
-	input, select {
-		max-width: 8em;
+	input {
+		max-width: 8.5em;
 	}
-	
+	input[type="file"] {
+		max-width: none;
+	}
+	select {
+		max-width: 9em;
+	}
 	#slider-range-prijs,#slider-range-jaartal {
 		margin: 3% 5%;
 	}
-
 
 	/****************************
   TWO COLUMN LAYOUT
@@ -389,8 +394,9 @@ footer {
 		float: left;
 	}
 	#secondary {
-		width: 40%;
+		margin: 0; width : 40%;
 		float: right;
+		width: 40%;
 	}
 
 	/****************************
@@ -410,6 +416,65 @@ footer {
 }
 
 @media screen and (min-width: 660px) {
+	/****************************
+  	PAGE: PRODUCTEN
+  	*****************************/
+	#productWrapper {
+		width: 90%;
+	}
+	#zoekTermForm div {
+		min-width: 0;
+	}
+	.sidebar {
+		float: left;
+		width: 15%;
+		border-bottom: none;
+		border-right: 1.5px solid;
+		padding: 1%;
+	}
+	div.slider {
+		padding-bottom: 1em;
+	}
+	#slider-range-prijs,#slider-range-jaartal {
+		width: 90%;
+	}
+	.productLijst {
+		float: right;
+		width: 75%;
+		margin-right: 1.5%;
+	}
+	#gallery {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		overflow: auto;
+	}
+	#gallery li {
+		float: left;
+		width: 28.33333%;
+		margin: 2.5%;
+		clear: none;
+	}
+	#gallery li a p {
+		margin: 0;
+		padding: 5%;
+		font-size: 0.8em;
+	}
+	#gallery li:nth-child(4n) {
+		clear: left;
+	}
+	#paginering {
+		position: relative;
+	}
+	
+	/****************************
+  	PAGE: PRODUCTEN TOEVOEGEN
+  	*****************************/
+  	
+  	#toevoegform span{
+  		width: 30%;
+  	}
+
 	/****************************
   HEADER
   *****************************/

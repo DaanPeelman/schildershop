@@ -33,6 +33,7 @@
 			<h1>Gegevens</h1>
 		</header>
 		<div id="wrapper">
+		<div id="primary">
 			<h2>Uw recente bestellingen</h2>
 			<c:if test="${not empty gebruiker.bestellingen}">
 				<table>
@@ -69,7 +70,8 @@
 			<c:if test="${empty gebruiker.bestellingen}">
 				<div>U hebt geen recente bestellingen</div>
 			</c:if>
-			<div class="lagereDiv">
+			</div>
+			<div class="lagereDiv" id="secondary">
 				<h2>Uw gegevens</h2>
 				<div>
 					<b>Naam: </b> ${gebruiker.naam}&nbsp;${gebruiker.familienaam}

@@ -103,12 +103,13 @@
 			</nav>
 			<h1>Producten ${filter}</h1>
 		</header>
-		<div id="wrapper">
+		<div id="wrapper productWrapper">
 			<aside class='sidebar'>
 				<c:url var="url" value="/producten" />
 				<form:form commandName="zoekTermForm" action="${url}" method="get">
 					<div>
-						<form:label path="zoekterm"><span>Zoekterm: </span>
+						<form:label path="zoekterm">
+							<span>Zoekterm: </span>
 							<form:input path="zoekterm" autofocus='autofocus' />
 							<form:errors path="zoekterm" cssClass="fout" />
 						</form:label>
@@ -133,12 +134,11 @@
 					</div>
 				</form:form>
 			</aside>
-			<div class='lagereDiv'>
+			<div class='lagereDiv productLijst'>
 				<c:choose>
 					<c:when test="${not empty producten}">
-						<ul>
+						<ul id="gallery">
 							<c:forEach items="${producten}" var="product">
-
 								<spring:url value="/producten/{productId}" var="productURL">
 									<spring:param name="productId" value="${product.key.productId}" />
 								</spring:url>
@@ -148,15 +148,19 @@
 											src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" /></span>
 									</c:if>
 									<div class="nieuwProductInfo">
-										<h2><a href="${productURL}">${product.key.titel}</a></h2><span class="enkel">${product.key.schilder.naam}</span>
-										<span>${product.key.stijl}</span><span class="rechts">${product.key.jaartal}</span><span class="enkel">
-											&euro;<fmt:formatNumber value="${product.key.prijs}"
-												minFractionDigits="2" maxFractionDigits="2" />
+										<h2>
+											<a href="${productURL}">${product.key.titel}</a>
+										</h2>
+										<span class="enkel">${product.key.schilder.naam}</span> <span>${product.key.stijl}</span><span
+											class="rechts">${product.key.jaartal}</span><span
+											class="enkel"> &euro;<fmt:formatNumber
+												value="${product.key.prijs}" minFractionDigits="2"
+												maxFractionDigits="2" />
 										</span>
 									</div></li>
 							</c:forEach>
 						</ul>
-						<p>
+						<p id="paginering">
 							<c:if test="${hasLess}">
 								<c:url value="${huidigUrl}" var="vorigeUrl">
 									<c:param name="page" value="${huidigePagina - 1}" />
