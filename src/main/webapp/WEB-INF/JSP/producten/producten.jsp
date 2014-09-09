@@ -133,23 +133,23 @@
 					</div>
 				</form:form>
 			</aside>
-			<div class='lagereDiv' id='mobileHide'>
+			<div class='lagereDiv'>
 				<c:choose>
-					<c:when test="${not empty schilderijen}">
+					<c:when test="${not empty producten}">
 						<ul>
-							<c:forEach items="${schilderijen}" var="schilderij">
+							<c:forEach items="${producten}" var="product">
 
 								<spring:url value="/producten/{productId}" var="productURL">
-									<spring:param name="productId" value="${schilderij.productId}" />
+									<spring:param name="productId" value="${product.key.productId}" />
 								</spring:url>
-								<li class="nieuwProduct"><c:if test="${heeftFoto}">
+								<li class="nieuwProduct"><c:if test="${product.value}">
 										<span class="nieuwProductImg"
-											style="background-image: url('${pageContext.servletContext.contextPath}/img/${schilderij.productId}.jpg');"><img
-											src="${pageContext.servletContext.contextPath}/img/${schilderij.productId}.jpg" /></span>
+											style="background-image: url('${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg');"><img
+											src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" /></span>
 									</c:if>
 									<div class="nieuwProductInfo">
-										<span><a href="${productURL}">${schilderij.titel}</a></span><span>${schilderij.schilder.naam}</span><span>${schilderij.stijl}</span><span>${schilderij.jaartal}</span><span>
-											&euro;<fmt:formatNumber value="${schilderij.prijs}"
+										<span><a href="${productURL}">${product.key.titel}</a></span><span>${product.key.schilder.naam}</span><span>${product.key.stijl}</span><span>${product.key.jaartal}</span><span>
+											&euro;<fmt:formatNumber value="${product.key.prijs}"
 												minFractionDigits="2" maxFractionDigits="2" />
 										</span>
 									</div></li>
@@ -176,7 +176,6 @@
 				</c:otherwise>
 				</c:choose>
 			</div>
-			<div class="mobileShow">TEXT OR IMAGE FOR MOBILE HERE</div>
 		</div>
 		<div class="push"></div>
 	</div>

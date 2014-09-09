@@ -55,7 +55,7 @@ public class ProductController {
 			mapProducten.put(product, file.exists());
 		}
 		ModelAndView mav = new ModelAndView("producten/producten",
-				"schilderijen", producten);
+				"producten", mapProducten);
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav = addMinsMaxs(mav);
@@ -89,7 +89,7 @@ public class ProductController {
 			mapProducten.put(product, file.exists());
 		}
 		ModelAndView mav = new ModelAndView("producten/producten",
-				"schilderijen", producten);
+				"producten", mapProducten);
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav = addMinsMaxs(mav);
@@ -127,9 +127,22 @@ public class ProductController {
 			BigDecimal totPrijs = zoekTermForm.getTotPrijs();
 			Integer vanJaartal = zoekTermForm.getVanJaartal();
 			Integer totJaartal = zoekTermForm.getTotJaartal();
-			Iterable<Product> resultaat = productService.findByZoektermen(
-					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, 1);
-			mav.addObject("schilderijen", resultaat);
+			
+			Map<Product, Boolean> mapProducten = new ConcurrentHashMap<>();
+			Iterable<Product> producten = productService
+					.findByZoektermen(zoekterm, vanPrijs, totPrijs, vanJaartal,
+							totJaartal, 1);
+
+			for (Product product : producten) {
+				String productFotoPad = servletContext.getRealPath(File.separator
+						+ "img")
+						+ File.separator + product.getProductId() + ".jpg";
+				File file = new File(productFotoPad);
+				mapProducten.put(product, file.exists());
+			}
+
+			mav.addObject("producten", mapProducten);
+
 			String filter = "tussen €" + vanPrijs + " en €" + totPrijs
 					+ ", gemaakt tussen " + vanJaartal + " en " + totJaartal;
 			if (!zoekterm.equals("")) {
@@ -206,7 +219,7 @@ public class ProductController {
 				mapProducten.put(product, file.exists());
 			}
 
-			mav.addObject("schilderijen", producten);
+			mav.addObject("producten", mapProducten);
 			String filter = "tussen €" + vanPrijs + " en €" + totPrijs
 					+ ", gemaakt tussen " + vanJaartal + " en " + totJaartal;
 			if (!zoekterm.equals("")) {
