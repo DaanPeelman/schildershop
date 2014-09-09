@@ -60,7 +60,7 @@
 									type="hidden" />
 								<form:label path="aantal">Aantal:</form:label>
 								<form:input path="aantal" />
-								<input type="submit" value="Koop" />
+								<input type="submit" value="Bestel" />
 							</form:form>
 						</div>
 					</div>

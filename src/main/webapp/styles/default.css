@@ -75,7 +75,7 @@ label>span {
 	margin-top: 10px;
 }
 
-input[type="text"],input[type="email"], input[type="number"],textarea {
+input[type="text"],input[type="email"],input[type="number"], input[type="password"], textarea {
 	height: 20px;
 	margin-top: 2px;
 	outline: 0 none;
@@ -100,13 +100,14 @@ select {
 	margin-right: 0.75em;
 }
 
-input[type=submit], input[type=file] {
+input[type=submit],input[type=file] {
 	margin-left: 0.5em;
 	margin-top: 0.25em;
 }
 
 .fout {
-	float:none;
+	float: none;
+	display: block;
 }
 
 /****************************
@@ -368,6 +369,18 @@ footer {
   **********************************
   ***********************************/
 @media screen and (min-width: 480px) {
+	/****************************
+	FORMS
+	*****************************/
+	input, select {
+		max-width: 8em;
+	}
+	
+	#slider-range-prijs,#slider-range-jaartal {
+		margin: 3% 5%;
+	}
+
+
 	/****************************
   TWO COLUMN LAYOUT
   *****************************/

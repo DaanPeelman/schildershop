@@ -76,7 +76,7 @@
 			</div>
 			<div class="lagereDiv">
 				<h2>Afleveradres</h2>
-				<p>${bestelbon.leverAdres.straat}${bestelbon.leverAdres.nummer},
+				<p>${bestelbon.leverAdres.straat} ${bestelbon.leverAdres.nummer},
 					${bestelbon.leverAdres.postcode} ${bestelbon.leverAdres.gemeente}</p>
 			</div>
 		</div>
