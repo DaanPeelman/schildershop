@@ -108,7 +108,7 @@
 				<c:url var="url" value="/producten" />
 				<form:form commandName="zoekTermForm" action="${url}" method="get">
 					<div>
-						<form:label path="zoekterm">
+						<form:label path="zoekterm"><span>Zoekterm: </span>
 							<form:input path="zoekterm" autofocus='autofocus' />
 							<form:errors path="zoekterm" cssClass="fout" />
 						</form:label>
@@ -148,7 +148,8 @@
 											src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" /></span>
 									</c:if>
 									<div class="nieuwProductInfo">
-										<span><a href="${productURL}">${product.key.titel}</a></span><span>${product.key.schilder.naam}</span><span>${product.key.stijl}</span><span>${product.key.jaartal}</span><span>
+										<h2><a href="${productURL}">${product.key.titel}</a></h2><span class="enkel">${product.key.schilder.naam}</span>
+										<span>${product.key.stijl}</span><span class="rechts">${product.key.jaartal}</span><span class="enkel">
 											&euro;<fmt:formatNumber value="${product.key.prijs}"
 												minFractionDigits="2" maxFractionDigits="2" />
 										</span>

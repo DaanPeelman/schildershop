@@ -167,11 +167,9 @@ PAGE: INDEX
 .nieuwProduct {
 	float: left;
 	clear: both;
-	min-height: 300px;
 	width: 90%;
 	margin: 5%;
 	overflow: hidden;
-	padding-bottom: 1em;
 }
 
 .nieuwProductImg {
@@ -195,7 +193,7 @@ PAGE: INDEX
 .nieuwProductInfo {
 	z-index: 100;
 	color: #444;
-	padding-left: 1em;
+	padding: 1em;
 }
 
 .nieuwProductInfo h2 {
@@ -232,25 +230,22 @@ PAGE: PRODUCTEN
 	padding: 5%;
 }
 
-div#slider-range-prijs,div#slider-range-jaartal {
-	min-width: initial;
-	min-width: 10%;
-	max-width: 5em;
+#slider-range-prijs,#slider-range-jaartal {
+	height: 0.5em;
+	width: 9.5em;
+	margin: 0.5em;
 }
 
 .ui-widget {
 	font-size: 1em;
 }
 
-/* Smartphone Portrait and Landscape */
-@media only screen and (min-device-width : 320px) and (max-device-width
-	: 480px) {
-	.mobileShow {
-		display: inline;
-	}
-	#mobileHide {
-		display: none;
-	}
+.rechts {
+	float: right;
+}
+
+.enkel {
+	display: block;
 }
 
 /****************************
@@ -385,12 +380,6 @@ footer {
 	/****************************
   	PAGE: PRODUCTEN
   	*****************************/
-	.mobileShow {
-		display: none;
-	}
-	#mobileHide {
-		display: inline;
-	}
 }
 
 @media screen and (min-width: 660px) {
