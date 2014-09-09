@@ -19,7 +19,7 @@
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div class="sticky_wrapper">
@@ -56,6 +56,9 @@
 				bekijken. Om dit project als team in goede banen te leiden
 				gebruikten we Github en Scrum.
 			</p>
+			<p>Het design van de site maakt gebruik van de Responsive
+				principes, bekijk de pagina's dus zeker ook eens in een ander
+				schermformaat.</p>
 			<h2>Wie</h2>
 			<div>
 				<img alt="portret Daan Peelman"
