@@ -75,7 +75,7 @@ label>span {
 	margin-top: 10px;
 }
 
-input[type="text"],input[type="email"],textarea,select {
+input[type="text"],input[type="email"], input[type="number"],textarea {
 	height: 20px;
 	margin-top: 2px;
 	outline: 0 none;
@@ -86,13 +86,27 @@ input[type="text"],input[type="email"],textarea,select {
 	-webkit-box-shadow: inset 0px 1px 4px #ECECEC;
 }
 
+select {
+	margin-top: 2px;
+	outline: 0 none;
+	padding: 3px 3px 3px 5px;
+	width: 38%;
+	box-shadow: inset 0px 1px 4px #ECECEC;
+	-moz-box-shadow: inset 0px 1px 4px #ECECEC;
+	-webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+
 .naCheckbox input {
 	margin-right: 0.75em;
 }
 
-input[type=submit] {
+input[type=submit], input[type=file] {
 	margin-left: 0.5em;
 	margin-top: 0.25em;
+}
+
+.fout {
+	float:none;
 }
 
 /****************************

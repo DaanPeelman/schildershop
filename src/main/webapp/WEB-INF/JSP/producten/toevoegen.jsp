@@ -16,7 +16,7 @@
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div class="sticky_wrapper">
@@ -32,31 +32,35 @@
 		</header>
 		<div id="wrapper">
 			<section class='content'>
-				<h2>Product toevoegen</h2>
-				<c:url value='/producten/toevoegen' var='producturl' />
-				<form:form action='${producturl}' method='post'
-					commandName='product' id='toevoegform'
-					enctype="multipart/form-data">
-					<jsp:include page='productformfields.jsp' />
-					<label><span>Afbeelding: </span><input type="file"
-						name="foto"></label>
-					<br>
-					<input type='submit' value='Toevoegen' id='toevoegknop'>
-					<form:errors cssClass='fout' />
-				</form:form>
-				${succesProduct}
-				<h2>Schilder toevoegen</h2>
-				<c:url value='/producten/toevoegen' var='schilderurl' />
-				<form:form action='${schilderurl}' method='post'
-					commandName='schilder' id='toevoegform'>
-					<form:label path="naam">
-						<span>Schilder: </span>
-						<form:input path="naam" />
-						<form:errors path="naam" cssClass="fout" />
-					</form:label>
-					<input type='submit' value='Toevoegen' id='toevoegknop'>
-				</form:form>
-				${succesSchilder}
+				<div>
+					<h2>Product toevoegen</h2>
+					<c:url value='/producten/toevoegen' var='producturl' />
+					<form:form action='${producturl}' method='post'
+						commandName='product' id='toevoegform'
+						enctype="multipart/form-data">
+						<jsp:include page='productformfields.jsp' />
+						<label><span>Afbeelding: </span><input type="file"
+							name="foto"></label>
+						<br>
+						<input type='submit' value='Toevoegen' id='toevoegknop'>
+						<form:errors cssClass='fout' />
+					</form:form>
+					${succesProduct}
+				</div>
+				<div class="lagereDiv">
+					<h2>Schilder toevoegen</h2>
+					<c:url value='/producten/toevoegen' var='schilderurl' />
+					<form:form action='${schilderurl}' method='post'
+						commandName='schilder' id='toevoegform'>
+						<form:label path="naam">
+							<span>Schilder: </span>
+							<form:input path="naam" />
+							<form:errors path="naam" cssClass="fout" />
+						</form:label>
+						<input type='submit' value='Toevoegen' id='toevoegknop'>
+					</form:form>
+					${succesSchilder}
+				</div>
 			</section>
 		</div>
 		<div class="push"></div>
