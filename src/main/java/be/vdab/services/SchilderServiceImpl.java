@@ -33,4 +33,9 @@ public class SchilderServiceImpl implements SchilderService {
 	public Iterable<Schilder> findAll() {
 		return schilderDAO.findAll(new Sort("naam"));
 	}
+	
+	@Override
+	public Schilder findByNaam(String naam) {
+		return schilderDAO.findByNaamIs(naam);
+	}
 }

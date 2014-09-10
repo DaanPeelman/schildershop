@@ -57,7 +57,6 @@ th,td {
 FORMS
 *****************************/
 form div {
-	min-width: 300px;
 	margin-bottom: 0.25em;
 	-webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
 	-moz-box-sizing: border-box; /* For all Gecko based browsers */
@@ -69,11 +68,18 @@ label {
 	margin: 0;
 }
 
-label>span {
+label>span:first-child {
 	float: left;
 	width: 55%;
-	margin-top: 10px;
+	
+	clear: both;
 }
+
+
+
+/* label>span { */
+/* 	margin-top: 10px; */
+/* } */
 
 input[type="text"],input[type="email"],input[type="number"],input[type="password"],textarea
 	{
@@ -124,7 +130,7 @@ header {
 
 #logo img {
 	margin: 0;
-	max-height: 15%;
+	max-height: 100px;
 }
 
 h1 {
@@ -250,8 +256,14 @@ PAGE: PRODUCTEN
 	height: 0.5em;
 	width: 9.5em;
 	margin: 0.5em;
+	
+	clear: both;
 }
 
+label>span.wijder {
+	width:100%;
+	margin-bottom: 10px;
+}
 .ui-widget {
 	font-size: 1em;
 }
@@ -327,7 +339,7 @@ nav {
 	border-color: #d0c7c2;
 }
 
-footer,.sidebar {
+footer,.sidebar,.productLijst {
 	border-color: #d0c7c2;
 }
 
@@ -394,7 +406,8 @@ footer {
 		float: left;
 	}
 	#secondary {
-		margin: 0; width : 40%;
+		margin: 0;
+		width: 40%;
 		float: right;
 		width: 40%;
 	}
@@ -427,9 +440,8 @@ footer {
 	}
 	.sidebar {
 		float: left;
-		width: 15%;
+		width: 17%;
 		border-bottom: none;
-		border-right: 1.5px solid;
 		padding: 1%;
 	}
 	div.slider {
@@ -440,8 +452,10 @@ footer {
 	}
 	.productLijst {
 		float: right;
-		width: 75%;
+		width: 77%;
 		margin-right: 1.5%;
+		margin-top: 0;
+		border-left: 1.5px solid;
 	}
 	#gallery {
 		margin: 0;
@@ -466,25 +480,33 @@ footer {
 	#paginering {
 		position: relative;
 	}
-	
+
 	/****************************
   	PAGE: PRODUCTEN TOEVOEGEN
   	*****************************/
-  	
-  	#toevoegform span{
-  		width: 30%;
-  	}
+	#toevoegform span {
+		width: 30%;
+	}
 
 	/****************************
   HEADER
   *****************************/
+  #logo img {
+  	float: left;
+	margin: 0.5% 2% 0.5% 1%;
+  }
 	nav {
+		float: right;
 		font-size: 1.125em;
+		background: none;
 	}
 	h1 {
+		margin-top: 70px;
 		font-size: 2.5em;
 	}
 	header {
+		text-align: left;
+	
 		border-bottom: 5px solid #403731;
 		margin-bottom: 60px;
 	}

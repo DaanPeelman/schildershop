@@ -3,6 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang='nl'>
@@ -19,7 +20,7 @@
 	href="${pageContext.servletContext.contextPath}/styles/lightbox.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript"
@@ -66,6 +67,14 @@
 					<input type="submit" value="Bestel" />
 				</div>
 			</form:form>
+			<security:authorize url='/producten/toevoegen'>
+				<spring:url value='/producten/{id}/wijzigen' var='wijzigURL'>
+					<spring:param name="id" value="${product.productId}" />
+				</spring:url>
+				<form action='${wijzigURL}' method='get'>
+					<input type='submit' value='Wijzigen'>
+				</form>
+			</security:authorize>
 		</div>
 		<div class="push"></div>
 	</div>

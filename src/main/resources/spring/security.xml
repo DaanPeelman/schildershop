@@ -15,6 +15,7 @@ http://www.springframework.org/schema/security/spring-security.xsd'>
 <!-- 		<intercept-url pattern="/gebruiker" access="hasRole('Klant')"/> -->
 		<intercept-url pattern="/gebruiker/*" access="isAuthenticated()"/>
 		<intercept-url pattern="/producten/toevoegen" access="hasRole('Administrator')"/>
+		<intercept-url pattern="/producten/wijzigen" access="hasRole('Administrator')"/>
 		<intercept-url pattern="/bestellingen/mandje" access="permitAll"/>
 		<intercept-url pattern="/bestellingen" access="isAuthenticated()"/>
 	</http>

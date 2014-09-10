@@ -6,4 +6,5 @@ public interface SchilderService {
 	void create(Schilder schilder);
 
 	Iterable<Schilder> findAll();
+	Schilder findByNaam(String naam);
 }

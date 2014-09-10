@@ -7,5 +7,6 @@ import be.vdab.entities.Schilder;
 public interface SchilderDAO extends JpaRepository<Schilder, Long> {
 
 	Iterable<Schilder> findByNaamLike(String naam);
+	Schilder findByNaamIs(String naam);
 
 }

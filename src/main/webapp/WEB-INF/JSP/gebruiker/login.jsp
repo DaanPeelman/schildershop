@@ -39,7 +39,7 @@
 						<h2>Ik ben al geregistreerd</h2>
 						<div>
 							<label><span>Gebruikersnaam: </span><input
-								name='j_username' autofocus></label>
+								name='j_username' autofocus type="text"></label>
 						</div>
 						<div>
 							<label><span>Paswoord: </span><input type='password'

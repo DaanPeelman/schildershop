@@ -43,12 +43,12 @@
 			max : iMaxPrijs,
 			values : [ sMinPrijs, sMaxPrijs ],
 			slide : function(event, ui) {
-				$("#amount").val("€" + ui.values[0] + " - €" + ui.values[1]);
+				$("#prijsSpan").html("€" + ui.values[0] + " - €" + ui.values[1]);
 				$("#vanPrijs").val(ui.values[0]);
 				$("#totPrijs").val(ui.values[1]);
 			}
 		});
-		$("#amount").val(
+		$("#prijsSpan").html(
 				"€" + $("#slider-range-prijs").slider("values", 0) + " - €"
 						+ $("#slider-range-prijs").slider("values", 1));
 		$("#vanPrijs").val($("#slider-range-prijs").slider("values", 0));
@@ -76,12 +76,12 @@
 			max : iMaxJaar,
 			values : [ sMinJaar, sMaxJaar ],
 			slide : function(event, ui) {
-				$("#periode").val(ui.values[0] + " - " + ui.values[1]);
+				$("#periodeSpan").html(ui.values[0] + " - " + ui.values[1]);
 				$("#vanJaartal").val(ui.values[0]);
 				$("#totJaartal").val(ui.values[1]);
 			}
 		});
-		$("#periode").val(
+		$("#periodeSpan").html(
 				$("#slider-range-jaartal").slider("values", 0) + " - "
 						+ $("#slider-range-jaartal").slider("values", 1));
 		$("#vanJaartal").val($("#slider-range-jaartal").slider("values", 0));
@@ -115,15 +115,13 @@
 						</form:label>
 					</div>
 					<div class="slider">
-						<label for="amount"><span>Prijs: </span><input type="text"
-							id="amount" readonly></label>
+						<label for="amount"><span class="wijder">Prijs: <span id="prijsSpan"></span></span></label>
 						<div id="slider-range-prijs"></div>
 						<form:input type="hidden" path="vanPrijs" id="vanPrijs" />
 						<form:input type="hidden" path="totPrijs" id="totPrijs" />
 					</div>
 					<div class="slider">
-						<label for="periode"><span>Periode: </span><input
-							type="text" id="periode" readonly></label>
+						<label for="periode"><span class="wijder">Periode: <span id="periodeSpan"></span></span></label>
 						<div id="slider-range-jaartal"></div>
 						<form:input type="hidden" path="vanJaartal" id="vanJaartal" />
 						<form:input type="hidden" path="totJaartal" id="totJaartal" />

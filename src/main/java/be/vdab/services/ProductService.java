@@ -27,4 +27,6 @@ public interface ProductService {
 	long findAantalProducten();
 	long findAantalProductenMetZoekterm(String zoekterm, BigDecimal vanPrijs,
 			BigDecimal totPrijs, Integer vanJaartal, Integer totJaartal);
+	
+	void update(Product product, long id);
 }

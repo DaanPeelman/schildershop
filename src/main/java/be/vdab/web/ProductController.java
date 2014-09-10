@@ -54,8 +54,8 @@ public class ProductController {
 			File file = new File(productFotoPad);
 			mapProducten.put(product, file.exists());
 		}
-		ModelAndView mav = new ModelAndView("producten/producten",
-				"producten", mapProducten);
+		ModelAndView mav = new ModelAndView("producten/producten", "producten",
+				mapProducten);
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav = addMinsMaxs(mav);
@@ -77,7 +77,7 @@ public class ProductController {
 		} catch (NumberFormatException e) {
 			iPage = 1;
 		}
-		
+
 		Map<Product, Boolean> mapProducten = new ConcurrentHashMap<>();
 		Iterable<Product> producten = productService.findAll(iPage);
 
@@ -88,8 +88,8 @@ public class ProductController {
 			File file = new File(productFotoPad);
 			mapProducten.put(product, file.exists());
 		}
-		ModelAndView mav = new ModelAndView("producten/producten",
-				"producten", mapProducten);
+		ModelAndView mav = new ModelAndView("producten/producten", "producten",
+				mapProducten);
 		mav.addObject("aantalInMandje", mandje.getProducten().size());
 		mav.addObject("zoekTermForm", new ZoekTermForm());
 		mav = addMinsMaxs(mav);
@@ -127,16 +127,16 @@ public class ProductController {
 			BigDecimal totPrijs = zoekTermForm.getTotPrijs();
 			Integer vanJaartal = zoekTermForm.getVanJaartal();
 			Integer totJaartal = zoekTermForm.getTotJaartal();
-			
+
 			Map<Product, Boolean> mapProducten = new ConcurrentHashMap<>();
-			Iterable<Product> producten = productService
-					.findByZoektermen(zoekterm, vanPrijs, totPrijs, vanJaartal,
-							totJaartal, 1);
+			Iterable<Product> producten = productService.findByZoektermen(
+					zoekterm, vanPrijs, totPrijs, vanJaartal, totJaartal, 1);
 
 			for (Product product : producten) {
-				String productFotoPad = servletContext.getRealPath(File.separator
-						+ "img")
-						+ File.separator + product.getProductId() + ".jpg";
+				String productFotoPad = servletContext
+						.getRealPath(File.separator + "img")
+						+ File.separator
+						+ product.getProductId() + ".jpg";
 				File file = new File(productFotoPad);
 				mapProducten.put(product, file.exists());
 			}
@@ -205,16 +205,17 @@ public class ProductController {
 			} catch (NumberFormatException e) {
 				iPage = 1;
 			}
-			
+
 			Map<Product, Boolean> mapProducten = new ConcurrentHashMap<>();
 			Iterable<Product> producten = productService
 					.findByZoektermen(zoekterm, vanPrijs, totPrijs, vanJaartal,
 							totJaartal, iPage);
 
 			for (Product product : producten) {
-				String productFotoPad = servletContext.getRealPath(File.separator
-						+ "img")
-						+ File.separator + product.getProductId() + ".jpg";
+				String productFotoPad = servletContext
+						.getRealPath(File.separator + "img")
+						+ File.separator
+						+ product.getProductId() + ".jpg";
 				File file = new File(productFotoPad);
 				mapProducten.put(product, file.exists());
 			}
@@ -340,6 +341,37 @@ public class ProductController {
 		BestelProductForm bestelProductForm = new BestelProductForm(productId);
 		mav.addObject("bestelProductForm", bestelProductForm);
 
+		return mav;
+	}
+
+	@RequestMapping(value = "{id}/wijzigen", method = RequestMethod.GET)
+	public ModelAndView updateForm(@PathVariable long id) {
+		Product product = productService.findOne(id);
+		if (product == null) {
+			return new ModelAndView("redirect:/producten");
+		}
+		ModelAndView mav = new ModelAndView("producten/wijzigen", "product",
+				product);
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
+		mav.addObject("schilders", schilderService.findAll());
+		return mav;
+	}
+
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	public ModelAndView update(@PathVariable long id, @Valid Product product,
+			BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView("producten/wijzigen", "product",
+				product);
+		mav.addObject("aantalInMandje", mandje.getProducten().size());
+		mav.addObject("schilders", schilderService.findAll());
+
+		try {
+			productService.update(product, id);
+			mav.addObject("succesProduct", product.getTitel()
+					+ " is succesvol gewijzigd.");
+		} catch (ProductBestaatAlException ex) {
+			bindingResult.rejectValue("titel", "ProductIsNietUniek");
+		}
 		return mav;
 	}
 
