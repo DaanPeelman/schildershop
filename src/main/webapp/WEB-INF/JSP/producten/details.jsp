@@ -71,7 +71,7 @@
 				<spring:url value='/producten/{id}/wijzigen' var='wijzigURL'>
 					<spring:param name="id" value="${product.productId}" />
 				</spring:url>
-				<form action='${wijzigURL}' method='get'>
+				<form action='${wijzigURL}' method='get' class="extraMarginBottom">
 					<input type='submit' value='Wijzigen'>
 				</form>
 			</security:authorize>

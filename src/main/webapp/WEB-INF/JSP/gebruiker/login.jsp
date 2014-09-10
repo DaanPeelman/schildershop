@@ -6,6 +6,7 @@
 <!doctype html>
 <html lang='nl'>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Aanmelden</title>
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/normalize.css' />
@@ -16,7 +17,7 @@
 	href="${pageContext.servletContext.contextPath}/styles/layout.css" />
 <link rel='stylesheet'
 	href='${pageContext.servletContext.contextPath}/styles/default.css' />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div class="sticky_wrapper">
@@ -32,6 +33,14 @@
 		</header>
 		<div id="wrapper">
 			<security:authorize access="isAnonymous()">
+				<div>
+					<p>
+						Klantaccount: jan@klanten.be<br> Wachtwoord: Klant123
+					</p>
+					<p>
+						Adminaccount: imke@schildershop.pw<br> Wachtwoord: Admin123
+					</p>
+				</div>
 				<div id="primary">
 					<form method='post'
 						action='<c:url value="/j_spring_security_check"/>'

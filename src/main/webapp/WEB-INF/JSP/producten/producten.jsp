@@ -141,9 +141,9 @@
 									<spring:param name="productId" value="${product.key.productId}" />
 								</spring:url>
 								<li class="nieuwProduct"><c:if test="${product.value}">
-										<span class="nieuwProductImg"
+										<a href="${productURL}"><span class="nieuwProductImg"
 											style="background-image: url('${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg');"><img
-											src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" /></span>
+											src="${pageContext.servletContext.contextPath}/img/${product.key.productId}.jpg" alt="${product.key.titel}" /></span></a>
 									</c:if>
 									<div class="nieuwProductInfo">
 										<h2>
