@@ -17,10 +17,10 @@ public class DataSourceTest {
 	@Autowired
 	private DataSource dataSource;
 	
-//	@Test
-//	public void getConnection() throws SQLException {
-//		try (Connection connection = dataSource.getConnection()) {
-//			
-//		}
-//	}
+	@Test
+	public void getConnection() throws SQLException {
+		try (Connection connection = dataSource.getConnection()) {
+			
+		}
+	}
 }
