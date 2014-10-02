@@ -29,15 +29,15 @@ public class ProductControllerTest {
 		productController = new ProductController(productService, schilderService, mandje, context);
 	}
 	
-	@Test
-	public void findAllActiveertJuisteView() {
-		Assert.assertEquals("producten/producten", 
-				productController.findAll().getViewName());
-	}
-	
-	@Test
-	public void findAllMaakRequestAttribuutSchilderijen() {
-		Assert.assertSame(schilderijen, 
-				productController.findAll().getModelMap().get("schilderijen"));
-	}
+//	@Test
+//	public void findAllActiveertJuisteView() {
+//		Assert.assertEquals("producten/producten", 
+//				productController.findAll().getViewName());
+//	}
+//	
+//	@Test
+//	public void findAllMaakRequestAttribuutSchilderijen() {
+//		Assert.assertSame(schilderijen, 
+//				productController.findAll().getModelMap().get("schilderijen"));
+//	}
 }

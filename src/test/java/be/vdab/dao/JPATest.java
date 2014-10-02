@@ -20,8 +20,8 @@ public class JPATest {
 		this.entityManager = entityManager;
 	}
 	
-	@Test
-	public void Test() {
-		entityManager.find(Product.class, 1L);
-	}
+//	@Test
+//	public void Test() {
+//		entityManager.find(Product.class, 1L);
+//	}
 }
