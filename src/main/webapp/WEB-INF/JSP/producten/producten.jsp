@@ -23,6 +23,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="jquery.ui.touch-punch.min.js"></script>
 <script>
 	$(function() {
 		var iMaxPrijs = parseInt("${maxPrijs}");
