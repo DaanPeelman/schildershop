@@ -137,11 +137,6 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.cloudfoundry</groupId>
-			<artifactId>cloudfoundry-client-lib</artifactId>
-			<version>1.0.2</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
