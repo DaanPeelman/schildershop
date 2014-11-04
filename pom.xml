@@ -6,10 +6,17 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<properties>
-		<spring.version>[3.2, 3.2.99]</spring.version>
-		<spring.security.version>[3.1,3.1.99]</spring.security.version>
-	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>				
+				<version>4.0.5.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency> <!-- gebruik servlets -->
 			<groupId>javax.servlet</groupId>
@@ -35,8 +42,7 @@
 		</dependency>
 		<dependency> <!-- gebruik Spring MVC -->
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
+			<artifactId>spring-webmvc</artifactId>			
 			<exclusions>
 				<exclusion> <!-- verouderde logging niet gebruiken -->
 					<artifactId>commons-logging</artifactId>
@@ -75,8 +81,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<!-- verwijzing naar de property spring.version: -->
-			<version>${spring.version}</version>
+			<!-- verwijzing naar de property spring.version: -->			
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -90,15 +95,10 @@
 			<artifactId>mockito-all</artifactId>
 			<version>[1.9,]</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>[1,]</version>
 		</dependency>
 		<dependency>
@@ -109,34 +109,28 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
+			<artifactId>spring-orm</artifactId>			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>[1,]</version>
+			<version>[1.6.0,]</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${spring.version}</version>
+			<artifactId>spring-aop</artifactId>			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>${spring.security.version}</version>
+			<version>[3.2,3.99]</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version> ${spring.security.version}</version>
+			<version>[3.2,3.99]</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
