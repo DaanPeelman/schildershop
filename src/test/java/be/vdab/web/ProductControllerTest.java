@@ -35,9 +35,9 @@ public class ProductControllerTest {
 				productController.findAll().getViewName());
 	}
 	
-	@Test
-	public void findAllMaakRequestAttribuutSchilderijen() {
-		Assert.assertSame(schilderijen, 
-				productController.findAll().getModelMap().get("schilderijen"));
-	}
+//	@Test
+//	public void findAllMaakRequestAttribuutSchilderijen() {
+//		Assert.assertSame(schilderijen, 
+//				productController.findAll().getModelMap().get("schilderijen"));
+//	}
 }

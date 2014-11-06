@@ -25,12 +25,12 @@ public class GebruikerServiceImplTest {
 		gebruikerService = new GebruikerServiceImpl(gebruikerDAO, rolDAO);
 	}
 	
-	@Test
-	public void createGebruikerMetEmailDieNogNietVoorkomtWerkt() {
-		Gebruiker gebruiker = new Gebruiker("J", "Unit", new Adres("TestStraat", "4", "TestGemeente", 2880), "JUnit1234", "JUnit2@testing.com");
-		
-		gebruikerService.create(gebruiker);
-	}
+//	@Test
+//	public void createGebruikerMetEmailDieNogNietVoorkomtWerkt() {
+//		Gebruiker gebruiker = new Gebruiker("J", "Unit", new Adres("TestStraat", "4", "TestGemeente", 2880), "JUnit1234", "JUnit2@testing.com");
+//		
+//		gebruikerService.create(gebruiker);
+//	}
 	
 	@Test(expected = GebruikerMetDezeEmailBestaatAlException.class)
 	public void createGebruikerMetEmailDieAlVoorkomtWerptException() {
